@@ -1,0 +1,13 @@
+[submodule "agent/cpp-algo/MaaUtils"]
+	path = agent/cpp-algo/MaaUtils
+	url = https://github.com/MaaXYZ/MaaUtils.git
+[submodule "assets/resource/model"]
+	path = assets/resource/model
+	url = https://github.com/MaaEnd/MaaEnd-AI.git
+[submodule "tests/MaaEndTestset"]
+	path = tests/MaaEndTestset
+	url = https://github.com/MaaEnd/MaaEndTestset
+[submodule "Android/MaaFwApp"]
+	path = Android/MaaFwApp
+	url = https://github.com/Aliothmoon/MaaFwApp.git
+	branch = main

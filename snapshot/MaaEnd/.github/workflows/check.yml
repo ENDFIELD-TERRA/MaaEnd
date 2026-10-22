@@ -1,0 +1,58 @@
+name: check
+
+on:
+  push:
+    branches:
+      - "v2"
+    paths:
+      - ".github/workflows/check.yml"
+      - "assets/**"
+      - "!assets/resource/model"
+      - "tools/schema/**"
+      - "package.json"
+      - "maatools.config.mts"
+      - "pyproject.toml"
+      - "uv.lock"
+
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/check.yml"
+      - "assets/**"
+      - "!assets/resource/model"
+      - "tools/schema/**"
+      - "package.json"
+      - "maatools.config.mts"
+      - "pyproject.toml"
+      - "uv.lock"
+
+  workflow_dispatch:
+
+jobs:
+  resource:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          enable-cache: true
+          cache-python: true
+
+      - name: Run maa-checker
+        run: |
+          pnpm i
+          pnpm run check
+
+      - name: Validate JSON Schema
+        run: uv run tools/validate_schema.py --resource-dirs assets/resource --exclude-dirs assets/resource/gamedata assets/resource/image assets/resource/model --task-dirs assets/tasks

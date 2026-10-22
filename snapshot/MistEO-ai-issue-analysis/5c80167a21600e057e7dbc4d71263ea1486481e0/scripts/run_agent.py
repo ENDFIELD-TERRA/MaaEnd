@@ -1,0 +1,233 @@
+"""Phase 2: install and run the agent, with opt-in execution-log comments."""
+
+from __future__ import annotations
+
+import json
+import os
+import secrets
+import shlex
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from agents import get_agent
+from comment_body import build_comment
+
+
+def select_api_key(raw: str) -> tuple[str, int]:
+    keys = [l.strip() for l in raw.splitlines() if l.strip()]
+    if not keys:
+        raise SystemExit("Input api-key is empty after trimming blank lines.")
+    return secrets.choice(keys), len(keys)
+
+
+def update_comment(body_file: str, repo: str, comment_id: str, token: str) -> None:
+    """Patch the streaming comment via the GitHub API.
+
+    The request is sent with urllib instead of shelling out to curl:
+    passing the JSON payload as a command-line argument hits the Linux
+    per-argument limit (MAX_ARG_STRLEN, 128 KiB) once the streamed agent
+    output grows large enough, failing with "Argument list too long".
+    """
+    body = Path(body_file).read_text(encoding="utf-8")
+    data = json.dumps({"body": body}).encode("utf-8")
+    url = f"https://api.github.com/repos/{repo}/issues/comments/{comment_id}"
+    req = urllib.request.Request(
+        url,
+        data=data,
+        method="PATCH",
+        headers={
+            "Authorization": f"token {token}",
+            "Accept": "application/vnd.github.v3+json",
+            "Content-Type": "application/json",
+            "User-Agent": "ai-issue-analysis",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            resp.read()
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:500]
+        print(
+            f"Warning: comment update failed: HTTP {exc.code}: {detail}",
+            file=sys.stderr,
+        )
+    except urllib.error.URLError as exc:
+        print(
+            f"Warning: comment update failed: {exc.reason}",
+            file=sys.stderr,
+        )
+
+
+def build_streaming_body(
+    content: str,
+    initial_body: str,
+    details_begin: str,
+    details_end: str,
+    action_link: str,
+    extra: str,
+) -> str:
+    return build_comment(
+        initial_body, action_link, extra,
+        execution_log=content,
+        details_begin=details_begin,
+        details_end=details_end,
+    )
+
+
+def main() -> None:
+    agent_name = os.environ["AGENT_NAME"]
+    api_key_raw = os.environ["API_KEY"]
+    base_url = os.environ.get("API_BASE_URL", "").strip()
+    model = os.environ.get("MODEL", "").strip()
+    package = os.environ.get("AGENT_PACKAGE", "").strip()
+    extra_args_raw = os.environ.get("AGENT_EXTRA_ARGS", "").strip()
+    reasoning_effort = os.environ.get("REASONING_EFFORT", "").strip()
+
+    github_token = os.environ["COMMENT_GITHUB_TOKEN"]
+    repo = os.environ["REPO"]
+    comment_id = os.environ["COMMENT_ID"]
+    issue_number = os.environ["ISSUE_NUMBER"]
+    server_url = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
+
+    prompt_file = os.environ["ANALYSIS_PROMPT_FILE"]
+    output_file = os.environ["OUTPUT_FILE"]
+    exec_log_file = os.environ["EXECUTION_LOG_FILE"]
+    body_file = os.environ["BODY_FILE"]
+
+    initial_body = os.environ["INITIAL_BODY"]
+    action_link = os.environ["ACTION_LINK"]
+    details_begin = os.environ["DETAILS_BEGIN"]
+    details_end = os.environ["DETAILS_END"]
+    interval = int(os.environ.get("STREAM_UPDATE_INTERVAL", "30"))
+    extra_content = os.environ.get("EXTRA_COMMENT_CONTENT", "")
+    publish_execution_log = os.environ.get("PUBLISH_EXECUTION_LOG", "false").strip().lower() == "true"
+
+    agent = get_agent(agent_name)
+    api_key, key_count = select_api_key(api_key_raw)
+
+    agent.install(package)
+    agent.setup_skill_links()
+
+    model = agent.resolve_model(model)
+    agent_env = agent.configure(api_key, base_url, model, reasoning_effort)
+
+    prompt = Path(prompt_file).read_text(encoding="utf-8").strip()
+    extra_args = shlex.split(extra_args_raw) if extra_args_raw else []
+    cmd = agent.build_command(model, prompt, extra_args, reasoning_effort)
+
+    comment_url = (
+        f"{server_url}/{repo}/issues/{issue_number}#issuecomment-{comment_id}"
+    )
+
+    # --- execution log header ---
+    safe_cmd_preview = " ".join(cmd[:4]) + " ... (prompt omitted)"
+    header_lines = [
+        f"{agent.display_name} invocation parameters:",
+        f"  repo: {repo}",
+        f"  issue-number: {issue_number}",
+        f"  comment-id: {comment_id}",
+        f"  comment-url: {comment_url}",
+        f"  model: {model}",
+        f"  reasoning-effort: {reasoning_effort or '(agent default)'}",
+        f"  api-key-count: {key_count}",
+        f"  stream-update-interval-seconds: {interval}",
+        f"  analysis-prompt-file: {prompt_file}",
+        f"  output-file: {output_file}",
+        f"  command: {safe_cmd_preview}",
+        "Prompt content begins",
+        prompt,
+        "Prompt content ends",
+    ]
+    header = "\n".join(header_lines) + "\n"
+    Path(exec_log_file).write_text(header, encoding="utf-8")
+    print(header, end="")
+
+    # --- launch agent ---
+    Path(output_file).write_text("", encoding="utf-8")
+    # gh in GitHub Actions requires GH_TOKEN specifically and will not
+    # fall back to the automatically provided GITHUB_TOKEN.
+    run_env = {
+        **os.environ,
+        **agent_env,
+        "GH_TOKEN": github_token,
+        "GITHUB_TOKEN": github_token,
+    }
+
+    output_fh = open(output_file, "w", encoding="utf-8")
+    try:
+        proc = subprocess.Popen(
+            cmd,
+            stdout=output_fh,
+            stderr=subprocess.STDOUT,
+            env=run_env,
+        )
+    except Exception:
+        output_fh.close()
+        raise
+
+    print(f"{agent.display_name} started with PID {proc.pid}")
+
+    # --- streaming loop ---
+    last_content = ""
+
+    def _try_update() -> None:
+        nonlocal last_content
+        if not publish_execution_log:
+            return
+        if not Path(output_file).is_file():
+            return
+        current = Path(output_file).read_text(encoding="utf-8")
+        if current == last_content or not current:
+            return
+        body = build_streaming_body(
+            current, initial_body, details_begin, details_end,
+            action_link, extra_content,
+        )
+        Path(body_file).write_text(body, encoding="utf-8")
+        # A single failed comment update must never kill the monitoring
+        # loop while the agent is still running.
+        try:
+            update_comment(body_file, repo, comment_id, github_token)
+        except Exception as exc:  # pragma: no cover - defensive
+            print(f"Warning: comment update error: {exc}", file=sys.stderr)
+            return
+        last_content = current
+        print(f"Comment updated at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+
+    try:
+        while proc.poll() is None:
+            elapsed = 0
+            while elapsed < interval and proc.poll() is None:
+                time.sleep(1)
+                elapsed += 1
+            _try_update()
+
+        _try_update()
+    finally:
+        proc.wait()
+        output_fh.close()
+
+    exit_code = proc.returncode
+
+    # --- append output to execution log ---
+    agent_out = (
+        Path(output_file).read_text(encoding="utf-8")
+        if Path(output_file).is_file()
+        else ""
+    )
+    with open(exec_log_file, "a", encoding="utf-8") as fh:
+        fh.write(f"\n{agent.display_name} output begins\n")
+        fh.write(agent_out)
+        fh.write(f"\n{agent.display_name} output ends\n")
+        fh.write(f"{agent.display_name} exit code: {exit_code}\n")
+
+    sys.exit(exit_code)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,847 @@
+name: install
+
+on:
+  push:
+    tags:
+      - "v*"
+    branches:
+      - "v2"
+    paths:
+      - ".github/workflows/install.yml"
+      - "assets/**"
+      - "agent/**"
+      - "tests/MaaEndTestset"
+      - "tools/**"
+
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/install.yml"
+      - "assets/**"
+      - "agent/**"
+      - "tests/MaaEndTestset"
+      - "tools/**"
+
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Git ref to build from (branch, tag, or commit SHA). Leave blank to use default branch.'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  meta:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      actions: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          enable-cache: true
+          cache-python: true
+
+      - id: icon-recognition-changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            icon_recognition:
+              - '.github/workflows/install.yml'
+              - 'agent/cpp-algo/CMakeLists.txt'
+              - 'agent/cpp-algo/CMakePresets.json'
+              - 'agent/cpp-algo/MaaUtils'
+              - 'agent/cpp-algo/source/CMakeLists.txt'
+              - 'agent/cpp-algo/source/IconRecognition/**'
+              - 'assets/data/IconRecognition/**'
+              - 'assets/resource/image/IconRecognition/**'
+              - 'tests/MaaEndTestset'
+              - 'tools/setup/dep_3rdparty.py'
+              - 'tools/maadeps-download.py'
+      - id: set_tag
+        run: |
+          # 检查标签格式
+          is_release=${{ startsWith(github.ref, 'refs/tags/v') }}
+          tag=$(git describe --tags --match "v*" ${{ github.ref }} || true)
+          if [[ $tag != v* ]]; then
+            tag=$(curl -sX GET "https://api.github.com/repos/${{ github.repository }}/releases/latest" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | awk '/tag_name/{print $4}' FS='["]')
+            if [[ $tag != v* ]]; then
+              tag="v0.0.0"
+            fi
+            tag=$(date "+$tag-%y%m%d-$(git rev-parse --short HEAD)")
+          fi
+
+          if ! $($is_release) ; then
+            prefix=${tag%-*-*}
+            suffix=${tag#$prefix-}
+            tag="$prefix-ci.$suffix"
+          fi
+
+          # 检查是否为预发布版本
+          is_prerelease=false
+          if [[ $tag =~ .*alpha.* || $tag =~ .*beta.* || $tag =~ .*rc.* || $tag =~ .*dev.* || $tag =~ .*-ci.* ]]; then
+            is_prerelease=true
+            echo "This is a pre-release version"
+          fi
+
+          echo tag=$tag | tee -a $GITHUB_OUTPUT
+          echo is_release=$is_release | tee -a $GITHUB_OUTPUT
+          echo is_prerelease=$is_prerelease | tee -a $GITHUB_OUTPUT
+
+      - id: commit
+        run: |
+          # workflow_dispatch 指定 ref 时 github.sha 是默认分支 sha，这里取实际 checkout 的 commit
+          echo "sha=$(git rev-parse HEAD)" | tee -a $GITHUB_OUTPUT
+
+      - id: maafw-latest-release
+        uses: step-security/github-action-get-latest-release@v0.8.2
+        with:
+          repository: MaaXYZ/MaaFramework
+          excludes: "draft"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: mxu-latest-release
+        uses: step-security/github-action-get-latest-release@v0.8.2
+        with:
+          repository: MistEO/MXU
+          excludes: ${{ (steps.set_tag.outputs.is_release == 'true' && steps.set_tag.outputs.is_prerelease == 'false') && 'prerelease, draft' || 'draft' }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 校验 MaaUtils submodule 是否落后/分叉于本次构建所用 maafw 版锁定的 commit，
+      # 不同步则联动触发 sync_maautils 工作流开修复 PR，并终止全部构建
+      # 注意：fork PR 无 bot App secrets，跳过 token 生成（联动触发会自动降级为 GITHUB_TOKEN）
+      - id: maautils-app-token
+        if: github.repository == 'MaaEnd/MaaEnd' && (github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork)
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.MAAEND_BOT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.MAAEND_BOT_APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-actions: write
+
+      - id: maautils-sync-check
+        name: Check MaaUtils submodule matches MaaFramework release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APP_TOKEN: ${{ steps.maautils-app-token.outputs.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          # 版本号来自第三方 action 输出，必须经环境变量传递，禁止直接内插进脚本
+          MAAFW_VERSION: ${{ steps.maafw-latest-release.outputs.release }}
+          FAIL_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set +e
+          out=$(uv run tools/check_maautils_sync.py --maafw-ref "$MAAFW_VERSION")
+          rc=$?
+          set -e
+          echo "$out"
+          status=$(sed -n 's/^status=//p' <<<"$out")
+          expected=$(sed -n 's/^expected_sha=//p' <<<"$out")
+          current=$(sed -n 's/^current_sha=//p' <<<"$out")
+
+          # uv / 脚本自身失败时不会输出 status，按 unknown 处理，不误判为分叉
+          if [ -z "$status" ]; then
+            echo "::warning::MaaUtils sync check produced no status (uv or script failure); skipping the gate this run."
+            exit 0
+          fi
+
+          # 写入 Run Summary，打开构建页即可看到判定结果，无需翻日志
+          {
+            echo "### MaaUtils Sync Check"
+            echo ""
+            echo "| Item | Value |"
+            echo "| --- | --- |"
+            echo "| MaaFramework | \`$MAAFW_VERSION\` |"
+            echo "| Upstream pinned MaaUtils | \`${expected:-n/a}\` |"
+            echo "| Local MaaUtils | \`${current:-n/a}\` |"
+            echo "| Verdict | \`$status\` (exit=$rc) |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          case "$rc" in
+            0)
+              echo "MaaUtils gate passed: $status"
+              ;;
+            1|2)
+              echo "::error::MaaUtils submodule is '$status' relative to the pin of MaaFramework $MAAFW_VERSION; builds are blocked until it is synced."
+              if [ -n "$APP_TOKEN" ] || [ -n "$GITHUB_TOKEN" ]; then
+                export GH_TOKEN="${APP_TOKEN:-$GITHUB_TOKEN}"
+                gh workflow run sync_maautils.yml --repo "$GITHUB_REPOSITORY" --ref "$DEFAULT_BRANCH" \
+                  -f fail_run_url="$FAIL_RUN_URL" \
+                  || echo "::warning::Failed to dispatch sync_maautils workflow; it also runs on its daily schedule."
+              fi
+              exit 1
+              ;;
+            3)
+              echo "::error::Cannot resolve the MaaUtils pin of MaaFramework $MAAFW_VERSION (tag missing or upstream 'source/MaaUtils' path changed). Manual investigation required, see tools/check_maautils_sync.py"
+              exit 1
+              ;;
+            *)
+              echo "::warning::MaaUtils sync status is UNKNOWN due to transient network/API failures after retries; skipping the gate this run (daily scheduled check still applies)."
+              ;;
+          esac
+
+    outputs:
+      tag: ${{ steps.set_tag.outputs.tag }}
+      is_release: ${{ steps.set_tag.outputs.is_release }}
+      is_prerelease: ${{ steps.set_tag.outputs.is_prerelease }}
+      maafw_version: ${{ steps.maafw-latest-release.outputs.release }}
+      mxu_version: ${{ steps.mxu-latest-release.outputs.release }}
+      maautils_expected_sha: ${{ steps.maautils-sync-check.outputs.expected_sha }}
+      commit_sha: ${{ steps.commit.outputs.sha }}
+      icon_recognition_changed: ${{ steps.icon-recognition-changes.outputs.icon_recognition }}
+
+  build_and_install:
+    needs: meta
+    strategy:
+      matrix:
+        os: [win, macos, linux]
+        arch: [aarch64, x86_64]
+      fail-fast: false
+    runs-on: ${{ matrix.os == 'win' && 'windows-latest' || (matrix.os == 'macos' && 'macos-latest' || 'ubuntu-latest') }}
+    env:
+      CCACHE_DIR: ${{ github.workspace }}/.cache/ccache
+      CCACHE_MAXSIZE: 1G
+      CCACHE_BASEDIR: ${{ github.workspace }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+          submodules: true
+
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          enable-cache: true
+          cache-python: true
+
+      - name: Install Linux dependencies
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y ninja-build cmake ccache
+
+      - name: Install macOS dependencies
+        if: matrix.os == 'macos'
+        run: |
+          brew list ninja >/dev/null 2>&1 || brew install ninja
+          brew list cmake >/dev/null 2>&1 || brew install cmake
+          brew list ccache >/dev/null 2>&1 || brew install ccache
+
+      - name: Setup Windows 10 SDK
+        if: matrix.os == 'win'
+        uses: GuillaumeFalourd/setup-windows10-sdk-action@v2.5
+        with:
+          sdk-version: 26100
+
+      - name: Install ccache (Windows, official 4.14 supports MSVC)
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          # Strawberry Perl 自带的 ccache 是 3.x 不支持 MSVC。直接下载官方 4.14 release。
+          CCACHE_ARCH=x86_64
+          mkdir -p .cache/ccache-bin
+          curl -sSL -o .cache/ccache.zip "https://github.com/ccache/ccache/releases/download/v4.14/ccache-4.14-windows-${CCACHE_ARCH}.zip"
+          unzip -o .cache/ccache.zip -d .cache/ccache-bin
+          find .cache/ccache-bin -name 'ccache.exe' -exec cp -f {} .cache/ccache-bin/ccache.exe \;
+          ./.cache/ccache-bin/ccache.exe --version | head -1
+          # 把官方 4.14 前置到 PATH：CMake 的 find_program(ccache)、ccache -sv 统计
+          # 以及 IconRecognition 测试子工程的 configure 都走这一份，避免命中 Strawberry 自带 3.x。
+          echo "${GITHUB_WORKSPACE}/.cache/ccache-bin" >> "${GITHUB_PATH}"
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: "agent/go-service/go.mod"
+          cache-dependency-path: |
+            agent/go-service/go.mod
+            agent/go-service/go.sum
+
+      # 缓存策略: restore/save 分离。PR 只恢复 v2 缓存不写入, 非 PR 才 save, 全仓只维护一份 v2 快照。
+      - name: Restore MaaDeps
+        id: cache-maadeps
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ./agent/cpp-algo/MaaUtils/MaaDeps
+          key: maadeps-${{ matrix.os }}-${{ matrix.arch }}-${{ hashFiles('./tools/maadeps-download.py') }}
+
+      - name: Bootstrap MaaDeps
+        if: steps.cache-maadeps.outputs.cache-hit != 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          uv run tools/maadeps-download.py ${{ matrix.arch == 'x86_64' && 'x64' || 'arm64' }}-${{ matrix.os == 'win' && 'windows' || (matrix.os == 'macos' && 'osx' || 'linux') }}
+
+      - name: Save MaaDeps
+        # 仅非 PR 保存: 避免每个 PR 各囤一份快照撑爆 10GB 上限
+        if: ${{ github.event_name != 'pull_request' && steps.cache-maadeps.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            ./agent/cpp-algo/MaaUtils/MaaDeps
+          key: maadeps-${{ matrix.os }}-${{ matrix.arch }}-${{ hashFiles('./tools/maadeps-download.py') }}
+
+      # 与 MaaDeps 同策略: restore 所有事件执行, save 仅非 PR
+      - name: Restore ccache
+        id: cache-ccache
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            ./.cache/ccache
+          # v4 标记作废 ccache 3.x 旧缓存 (与 4.x 不兼容)
+          key: ${{ matrix.os == 'win' && 'ccache-v4' || 'ccache' }}-${{ matrix.os }}-${{ matrix.arch }}-${{ hashFiles('agent/cpp-algo/CMakeLists.txt','agent/cpp-algo/CMakePresets.json','agent/cpp-algo/cmake/**','agent/cpp-algo/source/**','agent/cpp-algo/MaaUtils/cmake/**','agent/cpp-algo/MaaUtils/MaaUtils.cmake') }}
+          restore-keys: |
+            ${{ matrix.os == 'win' && 'ccache-v4' || 'ccache' }}-${{ matrix.os }}-${{ matrix.arch }}-
+
+      # 每次构建前清零 ccache 统计: 否则 Restore 会把上一轮(甚至历史多轮)的累计计数一并带回,
+      # Show ccache stats 显示的命中率会被历史调用数稀释, 无法反映本次构建的真实命中情况
+      - name: Reset ccache stats
+        shell: bash
+        run: ccache -z
+
+      - name: Setup WebView2 SDK
+        if: matrix.os == 'win'
+        shell: bash
+        run: |
+          uv run -m tools.setup.dep_3rdparty --webview2
+
+      - name: Download MaaFramework
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-${{ matrix.os }}-${{ matrix.arch }}*"
+          tag: ${{ needs.meta.outputs.maafw_version }}
+          out-file-path: "deps"
+          extract: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download MXU
+        if: ${{ !(matrix.os == 'linux' && matrix.arch == 'aarch64') }}
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MistEO/MXU
+          fileName: "*${{ matrix.os }}-${{ matrix.arch }}*"
+          tag: ${{ needs.meta.outputs.mxu_version }}
+          out-file-path: "downloads/MXU"
+          extract: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install
+        shell: bash
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONUNBUFFERED: "1"
+        run: |
+          # 运行安装脚本（构建 Go Agent + Cpp Agent + 复制资源）
+          uv run -m tools.setup.build_and_install --cpp-algo --ci --os ${{ matrix.os }} --arch ${{ matrix.arch }} --version ${{ needs.meta.outputs.tag }}
+
+          # 安装 MaaFramework
+          echo "Install MaaFramework"
+          cp -r deps/bin/* install/maafw/
+          cp -r deps/share/MaaAgentBinary install/maafw/
+          rm -rf install/maafw/MaaNode*
+
+          # 安装 MXU 并重命名为 MaaEnd
+          echo "Install MXU"
+          if [[ -d downloads/MXU ]]; then
+            rm -rf downloads/MXU*.zip downloads/MXU*.tgz
+            if [[ -f downloads/MXU/mxu.exe ]]; then
+              cp downloads/MXU/mxu.exe install/MaaEnd.exe
+            elif [[ -f downloads/MXU/mxu ]]; then
+              cp downloads/MXU/mxu install/MaaEnd
+            fi
+          fi
+
+          # 合并各 resource 的 pipeline JSON 文件（json5 由 uv 环境提供）
+          echo "Merge pipeline JSON"
+          uv run tools/merge_pipeline.py install
+
+          # 更新 interface.json（版本号 + 资源 hash）
+          echo "Update interface.json: version=${{ needs.meta.outputs.tag }}, compute resource hashes"
+          uv run tools/fill_interface.py \
+            --version "${{ needs.meta.outputs.tag }}" \
+            --interface install/interface.json
+
+          cat install/interface.json
+
+      - name: Save ccache
+        # Install 之后保存本次构建的新缓存; key 已存在时 save 只 warning 不覆盖; 仅非 PR 保存
+        if: ${{ github.event_name != 'pull_request' && steps.cache-ccache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            ./.cache/ccache
+          key: ${{ matrix.os == 'win' && 'ccache-v4' || 'ccache' }}-${{ matrix.os }}-${{ matrix.arch }}-${{ hashFiles('agent/cpp-algo/CMakeLists.txt','agent/cpp-algo/CMakePresets.json','agent/cpp-algo/cmake/**','agent/cpp-algo/source/**','agent/cpp-algo/MaaUtils/cmake/**','agent/cpp-algo/MaaUtils/MaaUtils.cmake') }}
+
+      - name: Show ccache stats
+        shell: bash
+        run: ccache -sv || true
+
+      - name: Run IconRecognition quick tests
+        if: matrix.os == 'win' && matrix.arch == 'x86_64' && (needs.meta.outputs.is_release == 'true' || needs.meta.outputs.icon_recognition_changed == 'true')
+        shell: powershell
+        run: |
+          $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
+          $vsInstall = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          if ([string]::IsNullOrWhiteSpace($vsInstall)) {
+            throw 'Visual Studio C++ toolchain was not found'
+          }
+          $vsDevShell = Join-Path $vsInstall 'Common7\Tools\Launch-VsDevShell.ps1'
+          & 'agent/cpp-algo/source/IconRecognition/test/run-tests.ps1' `
+            -Task quick `
+            -Jobs 16 `
+            -VsDevShellPath $vsDevShell
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: MaaEnd-${{ matrix.os }}-${{ matrix.arch }}-intermediate
+          path: install
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: cpp-algo-${{ matrix.os }}-${{ matrix.arch }}
+          path: |
+            install/agent/cpp-algo*
+            install/agent/WebView2Loader.dll
+          retention-days: 90
+
+  package_linux_tarball:
+    needs: [meta, build_and_install]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [aarch64, x86_64]
+      fail-fast: false
+
+    steps:
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: MaaEnd-linux-${{ matrix.arch }}-intermediate
+          path: "install"
+
+      - name: Repackage as tar.gz
+        shell: bash
+        run: |
+          # 给可执行文件添加执行权限
+          if [[ -f install/MaaEnd ]]; then
+            chmod +x install/MaaEnd
+          fi
+          if [[ -f install/agent/go-service ]]; then
+            chmod +x install/agent/go-service
+          fi
+          if [[ -f install/agent/cpp-algo ]]; then
+            chmod +x install/agent/cpp-algo
+          fi
+          # 给 maafw 目录下的可执行文件添加权限
+          find install/maafw -type f -name "Maa*" ! -name "*.so" -exec chmod +x {} \;
+
+          # 打包为 tar.gz
+          cd install
+          tar -czvf ../MaaEnd-linux-${{ matrix.arch }}.tar.gz .
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: MaaEnd-linux-${{ matrix.arch }}-tarball
+          path: "MaaEnd-linux-${{ matrix.arch }}.tar.gz"
+
+  package_macos_dmg:
+    needs: [meta, build_and_install]
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [aarch64, x86_64]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download macOS artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: MaaEnd-macos-${{ matrix.arch }}-intermediate
+          path: "install"
+
+      - name: Update mirrorchyan_rid for macOS
+        shell: bash
+        run: |
+          # 更新 interface.json 中的 mirrorchyan_rid 为 MaaEnd_exec
+          jq --indent 4 '.mirrorchyan_rid = "MaaEnd_exec"' install/interface.json > install/interface.json.tmp
+          mv install/interface.json.tmp install/interface.json
+          echo "Updated mirrorchyan_rid to MaaEnd_exec"
+          cat install/interface.json | grep mirrorchyan_rid
+
+      - name: Package DMG
+        shell: bash
+        run: |
+          brew install create-dmg
+
+          # Prepare Icon
+          mkdir MaaEnd.iconset
+          sips -z 16 16     assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_16x16.png
+          sips -z 32 32     assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_16x16@2x.png
+          sips -z 32 32     assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_32x32.png
+          sips -z 64 64     assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_32x32@2x.png
+          sips -z 128 128   assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_128x128.png
+          sips -z 256 256   assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_128x128@2x.png
+          sips -z 256 256   assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_256x256.png
+          sips -z 512 512   assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_256x256@2x.png
+          sips -z 512 512   assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_512x512.png
+          sips -z 1024 1024 assets/locales/MaaEnd-Tiny.png --out MaaEnd.iconset/icon_512x512@2x.png
+          iconutil -c icns MaaEnd.iconset -o maaend.icns
+
+          # Prepare App Bundle
+          APP_NAME="MaaEnd.app"
+          mkdir -p "$APP_NAME/Contents/MacOS"
+          mkdir -p "$APP_NAME/Contents/Resources"
+          cp maaend.icns "$APP_NAME/Contents/Resources/"
+          cp -r install/* "$APP_NAME/Contents/MacOS/"
+          FULL_VERSION="${{ needs.meta.outputs.tag }}"
+          SHORT_VERSION=$(echo "$FULL_VERSION" | sed -E 's/-.*//')
+
+          cat > "$APP_NAME/Contents/Info.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleInfoDictionaryVersion</key>
+              <string>6.0</string>
+              <key>CFBundleExecutable</key>
+              <string>MaaEnd</string>
+              <key>CFBundleIconFile</key>
+              <string>maaend.icns</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.maaend.app</string>
+              <key>CFBundleName</key>
+              <string>MaaEnd</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+              <key>CFBundleShortVersionString</key>
+              <string>$SHORT_VERSION</string>
+              <key>CFBundleVersion</key>
+              <string>$FULL_VERSION</string>
+              <key>LSMinimumSystemVersion</key>
+              <string>10.13</string>
+          </dict>
+          </plist>
+          EOF
+
+          chmod +x "$APP_NAME/Contents/MacOS/MaaEnd"
+          if [[ -f "$APP_NAME/Contents/MacOS/agent/go-service" ]]; then
+            chmod +x "$APP_NAME/Contents/MacOS/agent/go-service"
+          fi
+          if [[ -f "$APP_NAME/Contents/MacOS/agent/cpp-algo" ]]; then
+            chmod +x "$APP_NAME/Contents/MacOS/agent/cpp-algo"
+          fi
+          codesign --force --deep --sign - "$APP_NAME"
+
+          create-dmg \
+            --volname "MaaEnd Installer" \
+            --volicon "maaend.icns" \
+            --window-pos 200 120 \
+            --window-size 800 400 \
+            --icon-size 100 \
+            --icon "$APP_NAME" 200 190 \
+            --hide-extension "$APP_NAME" \
+            --app-drop-link 600 185 \
+            "MaaEnd.dmg" \
+            "$APP_NAME"
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: MaaEnd-macos-${{ matrix.arch }}-dmg
+          path: "MaaEnd.dmg"
+
+  package_win_zip:
+    needs: [meta, build_and_install]
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [aarch64, x86_64]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v7
+        with:
+          name: MaaEnd-win-${{ matrix.arch }}-intermediate
+          path: "install"
+
+      - name: Convert PNG to ICO
+        if: matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          choco install imagemagick -y
+          # 为每个尺寸单独生成图像，确保 ICO 中包含独立的各尺寸图层
+          for size in 512 256 128 64 48 32 24 16; do
+            magick assets/locales/MaaEnd-Tiny.png -resize ${size}x${size} icon-${size}.png
+          done
+          magick icon-512.png icon-256.png icon-128.png icon-64.png icon-48.png icon-32.png icon-24.png icon-16.png maaend.ico
+
+      - name: Modify MaaEnd.exe icon
+        if: matrix.arch == 'x86_64'
+        shell: bash
+        run: |
+          curl -L https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe -o rcedit.exe
+          ./rcedit.exe "install/MaaEnd.exe" --set-icon "maaend.ico"
+          echo "MaaEnd.exe icon modified successfully"
+
+      # 调试符号仅存 Actions artifact（90 天保留，供 DMP 崩溃转储分析），不随 release 发布
+      - name: Package debug symbols
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "install/agent/cpp-algo.pdb")) {
+            throw "cpp-algo.pdb not found"
+          }
+          if (-not (Test-Path "install/agent/go-service.exe")) {
+            throw "go-service.exe not found"
+          }
+
+          $symbols = "symbols"
+          New-Item -ItemType Directory -Force -Path $symbols | Out-Null
+          # cpp-algo PDB：与发布二进制同一次构建产出（GUID 自动配对）
+          Copy-Item "install/agent/cpp-algo.pdb" "$symbols/cpp-algo.pdb" -Force
+          # Go 工具链不产出 PDB：调试符号即未剥离 DWARF 的精确二进制（CI 构建不带 -s -w）
+          Copy-Item "install/agent/go-service.exe" "$symbols/go-service.exe" -Force
+          # 发布包仍不含 PDB（与旧行为一致）：已复制进符号包，从 install 中移除
+          Remove-Item "install/agent/cpp-algo.pdb" -Force
+
+          # go-service 版本自检：-X main.Version 注入的 tag 字符串应存在于二进制中
+          $bytes = [System.IO.File]::ReadAllBytes("$symbols/go-service.exe")
+          $ascii = [System.Text.Encoding]::ASCII.GetString($bytes)
+          if (-not $ascii.Contains("${{ needs.meta.outputs.tag }}")) {
+            throw "go-service.exe does not contain version stamp: ${{ needs.meta.outputs.tag }}"
+          }
+
+          # 符号清单：记录 tag / commit / 上游版本，便于按版本精确配对
+          $manifest = [ordered]@{
+            tag = "${{ needs.meta.outputs.tag }}"
+            arch = "${{ matrix.arch }}"
+            commit = "${{ needs.meta.outputs.commit_sha }}"
+            maafw_version = "${{ needs.meta.outputs.maafw_version }}"
+            mxu_version = "${{ needs.meta.outputs.mxu_version }}"
+            maautils_commit = "${{ needs.meta.outputs.maautils_expected_sha || 'unknown' }}"
+            go_service = "unstripped binary with DWARF (Go emits no PDB); resolve with go tool addr2line"
+          } | ConvertTo-Json
+          Set-Content -Path "$symbols/symbols-manifest.json" -Value $manifest -Encoding utf8NoBOM
+
+          Compress-Archive -Path "symbols/*" -DestinationPath "MaaEnd-pdb-win-${{ matrix.arch }}.zip" -Force
+
+      - name: Package ZIP
+        shell: pwsh
+        run: |
+          Compress-Archive -Path install/* -DestinationPath MaaEnd-win-${{ matrix.arch }}.zip
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: MaaEnd-win-${{ matrix.arch }}-zip
+          path: "MaaEnd-win-${{ matrix.arch }}.zip"
+
+      # artifact 名即版本号，便于 90 天内按版本检索下载；不带 -zip 后缀，
+      # 避免被 release job 的 MaaEnd-*-zip 下载 pattern 匹配（符号包不发布）
+      - uses: actions/upload-artifact@v6
+        with:
+          name: MaaEnd-pdb-win-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
+          path: "MaaEnd-pdb-win-${{ matrix.arch }}.zip"
+          retention-days: 90
+
+  changelog:
+    name: Generate changelog
+    needs: meta
+    runs-on: ubuntu-latest
+    outputs:
+      release_body: ${{ steps.git-cliff.outputs.content }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Generate a changelog
+        uses: orhun/git-cliff-action@v4
+        id: git-cliff
+        with:
+          config: .github/cliff.toml
+          # 正式版：使用 tag-pattern 只匹配正式版标签，包含所有从上一个正式版以来的提交
+          # 预发布版：正常生成，只包含从上一个标签以来的提交
+          args: >-
+            -vv --latest --strip header
+            ${{ needs.meta.outputs.is_prerelease == 'false' && '--tag-pattern "^v[0-9]+\\.[0-9]+\\.[0-9]+$"' || '' }}
+        env:
+          OUTPUT: CHANGES.md
+          GITHUB_REPO: ${{ github.repository }}
+
+  # 正式版的 Android APK：与桌面包同一 tag、同一 MaaFramework 版本，一起进 Release
+  android:
+    if: ${{ needs.meta.outputs.is_release == 'true' }}
+    needs: meta
+    uses: ./.github/workflows/android.yml
+    with:
+      assemble: release
+      ref: ${{ github.event.inputs.ref || github.ref }}
+      tag: ${{ needs.meta.outputs.tag }}
+      maafw_version: ${{ needs.meta.outputs.maafw_version }}
+    secrets: inherit
+
+  release:
+    if: ${{ needs.meta.outputs.is_release == 'true' }}
+    needs: [meta, package_linux_tarball, package_macos_dmg, package_win_zip, changelog, android]
+    runs-on: ubuntu-latest
+    steps:
+      # 只取生成 Release 正文的脚本
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: .github/scripts
+          show-progress: false
+
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          enable-cache: true
+          cache-python: true
+
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: MaaEnd-*-zip
+          path: artifacts
+
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: MaaEnd-*-tarball
+          path: artifacts
+
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: MaaEnd-*-dmg
+          path: artifacts
+
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: MaaEnd-android-*-release
+          path: artifacts
+
+      - name: Prepare release artifacts
+        run: |
+          cd artifacts
+          # 重命名 win zip 文件，添加版本号
+          for f in MaaEnd-win-*-zip/MaaEnd-win-*.zip; do
+            if [[ -f "$f" ]]; then
+              name=$(basename "$f" .zip)
+              mv "$f" "${name}-${{ needs.meta.outputs.tag }}.zip"
+            fi
+          done
+          # 重命名 linux tar.gz 文件，添加版本号
+          for f in MaaEnd-linux-*-tarball/MaaEnd-linux-*.tar.gz; do
+            if [[ -f "$f" ]]; then
+              name=$(basename "$f" .tar.gz)
+              mv "$f" "${name}-${{ needs.meta.outputs.tag }}.tar.gz"
+            fi
+          done
+          # 重命名 dmg 文件，添加版本号
+          for f in MaaEnd-*-dmg/MaaEnd.dmg; do
+            if [[ -f "$f" ]]; then
+              dir=$(dirname "$f")
+              # 从目录名提取 arch (例如 MaaEnd-macos-aarch64-dmg -> macos-aarch64)
+              arch=$(echo "$dir" | sed 's/MaaEnd-//' | sed 's/-dmg//')
+              mv "$f" "MaaEnd-${arch}-${{ needs.meta.outputs.tag }}.dmg"
+            fi
+          done
+          # APK 在 android.yml 里已按最终文件名命名，只需移出 artifact 目录
+          mv MaaEnd-android-*-release/*.apk .
+          # 清理空目录
+          rm -rf MaaEnd-*/
+          ls -la
+
+      # 正文 = 下载表 + 更新日志；下载表按 artifacts 里实际要上传的文件生成
+      - name: Build release body
+        env:
+          CHANGELOG: ${{ needs.changelog.outputs.release_body }}
+        run: |
+          printf '%s\n' "$CHANGELOG" > "$RUNNER_TEMP/changelog.md"
+          uv run --no-project .github/scripts/release_body.py \
+            --artifacts artifacts \
+            --tag "${{ needs.meta.outputs.tag }}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --changelog "$RUNNER_TEMP/changelog.md" \
+            --output "$RUNNER_TEMP/release_body.md"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
+          tag_name: ${{ needs.meta.outputs.tag }}
+          body_path: ${{ runner.temp }}/release_body.md
+          draft: false
+          prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
+
+      - name: Trigger MirrorChyanUploading
+        if: ${{ github.repository_owner == 'MaaEnd' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release.yml -f tag=${{ needs.meta.outputs.tag }}
+          gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
+
+      - name: Send Discord release notification
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh workflow run --repo $GITHUB_REPOSITORY discord-release-notification.yml \
+            -f release_tag="${{ needs.meta.outputs.tag }}"
+
+  sentry_release:
+    if: ${{ needs.meta.outputs.is_release == 'true' && github.repository_owner == 'MaaEnd' }}
+    needs: [meta, release, android]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+          fetch-depth: 0
+
+      - name: Resolve Sentry release
+        id: sentry_release
+        env:
+          MAAEND_VERSION: ${{ needs.meta.outputs.tag }}
+          MXU_VERSION: ${{ needs.meta.outputs.mxu_version }}
+          MAFW_APP_VERSION: ${{ needs.android.outputs.mafw_app_version }}
+        run: |
+          release="MXU@${MXU_VERSION#v}+MaaEnd@$MAAEND_VERSION"
+          echo "release=$release" | tee -a "$GITHUB_OUTPUT"
+          # 外壳版本取自 APK 构建时 gradle 生成的值；取不到就只登记桌面 release
+          if [[ -n "$MAFW_APP_VERSION" ]]; then
+            echo "android_release=MaaFwApp@$MAFW_APP_VERSION+MaaEnd@$MAAEND_VERSION" | tee -a "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Sentry release
+        uses: getsentry/action-release@v3
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: maaend
+          SENTRY_PROJECT: rust
+        with:
+          environment: ${{ needs.meta.outputs.is_prerelease == 'true' && 'beta' || 'stable' }}
+          release: ${{ steps.sentry_release.outputs.release }}
+          set_commits: auto
+          ignore_missing: true
+          ignore_empty: true
+
+      # 外壳代码在 Aliothmoon/MaaFwApp，本仓库只 pin 一个 commit，没有可自动关联的
+      # 提交范围，所以只登记 release / deploy，不设 commits
+      - name: Create Android Sentry release
+        if: steps.sentry_release.outputs.android_release != ''
+        uses: getsentry/action-release@v3
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: maaend
+          SENTRY_PROJECT: rust
+        with:
+          environment: ${{ needs.meta.outputs.is_prerelease == 'true' && 'beta' || 'stable' }}
+          release: ${{ steps.sentry_release.outputs.android_release }}
+          set_commits: skip

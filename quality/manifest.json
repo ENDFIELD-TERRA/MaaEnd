@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "preparedAt": "2026-10-21",
+  "executionPolicy": "Complete team, handoff and tool integration before consolidated validation.",
+  "installDestination": ".qoder/maaend-private/quality",
+  "skills": [
+    "e2e",
+    "gdp-ts",
+    "maaend-e2e-validation",
+    "maaend-gdp-contracts"
+  ],
+  "sources": {
+    "e2e": {
+      "repository": "tester-army/e2e",
+      "auditedMain": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+      "releaseCommit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "runnerVersion": "0.21.2",
+      "webVersion": "0.15.2",
+      "playwrightCoreVersion": "1.64.0",
+      "license": "Apache-2.0",
+      "platform": "Web via Playwright; Windows documentation requires WSL. Native Windows/Tauri is not qualified.",
+      "node": "^22.22.3 || >=24.8.0",
+      "installed": false
+    },
+    "gdp": {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "packageDeclaredVersion": "0.1.0",
+      "npmPublicationIndependentlyVerified": false,
+      "librarySource": "vendor/gdp/index.ts",
+      "license": "MIT",
+      "typescriptMinimum": "5.4",
+      "runtimeReader": "Pending; rejects by default"
+    }
+  },
+  "pending": [
+    {
+      "id": "Q01",
+      "object": "Team/handoff/tool integration",
+      "status": "Pending",
+      "closeWith": "One real delegated task hands back its contract and evidence; main thread consumes it and cleans owned resources."
+    },
+    {
+      "id": "Q02",
+      "object": "e2e consumption and WSL MCP",
+      "status": "Pending",
+      "closeWith": "Audited exact dependencies, authorized install, handshake/tools, real target and complete cleanup."
+    },
+    {
+      "id": "Q03",
+      "object": "Real web/media candidate",
+      "status": "Pending",
+      "closeWith": "Run result bound to actual build/suite/target after complete integration; no synthetic media substitution."
+    },
+    {
+      "id": "Q04",
+      "object": "gdp compile-time contracts",
+      "status": "Pending",
+      "closeWith": "Positive and annotated cases compile; unannotated four misuse cases fail for intended type reasons."
+    },
+    {
+      "id": "Q05",
+      "object": "gdp runtime evidence boundary",
+      "status": "Pending",
+      "closeWith": "Authenticated real reader plus rejection matrix; upstream library test alone cannot close this."
+    },
+    {
+      "id": "Q06",
+      "object": "MaaEnd node/native/Windows/game gates",
+      "status": "Pending",
+      "closeWith": "Current repository rules and FRD gates; neither e2e nor gdp substitutes for them."
+    }
+  ],
+  "executed": [
+    {
+      "object": "Fixed upstream gdp runtime library tests",
+      "status": "Passed",
+      "count": 4,
+      "date": "2026-10-21",
+      "evidence": "research/gdp-experiment-result.md",
+      "limit": "Does not qualify candidate proof validator, authenticated reader, compile-time contracts or product behavior."
+    },
+    {
+      "object": "Vendor node --check",
+      "status": "Failed",
+      "attempts": 2,
+      "evidence": "research/gdp-experiment-result.md",
+      "limit": "Stopped after the second failure; runtime ESM import succeeded separately."
+    }
+  ]
+}

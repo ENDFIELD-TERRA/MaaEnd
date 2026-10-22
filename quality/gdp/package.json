@@ -1,0 +1,11 @@
+{
+  "name": "maaend-private-proof-contracts",
+  "private": true,
+  "type": "module",
+  "devDependencies": { "typescript": "7.0.2" },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "negative": "tsc -p tsconfig.negative.json",
+    "upstream-runtime": "node --test upstream-test/runtime.test.ts"
+  }
+}

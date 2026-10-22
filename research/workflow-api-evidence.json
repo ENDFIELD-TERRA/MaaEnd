@@ -1,0 +1,1613 @@
+[
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6701/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6314064011",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6701#issuecomment-6314064011",
+        "id": 6314064011,
+        "user": {
+          "login": "maaendbotapp[bot]",
+          "id": 305547419,
+          "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+          "html_url": "https://github.com/apps/maaendbotapp",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-21T10:46:07Z",
+        "updated_at": "2026-10-21T10:57:20Z",
+        "body_sha256": "4f73c82ab580360f08fedb18a744c486a539f4b7a490903d949b1fb14c5a2e36"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6694/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6309781185",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6694#issuecomment-6309781185",
+        "id": 6309781185,
+        "user": {
+          "login": "maaendbotapp[bot]",
+          "id": 305547419,
+          "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+          "html_url": "https://github.com/apps/maaendbotapp",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-21T06:39:50Z",
+        "updated_at": "2026-10-21T07:19:28Z",
+        "body_sha256": "ec1fe1a767e14482ccb0fcd89feb8c795bb25e9a22da29a9112b98e219fa11d4"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6313058712",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6694#issuecomment-6313058712",
+        "id": 6313058712,
+        "user": {
+          "login": "zmdyy0318",
+          "id": 16699676,
+          "url": "https://api.github.com/users/zmdyy0318",
+          "html_url": "https://github.com/zmdyy0318",
+          "type": "User"
+        },
+        "created_at": "2026-10-21T09:49:51Z",
+        "updated_at": "2026-10-21T09:49:51Z",
+        "body_sha256": "c0f4bad2b256b73801e38962fa44bcc0f103cc75cfb20b2574fdb2db84cb42fc"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6314348606",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6694#issuecomment-6314348606",
+        "id": 6314348606,
+        "user": {
+          "login": "zyqpq",
+          "id": 180090602,
+          "url": "https://api.github.com/users/zyqpq",
+          "html_url": "https://github.com/zyqpq",
+          "type": "User"
+        },
+        "created_at": "2026-10-21T11:02:50Z",
+        "updated_at": "2026-10-21T11:02:50Z",
+        "body_sha256": "e30a3fdcf344a8365fb6437bd08d286c745388640d576e56ddecbc8a61c539dc"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6695/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6310454045",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6695#issuecomment-6310454045",
+        "id": 6310454045,
+        "user": {
+          "login": "maaendbotapp[bot]",
+          "id": 305547419,
+          "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+          "html_url": "https://github.com/apps/maaendbotapp",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-21T07:23:06Z",
+        "updated_at": "2026-10-21T08:53:27Z",
+        "body_sha256": "0b60c42c14452d32063914b8c34675fea248940d7b4e735a8b3bbae7a27a5d7b"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6679/reviews",
+    "data": []
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6483/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6191285178",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6483#issuecomment-6191285178",
+        "id": 6191285178,
+        "user": {
+          "login": "maaendbotapp[bot]",
+          "id": 305547419,
+          "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+          "html_url": "https://github.com/apps/maaendbotapp",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-15T11:46:00Z",
+        "updated_at": "2026-10-15T11:54:29Z",
+        "body_sha256": "43277cfd3aae5ec87b6500c2d310b5d69a738e6f35debdd1eb2e4f2f342dc4c1"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6291639493",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6483#issuecomment-6291639493",
+        "id": 6291639493,
+        "user": {
+          "login": "SENyiAi",
+          "id": 123186357,
+          "url": "https://api.github.com/users/SENyiAi",
+          "html_url": "https://github.com/SENyiAi",
+          "type": "User"
+        },
+        "created_at": "2026-10-20T13:11:03Z",
+        "updated_at": "2026-10-20T13:11:03Z",
+        "body_sha256": "ed22aef7ea8f86fee4051a52e5e147b8efcffa89fe0e22ca11bfa388de66b0b0"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6649/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6271748562",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#issuecomment-6271748562",
+        "id": 6271748562,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-19T16:14:00Z",
+        "updated_at": "2026-10-21T00:49:47Z",
+        "body_sha256": "bf00fe1aa15ae90b6723451ba2f0e34080e1867d9cd80d2d883da59b04a7d0b3"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6305335831",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#issuecomment-6305335831",
+        "id": 6305335831,
+        "user": {
+          "login": "overflow65537",
+          "id": 35667945,
+          "url": "https://api.github.com/users/overflow65537",
+          "html_url": "https://github.com/overflow65537",
+          "type": "User"
+        },
+        "created_at": "2026-10-21T00:59:37Z",
+        "updated_at": "2026-10-21T00:59:37Z",
+        "body_sha256": "d897be02f8ee0a8c1c20e4498d400b01a2a63dc7222725fa862efa03c7ccf4de"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6649/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/comments/4316169289",
+        "id": 4316169289,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "body_sha256": "867b3eeb8308428aab397b376f6082aba414882eb3129dcd5231bc9b77fb6fec",
+        "created_at": "2026-10-19T16:18:49Z",
+        "updated_at": "2026-10-19T16:18:50Z",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#discussion_r4316169289"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/comments/4316773658",
+        "id": 4316773658,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "body_sha256": "82d001fe0406593105994864e1cf6cfef2e1c5daa5ddd949a5599fd803ade4ab",
+        "created_at": "2026-10-19T17:25:14Z",
+        "updated_at": "2026-10-19T17:25:14Z",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#discussion_r4316773658"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/comments/4320738875",
+        "id": 4320738875,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "body_sha256": "5af03ca41f8ba770815f02505b7772860923ddf44fa1914d984a0ff063bd16f3",
+        "created_at": "2026-10-20T02:02:02Z",
+        "updated_at": "2026-10-20T02:02:03Z",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#discussion_r4320738875"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/comments/4320738882",
+        "id": 4320738882,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "body_sha256": "816683bc900c1a6383426bf868c98bafa0fc1f96dc6be9acd19d3a87b5ce2786",
+        "created_at": "2026-10-20T02:02:02Z",
+        "updated_at": "2026-10-20T02:16:53Z",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#discussion_r4320738882"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6696/comments?per_page=100",
+    "data": []
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6679/commits?per_page=100",
+    "data": [
+      {
+        "sha": "d3b1721ddc0417528974c825f73884a0690be967",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/d3b1721ddc0417528974c825f73884a0690be967",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/d3b1721ddc0417528974c825f73884a0690be967"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6696/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6310634964",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6696#issuecomment-6310634964",
+        "id": 6310634964,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-21T07:34:12Z",
+        "updated_at": "2026-10-21T07:34:12Z",
+        "body_sha256": "cfdbddd1ebdbbe5e0bada1a083fda88ca7a39fbaf064fe190cd6e6216a778bf8"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6314358771",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6696#issuecomment-6314358771",
+        "id": 6314358771,
+        "user": {
+          "login": "he0119",
+          "id": 5219550,
+          "url": "https://api.github.com/users/he0119",
+          "html_url": "https://github.com/he0119",
+          "type": "User"
+        },
+        "created_at": "2026-10-21T11:03:25Z",
+        "updated_at": "2026-10-21T11:03:25Z",
+        "body_sha256": "c2aacd2c877c22ac914640f6df290991e52baaf3577476751b68a07cb25a680e"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6679/comments?per_page=100",
+    "data": []
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6679",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6679",
+      "id": 4938361450,
+      "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6679",
+      "number": 6679,
+      "state": "closed",
+      "title": "fix(ProtocolSpace): 关卡开始时关闭「机制特性」提示弹窗",
+      "user": {
+        "login": "zmdyy0318",
+        "id": 16699676,
+        "url": "https://api.github.com/users/zmdyy0318",
+        "html_url": "https://github.com/zmdyy0318",
+        "type": "User"
+      },
+      "body_sha256": "74d8f35ba647aa93d42819a0c5e14eef01a7781be529db487982d94e3c24e1ad",
+      "created_at": "2026-10-20T15:44:35Z",
+      "updated_at": "2026-10-20T15:46:07Z",
+      "closed_at": "2026-10-20T15:46:05Z",
+      "merged_at": "2026-10-20T15:46:05Z",
+      "head": {
+        "label": "MaaEnd:fix/protocolspace-mechanism-popup",
+        "ref": "fix/protocolspace-mechanism-popup",
+        "sha": "d3b1721ddc0417528974c825f73884a0690be967",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "base": {
+        "label": "MaaEnd:v2",
+        "ref": "v2",
+        "sha": "4d370a148a118cef0929e3765387d4d0c52eb340",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "draft": false,
+      "merged": true,
+      "merged_by": {
+        "login": "zmdyy0318",
+        "id": 16699676,
+        "url": "https://api.github.com/users/zmdyy0318",
+        "html_url": "https://github.com/zmdyy0318",
+        "type": "User"
+      }
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6673/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6291865605",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6673#issuecomment-6291865605",
+        "id": 6291865605,
+        "user": {
+          "login": "maaendbotapp[bot]",
+          "id": 305547419,
+          "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+          "html_url": "https://github.com/apps/maaendbotapp",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-20T13:22:37Z",
+        "updated_at": "2026-10-20T14:09:53Z",
+        "body_sha256": "535dfb6263227a5a579205d4dc7333bb79e97411634c7d6486ed182040606cdf"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6293158072",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6673#issuecomment-6293158072",
+        "id": 6293158072,
+        "user": {
+          "login": "zmdyy0318",
+          "id": 16699676,
+          "url": "https://api.github.com/users/zmdyy0318",
+          "html_url": "https://github.com/zmdyy0318",
+          "type": "User"
+        },
+        "created_at": "2026-10-20T14:25:09Z",
+        "updated_at": "2026-10-20T14:25:09Z",
+        "body_sha256": "53471051a47953e598945f5dd88eec25717b5e2e08149d3449c1c79cc0e5b03e"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6293502308",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6673#issuecomment-6293502308",
+        "id": 6293502308,
+        "user": {
+          "login": "gunword20-lab",
+          "id": 344171114,
+          "url": "https://api.github.com/users/gunword20-lab",
+          "html_url": "https://github.com/gunword20-lab",
+          "type": "User"
+        },
+        "created_at": "2026-10-20T14:40:54Z",
+        "updated_at": "2026-10-20T14:40:54Z",
+        "body_sha256": "abc3b85f3d034e0cbae9866ecc92cfdd9166b3deb3809984c2c7e9f2b167e5af"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6649",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6649",
+      "id": 4923907758,
+      "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649",
+      "number": 6649,
+      "state": "closed",
+      "title": "chore(deps): 升级 Python 至 3.14，补齐依赖下限、统一 CI 使用 uv 并引入 ruff",
+      "user": {
+        "login": "he0119",
+        "id": 5219550,
+        "url": "https://api.github.com/users/he0119",
+        "html_url": "https://github.com/he0119",
+        "type": "User"
+      },
+      "body_sha256": "064f6001d4757c57c575ecfd145c1f8ff436991c8110832c7a900fa1cbb4f860",
+      "created_at": "2026-10-19T16:12:57Z",
+      "updated_at": "2026-10-21T01:23:11Z",
+      "closed_at": "2026-10-21T01:23:08Z",
+      "merged_at": "2026-10-21T01:23:08Z",
+      "head": {
+        "label": "MaaEnd:chore/python-3.14",
+        "ref": "chore/python-3.14",
+        "sha": "336b9f9f2b1f6b6fb6703869eb3e5562f9de0c57",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "base": {
+        "label": "MaaEnd:v2",
+        "ref": "v2",
+        "sha": "12d3d3c4bcb9e15dcbd03e500017a757627ed6eb",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "draft": false,
+      "merged": true,
+      "merged_by": {
+        "login": "he0119",
+        "id": 5219550,
+        "url": "https://api.github.com/users/he0119",
+        "html_url": "https://github.com/he0119",
+        "type": "User"
+      }
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6649/commits?per_page=100",
+    "data": [
+      {
+        "sha": "703c2f1e2db1b4534856f6adca6cd649cc6c822c",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/703c2f1e2db1b4534856f6adca6cd649cc6c822c",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/703c2f1e2db1b4534856f6adca6cd649cc6c822c"
+      },
+      {
+        "sha": "3d40a08da40b24e1d9f8b2c8d770019fc3798c97",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/3d40a08da40b24e1d9f8b2c8d770019fc3798c97",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/3d40a08da40b24e1d9f8b2c8d770019fc3798c97"
+      },
+      {
+        "sha": "55f5994ec5c5da89f444010a6a7d8e0d7d1ce965",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/55f5994ec5c5da89f444010a6a7d8e0d7d1ce965",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/55f5994ec5c5da89f444010a6a7d8e0d7d1ce965"
+      },
+      {
+        "sha": "601d563ed37616fc35583bd9ec7be4e3c6dd902e",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/601d563ed37616fc35583bd9ec7be4e3c6dd902e",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/601d563ed37616fc35583bd9ec7be4e3c6dd902e"
+      },
+      {
+        "sha": "9daab7c28a5a18d4ef9442bc6ff9e4472a61b394",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/9daab7c28a5a18d4ef9442bc6ff9e4472a61b394",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/9daab7c28a5a18d4ef9442bc6ff9e4472a61b394"
+      },
+      {
+        "sha": "5a4c9fc7540d1cfe3b1106752262c43448aa1bf2",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/5a4c9fc7540d1cfe3b1106752262c43448aa1bf2",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/5a4c9fc7540d1cfe3b1106752262c43448aa1bf2"
+      },
+      {
+        "sha": "2503f9ca07158c1cad7dda7430f27057b2f42cfb",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/2503f9ca07158c1cad7dda7430f27057b2f42cfb",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/2503f9ca07158c1cad7dda7430f27057b2f42cfb"
+      },
+      {
+        "sha": "118a656afbb557baa5956c96c16b4d590a12eaa7",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/118a656afbb557baa5956c96c16b4d590a12eaa7",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/118a656afbb557baa5956c96c16b4d590a12eaa7"
+      },
+      {
+        "sha": "9e3f71d3ce27cd72229cdbf2b7c406f1c6717a44",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/9e3f71d3ce27cd72229cdbf2b7c406f1c6717a44",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/9e3f71d3ce27cd72229cdbf2b7c406f1c6717a44"
+      },
+      {
+        "sha": "336b9f9f2b1f6b6fb6703869eb3e5562f9de0c57",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/336b9f9f2b1f6b6fb6703869eb3e5562f9de0c57",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/336b9f9f2b1f6b6fb6703869eb3e5562f9de0c57"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6696/commits?per_page=100",
+    "data": [
+      {
+        "sha": "fb73ec16b369840f553f81584be6e2105237338b",
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/fb73ec16b369840f553f81584be6e2105237338b",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/commit/fb73ec16b369840f553f81584be6e2105237338b"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6649/reviews",
+    "data": [
+      {
+        "id": 5574483251,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "body_sha256": "d309473018677d691360f8d01f08b22f33aa38bbf0a34931989160a1102d44c5",
+        "state": "COMMENTED",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#pullrequestreview-5574483251"
+      },
+      {
+        "id": 5575230311,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "body_sha256": "c2f09ba37f19aaad304e0dfe551d6416e6f8ff0ac14c0281453f6813c82c643e",
+        "state": "COMMENTED",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#pullrequestreview-5575230311"
+      },
+      {
+        "id": 5579933039,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "body_sha256": "75b66d832eb6c795ef604f51266b0ccd844e544fccd368a815bb61893dbfce9a",
+        "state": "COMMENTED",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6649#pullrequestreview-5579933039"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6679/comments?per_page=100",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6294896058",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6679#issuecomment-6294896058",
+        "id": 6294896058,
+        "user": {
+          "login": "coderabbitai[bot]",
+          "id": 136622811,
+          "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+          "html_url": "https://github.com/apps/coderabbitai",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-20T15:45:14Z",
+        "updated_at": "2026-10-20T15:45:14Z",
+        "body_sha256": "f64d4b020979be1d5adf4cdfbbca88021d880cbbdf95d2dacc5a78cdcd8c427c"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6696",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6696",
+      "id": 4948060977,
+      "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6696",
+      "number": 6696,
+      "state": "open",
+      "title": "feat(web): 云终末地网页端在 headless Linux 上的运行层（pipeline 覆盖 32 节点 + 驱动脚本）",
+      "user": {
+        "login": "yuhuan-zhen",
+        "id": 136444091,
+        "url": "https://api.github.com/users/yuhuan-zhen",
+        "html_url": "https://github.com/yuhuan-zhen",
+        "type": "User"
+      },
+      "body_sha256": "9ebf7ce2a3842afcfef6acef59d85e05252ec60b1b492b1db8c1fdce1b980699",
+      "created_at": "2026-10-21T07:34:04Z",
+      "updated_at": "2026-10-21T11:03:25Z",
+      "closed_at": null,
+      "merged_at": null,
+      "head": {
+        "label": "yuhuan-zhen:feat/web-linux-layer",
+        "ref": "feat/web-linux-layer",
+        "sha": "fb73ec16b369840f553f81584be6e2105237338b",
+        "user": {
+          "login": "yuhuan-zhen",
+          "id": 136444091,
+          "url": "https://api.github.com/users/yuhuan-zhen",
+          "html_url": "https://github.com/yuhuan-zhen",
+          "type": "User"
+        }
+      },
+      "base": {
+        "label": "MaaEnd:v2",
+        "ref": "v2",
+        "sha": "ed63929ab6af2431bdb073f1588c6f8486c1a3d3",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "draft": true,
+      "merged": false,
+      "merged_by": null
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6696/reviews",
+    "data": [
+      {
+        "id": 5597258219,
+        "user": {
+          "login": "yuhuan-zhen",
+          "id": 136444091,
+          "url": "https://api.github.com/users/yuhuan-zhen",
+          "html_url": "https://github.com/yuhuan-zhen",
+          "type": "User"
+        },
+        "body_sha256": "a0442806c2de39e236da02f727add64c447eab0166ecf71cf02cb8897c49a234",
+        "state": "COMMENTED",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6696#pullrequestreview-5597258219"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6673",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6673",
+      "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6673",
+      "id": 5942433128,
+      "number": 6673,
+      "title": "协议空间刷取时无法点击到中间右上角的关闭",
+      "user": {
+        "login": "gunword20-lab",
+        "id": 344171114,
+        "url": "https://api.github.com/users/gunword20-lab",
+        "html_url": "https://github.com/gunword20-lab",
+        "type": "User"
+      },
+      "state": "closed",
+      "created_at": "2026-10-20T13:22:23Z",
+      "updated_at": "2026-10-20T15:46:06Z",
+      "closed_at": "2026-10-20T15:46:06Z",
+      "type": null,
+      "body_sha256": "a7b1855cbf32ff4b517bfa1fe163fcdbb763706afc158d7c17a0e09379c09ceb",
+      "state_reason": "completed"
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6695",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6695",
+      "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6695",
+      "id": 5956194742,
+      "number": 6695,
+      "title": "自动采集道中因小地图任务追踪标记而寻路错乱，偶有任务失败",
+      "user": {
+        "login": "ilyms",
+        "id": 163539029,
+        "url": "https://api.github.com/users/ilyms",
+        "html_url": "https://github.com/ilyms",
+        "type": "User"
+      },
+      "state": "closed",
+      "created_at": "2026-10-21T07:22:53Z",
+      "updated_at": "2026-10-21T08:53:27Z",
+      "closed_at": "2026-10-21T08:38:01Z",
+      "type": null,
+      "body_sha256": "fcc8345228396cf6e0b021469910c44c69e8623dddff574b2d3a5e7b8856287c",
+      "state_reason": "not_planned"
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/6673/timeline?per_page=100",
+    "data": [
+      {
+        "id": 33745370336,
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/events/33745370336",
+        "actor": {
+          "login": "gunword20-lab",
+          "id": 344171114,
+          "url": "https://api.github.com/users/gunword20-lab",
+          "html_url": "https://github.com/gunword20-lab",
+          "type": "User"
+        },
+        "event": "labeled",
+        "created_at": "2026-10-20T13:22:25Z",
+        "label": {
+          "name": "bug"
+        }
+      },
+      {
+        "id": 33745378851,
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/events/33745378851",
+        "actor": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "type": "Bot"
+        },
+        "event": "labeled",
+        "created_at": "2026-10-20T13:22:30Z",
+        "label": {
+          "name": "task: 协议空间"
+        }
+      },
+      {
+        "id": 33745380142,
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/events/33745380142",
+        "actor": {
+          "login": "github-actions[bot]",
+          "id": 41898282,
+          "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+          "html_url": "https://github.com/apps/github-actions",
+          "type": "Bot"
+        },
+        "event": "labeled",
+        "created_at": "2026-10-20T13:22:31Z",
+        "label": {
+          "name": "client: MXU"
+        }
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6291865605",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6673#issuecomment-6291865605",
+        "id": 6291865605,
+        "user": {
+          "login": "maaendbotapp[bot]",
+          "id": 305547419,
+          "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+          "html_url": "https://github.com/apps/maaendbotapp",
+          "type": "Bot"
+        },
+        "created_at": "2026-10-20T13:22:37Z",
+        "updated_at": "2026-10-20T14:09:53Z",
+        "body_sha256": "535dfb6263227a5a579205d4dc7333bb79e97411634c7d6486ed182040606cdf",
+        "event": "commented",
+        "actor": {
+          "login": "maaendbotapp[bot]",
+          "id": 305547419,
+          "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+          "html_url": "https://github.com/apps/maaendbotapp",
+          "type": "Bot"
+        }
+      },
+      {
+        "id": 33747147108,
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/events/33747147108",
+        "actor": {
+          "login": "zmdyy0318",
+          "id": 16699676,
+          "url": "https://api.github.com/users/zmdyy0318",
+          "html_url": "https://github.com/zmdyy0318",
+          "type": "User"
+        },
+        "event": "assigned",
+        "created_at": "2026-10-20T13:42:31Z"
+      },
+      {
+        "id": 33749571291,
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/events/33749571291",
+        "actor": {
+          "login": "720p",
+          "id": 25824979,
+          "url": "https://api.github.com/users/720p",
+          "html_url": "https://github.com/720p",
+          "type": "Organization"
+        },
+        "event": "mentioned",
+        "created_at": "2026-10-20T14:09:16Z"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6293158072",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6673#issuecomment-6293158072",
+        "id": 6293158072,
+        "user": {
+          "login": "zmdyy0318",
+          "id": 16699676,
+          "url": "https://api.github.com/users/zmdyy0318",
+          "html_url": "https://github.com/zmdyy0318",
+          "type": "User"
+        },
+        "created_at": "2026-10-20T14:25:09Z",
+        "updated_at": "2026-10-20T14:25:09Z",
+        "body_sha256": "53471051a47953e598945f5dd88eec25717b5e2e08149d3449c1c79cc0e5b03e",
+        "event": "commented",
+        "actor": {
+          "login": "zmdyy0318",
+          "id": 16699676,
+          "url": "https://api.github.com/users/zmdyy0318",
+          "html_url": "https://github.com/zmdyy0318",
+          "type": "User"
+        }
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/comments/6293502308",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/issues/6673#issuecomment-6293502308",
+        "id": 6293502308,
+        "user": {
+          "login": "gunword20-lab",
+          "id": 344171114,
+          "url": "https://api.github.com/users/gunword20-lab",
+          "html_url": "https://github.com/gunword20-lab",
+          "type": "User"
+        },
+        "created_at": "2026-10-20T14:40:54Z",
+        "updated_at": "2026-10-20T14:40:54Z",
+        "body_sha256": "abc3b85f3d034e0cbae9866ecc92cfdd9166b3deb3809984c2c7e9f2b167e5af",
+        "event": "commented",
+        "actor": {
+          "login": "gunword20-lab",
+          "id": 344171114,
+          "url": "https://api.github.com/users/gunword20-lab",
+          "html_url": "https://github.com/gunword20-lab",
+          "type": "User"
+        }
+      },
+      {
+        "id": 33758592470,
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/events/33758592470",
+        "actor": {
+          "login": "zmdyy0318",
+          "id": 16699676,
+          "url": "https://api.github.com/users/zmdyy0318",
+          "html_url": "https://github.com/zmdyy0318",
+          "type": "User"
+        },
+        "event": "closed",
+        "created_at": "2026-10-20T15:46:06Z",
+        "state_reason": null
+      },
+      {
+        "id": 33760700009,
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/issues/events/33760700009",
+        "actor": {
+          "login": "zzc-tongji",
+          "id": 20331014,
+          "url": "https://api.github.com/users/zzc-tongji",
+          "html_url": "https://github.com/zzc-tongji",
+          "type": "User"
+        },
+        "event": "referenced",
+        "created_at": "2026-10-20T16:09:05Z"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39561569294/jobs?per_page=100",
+    "data": {
+      "total_count": 2,
+      "jobs": [
+        {
+          "id": 119093825950,
+          "run_attempt": 1,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/jobs/119093825950",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39561569294/job/119093825950",
+          "status": "completed",
+          "conclusion": "cancelled",
+          "created_at": "2026-10-21T07:22:56Z",
+          "name": "ai-analysis"
+        },
+        {
+          "id": 119130470670,
+          "run_attempt": 1,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/jobs/119130470670",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39561569294/job/119130470670",
+          "status": "completed",
+          "conclusion": "success",
+          "created_at": "2026-10-21T08:53:19Z",
+          "name": "finalize-comment"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/releases?per_page=5",
+    "data": [
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/releases/418648573",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/releases/tag/v2.35.0-beta.2",
+        "id": 418648573,
+        "tag_name": "v2.35.0-beta.2",
+        "target_commitish": "v2",
+        "name": "v2.35.0-beta.2",
+        "draft": false,
+        "prerelease": true,
+        "created_at": "2026-10-20T16:13:48Z",
+        "updated_at": "2026-10-20T17:24:03Z",
+        "published_at": "2026-10-20T16:57:26Z",
+        "body_sha256": "b91fde17cb9651c6ca2b7fd1ccf63403befe9b64bfad7c04996743b54ed6d6b6"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/releases/417525344",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/releases/tag/v2.35.0-beta.1",
+        "id": 417525344,
+        "tag_name": "v2.35.0-beta.1",
+        "target_commitish": "v2",
+        "name": "v2.35.0-beta.1",
+        "draft": false,
+        "prerelease": true,
+        "created_at": "2026-10-19T16:13:38Z",
+        "updated_at": "2026-10-19T17:07:20Z",
+        "published_at": "2026-10-19T16:53:42Z",
+        "body_sha256": "f18c1fb6acff7f54d89247fbba50fa6b27a064360c286be8eeecef9ddc8aa043"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/releases/417439381",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/releases/tag/v2.34.0",
+        "id": 417439381,
+        "tag_name": "v2.34.0",
+        "target_commitish": "release/v2.34",
+        "name": "v2.34.0",
+        "draft": false,
+        "prerelease": false,
+        "created_at": "2026-10-19T15:04:50Z",
+        "updated_at": "2026-10-19T15:26:21Z",
+        "published_at": "2026-10-19T15:08:59Z",
+        "body_sha256": "457f07dbb9d9f62355cbe27c5e7e6b5244dabd7ba0099f86242b531dbc63a630"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/releases/416575256",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/releases/tag/v2.34.0-rc.1",
+        "id": 416575256,
+        "tag_name": "v2.34.0-rc.1",
+        "target_commitish": "v2",
+        "name": "v2.34.0-rc.1",
+        "draft": false,
+        "prerelease": true,
+        "created_at": "2026-10-18T16:37:27Z",
+        "updated_at": "2026-10-18T17:03:58Z",
+        "published_at": "2026-10-18T16:50:11Z",
+        "body_sha256": "7e536bb837d69341f12aa7f0748c09ba68c65a9519ef351febebd9743b832e87"
+      },
+      {
+        "url": "https://api.github.com/repos/MaaEnd/MaaEnd/releases/415893483",
+        "html_url": "https://github.com/MaaEnd/MaaEnd/releases/tag/v2.34.0-beta.1",
+        "id": 415893483,
+        "tag_name": "v2.34.0-beta.1",
+        "target_commitish": "v2",
+        "name": "v2.34.0-beta.1",
+        "draft": false,
+        "prerelease": true,
+        "created_at": "2026-10-17T15:13:07Z",
+        "updated_at": "2026-10-17T15:56:38Z",
+        "published_at": "2026-10-17T15:43:37Z",
+        "body_sha256": "1969d2fd55b1264ce38149e2d19aeceac5b9c5be8375481306c3da4466e096a1"
+      }
+    ]
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/commits/6b233d3daf0595e034cb36c4bc799d4270a88910/check-runs?per_page=100",
+    "data": {
+      "total_count": 26
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6647",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6647",
+      "id": 4923082805,
+      "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6647",
+      "number": 6647,
+      "state": "closed",
+      "title": "fix(WorldMap): 视口求解整窗被拒时掩掉迷雾再解一次 (cherry-pick of #6645)",
+      "user": {
+        "login": "maaendbotapp[bot]",
+        "id": 305547419,
+        "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+        "html_url": "https://github.com/apps/maaendbotapp",
+        "type": "Bot"
+      },
+      "body_sha256": "ff8a0f7e219038e385072f8199297a44b2564459d44ea600d4354fcb77e7f8cb",
+      "created_at": "2026-10-19T15:06:31Z",
+      "updated_at": "2026-10-19T15:22:20Z",
+      "closed_at": "2026-10-19T15:22:17Z",
+      "merged_at": "2026-10-19T15:22:17Z",
+      "head": {
+        "label": "MaaEnd:fix/pr-6645",
+        "ref": "fix/pr-6645",
+        "sha": "d7e62d8bfafc8fcaf55ee405ee8ae4021918bdaa",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "base": {
+        "label": "MaaEnd:v2",
+        "ref": "v2",
+        "sha": "df78609f56dd530bba0a932faace72492bb08e5f",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "draft": false,
+      "merged": true,
+      "merged_by": {
+        "login": "zmdyy0318",
+        "id": 16699676,
+        "url": "https://api.github.com/users/zmdyy0318",
+        "html_url": "https://github.com/zmdyy0318",
+        "type": "User"
+      }
+    }
+  },
+  {
+    "url": "https://api.github.com/search/issues?q=repo%3AMaaEnd%2FMaaEnd%20is%3Aissue%20%22%40MaaEndBot%22%20in%3Acomments&per_page=10",
+    "data": {
+      "total_count": 818
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6644",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6644",
+      "id": 4922835014,
+      "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6644",
+      "number": 6644,
+      "state": "closed",
+      "title": "fix(MouseMoveReset): 点击后立即移动鼠标导致点击失效",
+      "user": {
+        "login": "zmdyy0318",
+        "id": 16699676,
+        "url": "https://api.github.com/users/zmdyy0318",
+        "html_url": "https://github.com/zmdyy0318",
+        "type": "User"
+      },
+      "body_sha256": "29f17cf06679e02b11107b8a9a568d16ae0b9f7f3cc182642122ce5446dbb9b6",
+      "created_at": "2026-10-19T14:48:27Z",
+      "updated_at": "2026-10-19T14:54:44Z",
+      "closed_at": "2026-10-19T14:54:42Z",
+      "merged_at": "2026-10-19T14:54:42Z",
+      "head": {
+        "label": "MaaEnd:fix/mouse-move-reset-click-lost",
+        "ref": "fix/mouse-move-reset-click-lost",
+        "sha": "ed8d9d7e15eee0252d4f07316394c7d7aa752144",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "base": {
+        "label": "MaaEnd:release/v2.34",
+        "ref": "release/v2.34",
+        "sha": "37d2909667209a053883314ce91fea377c039a52",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "draft": false,
+      "merged": true,
+      "merged_by": {
+        "login": "zmdyy0318",
+        "id": 16699676,
+        "url": "https://api.github.com/users/zmdyy0318",
+        "html_url": "https://github.com/zmdyy0318",
+        "type": "User"
+      }
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs?per_page=20",
+    "data": {
+      "total_count": 40000,
+      "workflow_runs": [
+        {
+          "id": 39589110583,
+          "name": "AI Issue Analysis",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "skipped",
+          "workflow_id": 246249880,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39589110583",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39589110583",
+          "created_at": "2026-10-21T11:03:28Z",
+          "updated_at": "2026-10-21T11:03:38Z",
+          "actor": {
+            "login": "he0119",
+            "id": 5219550,
+            "url": "https://api.github.com/users/he0119",
+            "html_url": "https://github.com/he0119",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39589110514,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39589110514",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39589110514",
+          "created_at": "2026-10-21T11:03:28Z",
+          "updated_at": "2026-10-21T11:03:35Z",
+          "actor": {
+            "login": "he0119",
+            "id": 5219550,
+            "url": "https://api.github.com/users/he0119",
+            "html_url": "https://github.com/he0119",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39589038503,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39589038503",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39589038503",
+          "created_at": "2026-10-21T11:02:53Z",
+          "updated_at": "2026-10-21T11:03:02Z",
+          "actor": {
+            "login": "zyqpq",
+            "id": 180090602,
+            "url": "https://api.github.com/users/zyqpq",
+            "html_url": "https://github.com/zyqpq",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39589038156,
+          "name": "AI Issue Analysis",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "skipped",
+          "workflow_id": 246249880,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39589038156",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39589038156",
+          "created_at": "2026-10-21T11:02:53Z",
+          "updated_at": "2026-10-21T11:02:54Z",
+          "actor": {
+            "login": "zyqpq",
+            "id": 180090602,
+            "url": "https://api.github.com/users/zyqpq",
+            "html_url": "https://github.com/zyqpq",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39588357114,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39588357114",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39588357114",
+          "created_at": "2026-10-21T10:57:22Z",
+          "updated_at": "2026-10-21T10:57:29Z",
+          "actor": {
+            "login": "maaendbotapp[bot]",
+            "id": 305547419,
+            "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+            "html_url": "https://github.com/apps/maaendbotapp",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39588336793,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39588336793",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39588336793",
+          "created_at": "2026-10-21T10:57:12Z",
+          "updated_at": "2026-10-21T10:57:19Z",
+          "actor": {
+            "login": "maaendbotapp[bot]",
+            "id": 305547419,
+            "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+            "html_url": "https://github.com/apps/maaendbotapp",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39587001192,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39587001192",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39587001192",
+          "created_at": "2026-10-21T10:46:09Z",
+          "updated_at": "2026-10-21T10:46:17Z",
+          "actor": {
+            "login": "maaendbotapp[bot]",
+            "id": 305547419,
+            "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+            "html_url": "https://github.com/apps/maaendbotapp",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39587001079,
+          "name": "AI Issue Analysis",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "skipped",
+          "workflow_id": 246249880,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39587001079",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39587001079",
+          "created_at": "2026-10-21T10:46:09Z",
+          "updated_at": "2026-10-21T10:46:11Z",
+          "actor": {
+            "login": "maaendbotapp[bot]",
+            "id": 305547419,
+            "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+            "html_url": "https://github.com/apps/maaendbotapp",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39586971780,
+          "name": "issue auto label",
+          "event": "issues",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 342655050,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39586971780",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39586971780",
+          "created_at": "2026-10-21T10:45:55Z",
+          "updated_at": "2026-10-21T10:46:05Z",
+          "actor": {
+            "login": "lintx",
+            "id": 16777174,
+            "url": "https://api.github.com/users/lintx",
+            "html_url": "https://github.com/lintx",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39586971772,
+          "name": "Issue Upload Check",
+          "event": "issues",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39586971772",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39586971772",
+          "created_at": "2026-10-21T10:45:55Z",
+          "updated_at": "2026-10-21T10:46:02Z",
+          "actor": {
+            "login": "lintx",
+            "id": 16777174,
+            "url": "https://api.github.com/users/lintx",
+            "html_url": "https://github.com/lintx",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39586971770,
+          "name": "AI Issue Analysis",
+          "event": "issues",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 246249880,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39586971770",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39586971770",
+          "created_at": "2026-10-21T10:45:55Z",
+          "updated_at": "2026-10-21T10:57:23Z",
+          "actor": {
+            "login": "lintx",
+            "id": 16777174,
+            "url": "https://api.github.com/users/lintx",
+            "html_url": "https://github.com/lintx",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39584138603,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39584138603",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39584138603",
+          "created_at": "2026-10-21T10:22:40Z",
+          "updated_at": "2026-10-21T10:22:46Z",
+          "actor": {
+            "login": "lintx",
+            "id": 16777174,
+            "url": "https://api.github.com/users/lintx",
+            "html_url": "https://github.com/lintx",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39584138559,
+          "name": "AI Issue Analysis",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "skipped",
+          "workflow_id": 246249880,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39584138559",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39584138559",
+          "created_at": "2026-10-21T10:22:40Z",
+          "updated_at": "2026-10-21T10:22:48Z",
+          "actor": {
+            "login": "lintx",
+            "id": 16777174,
+            "url": "https://api.github.com/users/lintx",
+            "html_url": "https://github.com/lintx",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39583801460,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39583801460",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39583801460",
+          "created_at": "2026-10-21T10:19:56Z",
+          "updated_at": "2026-10-21T10:20:03Z",
+          "actor": {
+            "login": "coderabbitai[bot]",
+            "id": 136622811,
+            "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+            "html_url": "https://github.com/apps/coderabbitai",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39583156721,
+          "name": "AI Issue Analysis",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "skipped",
+          "workflow_id": 246249880,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39583156721",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39583156721",
+          "created_at": "2026-10-21T10:14:46Z",
+          "updated_at": "2026-10-21T10:14:47Z",
+          "actor": {
+            "login": "coderabbitai[bot]",
+            "id": 136622811,
+            "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+            "html_url": "https://github.com/apps/coderabbitai",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39583156410,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39583156410",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39583156410",
+          "created_at": "2026-10-21T10:14:46Z",
+          "updated_at": "2026-10-21T10:14:51Z",
+          "actor": {
+            "login": "coderabbitai[bot]",
+            "id": 136622811,
+            "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+            "html_url": "https://github.com/apps/coderabbitai",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39583051387,
+          "name": "install",
+          "event": "pull_request",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 220378852,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39583051387",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39583051387",
+          "created_at": "2026-10-21T10:13:55Z",
+          "updated_at": "2026-10-21T10:28:09Z",
+          "actor": {
+            "login": "zmdyy0318",
+            "id": 16699676,
+            "url": "https://api.github.com/users/zmdyy0318",
+            "html_url": "https://github.com/zmdyy0318",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39583051274,
+          "name": "build-android-apk",
+          "event": "pull_request",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 371389610,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39583051274",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39583051274",
+          "created_at": "2026-10-21T10:13:55Z",
+          "updated_at": "2026-10-21T10:22:44Z",
+          "actor": {
+            "login": "zmdyy0318",
+            "id": 16699676,
+            "url": "https://api.github.com/users/zmdyy0318",
+            "html_url": "https://github.com/zmdyy0318",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39583051273,
+          "name": "go-check",
+          "event": "pull_request",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 371724532,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39583051273",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39583051273",
+          "created_at": "2026-10-21T10:13:55Z",
+          "updated_at": "2026-10-21T10:15:19Z",
+          "actor": {
+            "login": "zmdyy0318",
+            "id": 16699676,
+            "url": "https://api.github.com/users/zmdyy0318",
+            "html_url": "https://github.com/zmdyy0318",
+            "type": "User"
+          },
+          "run_attempt": 1
+        },
+        {
+          "id": 39581952212,
+          "name": "Issue Upload Check",
+          "event": "issue_comment",
+          "status": "completed",
+          "conclusion": "success",
+          "workflow_id": 228055015,
+          "url": "https://api.github.com/repos/MaaEnd/MaaEnd/actions/runs/39581952212",
+          "html_url": "https://github.com/MaaEnd/MaaEnd/actions/runs/39581952212",
+          "created_at": "2026-10-21T10:05:11Z",
+          "updated_at": "2026-10-21T10:05:20Z",
+          "actor": {
+            "login": "coderabbitai[bot]",
+            "id": 136622811,
+            "url": "https://api.github.com/users/coderabbitai%5Bbot%5D",
+            "html_url": "https://github.com/apps/coderabbitai",
+            "type": "Bot"
+          },
+          "run_attempt": 1
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6645",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6645",
+      "id": 4922850929,
+      "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6645",
+      "number": 6645,
+      "state": "closed",
+      "title": "fix(WorldMap): 视口求解整窗被拒时掩掉迷雾再解一次",
+      "user": {
+        "login": "Lemon-miaow",
+        "id": 61692393,
+        "url": "https://api.github.com/users/Lemon-miaow",
+        "html_url": "https://github.com/Lemon-miaow",
+        "type": "User"
+      },
+      "body_sha256": "0f19ae6ee1b0bc9fce42a95a2b443e034f27212d1a71eef095d437cd3db9ecfa",
+      "created_at": "2026-10-19T14:49:37Z",
+      "updated_at": "2026-10-19T15:04:54Z",
+      "closed_at": "2026-10-19T15:04:51Z",
+      "merged_at": "2026-10-19T15:04:51Z",
+      "head": {
+        "label": "MaaEnd:fix/worldmap-fog-mask",
+        "ref": "fix/worldmap-fog-mask",
+        "sha": "818cb94759cbbf1f30e925d28e5d08fa7db9eca4",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "base": {
+        "label": "MaaEnd:release/v2.34",
+        "ref": "release/v2.34",
+        "sha": "ec5552d7f4a9ba1c9db2a3b0d38f1600f5d6cf0e",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "draft": false,
+      "merged": true,
+      "merged_by": {
+        "login": "zmdyy0318",
+        "id": 16699676,
+        "url": "https://api.github.com/users/zmdyy0318",
+        "html_url": "https://github.com/zmdyy0318",
+        "type": "User"
+      }
+    }
+  },
+  {
+    "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6646",
+    "data": {
+      "url": "https://api.github.com/repos/MaaEnd/MaaEnd/pulls/6646",
+      "id": 4922926441,
+      "html_url": "https://github.com/MaaEnd/MaaEnd/pull/6646",
+      "number": 6646,
+      "state": "closed",
+      "title": "fix(MouseMoveReset): 点击后立即移动鼠标导致点击失效 (cherry-pick of #6644)",
+      "user": {
+        "login": "maaendbotapp[bot]",
+        "id": 305547419,
+        "url": "https://api.github.com/users/maaendbotapp%5Bbot%5D",
+        "html_url": "https://github.com/apps/maaendbotapp",
+        "type": "Bot"
+      },
+      "body_sha256": "661cd8cd55d12ddad5c673e32e306029c7e6efac97d17f62ad4fd011c91c87e7",
+      "created_at": "2026-10-19T14:55:05Z",
+      "updated_at": "2026-10-19T14:55:57Z",
+      "closed_at": "2026-10-19T14:55:46Z",
+      "merged_at": "2026-10-19T14:55:46Z",
+      "head": {
+        "label": "MaaEnd:fix/pr-6644",
+        "ref": "fix/pr-6644",
+        "sha": "ec78503d2c0685d6bac4eb6c2142c50cdae75c1c",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "base": {
+        "label": "MaaEnd:v2",
+        "ref": "v2",
+        "sha": "2c716a88efa506a607a94b9c1e0001e537809037",
+        "user": {
+          "login": "MaaEnd",
+          "id": 246811593,
+          "url": "https://api.github.com/users/MaaEnd",
+          "html_url": "https://github.com/MaaEnd",
+          "type": "Organization"
+        }
+      },
+      "draft": false,
+      "merged": true,
+      "merged_by": {
+        "login": "zmdyy0318",
+        "id": 16699676,
+        "url": "https://api.github.com/users/zmdyy0318",
+        "html_url": "https://github.com/zmdyy0318",
+        "type": "User"
+      }
+    }
+  }
+]

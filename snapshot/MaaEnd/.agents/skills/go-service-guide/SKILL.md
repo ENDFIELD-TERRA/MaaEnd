@@ -1,0 +1,296 @@
+---
+name: go-service-guide
+description: MaaEnd go-service 编写指南。为 agent/go-service/ 下的 Go 代码提供架构、注册、命名、日志、注释等编码规范和模式参考。在编写、修改或审查 Go 自定义识别器、动作、EventSink，或需要了解 go-service 项目结构与 MaaFramework Go 集成方式时使用。
+---
+
+# MaaEnd Go Service 编写指南
+
+## 架构定位
+
+Go Service 仅处理 Pipeline 无法覆盖的复杂逻辑（图像算法、状态机、外部数据等）。禁止在 Go 中编写大规模业务流程——流程控制由 Pipeline JSON 负责。
+
+所有坐标与图像以 **720p (1280×720)** 为基准。
+
+## 目录结构
+
+```text
+agent/go-service/
+├── main.go                     # 入口：初始化、registerAll、启动 AgentServer
+├── register.go                 # registerAll() 聚合各子包 Register()
+├── logger.go                   # zerolog 初始化
+├── pkg/                        # 公共工具包（详见 docs/zh_cn/developers/go-service-pkg.md）
+│                               # recogtarget / boolexpr / ocrnum / jsonclean / pienv /
+│                               # i18n / maafocus / resource / control / minicv / …
+├── common/                     # 通用 Custom 组件（subtask、clearhitcount 等）
+├── taskersink/                 # TaskerEventSink / ContextEventSink 实现
+└── <business>/                 # 业务子包（resell、essencefilter、autofight 等）
+    ├── register.go             # Register() —— 本包所有组件注册
+    └── *.go                    # 按职责拆分的实现文件
+```
+
+## 注册机制
+
+### 子包 Register()
+
+每个子包必须有 `register.go`，只暴露一个 `Register()` 函数，在其中完成本包所有组件注册。
+
+```go
+package mypkg
+
+import maa "github.com/MaaXYZ/maa-framework-go/v4"
+
+func Register() {
+    maa.AgentServerRegisterCustomAction("MyAction", &MyAction{})
+    maa.AgentServerRegisterCustomRecognition("MyRecognition", &MyRecognition{})
+}
+```
+
+注册名称和参数必须与 Pipeline JSON 中 `custom_action` / `custom_recognition` 的 `name`、`param` 一致。
+
+### main 聚合
+
+子包的 `Register()` 必须在 `register.go` 的 `registerAll()` 中调用：
+
+```go
+func registerAll() {
+    mypkg.Register()
+    // ...
+}
+```
+
+遗漏调用 = 组件不生效。
+
+## Schema 维护
+
+新增、修改、重命名或删除 Custom 组件时同步维护 Pipeline Schema：
+
+- Action 使用 `tools/schema/custom.action.schema.json`，Recognition 使用 `tools/schema/custom.recognition.schema.json`。
+- 注册名有变化时，更新对应 Custom Schema 的 `enum`；重命名或删除前先更新 Pipeline 中的用法。
+- 参数有变化时，更新对应的参数 Schema。
+- 删除组件或参数时，一并清理不再使用的 Schema 规则和 `$ref`。
+- 复杂参数放入 `tools/schema/components/` 并通过 `$ref` 引用。
+- 无参数或允许任意值透传时，不要创建空参数 Schema。
+- 不要修改 `tools/schema/pipeline.schema.json`；该文件已引用上述两个 Custom Schema。
+
+## 编译期接口校验
+
+所有注册类型必须在**定义该类型的文件**中包含编译期校验，不要集中放在 `register.go`：
+
+```go
+var _ maa.CustomActionRunner      = &MyAction{}
+var _ maa.CustomRecognitionRunner = &MyRecognition{}
+var _ maa.TaskerEventSink         = &MySink{}
+var _ maa.ContextEventSink        = &MySink{}
+```
+
+## 句柄生命周期（maa-framework-go v4.0.0-beta.19 起）
+
+回调（Custom 的 `Run`、EventSink 的各方法）里拿到的 `*maa.Context`、`*maa.Tasker`、`*maa.Controller`、`*maa.Resource` 都是**借用视图**，必须遵守：
+
+- **只在本次回调内使用。** 回调返回后 `ctx.GetTasker()` / `ctx.Clone()` 返回 `nil`，其余方法返回 `maa.ErrClosed`。禁止存进包级变量或跨回调存活的结构体，禁止交给回调返回后仍在运行的 goroutine。
+- **同一回调内 controller / resource 只取一次，取到后往下传。** `Tasker.GetController()` / `GetResource()` 每调用一次，agent 侧就会销毁上一次返回的对象；继续使用旧对象是释放后使用，表现为 go-service 随机崩溃。辅助函数需要 controller 时接收 `*maa.Controller` 参数，不要自己再从 `ctx` 取。
+- **`PostXxx()` 返回的 Job 紧接着 `.Wait()`。** Job 绑定在取它的那个 controller 上，不要隔着另一次 `GetController()` 再等。
+- **取到后先判空。** 与客户端断连等情况下 `GetTasker()` / `GetController()` / `GetResource()` 返回 `nil`；绑定的回调里没有 `recover`，空指针 panic 会直接结束 go-service 进程。
+- **不要对借用视图调用 `Destroy()`**，也不要把它们传给 `BindResource` / `BindController`，二者都返回 `maa.ErrBorrowed`。
+- **判断控制器类型用 `pienv.ControllerType()` / `pienv.ControllerName()`。** 不要为此去取 controller 调 `GetInfo()`；`GetInfo()` 只在需要窗口句柄等 PI 没有的信息时使用。
+- **识别未命中返回 `nil, false`。** 返回非 nil 的 result 时，即使第二个返回值为 `false`，`Box` 与 `Detail` 也会交给 MaaFramework 写进识别详情；只有确实要带诊断信息时才这么做。
+
+```go
+// ❌ 辅助函数里又取了一次，Run 手里的 ctrl 随即失效
+func (a *MyAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
+    ctrl := ctx.GetTasker().GetController()
+    img := capture(ctx)         // 内部再次 ctx.GetTasker().GetController()
+    ctrl.PostClick(x, y).Wait() // 释放后使用
+    return img != nil
+}
+
+// ✅ 入口取一次并判空，往下传
+func (a *MyAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
+    tasker := ctx.GetTasker()
+    if tasker == nil {
+        return false
+    }
+    ctrl := tasker.GetController()
+    if ctrl == nil {
+        return false
+    }
+    img := capture(ctrl)
+    ctrl.PostClick(x, y).Wait()
+    return img != nil
+}
+```
+
+`ctx.RunTask` 等触发的嵌套 Custom 回调有各自独立的 `ctx`，不受外层持有的 controller 影响，反之亦然。
+
+## 文件管理
+
+- 一个 Custom 组件的实现尽量集中在单个文件。
+- 同包内可按职责拆分多个 `.go`（`register.go` + 功能文件），保持单文件行数可控。
+- 参数结构体（`xxxParam`）放在实现文件中，紧跟类型定义。
+
+## 命名
+
+- **包名**：简短、小写、单词优先（[Go 包命名惯例](https://go.dev/blog/package-names)）；包名已表达语义时不加冗余前缀。
+- **类型/变量**：清晰驼峰；导出名能表意，未导出名保持简短。
+
+## 日志（zerolog）
+
+统一 zerolog，禁止 `log.Printf` / `log.Println`。
+
+```go
+log.Info().
+    Str("component", "MyComponent").
+    Str("step", "Step1").
+    Msg("short description")
+
+log.Error().
+    Err(err).
+    Str("component", "MyComponent").
+    Msg("what failed")
+```
+
+- 上下文（组件名、步骤、场景）用链式字段，禁止拼进 `Msg`。
+- 错误、参数、识别结果一律用链式字段（`.Err(err)`、`.Int("x", x)`）。
+
+## 注释
+
+- **导出符号**：必须添加注释，以符号名开头（便于 `go doc`），说明用途、参数、返回值。
+- **未导出但复杂的逻辑**：初始化、多分支错误处理、算法步骤等应有简要注释。
+- 判断标准：读者能否在不读实现的情况下理解何时/为何被调用。
+
+## CustomAction 模板
+
+```go
+package mypkg
+
+import (
+    "encoding/json"
+
+    maa "github.com/MaaXYZ/maa-framework-go/v4"
+    "github.com/rs/zerolog/log"
+)
+
+var _ maa.CustomActionRunner = &MyAction{}
+
+type myActionParam struct {
+    Target string `json:"target"`
+}
+
+// MyAction does X when Pipeline calls custom_action "MyAction".
+type MyAction struct{}
+
+func (a *MyAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) bool {
+    var params myActionParam
+    if err := json.Unmarshal([]byte(arg.CustomActionParam), &params); err != nil {
+        log.Error().
+            Err(err).
+            Str("component", "MyAction").
+            Msg("failed to parse params")
+        return false
+    }
+
+    // ... 业务逻辑 ...
+
+    return true
+}
+```
+
+## CustomRecognition 模板
+
+```go
+package mypkg
+
+import (
+    "encoding/json"
+
+    maa "github.com/MaaXYZ/maa-framework-go/v4"
+    "github.com/rs/zerolog/log"
+)
+
+var _ maa.CustomRecognitionRunner = &MyRecognition{}
+
+type myRecognitionParam struct {
+    Threshold float64 `json:"threshold"`
+}
+
+// MyRecognition performs X recognition.
+type MyRecognition struct{}
+
+func (r *MyRecognition) Run(ctx *maa.Context, arg *maa.CustomRecognitionArg) (*maa.CustomRecognitionResult, bool) {
+    var params myRecognitionParam
+    if err := json.Unmarshal([]byte(arg.CustomRecognitionParam), &params); err != nil {
+        log.Error().
+            Err(err).
+            Str("component", "MyRecognition").
+            Msg("failed to parse params")
+        return nil, false
+    }
+
+    // ... 识别逻辑，使用 arg.Img ...
+
+    matched := true // 判断是否命中
+    if !matched {
+        return nil, false
+    }
+
+    return &maa.CustomRecognitionResult{
+        Box:    arg.Roi,
+        Detail: "...",
+    }, true
+}
+```
+
+## EventSink 模板
+
+```go
+package mypkg
+
+import maa "github.com/MaaXYZ/maa-framework-go/v4"
+
+var _ maa.TaskerEventSink = &MySink{}
+
+// MySink does X on task lifecycle events.
+type MySink struct{}
+
+func (s *MySink) OnTaskerTask(tasker *maa.Tasker, event maa.EventStatus, detail maa.TaskerTaskDetail) {
+    if event != maa.EventStatusStarting {
+        return
+    }
+    // ...
+}
+```
+
+如需同时监听 Context 事件，实现 `maa.ContextEventSink` 并通过 `maa.AgentServerAddContextSink` 注册。未使用的回调方法写空实现。
+
+## 错误处理
+
+- 错误合理返回或记录，便于上层分支处理。
+- 避免静默吞掉错误。
+
+## 审查清单
+
+- [ ] 注册名与 Pipeline `name` / `param` 一致
+- [ ] `Register()` 已在 `registerAll()` 中调用
+- [ ] Action 注册名变化已同步到 `tools/schema/custom.action.schema.json` 的 `enum`
+- [ ] Recognition 注册名变化已同步到 `tools/schema/custom.recognition.schema.json` 的 `enum`
+- [ ] 参数变化已同步到上述文件或 `tools/schema/components/`，删除内容已清理旧规则和 `$ref`
+- [ ] 编译期接口校验在类型定义文件中
+- [ ] 回调内 controller / resource 只取一次并已判空，辅助函数通过参数接收，不自行再取
+- [ ] 没有把 `ctx` / `tasker` / `controller` / `resource` 留到回调返回之后使用
+- [ ] 识别未命中返回 `nil, false`
+- [ ] zerolog 链式写法，无 `log.Printf`，上下文不拼进 Msg
+- [ ] 导出符号有注释
+- [ ] 无大规模流程代码——流程由 Pipeline 驱动
+- [ ] 坐标/图像基于 720p
+- [ ] 无多余 `time.Sleep`（有明确用途注释的除外）
+- [ ] 重复逻辑考虑抽取为共用函数或子包
+
+## 参考
+
+- 项目整体规范：根目录 `AGENTS.md`
+- 注册示例：`agent/go-service/register.go` + 各子包 `register.go`
+- Custom 节点文档：`docs/zh_cn/developers/custom.md`
+- 公共工具包：`docs/zh_cn/developers/go-service-pkg.md`（`pkg/recogtarget`、`boolexpr`、`ocrnum`、`i18n` 等）
+- Pipeline 协议：[MaaFramework PipelineProtocol](https://github.com/MaaXYZ/MaaFramework/blob/main/docs/en_us/3.1-PipelineProtocol.md)
+- Go binding：`vendor/github.com/MaaXYZ/maa-framework-go/v4/`
+- Go binding beta.19 迁移指南：[v4.0.0-beta.19.md](https://github.com/MaaXYZ/maa-framework-go/blob/v4.0.0-beta.19/docs/migration/v4.0.0-beta.19.md)

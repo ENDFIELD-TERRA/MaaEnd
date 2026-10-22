@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "backend": "Qoder CN native Agent Teams (interactive TUI, beta)",
+  "enable_env": "QODERCN_AGENT_TEAMS=1",
+  "default_active_teammates_limit": 3,
+  "native_runtime_schema": "Discover Agent, SendMessage and shared Task tools in the actual installed client; this file is not a native tool argument object",
+  "roles": [
+    {"definition": "maaend-issue-analyst", "runtime_name_candidate": "analyst", "scope": "Private evidence and analysis only", "upstream_role": "Issue diagnostics and missing-evidence routing"},
+    {"definition": "maaend-designer", "runtime_name_candidate": "designer", "scope": "Private design and dependency contracts", "upstream_role": "Human-understood architecture and work-package review"},
+    {"definition": "maaend-implementer", "runtime_name_candidate": "builder", "scope": "Assigned source paths with exclusive write ownership", "upstream_role": "Incremental, understandable changes"},
+    {"definition": "maaend-reviewer", "runtime_name_candidate": "reviewer", "scope": "Fixed candidate read-only; private review artifacts", "upstream_role": "Independent review and justified finding resolution"},
+    {"definition": "maaend-validator", "runtime_name_candidate": "validator", "scope": "Post-integration validation; exclusive approved browser lease", "upstream_role": "Candidate-bound checks and real-platform acceptance"},
+    {"definition": "maaend-delivery", "runtime_name_candidate": "delivery", "scope": "Private technical publication drafts, no self-approval", "upstream_role": "Commit/PR/CI/release lifecycle tracking"}
+  ],
+  "claims": {"native_team_started": false, "standard_a2a_supported": false, "github_event_listener_deployed": false, "hard_security_sandbox_verified": false}
+}

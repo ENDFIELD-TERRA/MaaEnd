@@ -1,0 +1,109 @@
+{
+  "preparedAt": "2026-10-21",
+  "sourceFiles": [
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/SKILL.md",
+      "gitBlobSha": "21373a884f2c36e546d4913a824e5131c886ca97"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/agent.md",
+      "gitBlobSha": "915a06a990a966f89ec1c59da783d83c7dde6c89"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/bug-bash.md",
+      "gitBlobSha": "c30973e9438a8862abc5489b0084e71480cd3154"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/debugging.md",
+      "gitBlobSha": "a884c62896aedc67643a6fbd66aa7ab281c6caf7"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/explore.md",
+      "gitBlobSha": "94e5f0732295593a83079b8942def62be2eee4cf"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/mcp.md",
+      "gitBlobSha": "053e30632a899618e2db39b4c179a59c5a11ee7a"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/running.md",
+      "gitBlobSha": "e37855439ece75a5434d0deb10a2fbeee0dcc0a9"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/setup.md",
+      "gitBlobSha": "cf2fddbb1a413e749f003b5a7734bfecdd6e3f0b"
+    },
+    {
+      "repository": "tester-army/e2e",
+      "commit": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+      "path": "skills/e2e/references/writing-tests.md",
+      "gitBlobSha": "bbd61af792714e6c92344788492146a3e41158a4"
+    },
+    {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "path": "skills/gdp-ts/SKILL.md",
+      "gitBlobSha": "bad75e5ebdb79456a6def7b1edd924dfe1a00fee"
+    },
+    {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "path": "skills/gdp-ts/references/errors.md",
+      "gitBlobSha": "798bd7b093016bc8ec91b5bbf1237a2de24d526a"
+    },
+    {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "path": "skills/gdp-ts/references/limits.md",
+      "gitBlobSha": "75bd344c68e94de035f18fc66c282819a30b1e87"
+    },
+    {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "path": "skills/gdp-ts/references/patterns.md",
+      "gitBlobSha": "0210d80aa1fb2ddbdfa1af615852d47cf91fae78"
+    },
+    {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "path": "skills/gdp-ts/references/recipe.md",
+      "gitBlobSha": "f1a5c8259105efbb20f3051bdd06eb4db65c4f01"
+    },
+    {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "path": "skills/gdp-ts/references/where-to-stop.md",
+      "gitBlobSha": "2f524ec09d1be3a380f7243bc3ec5a1705722fe5"
+    },
+    {
+      "repository": "rauchg/gdp-ts",
+      "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+      "path": "src/index.ts",
+      "gitBlobSha": "0f3776cf4cac0093de8f4ce0ef802f75066e3bbb"
+    }
+  ],
+  "upstreamRuntimeTest": {
+    "repository": "rauchg/gdp-ts",
+    "commit": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "test/runtime.test.ts",
+    "gitBlobSha": "ccd4dfc11768842d3ea9a4845fc336edcacdc434",
+    "localChange": "Only relative import changed from ../src/index.ts to ../vendor/gdp/index.ts."
+  },
+  "validationStatus": "Original gdp runtime tests: 4 passed; candidate syntax checks recorded separately; vendored source node --check failed twice. Typecheck, authenticated reader and e2e execution remain Pending. See research/gdp-experiment-result.md."
+}

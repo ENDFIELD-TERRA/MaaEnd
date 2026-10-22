@@ -1,0 +1,19 @@
+{
+  "name": "maaend-private-quality-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify": "e2e run --config e2e.config.ts --target web --headed --no-cache",
+    "inspect": "e2e mcp --config e2e.config.ts --target web --headed --max-sessions 1",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "e2e": "0.21.2",
+    "@e2e-dev/web": "0.15.2",
+    "@types/node": "26.6.2",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": "^22.22.3 || >=24.8.0"
+  }
+}

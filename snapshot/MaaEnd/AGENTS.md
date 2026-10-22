@@ -1,0 +1,128 @@
+# MaaEnd AI Agent 编码指南
+
+欢迎参与 MaaEnd 的开发！本指南旨在帮助 AI Agent 快速理解项目结构及编码规范，以提供更高质量的代码建议。
+
+---
+
+> [!CAUTION]
+>
+> 首要准则：**产出符合编码规范的代码**
+>
+> **`docs/zh_cn/developers/coding-standards.md`（编码规范）是代码产出的基准。AI 生成的代码必须符合规范，不应让用户事后纠正。**
+>
+> 1. **合规优先 + 主动提醒**：AI 应在用户指令可能违反规范时主动提醒，给出符合规范的替代方案，但不替代用户的最终判断。例如用户想"加个延迟"→ 提醒优先使用 `post_wait_freezes` + 中间识别节点，但若用户确认确实需要硬延迟，则按用户意图执行；用户想"重试几次"→ 提醒分析根因、修补对应节点，而非盲目重试。
+> 2. **产出即合规**：AI 生成的代码默认应符合规范，不需要用户手动修正违规写法。
+> 3. **信息不足时标注而非瞎编**：缺少截图、ROI 等上下文时，AI 应基于已有信息写出初稿，并明确标注不确定的占位部分，要求用户补充。
+> 4. **验证按需，默认交给 CI**：不要主动跑 `pnpm check` / `pnpm test`，这两个套件由 PR 的 CI 负责，跟进 CI 状态即可。**仅当改动包含 `tests/**` 内容**（新增/修改用例、截图、`hits` / `box` 期望），或用户明确要求时，才在本地先跑 `pnpm test`；此时若还改了 `assets/**`、`tools/schema/**`，一并跑 `pnpm check`。
+>
+> **AI 的默认行为**
+>
+> | 用户意图 | AI 的默认做法 |
+> | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
+> | 希望解决节点不稳定 | 增加中间识别节点或 `pre_wait_freezes` / `post_wait_freezes`，不引入硬延迟 |
+> | 希望操作失败后自动恢复 | 分析失败根因（哪个节点、哪个识别不符合预期），修补对应节点，而非盲目重试 |
+> | 未提供截图/界面信息就让 AI 写 Pipeline | 说明 Pipeline 强依赖界面信息，缺乏截图只能产出幻觉代码。要求提供截图、ROI、界面跳转关系后再编写 |
+> | 让 AI 开发功能并直接提 PR | 先在对话中做增量辅助，由用户做架构设计、自行 review 后再决定是否提交 |
+> | 让 AI 全权负责修 bug 不 review | 产出修复并说明改动逻辑，用户理解并 review 后再提交 |
+> | 让 Go Service 里写大段流程控制 | 将流程逻辑留在 Pipeline JSON，Go 仅处理复杂算法，遵循「Pipeline 管流程，Go 管难点」 |
+> | 整体识别一次然后连点多次 | 每步操作都有独立识别节点，遵循「识别 → 操作 → 再识别」 |
+> | 代码产出完成 | 提醒跑格式化：`pnpm format`（JSON/YAML）、`pnpm format:go`（Go）、`pnpm format:md`（Markdown）；**不要**主动跑 `pnpm check` / `pnpm test`，交给 PR 的 CI |
+> | 为验证而生成临时测试文件 | 验证完成后删除，除非用户明确要求保留 |
+> | 新增 / 修改 option 或 Pipeline 节点 | **不要**主动生成 option 的 `description`、Pipeline 的 `focus` 提示字段；仅当用户明确要求时再添加 |
+>
+> **核心原则：AI 产出的代码默认合规，用户无需事后纠正。**
+
+---
+
+## 项目概览
+
+**MaaEnd** 是基于 [MaaFramework](https://github.com/MaaXYZ/MaaFramework) 开发的游戏自动化工具。
+
+- **主体流程**：用户可以选择若干 Task 来执行自动化任务，位于 `assets/tasks` 目录。而 Task 会调用 Pipeline 中定义的 Node 来执行。Pipeline 是基于 JSON 的低代码实现，位于 `assets/resource/pipeline`。
+- **复杂逻辑**：对于不便进行低代码实现的复杂的识别或操作逻辑，可通过 Go 编写的 `agent/go-service` 来扩展实现。
+- **配置入口**：`assets/interface.json` 定义了任务列表、控制器及 Agent 启动项。
+
+## 关键文件
+
+- [`assets/resource/pipeline/`](assets/resource/pipeline/): 所有的 Pipeline 任务逻辑。
+- [`assets/resource/image/`](assets/resource/image/): 识别所需的图片资源（基准分辨率 720p）。
+- [`agent/go-service/`](agent/go-service/): 自定义 Go Service 源码。
+- [`assets/locales/`](assets/locales/): 国际化本地化文件（任务名称、UI 文本等）。
+- [`tests/`](tests/): 节点测试用例与测试集（`tests/**/*.json`）；新增或修改识别节点时补充用例，写法见 [`docs/zh_cn/developers/node-testing.md`](docs/zh_cn/developers/node-testing.md)。
+- [`docs/zh_cn/developers/README.md`](docs/zh_cn/developers/README.md): 中文开发者文档索引（阅读路线、文档目录）；英文镜像见 [`docs/en_us/developers/README.md`](docs/en_us/developers/README.md)。
+
+## 编码规范
+
+### 1. Pipeline 低代码规范
+
+- **禁止无界面信息编写 Pipeline**：严禁在未向 AI 提供游戏界面截图、界面跳转逻辑等上下文的情况下，让 AI 直接编写 Pipeline。MaaFramework 的 Pipeline 强依赖游戏界面与业务逻辑，缺乏界面信息的 AI 只能依赖幻觉和项目已有代码拼凑，产出代码质量极低。充分的信息至少包括：每个识别节点需提供 `roi` 与模板图片，并说明界面间的跳转关系（从哪个界面、点击什么、跳转到何处）。不满足以上条件的 PR 将被维护者直接关闭。
+- **协议合规性**：所有 Pipeline JSON 字段必须严格遵循 MaaFramework Pipeline 协议规范（见下方相关文档链接）。在新增或修改节点时，务必核对字段名称、类型及取值范围。
+- **状态驱动**：遵循“识别 -> 操作 -> 识别”的循环。严禁盲目使用 `pre_delay` 或 `post_delay`。
+- **高命中率**：尽可能扩充 `next` 列表，确保在第一轮截图（一次心跳）内命中目标节点。
+- **原子化操作**：每一步点击或交互都应基于明确的识别结果，不要假设点击后的状态。
+- **分辨率基准**：所有坐标和图片必须以 **720p (1280x720)** 为基准。
+
+### 2. Go Service 规范
+
+- **职责分离**：Go Service 仅用于处理 Pipeline 难以实现的复杂图像算法或特殊交互逻辑。
+- **流程控制**：禁止在 Go 中编写大规模的业务流程，流程控制应交由 Pipeline JSON 负责。
+- **注册机制**：新增、重命名或删除自定义动作/识别时，需同步修改对应子包 `register.go`；新增或删除子包时，还需在 `registerAll()` 中接入或移除。
+- **参数极简**：新增或修改 Custom Recognition / Action 时，`custom_recognition_param` / `custom_action_param` 应尽可能简单——用户未明确要求的参数不要自行添加，避免擅自设计大量接口。
+- **句柄生命周期**：回调里的 `ctx` / `tasker` / `controller` / `resource` 只在本次回调内有效；同一回调内 `GetController()` / `GetResource()` 只调用一次并往下传，再次调用会使上一次返回的对象失效。详见 [Go Service 编写指南](.agents/skills/go-service-guide/SKILL.md) 的「句柄生命周期」一节。
+
+### 3. Cpp Algo 规范
+
+- **职责分离**：Cpp Algo 支持原生 OpenCV 和 ONNX Runtime，优先用于实现单个复杂识别算法；操作及业务流程优先由 Go Service 与 Pipeline 负责。
+- **注册机制**：新增、重命名或删除自定义动作/识别时，需同步修改 `agent/cpp-algo/source/main.cpp` 中的注册。
+- **参数极简**：新增或修改 Custom Recognition / Action 时，`custom_recognition_param` / `custom_action_param` 应尽可能简单——用户未明确要求的参数不要自行添加，避免擅自设计大量接口。
+
+### 4. Custom Schema 规范
+
+- **文件位置**：Action 使用 `tools/schema/custom.action.schema.json`，Recognition 使用 `tools/schema/custom.recognition.schema.json`。
+- **注册名同步**：注册名有变化时，更新对应 Custom Schema 的 `enum`；重命名或删除前先更新 Pipeline 中的用法。
+- **参数同步**：参数有变化时，更新对应的参数 Schema；删除组件或参数时，一并清理不再使用的 Schema 规则和 `$ref`。
+- **空参数边界**：无参数或允许任意值透传时，无需创建空参数 Schema。
+- **主 Schema 边界**：`tools/schema/pipeline.schema.json` 已引用两个 Custom Schema，无需修改。
+
+### 5. 资源维护与任务新增
+
+- **接口定义合规性**：`assets/interface.json` 必须符合 MaaFramework 项目接口 V2（见下方相关文档链接） 规范。
+- **国际化同步**：新增任务时，必须在 `assets/locales/` 下的相关语言 JSON 文件中添加对应的任务名称及描述。
+- **配置同步**：`assets/interface.json` 的修改需要手动从 `install` 目录同步回源码（如果是通过工具修改）。
+- **文件夹命名**：资源目录下的文件夹名禁止以下划线 `_` 开头（如 `__Private`）。Android 打包逻辑无法处理下划线开头的目录名，会导致资源无法打入包内；此限制仅针对文件夹名，任务名（JSON 键名）不受影响。
+
+### 6. 代码格式化规范
+
+- **Prettier 约束**：所有 JSON、YAML 文件必须遵循 `.prettierrc` 的配置。
+- **关键规则**：
+    - 缩进宽度以 `.prettierrc` 为唯一准则，通常是 4 个空格。
+    - 数组格式受 `prettier-plugin-multiline-arrays` 插件影响，数组元素必须换行排列（阈值为 1）。
+    - 提交前请务必执行格式化，确保代码风格统一。
+- **Markdown 约束**：新增、修改 `.md` 前先读 [docs-guide](.agents/skills/docs-guide/SKILL.md)，按其中的写法和 markdownlint 规则处理。
+
+## 审查重点
+
+在审查代码（Review）时，请重点关注以下事项：
+
+- **协议字段校验**：检查 Pipeline 和 Interface JSON 中的字段是否合法，是否存在拼写错误或使用了协议不支持的属性。参考相关协议文档。
+- **禁止硬延迟**：检查是否出现了不必要的 `pre_delay`, `post_delay`, `timeout`。应优先考虑通过增加中间识别节点来优化流程。
+- **截图效率**：检查 `next` 列表是否足够完善。理想情况下，应能覆盖当前操作后所有可能的预期画面，实现“一次心跳，立即命中”。
+- **坐标合法性**：所有新定义的 `roi` 或 `target` 坐标必须基于 **1280x720** 分辨率。
+- **代码格式化**：确保代码符合 `.prettierrc` 规范，特别是 JSON 中的缩进格式。
+- **文档改动**：按 [docs-guide](.agents/skills/docs-guide/SKILL.md) 检查，特别是中英文文档是否一起改了。
+- **国际化缺失**：检查新增任务是否在 `assets/locales/` 文件夹中配置了多语言文本。
+- **文件夹命名**：检查资源目录下是否有以下划线 `_` 开头的文件夹名（Android 打包逻辑无法处理，需改为普通命名）。
+- **OCR 完整文本**：OCR 节点的 `expected` 默认必须写完整文本，禁止为了"图省事"写片段。仅当 OCR 引擎对完整文本识别不稳定，确需截断/正则才能稳定命中时，才允许写片段，此时必须在 `expected` 数组中加 `// @i18n-skip`，并在数组上方用普通 JSON 注释保留**完整原文**，方便审查与多语言对照。
+- **逻辑边界**：检查 Pipeline 是否处理了异常情况（如弹窗阻断）。每一步点击后都应有相应的识别验证。
+- **Go 职责界限**：审查 Go Service 中的代码是否包含本应由 Pipeline 处理的业务逻辑。确保 Go 仅作为“工具”被 Pipeline 调用。
+- **配置文件同步**：若修改了任务列表，务必确认 `assets/interface.json` 已正确更新。
+
+## 相关文档链接
+
+建议调取以下文档（通过读取文件或使用工具访问网页）以辅助理解和开发：
+
+- [MaaFramework Pipeline 协议规范](https://github.com/MaaXYZ/MaaFramework/raw/refs/heads/main/docs/en_us/3.1-PipelineProtocol.md)
+- [MaaFramework 项目接口 V2](https://github.com/MaaXYZ/MaaFramework/raw/refs/heads/main/docs/en_us/3.3-ProjectInterfaceV2.md)
+- [MaaEnd 开发者文档（中文索引）](docs/zh_cn/developers/README.md) · [English index](docs/en_us/developers/README.md)
+- [Go Service `pkg/` 公共包](docs/zh_cn/developers/go-service-pkg.md)（And 解包、条件计算等）
+- [Android 构建环境准备](docs/zh_cn/developers/android-build-env.md)（JDK / Android SDK / NDK / Ninja 安装与环境变量）

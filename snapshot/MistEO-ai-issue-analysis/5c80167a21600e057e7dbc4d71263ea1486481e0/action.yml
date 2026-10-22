@@ -1,0 +1,237 @@
+name: AI Issue Analysis
+description: Analyze a GitHub issue with an AI coding agent (Copilot / Claude / Codex) and keep a comment updated with progress and the final result.
+author: MistEO
+
+inputs:
+  agent:
+    description: AI agent to use. One of copilot, claude, codex.
+    required: true
+  api-key:
+    description: API key or token for the agent. Supports multiple keys (one per line); a random one is picked each run.
+    required: true
+  api-base-url:
+    description: Custom API base URL. Typically passed from a repository secret (e.g. secrets.API_BASE_URL).
+    required: false
+    default: ""
+  model:
+    description: Model name passed to the agent CLI.
+    required: false
+    default: ""
+  reasoning-effort:
+    description: >-
+      Thinking / reasoning effort level. Default xhigh.
+      Claude: --effort (low/medium/high/xhigh/max).
+      Codex: model_reasoning_effort (low/medium/high/xhigh/max/ultra).
+      Copilot: --reasoning-effort (low/medium/high/xhigh; max/ultra map to xhigh).
+      Leave empty to skip and use the agent default.
+    required: false
+    default: "xhigh"
+  agent-package:
+    description: NPM package to install. Leave empty to use the agent default.
+    required: false
+    default: ""
+  agent-extra-args:
+    description: Extra CLI arguments appended to the agent command.
+    required: false
+    default: ""
+  issue-number:
+    description: Issue number to analyze. If empty, inferred from the event payload.
+    required: false
+    default: ""
+  github-token:
+    description: GitHub token used to create/update issue comments and for the agent to call `gh` / the GitHub API.
+    required: true
+  bot-name:
+    description: Bot mention to strip from issue_comment messages.
+    required: false
+    default: ""
+  initial-comment-body:
+    description: Initial comment body shown before analysis finishes.
+    required: false
+    default: |
+      🤖 **AI 正在分析该 Issue...**  
+      
+      感谢您的反馈！AI 正在自动分析该问题，预计耗时约 10 分钟。
+  action-link-text:
+    description: Link text for the current GitHub Actions run.
+    required: false
+    default: GitHub Action 运行记录
+  publish-execution-log:
+    description: Publish raw execution logs in issue comments during and after analysis. Opt-in debugging only; logs may contain sensitive data.
+    required: false
+    default: "false"
+  details-summary:
+    description: Summary text for the collapsible log block when publish-execution-log is true.
+    required: false
+    default: 点击此处展开分析过程
+  prompt-template:
+    description: "Base prompt template. Placeholders: {{issue_number}}, {{answer_file}}, {{repository}}, {{event_name}}."
+    required: false
+    default: 严格按照 SKILL 中的规则，分析 GitHub Issue {{issue_number}}。把最终结论写到 {{answer_file}}。
+  comment-prompt-template:
+    description: "Extra prompt appended when the comment has content. Additional placeholder: {{comment_body}}."
+    required: false
+    default: 补充要求：{{comment_body}}
+  stream-update-interval-seconds:
+    description: Seconds between streamed comment updates when publish-execution-log is true.
+    required: false
+    default: "30"
+  cache-dir:
+    description: Directory for temporary files.
+    required: false
+    default: .cache
+  answer-file:
+    description: File path where the agent writes the final answer.
+    required: false
+    default: answer.md
+  checkout-repository:
+    description: Whether to run actions/checkout inside the action.
+    required: false
+    default: "true"
+  process-error-message:
+    description: Fallback message in the analysis log when the answer file is missing.
+    required: false
+    default: 分析过程出现错误，请重试。
+  result-error-message:
+    description: Fallback message in the final comment when the answer file is missing.
+    required: false
+    default: 分析结果出现错误，请重试。
+  extra-comment-content:
+    description: Extra content appended to every comment update.
+    required: false
+    default: ""
+
+outputs:
+  issue-number:
+    description: Resolved issue number.
+    value: ${{ steps.prepare.outputs.issue_number }}
+  comment-id:
+    description: Issue comment ID.
+    value: ${{ steps.initial_comment.outputs.comment-id }}
+  comment-url:
+    description: Issue comment URL.
+    value: ${{ steps.finalize.outputs.comment-url }}
+  analysis-prompt:
+    description: Final prompt sent to the agent.
+    value: ${{ steps.finalize.outputs.analysis-prompt }}
+  agent-output:
+    description: Full execution log.
+    value: ${{ steps.finalize.outputs.agent-output }}
+  final-conclusion:
+    description: Final conclusion from the agent.
+    value: ${{ steps.finalize.outputs.final-conclusion }}
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      if: ${{ inputs.checkout-repository == 'true' }}
+      uses: actions/checkout@v4
+
+    - name: Prepare (issue number, prompt, runtime paths)
+      id: prepare
+      shell: bash
+      env:
+        INPUT_ISSUE_NUMBER: ${{ inputs.issue-number }}
+        EVENT_NAME: ${{ github.event_name }}
+        BOT_NAME: ${{ inputs.bot-name }}
+        ANSWER_FILE: ${{ inputs.answer-file }}
+        PROMPT_TEMPLATE: ${{ inputs.prompt-template }}
+        COMMENT_PROMPT_TEMPLATE: ${{ inputs.comment-prompt-template }}
+        REPOSITORY: ${{ github.repository }}
+        CACHE_DIR: ${{ inputs.cache-dir }}
+        DETAILS_SUMMARY: ${{ inputs.details-summary }}
+        ACTION_LINK_TEXT: ${{ inputs.action-link-text }}
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        GITHUB_RUN_ID: ${{ github.run_id }}
+      run: python "${{ github.action_path }}/scripts/prepare.py"
+
+    - name: Create initial comment
+      id: initial_comment
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        issue-number: ${{ steps.prepare.outputs.issue_number }}
+        token: ${{ inputs.github-token }}
+        body: |
+          ${{ inputs.initial-comment-body }}
+          ---
+          ${{ steps.prepare.outputs.action_link }}
+
+    - name: Run agent analysis
+      shell: bash
+      env:
+        AGENT_NAME: ${{ inputs.agent }}
+        API_KEY: ${{ inputs.api-key }}
+        API_BASE_URL: ${{ inputs.api-base-url }}
+        MODEL: ${{ inputs.model }}
+        REASONING_EFFORT: ${{ inputs.reasoning-effort }}
+        AGENT_PACKAGE: ${{ inputs.agent-package }}
+        AGENT_EXTRA_ARGS: ${{ inputs.agent-extra-args }}
+        COMMENT_GITHUB_TOKEN: ${{ inputs.github-token }}
+        GH_TOKEN: ${{ inputs.github-token }}
+        REPO: ${{ github.repository }}
+        COMMENT_ID: ${{ steps.initial_comment.outputs.comment-id }}
+        ISSUE_NUMBER: ${{ steps.prepare.outputs.issue_number }}
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        ANALYSIS_PROMPT_FILE: ${{ steps.prepare.outputs.analysis_prompt_file }}
+        OUTPUT_FILE: ${{ steps.prepare.outputs.agent_output_file }}
+        EXECUTION_LOG_FILE: ${{ steps.prepare.outputs.agent_execution_log_file }}
+        BODY_FILE: ${{ steps.prepare.outputs.comment_body_file }}
+        INITIAL_BODY: ${{ inputs.initial-comment-body }}
+        ACTION_LINK: ${{ steps.prepare.outputs.action_link }}
+        DETAILS_BEGIN: ${{ steps.prepare.outputs.details_begin }}
+        DETAILS_END: ${{ steps.prepare.outputs.details_end }}
+        STREAM_UPDATE_INTERVAL: ${{ inputs.stream-update-interval-seconds }}
+        PUBLISH_EXECUTION_LOG: ${{ inputs.publish-execution-log }}
+        EXTRA_COMMENT_CONTENT: ${{ inputs.extra-comment-content }}
+      run: python "${{ github.action_path }}/scripts/run_agent.py"
+
+    - name: Finalize (comment, artifacts, outputs)
+      id: finalize
+      if: ${{ always() }}
+      shell: bash
+      env:
+        COMMENT_ID: ${{ steps.initial_comment.outputs.comment-id }}
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        ISSUE_NUMBER: ${{ steps.prepare.outputs.issue_number }}
+        REPOSITORY: ${{ github.repository }}
+        ANALYSIS_PROMPT_FILE: ${{ steps.prepare.outputs.analysis_prompt_file }}
+        EXECUTION_LOG_FILE: ${{ steps.prepare.outputs.agent_execution_log_file }}
+        OUTPUT_ARTIFACT_FILE: ${{ steps.prepare.outputs.agent_output_artifact_file }}
+        OUTPUT_FILE: ${{ steps.prepare.outputs.agent_output_file }}
+        ANSWER_FILE: ${{ inputs.answer-file }}
+        CONCLUSION_ARTIFACT_FILE: ${{ steps.prepare.outputs.final_conclusion_artifact_file }}
+        FINAL_COMMENT_FILE: ${{ steps.prepare.outputs.final_comment_file }}
+        ACTION_LINK: ${{ steps.prepare.outputs.action_link }}
+        DETAILS_BEGIN: ${{ steps.prepare.outputs.details_begin }}
+        DETAILS_END: ${{ steps.prepare.outputs.details_end }}
+        EXTRA_COMMENT_CONTENT: ${{ inputs.extra-comment-content }}
+        PUBLISH_EXECUTION_LOG: ${{ inputs.publish-execution-log }}
+        RESULT_ERROR_MESSAGE: ${{ inputs.result-error-message }}
+        PROCESS_ERROR_MESSAGE: ${{ inputs.process-error-message }}
+      run: python "${{ github.action_path }}/scripts/finalize.py"
+
+    - name: Upload agent output artifact
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: agent-output-issue-${{ steps.prepare.outputs.issue_number }}-comment-${{ steps.initial_comment.outputs.comment-id || 'none' }}
+        path: ${{ steps.prepare.outputs.agent_output_artifact_file }}
+        if-no-files-found: warn
+
+    - name: Upload final conclusion artifact
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: final-conclusion-issue-${{ steps.prepare.outputs.issue_number }}-comment-${{ steps.initial_comment.outputs.comment-id || 'none' }}
+        path: ${{ steps.prepare.outputs.final_conclusion_artifact_file }}
+        if-no-files-found: warn
+
+    - name: Update comment with final result
+      if: ${{ always() && steps.initial_comment.outputs.comment-id != '' }}
+      uses: peter-evans/create-or-update-comment@v4
+      with:
+        comment-id: ${{ steps.initial_comment.outputs.comment-id }}
+        edit-mode: replace
+        body-path: ${{ steps.prepare.outputs.final_comment_file }}
+        token: ${{ inputs.github-token }}

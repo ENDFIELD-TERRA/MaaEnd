@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "files": ["proofs/proof-boundary.ts", "runtime-bridge.ts", "misuse.negative.ts"]
+}

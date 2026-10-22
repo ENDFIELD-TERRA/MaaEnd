@@ -1,0 +1,13 @@
+{
+  "event_name": "manual",
+  "payload": {
+    "repository": {"full_name": "MaaEnd/MaaEnd"},
+    "issue": {
+      "number": 6483,
+      "title": "EXAMPLE ONLY: replace with the current exported issue and all comments",
+      "body": "This fixture is not a current issue export or evidence of a game defect.",
+      "state": "open",
+      "updated_at": "2026-10-21T00:00:00Z"
+    }
+  }
+}

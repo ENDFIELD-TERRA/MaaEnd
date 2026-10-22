@@ -1,0 +1,1496 @@
+[
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/issue-ai-analysis.yml",
+    "git_blob": "bb977cb6f1008ff2f7c2db5c15c1d4f892509a3b",
+    "sha256": "86c6d580052b7925fad337f654e07973aaa2316c2b583eb69442f6d82d156a1f",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/issue-ai-analysis.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/issue-ai-analysis.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/issue-auto-label.yml",
+    "git_blob": "9b990a0c87c4d2abac64e4478214b5660615bea6",
+    "sha256": "2ced1c8990d19f0578a97f71f8e0afed040f3723c0406dffa8ee859016be1e2a",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/issue-auto-label.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/issue-auto-label.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/issue-upload-check.yml",
+    "git_blob": "30958d189d2df43d18934c678ea10b722f125fbc",
+    "sha256": "78a44a21f6c5f74898060838ddc6c75a063f2dfe5d45484184362a3f63e8bf21",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/issue-upload-check.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/issue-upload-check.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/lint.yml",
+    "git_blob": "04526d6a47e10a6f18ed6e7998977ce31037a898",
+    "sha256": "22b8eb34477fd2b801a6c44973e4635574cdd8d75585ab6f2626714108c18c43",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/lint.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/lint.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".python-version",
+    "git_blob": "6324d401a069f4020efcf0ff07442724b52f47c2",
+    "sha256": "a876e0b10411037a012498b9fe18d9bc1df32ed8b722a13564dc944ddcfd9135",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.python-version",
+    "local_path": "snapshot/MaaEnd/.python-version"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "docs/zh_cn/developers/coding-standards.md",
+    "git_blob": "cdd0aad14729ae254f5c1c17389ba00714db2a93",
+    "sha256": "197118cff8cc0ad125afbaed64fb253d93d1ff11c47166e65fed5a5087350124",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/docs/zh_cn/developers/coding-standards.md",
+    "local_path": "snapshot/MaaEnd/docs/zh_cn/developers/coding-standards.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "docs/zh_cn/developers/node-testing.md",
+    "git_blob": "1a45f8185c0914cfca341fab9661a578c07baa6a",
+    "sha256": "99872d23e980b0a6dccb114964bd2f2e5dfeadce80dc5af03338f6fd1549381d",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/docs/zh_cn/developers/node-testing.md",
+    "local_path": "snapshot/MaaEnd/docs/zh_cn/developers/node-testing.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "package.json",
+    "git_blob": "d022cd242c78ea23fafb7b9b7ab0c140b9b7d067",
+    "sha256": "a4214a75c6fff79bf642ce459e0bd5018d44bd83e963aa17472f8e6707fb6041",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/package.json",
+    "local_path": "snapshot/MaaEnd/package.json"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "pyproject.toml",
+    "git_blob": "9fb63d5be3f328172bdfb974321dd846e3a98fbb",
+    "sha256": "225152326ccaf2fb87a59524fbc8f92e2e7a991f4d29e6382eb00bb5b75890d4",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/pyproject.toml",
+    "local_path": "snapshot/MaaEnd/pyproject.toml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/go-service-guide/SKILL.md",
+    "git_blob": "022899dcd08c4737e9f79fdba8c837dffdaeff1a",
+    "sha256": "a74f4e87799027a5134ff2a54c9f9af8f6721ddb2a27f43f5c95e4a8cc419244",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/go-service-guide/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/go-service-guide/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/maaend-test-image/scripts/detect_screenshot_platform.py",
+    "git_blob": "392ce3c4d196ab1e5ef0aade665496dd2e37e777",
+    "sha256": "69da5b8b23334b36c1a9c468591d518f148fa068319784ed79a51419090355ee",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/maaend-test-image/scripts/detect_screenshot_platform.py",
+    "local_path": "snapshot/MaaEnd/.agents/skills/maaend-test-image/scripts/detect_screenshot_platform.py"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/environment-monitoring-add-route/check_missing.mjs",
+    "git_blob": "4f028cd35f475653bed999f2d8950bb0bda9a32b",
+    "sha256": "2c39faad746cb9bc4d140edab57b8b23c40b687d74d0f91deac979a807f8b06d",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/environment-monitoring-add-route/check_missing.mjs",
+    "local_path": "snapshot/MaaEnd/.agents/skills/environment-monitoring-add-route/check_missing.mjs"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/map-navigator-guide/SKILL.md",
+    "git_blob": "750dce146b7cebec7651a34aaa3dccbb7a37c615",
+    "sha256": "0733de0a11f32b8581133498ae9c1f59aabf754cb12ff6ae31189068de504ba8",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/map-navigator-guide/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/map-navigator-guide/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/autostockstaple-log-analysis/SKILL.md",
+    "git_blob": "a78236ad92c4a9479e7893c59ff8703f5eecd625",
+    "sha256": "d7f8ed9447ad5a772bda09dd95a3ce595a01065b5ffb8f4adec351aaf2809725",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/autostockstaple-log-analysis/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/autostockstaple-log-analysis/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/docs-guide/SKILL.md",
+    "git_blob": "6b603ed506c6bb911e62ab9351a351d8a2ae6360",
+    "sha256": "3cfe74e9eb313b6f05c2143366241be52b2b2aa5509843c5570bd61e6e3ec5e5",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/docs-guide/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/docs-guide/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/cherry-pick-to-v2.yml",
+    "git_blob": "1963fe460165b2719ab5fe733dca31b7f940e509",
+    "sha256": "2d0208b9a82e14d3c74f35a52c5d10b22206180e174d50c738c25edd5c08ba3a",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/cherry-pick-to-v2.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/cherry-pick-to-v2.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/cpp-algo-style/SKILL.md",
+    "git_blob": "01beb3781aab0d6a306b40725efb24f68ebd2230",
+    "sha256": "a4bdba21d02c5ee38cafce0d078a597c4e9a568ad82de1f8fac8c6ec72ea0daa",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/cpp-algo-style/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/cpp-algo-style/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/perlica-style-reply/SKILL.md",
+    "git_blob": "359f127be5316d4e447c531f3086ab648ce615fa",
+    "sha256": "f91dffe59d69a36e50b66f25d70714342313f63ed2b17b0d90065b13039c78cb",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/perlica-style-reply/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/perlica-style-reply/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/blame-ignore.yml",
+    "git_blob": "836b61c076e9e733fe17c618c3937d69f26b3ec9",
+    "sha256": "ab2b075ce80332e5ae10501383dd2a10c9b660b29b6694dac7ccf77d218021b6",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/blame-ignore.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/blame-ignore.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/item-transfer/SKILL.md",
+    "git_blob": "95c1408c087213f853036c1ecd4eb9f85efc09d0",
+    "sha256": "460e7437fecb98e636e7c5296a253ed3e9b340efac511710848c898e69e41f86",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/item-transfer/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/item-transfer/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/cleanup-cache.yml",
+    "git_blob": "cebd64f705a6d7e8073e5f90392773e6ceb306cf",
+    "sha256": "72cbb7aafe794a8325d1222b197f007d0325995d3dfff9983ea4c2406264f54c",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/cleanup-cache.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/cleanup-cache.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/meojson/SKILL.md",
+    "git_blob": "b0200d4541de825dbc273be05157b0641f8302a4",
+    "sha256": "e4d03dc6ef42e350ccc93fdacfc248611c1ab0df931b036f15442153998bd2db",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/meojson/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/meojson/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/credit-shopping-log-analysis/SKILL.md",
+    "git_blob": "4f652b6532746f053bbc317b7b8621e5aa89ad86",
+    "sha256": "c6dd7e978758bff337768b5f0fb67fbd82081aa0b0f959718e7899f08a85bdbb",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/credit-shopping-log-analysis/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/credit-shopping-log-analysis/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/pipeline-guide/field-reference.md",
+    "git_blob": "2e822e545ac46ae6b109d6aa5b8d5e14fd24fa10",
+    "sha256": "cb33a5c20ddcd2d1e19a5c6773f5cc3b5a140538e729f73df4d6c0d0dc9e500a",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/pipeline-guide/field-reference.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/pipeline-guide/field-reference.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/meojson/reference.md",
+    "git_blob": "7e9bf74bd570c4023bc06474460fc10254bba605",
+    "sha256": "72934c32e715035cb845f01d853fb0b349ffc519c1cc4034675016b3e911ca60",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/meojson/reference.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/meojson/reference.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/mirrorchyan_release_note.yml",
+    "git_blob": "054520a9f3a372fff307216a75c1f986ebbb35dd",
+    "sha256": "f538dd9aedc787ec213fc26b37cc96fb4201e9ffd5bfb309ac51f6ce4668ed83",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/mirrorchyan_release_note.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/mirrorchyan_release_note.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/generate-macos-keymap.yml",
+    "git_blob": "b18794ccf5a9b21c90f9a726fae08efecde7f477",
+    "sha256": "3d4a6e475d8ffc56d3fc39b9d1ac75ae131d1895c16e99d4e16524409d0cc7fe",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/generate-macos-keymap.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/generate-macos-keymap.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/mirrorchyan_release.yml",
+    "git_blob": "12d8d42c193ee6c28223c13da49466e89b327530",
+    "sha256": "9202f63d2964f1af78f89790817841d2228e64b6f5ed7c84b6a7313f3df5ad56",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/mirrorchyan_release.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/mirrorchyan_release.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/android.yml",
+    "git_blob": "f936b320784e3bd3eec76ea68511795b06995b6d",
+    "sha256": "751549780e20680fe5e9ae5792bc2a88016a62e27e6bc7760d784154f3a388ac",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/android.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/android.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/stale.yml",
+    "git_blob": "f04bc3c59e12517c6f799a6ccdaddf3cdf809e55",
+    "sha256": "b9e416e8a325635e33a842b4dd68d0dfde83a27bf261e00ed97f189e65b94cdd",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/stale.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/stale.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/optimize-img.yml",
+    "git_blob": "cdc2541e5fd6fca2a340c73842ddb950c0b3b5f8",
+    "sha256": "56fbdd1d885b29867a56c54e2468adc95e90436814206535c8bd2082a873dfe5",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/optimize-img.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/optimize-img.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/i18n-sync.yml",
+    "git_blob": "499fd9ed1dce0a0c3ec259d99966a298742e2d7b",
+    "sha256": "ef17df20f58b20b3089a97094529e7689a56adc059073ffafd07be829de65a93",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/i18n-sync.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/i18n-sync.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/go-check.yml",
+    "git_blob": "db3814681203b59cf8fb20f8eed5aada50b43851",
+    "sha256": "662140fd3cf15b87deca4967cac670761cf168b450e3a0aafbb9b48d884a7854",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/go-check.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/go-check.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/format.yml",
+    "git_blob": "dc1351e09b71138cc78c3aada969f8e4a1a287cd",
+    "sha256": "182667968cef21d5d37407085427d738fabab56e528fa2f84abab20b5fa44f3f",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/format.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/format.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/install.yml",
+    "git_blob": "b5dcceaf200f3617e5668f4dee14e9d5d449eeed",
+    "sha256": "b9f075b9966444b3a2f7a829a74a65b89c789d0380d5e1b037eeccfa86a3efb2",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/install.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/install.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/cpp-algo-style/reference.md",
+    "git_blob": "51da8d7c353bd61bf70cb23a75acfd6187600b36",
+    "sha256": "7f960e844bc05e8dca0f98191e1cfa6b4a4ffa9ef6465ce1e6cec0c1282577ac",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/cpp-algo-style/reference.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/cpp-algo-style/reference.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/environment-monitoring-add-route/SKILL.md",
+    "git_blob": "4652fe9c59cf3c6744af298a1548f936539f3cc0",
+    "sha256": "86696fbffab10a78aaa108c59dda25abdb570788f92bba14d3daf570bac9fb0f",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/environment-monitoring-add-route/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/environment-monitoring-add-route/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".prettierrc.mjs",
+    "git_blob": "0592333d4442eaf6934dc0a3fb7773218e19208e",
+    "sha256": "d4470b4769eac483c7b1f7ff1a1acc75c8639db635efd8cb63c5927526e63393",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.prettierrc.mjs",
+    "local_path": "snapshot/MaaEnd/.prettierrc.mjs"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".markdownlint.json",
+    "git_blob": "87ace3ae133ce5311825a0f2716f9310350391e3",
+    "sha256": "ff71689f37956a8be9aa2d08ed135072f420876978975677b70520176730a7ff",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.markdownlint.json",
+    "local_path": "snapshot/MaaEnd/.markdownlint.json"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/maa-logging/SKILL.md",
+    "git_blob": "0a6fcc1c3690a1ff98b70d65c7354851176b0371",
+    "sha256": "54ed3f78e13ea3dbb48b1c98bd285c58760aa4533c8a2f1fcfd6a756d37d2593",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/maa-logging/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/maa-logging/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "docs/zh_cn/developers/release-process.md",
+    "git_blob": "5eb62e4dfc2114372d9ac07fb7cfc5f5748462a8",
+    "sha256": "f3937b984ffc606bba87f76908c8eb34d942aa94576dff12f7e11e6b3b6a3bfb",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/docs/zh_cn/developers/release-process.md",
+    "local_path": "snapshot/MaaEnd/docs/zh_cn/developers/release-process.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/autocollect-add-route/SKILL.md",
+    "git_blob": "0786b0696211991488dccd263b70acf5891c22f3",
+    "sha256": "4882116e79456b558707bc9f59916c0a7b76603092ce614b80f152ff7e9a12b6",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/autocollect-add-route/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/autocollect-add-route/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/maaend-test-image/SKILL.md",
+    "git_blob": "cc41ca91e412cefc1fe28e53fb7d23ee276f2c30",
+    "sha256": "07c00138d5fa821cc56ac11e2f4c80e5839638b991ca87da1012694379ca126d",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/maaend-test-image/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/maaend-test-image/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/discord-release-notification.yml",
+    "git_blob": "8678e2ef9f36a3b3f530ea69848730af2179a198",
+    "sha256": "ddce7db22b7771a70bd2cb1e2a3414b7cdb3e1d095f0a716af08ec81f5c12677",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/discord-release-notification.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/discord-release-notification.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/sync-zmdmap.yml",
+    "git_blob": "537aa948cbd5a5f9b71be2c1681e698d72108265",
+    "sha256": "ae3f27d4ebfa06458b2a34ac607e1620b8b6aec04ac17476fa7f8c6b622e1bea",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/sync-zmdmap.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/sync-zmdmap.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".gitmodules",
+    "git_blob": "e8f71702688a5c18af36f86cf78bf0ff835602c2",
+    "sha256": "f55369671c40dcd772b271b4045eee0dabe88cf795eca7f0fbb45acc40ebabdf",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.gitmodules",
+    "local_path": "snapshot/MaaEnd/.gitmodules"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "AGENTS.md",
+    "git_blob": "56706bc5945d487adc7bca2bd502917b76a3352d",
+    "sha256": "aaf11415d400481c8590a3462981d92ed7c0a8dbab41fc3d80765426902b0b84",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/AGENTS.md",
+    "local_path": "snapshot/MaaEnd/AGENTS.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/maaend-test-image/scripts/redact_test_image.py",
+    "git_blob": "223d6f81c4d451dca8e15b95384acef050d31b6e",
+    "sha256": "fc39870e1cb183a1f3153342837aea229095cb11fa290f3900799c80a6bea602",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/maaend-test-image/scripts/redact_test_image.py",
+    "local_path": "snapshot/MaaEnd/.agents/skills/maaend-test-image/scripts/redact_test_image.py"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/create-release-branch.yml",
+    "git_blob": "68b0d11d5a6faa0a4c8500108c7d4093de37c8a4",
+    "sha256": "1413dbd8536c34d01e12ddd2b1ee3901ea85ab28baabd008789b3a40d6b86282",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/create-release-branch.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/create-release-branch.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/dmp-analysis/SKILL.md",
+    "git_blob": "72bf217068e2f84749c5c9a18d68d788b84fdf79",
+    "sha256": "539a0d29926eedd588828062b68308fc4918a740e0d9fec675459f371f3c5178",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/dmp-analysis/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/dmp-analysis/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/check.yml",
+    "git_blob": "5058c0aee1c88658f9adf3b04e45df0cc5ee9a0b",
+    "sha256": "bd52d2c5647ac77189bd17a20735ffed8c977110f58fd2726ee6c544f7c0bcbe",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/check.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/check.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/sync-qq-groups.yml",
+    "git_blob": "bbb2869160deaa6f21c600304361c3b604577778",
+    "sha256": "86c680855dd4db7e837642a92214110be47af1fea59621abf6173c13602f9d45",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/sync-qq-groups.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/sync-qq-groups.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/pipeline-guide/SKILL.md",
+    "git_blob": "9351f1d665ae65006ce69b469d553c1cf9039a1d",
+    "sha256": "184af68de8c4cb9c7abe93cda442739688eb2e8a2460d992bef93143f6900d7b",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/pipeline-guide/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/pipeline-guide/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/sync_schema_files.yml",
+    "git_blob": "8ac3c9f2fa9ac5b1e60c23674d6090bf0109cfa4",
+    "sha256": "5a571b82d79547e7851fd1ba320e3469d3f6ab7d300a740887f6c6ec1715fc8e",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/sync_schema_files.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/sync_schema_files.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/sync_maautils.yml",
+    "git_blob": "0ff7e20cc6dce876f447c2769057595d7745b515",
+    "sha256": "00464a89e5a7357be4c6628890d80f56d571f582904ea91c3a07a173ba6177ff",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/sync_maautils.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/sync_maautils.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "pnpm-lock.yaml",
+    "git_blob": "33a59e7108f45158cb1a21c8401030d32c9f9c8c",
+    "sha256": "0f8177a31da3cc45569a0464694069ca7d24db0c294976d95ceff7fa650ef059",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/pnpm-lock.yaml",
+    "local_path": "snapshot/MaaEnd/pnpm-lock.yaml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/test.yml",
+    "git_blob": "59538f3c87de88ba44f11ddaba915970a5e6f27d",
+    "sha256": "e1927ffb617eacb86889f7374c0089b0c23fba6601e17e16e51c98628e96d4ff",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/test.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/test.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/maaend-issue-log-analysis/SKILL.md",
+    "git_blob": "f0d745038edbc5377dd5163f209374237c973967",
+    "sha256": "7b19a08ce2989d46bb6c63a9f7b8826891a8c1e66bb8e9a8cce177d0870a86a3",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/maaend-issue-log-analysis/SKILL.md",
+    "local_path": "snapshot/MaaEnd/.agents/skills/maaend-issue-log-analysis/SKILL.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".agents/skills/maaend-test-image/evals/evals.json",
+    "git_blob": "c5cf2542f632527668591d8e8d628d7986e10b26",
+    "sha256": "defb6acf5e39a90046be043aee480fe4fed5665751e8531c7d1bbd8825d32ca5",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.agents/skills/maaend-test-image/evals/evals.json",
+    "local_path": "snapshot/MaaEnd/.agents/skills/maaend-test-image/evals/evals.json"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/workflows/check-submodule.yml",
+    "git_blob": "eee380e002e10edc50bc4e477894f617422ab953",
+    "sha256": "9b3b42640f51344cf94a56578962a203d4f7b7d6366ac3f179890c211b9457a6",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/workflows/check-submodule.yml",
+    "local_path": "snapshot/MaaEnd/.github/workflows/check-submodule.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": "uv.lock",
+    "git_blob": "03981f23d3377da05cf1d1539bed923b8cd4dd39",
+    "sha256": "3e84f6c8c0623cff9787a44d80cf710ae496f360f6b77c0fb6cc583813452de5",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/uv.lock",
+    "local_path": "snapshot/MaaEnd/uv.lock"
+  },
+  {
+    "repository": "ChromeDevTools/chrome-devtools-mcp",
+    "ref": "a878bcad39584337e055778353246820deafa7c0",
+    "path": "LICENSE",
+    "git_blob": "7a4a3ea2424c09fbe48d455aed1eaa94d9124835",
+    "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+    "local_path": "third-party/ChromeDevTools-Apache-2.0.txt",
+    "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp/blob/a878bcad39584337e055778353246820deafa7c0/LICENSE"
+  },
+  {
+    "repository": "ChromeDevTools/chrome-devtools-mcp",
+    "ref": "a878bcad39584337e055778353246820deafa7c0",
+    "path": "skills/chrome-devtools/SKILL.md",
+    "git_blob": "ab71579f7667050ef13d8c87c9fcdde522271482",
+    "sha256": "69a65d0276dd2b6a2fff9889d45be154754b7eb589ca019346cdc9319e6439bb",
+    "local_path": "browser-skills/chrome-devtools/SKILL.md",
+    "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp/blob/a878bcad39584337e055778353246820deafa7c0/skills/chrome-devtools/SKILL.md"
+  },
+  {
+    "repository": "ChromeDevTools/chrome-devtools-mcp",
+    "ref": "a878bcad39584337e055778353246820deafa7c0",
+    "path": "skills/troubleshooting/SKILL.md",
+    "git_blob": "94a23d4cb7f4dfce11eacf6f0e418d445f12fb50",
+    "sha256": "80357d865f9604c12403b9754c1a513d4ee8afcfda84423c7a0e62a246c472f7",
+    "local_path": "browser-skills/chrome-devtools/references/upstream-troubleshooting.md",
+    "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp/blob/a878bcad39584337e055778353246820deafa7c0/skills/troubleshooting/SKILL.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": ".github/workflows/mobile.yml",
+    "git_blob": "3fa4e18bf7201b83d7ab50f9e159e086af94803d",
+    "sha256": "2e13af31a02362e5c74844a3dce976b6aea5fd1d1a43b126f2f775ba139e19e2",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/.github/workflows/mobile.yml",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/.github/workflows/mobile.yml"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": ".github/workflows/spec.yml",
+    "git_blob": "e73221507cab658372660e0ddcb7603934727a50",
+    "sha256": "394fb2ef74cf516978743be57f045fb1e5dff824d275f98f958332c04c97c883",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/.github/workflows/spec.yml",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/.github/workflows/spec.yml"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": ".mcp.json",
+    "git_blob": "c634058701f59cbd9c3b1423ac934883c5a04aa4",
+    "sha256": "0b3ebd37fc0ea49dd7e01b2d28744c44218e286baf3d0677f8a6c322d448770b",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/.mcp.json",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/.mcp.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "AGENTS.md",
+    "git_blob": "b352e38171228f8fea9615e97699f7f540a16b0f",
+    "sha256": "20c6a9565b880c15bbdfd7251b0e26ff20144217fabd06b45dae3c962cc2eb87",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/AGENTS.md",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/AGENTS.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "README.md",
+    "git_blob": "cae0136126fb991521ab9db28269ad5565cf9646",
+    "sha256": "9423755d09fe129a1ee580bb43dc96a0d3de6619dae46099b915a6c070a07559",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/README.md",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/README.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "SECURITY.md",
+    "git_blob": "68764924d3997fb8d4a10f4ddb34b6e38d20d992",
+    "sha256": "22d2d9591f26dc4b4664f1f9f78ebddc4a0a467f9c56c8d6fe24a1963b8080a7",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/SECURITY.md",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/SECURITY.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/agent-steps.mdx",
+    "git_blob": "de9facbf7426a651932f14e0f10351748cb2623c",
+    "sha256": "2b64177ade8481f505967e9d2fb7569a28509881d4111bc01536c2651f8671c8",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/agent-steps.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/agent-steps.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/agents.mdx",
+    "git_blob": "b46fe7176a7ec2bf742227bea6f8751d7c7ff13f",
+    "sha256": "dfaf454c6047f3101d5f48203a605f059e2687ae7a2f0febe855b65fba72e352",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/agents.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/agents.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/coding-agents.mdx",
+    "git_blob": "fcc909116a4093cba4de281c157ca8460dfdc777",
+    "sha256": "907b168a0571487c1983f97e5960be73dee6fb1a9af4b3323641b4ac9046913e",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/coding-agents.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/coding-agents.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/examples/quickstart/e2e.config.ts",
+    "git_blob": "e93f0da0135bbba200fc8b22c53f13e46d1aa313",
+    "sha256": "91a9fc3018d97129b99e62a515220a7de67bd274ff8115de583f1e7850e19dd5",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/examples/quickstart/e2e.config.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/examples/quickstart/e2e.config.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/examples/quickstart/tests/agent.e2e.ts",
+    "git_blob": "8502d1bdeb03f2b6f2ecfbe3d8e5d0e2a6336cf0",
+    "sha256": "9edea6564bb0ef24d534fa08cd50a16e162cefd316aac22274d0c5177a2b4e19",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/examples/quickstart/tests/agent.e2e.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/examples/quickstart/tests/agent.e2e.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/examples/quickstart/tests/example.e2e.ts",
+    "git_blob": "e2fe2315b46a8875209bce8653240eb24a01be51",
+    "sha256": "0be60c3087269a77a027bed046687ec363b3afab057fa2161526c0522b68c371",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/examples/quickstart/tests/example.e2e.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/examples/quickstart/tests/example.e2e.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/mcp-server.mdx",
+    "git_blob": "e83c607227d6c789818b3fb29a9ae2ea3afc6009",
+    "sha256": "bc3be12eb39478f3aa452c23a5bc67a88911135bb735965ad068c4ee0119b71e",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/mcp-server.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/mcp-server.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/quickstart.mdx",
+    "git_blob": "e7e1c4936ae47b691701fa7ae5e4416f1c177bfc",
+    "sha256": "4b909a6b8bfbee27a1225eb620b8ccebae71b219703bf95120041591b17383c9",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/quickstart.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/quickstart.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/reference/agent.mdx",
+    "git_blob": "bc686673b383de9be926789907290c8681f1d7cc",
+    "sha256": "cb13534a8290438a4d4568284403019d7970d4a9bb464f356c07fd647ce5b3f1",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/agent.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/agent.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/reference/config.mdx",
+    "git_blob": "a29816108fd04ad49158b27903a9abee38c8ff0e",
+    "sha256": "67b8092aec548d5eebc2452841aa53ad60df4b73a1e0cbf348ded353ac89db34",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/config.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/config.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/reference/mcp.mdx",
+    "git_blob": "c9a52a7a88092da4b73dab782cf6f51869c8cdbf",
+    "sha256": "f6ce1203d7fd4dea656a18d3197641bb9e873543de502b890ac98a0ccff6add4",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/mcp.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/mcp.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/reference/security.mdx",
+    "git_blob": "702aa2bede49d595786f9ef72268d394e9a357e6",
+    "sha256": "56092d6b854a603c8d0dd9fa7612e54f9d9cc0c37a03324ff69fce1bdce8c8ef",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/security.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/reference/security.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "docs/web.mdx",
+    "git_blob": "3058664dfd2fd3fa46077d73ef4ccd9b7bdc06c5",
+    "sha256": "af4658906e4542df9b65eee5efcb382cce38b76665e43202cd638a7e8ea8f459",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/web.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/docs/web.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "package.json",
+    "git_blob": "433332b407e0db07966e503cf8ec782f82e4ebda",
+    "sha256": "ada2454fa118a25227df253f755e76b0f6eab9d630c7ae8c4f1c91f99d5efd34",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/package.json",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/package.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/package.json",
+    "git_blob": "daeb92916b4c9f171f7c59c330c58fe36f0f33ba",
+    "sha256": "dbb6be1b0d8a4e4dd710723688412e4b6736a505f9ecca2700a82744aecc746e",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/package.json",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/package.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/agent/default-agent.ts",
+    "git_blob": "1937f674c97ad5c2ffc5e057add8338beec04099",
+    "sha256": "80f1cce3382f1d3ed661e8022ac8adb14e7d0b142ce1a0475606b27c2a010c27",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/default-agent.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/default-agent.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/agent/interactive-step.ts",
+    "git_blob": "79c2cf5d4ad3dc82933bcc970e23ca08d13b2406",
+    "sha256": "22729eba06f20424fd9fdc9e6a984ab30ba6c48d9970e80c13bd76f659cc1299",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/interactive-step.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/interactive-step.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/agent/step-cache.ts",
+    "git_blob": "ddbe4d21bdb0002f23b97601a0e5c6475bac3418",
+    "sha256": "94e9403fe2c0761d187c7ca01784c0440d57329948024f7138cda6d2f3c22cfe",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/step-cache.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/step-cache.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/agent/usage.ts",
+    "git_blob": "9e124bc9d8e920664f38fd7ad39b4f2d13b8ad4b",
+    "sha256": "f5fa8ef1aad01a397dddf3c1c2f712ac2251c67a008c108f8bf6b9e18591bebe",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/usage.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/agent/usage.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/cache/decide.ts",
+    "git_blob": "ccbbcc5d42568e375746392531963081cdfdb1e5",
+    "sha256": "2199d59f4b27fbc01c5a9adee16cfc44c8ffe05c4a918156cc7f0a1eddf5e450",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cache/decide.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cache/decide.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/cache/recorder.ts",
+    "git_blob": "80cc10fac527895db89d3c09d2ae4ac5c08de8b1",
+    "sha256": "1faf14e2e8f6e39e17dcd2c1f083b2a25a41994fd2d7f31089f01f659cad6084",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cache/recorder.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cache/recorder.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/cli/mcp.ts",
+    "git_blob": "c677fa2e3a15c6581cb4c9d43def9099b40baeea",
+    "sha256": "a1cb8f3b32533696261f0a50243e81da43ffd013ea3634fd24d7802f9f5803a1",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cli/mcp.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cli/mcp.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/cli/update-check.ts",
+    "git_blob": "aaf47304fd2605d469f72576dccde8073e7e2857",
+    "sha256": "7f24e80cde8815418b70bad60989da349d6d2fb5ca33a0c014cf361ad98eea7a",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cli/update-check.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/cli/update-check.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/expect/async.ts",
+    "git_blob": "90b233066f903eef2855f97ebb87d111a8bf6085",
+    "sha256": "13002f645c788f36899ca1133315004ca63d9627eacbd6a2c94de174866a07ea",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/async.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/async.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/expect/attempt.ts",
+    "git_blob": "3b05cbaf1019fa6a55ee2a3a5c2dc362a9453edc",
+    "sha256": "1a0408e6d3b96e74a1e1d4bb63951d6b7d005b223cd9c0d81d0cf5d3ac9a6227",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/attempt.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/attempt.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/expect/index.ts",
+    "git_blob": "9c09739959275eb1532336965a2ca7fe5ab4201b",
+    "sha256": "be99fabf87a7426b4ddb57d2bd0ab034e3e9eff139b67d89c54b7d42ef1e52ff",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/index.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/index.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/expect/samples.ts",
+    "git_blob": "cea08687698c76b97b8a8cf2bc207d76da64e16a",
+    "sha256": "7f728ba7db78bfb3d3bbbaa6513599c1b00f7e575b3f10e3e0148e8b158d1847",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/samples.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/expect/samples.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/mcp/session.ts",
+    "git_blob": "ec14b7fa614296a8fcf32146c12ad45c7c8bc858",
+    "sha256": "530da31417889da6288b98db86e8dc197f3be0e32bfae09cd75c84f4f61caab8",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/mcp/session.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/mcp/session.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/mcp/sessions.ts",
+    "git_blob": "e8863ef633ac8acb5244989c58d8c214ea14d869",
+    "sha256": "de79ef90d03238b170ec24effe5d7b5b9a516d3b85c043c5fbf6a765017ee6bd",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/mcp/sessions.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/mcp/sessions.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/e2e/src/mcp/tools.ts",
+    "git_blob": "0079188d625e5fb124acc7273898ad509702e11b",
+    "sha256": "e389c688236342aab5d5b16f8743f3ef30a2cb5be7a58e0a532601784eec3892",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/mcp/tools.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/e2e/src/mcp/tools.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/mobile/package.json",
+    "git_blob": "6ab7d54808df6a3b71330722bd86e38c33bcee10",
+    "sha256": "01370ab43cede33acddba59c8a0820a81bab1fa7a20c5701d6e72fc1b5b77570",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/mobile/package.json",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/mobile/package.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/web/package.json",
+    "git_blob": "f7e5c13a8fab97e05451c2d57efeeb617dfe2987",
+    "sha256": "69c8af48472f42f4a13d04681ce28b1e35a0e109d72cff77fec90cd886776a52",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/package.json",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/package.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/web/src/browser-connection.ts",
+    "git_blob": "900871817a5b3e17f9b9c80eb0625558c672c9f4",
+    "sha256": "4ca53a9591ae17dbb4178c974c3bc2a27e4b066e7ddc33cb0097454993824372",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/browser-connection.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/browser-connection.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/web/src/engine.ts",
+    "git_blob": "aebcd483d1bf72fbeab44bfd89e44304ad3d8bbb",
+    "sha256": "8fb2bc30614cb2d6ef2e765e1f67f941bfc796851cf87e3b35aff96cb44e2373",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/engine.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/engine.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/web/src/index.ts",
+    "git_blob": "620a109b119ee2fe291a56c65f451c1ec3e97e9c",
+    "sha256": "30b4434fdd581ae4b6b7fbf604476b8daa72bf2e7c278dfb1394418d377e0bab",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/index.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/index.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/web/src/provider.ts",
+    "git_blob": "9239fb01066ed452c363eea555548558e6dc17c0",
+    "sha256": "1ffe64f554f55558d33e0ee73108d4aacc4721e093e221604ecc96b0addd113f",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/provider.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/provider.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "packages/web/src/surface.ts",
+    "git_blob": "9ddd195a0ca3d58261ce05a9346834cee741ead8",
+    "sha256": "2c8f039386f6a668a3b7cece5c7a0a06e566ad7cf80373fe950b03c69ab3cd5a",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/surface.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/packages/web/src/surface.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "pnpm-lock.yaml",
+    "git_blob": "c3e350d88d1a599afbedf34b581f94983bc55def",
+    "sha256": "0c0c3d752dbeee816a12ff845804bbec8963aa4833e644a806cdd507588471bf",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/pnpm-lock.yaml",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/pnpm-lock.yaml"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "pnpm-workspace.yaml",
+    "git_blob": "c99fdef0e6fc5faa49e244ea1266672f1508fa55",
+    "sha256": "932573cef1381dde74827b926e73a92d366607d0180089106cc4f3d6de5553ef",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/pnpm-workspace.yaml",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/pnpm-workspace.yaml"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "scripts/check-install-scripts.ts",
+    "git_blob": "fd34b59e782b4aaf54cc860b400bf8e322fa2de9",
+    "sha256": "b254143a2641a71a96efae18432663f997905e5ff46bb111f38764eded295b52",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/scripts/check-install-scripts.ts",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/scripts/check-install-scripts.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "d7c6b5e5a4c27fac7633e66866fd367b0351ead8",
+    "path": "skills/e2e/SKILL.md",
+    "git_blob": "327614e189d4a2656c8b99464885198c282438a9",
+    "sha256": "c219614cf5a246d6b9ccb439a0c6c3f4a3afbd99179cfeedcbb5912e1e8f8c6a",
+    "local_path": "snapshot/tester-army-e2e/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/skills/e2e/SKILL.md",
+    "url": "https://github.com/tester-army/e2e/blob/d7c6b5e5a4c27fac7633e66866fd367b0351ead8/skills/e2e/SKILL.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": ".github/workflows/ci.yml",
+    "git_blob": "05e5779e6e28fd5464abc68e1c9f70329b4a416f",
+    "sha256": "bbae24d63185c55e4b454acacff33ae1e3ed9be80fb0b376884bc488843437c8",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/.github/workflows/ci.yml",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/.github/workflows/ci.yml"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": ".github/workflows/publish.yml",
+    "git_blob": "1ce861772c2774d4cc93c413f473a02bfd380bff",
+    "sha256": "12fbb4cf868c35e189a9dc75c8fc13c2058c9fb3f401140ca5da6c9487ba6984",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/.github/workflows/publish.yml",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/.github/workflows/publish.yml"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "LICENSE",
+    "git_blob": "5b7a2a38d97d0ffce3d30ebc10088d56db58f35f",
+    "sha256": "1e0d1af37e3e303acf576d3498b7c723b6cd7196c87157ddcd95d6aac8efb563",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/LICENSE",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/LICENSE"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "README.md",
+    "git_blob": "d47296b691f0e904992b4264829213958056c125",
+    "sha256": "d520d69f33a760afb860d9696b5538e733133ba07f920c7a299dd0047d34f818",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/README.md",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/README.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "package.json",
+    "git_blob": "67cf3b0526112ee8028f733d9fd5e19d91dc51ad",
+    "sha256": "3c7a595be7787bdc91427e72c078e70887314fa7dcfdb5b2e1b438387d8c0b9a",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/package.json",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/package.json"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "pnpm-lock.yaml",
+    "git_blob": "715af642e747c9e5145f9f36b2d8474b6c917d10",
+    "sha256": "ddf59fe67e753000f741f5904a015997eaa20ba9c76ee10e06eabaa138990efa",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/pnpm-lock.yaml",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/pnpm-lock.yaml"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "skills/gdp-ts/SKILL.md",
+    "git_blob": "bad75e5ebdb79456a6def7b1edd924dfe1a00fee",
+    "sha256": "307fb2ef3e9bea9d57cfcc1403165fbc5f1231342ee87b9098378ad6950ce760",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/SKILL.md",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/SKILL.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "skills/gdp-ts/references/errors.md",
+    "git_blob": "798bd7b093016bc8ec91b5bbf1237a2de24d526a",
+    "sha256": "8fe2977bc6dafaf48ae61b4a3f77f19ff37947f44160ab83e854ab289f25be36",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/errors.md",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/errors.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "skills/gdp-ts/references/limits.md",
+    "git_blob": "75bd344c68e94de035f18fc66c282819a30b1e87",
+    "sha256": "d1df8cab862973e67159539db506ff39a6668a5fa85aab1181c000d7bb4064ef",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/limits.md",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/limits.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "skills/gdp-ts/references/patterns.md",
+    "git_blob": "0210d80aa1fb2ddbdfa1af615852d47cf91fae78",
+    "sha256": "59e818a00c6e34f40666abf6224161c972ec969dc038a36f2976b758f602af46",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/patterns.md",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/patterns.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "skills/gdp-ts/references/recipe.md",
+    "git_blob": "f1a5c8259105efbb20f3051bdd06eb4db65c4f01",
+    "sha256": "f95ccc23d3a581bd3d8e9b70d4a7991cdcf4bf51fbdc9140514095bd109e9522",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/recipe.md",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/recipe.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "skills/gdp-ts/references/where-to-stop.md",
+    "git_blob": "2f524ec09d1be3a380f7243bc3ec5a1705722fe5",
+    "sha256": "df54814089194c575021f7a50301a95c8c7d91a425c76feb3cb96ff7f12ca768",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/where-to-stop.md",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/skills/gdp-ts/references/where-to-stop.md"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "src/index.ts",
+    "git_blob": "0f3776cf4cac0093de8f4ce0ef802f75066e3bbb",
+    "sha256": "11e79f8d7288d17ce911a195066f0b19d39640320b6746692ff7c0caeece2adc",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/index.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/index.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "src/lint/eslint.ts",
+    "git_blob": "7f035a680927c6c0995d9db89ca416f9614676f0",
+    "sha256": "4d075819ea4b5b3bc02b83ca2020adc1b3949829ad6075ab3b9503376b4bd48e",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/eslint.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/eslint.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "src/lint/oxlint.ts",
+    "git_blob": "9d83ddc1c5bf514efa49aa6ce89e6a16d1c2dfc2",
+    "sha256": "d9725ee4b3f46e81751322dfd4d82a711d5c16f6f296c0a277f75c75282af408",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/oxlint.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/oxlint.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "src/lint/plugin.ts",
+    "git_blob": "c7e50592b0144fd93bdc8c4c7c37a76a7f68b4cd",
+    "sha256": "dc60d21f9bc27858390dc35f104b1cac6ac1a4727ea4ba5da34123132d9d984d",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/plugin.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/plugin.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "src/lint/shared.ts",
+    "git_blob": "b84ac139ff7e4a392034d7939793a64cf7b5c870",
+    "sha256": "d74b129fc83025f5fcce183e266cd434fb41455388d1cc76aff48a1f5f0b13d3",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/shared.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/src/lint/shared.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "test/docs.test.ts",
+    "git_blob": "3204fb78d860dc6da140d309de324a4eb91afa53",
+    "sha256": "b741ef69b857d86d2630517549bb5f835373dc77f073a5784b996f9f717db381",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/test/docs.test.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/test/docs.test.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "test/runtime.test.ts",
+    "git_blob": "ccd4dfc11768842d3ea9a4845fc336edcacdc434",
+    "sha256": "a920670e7342a7dfc0f2ca978cef1dff162d42dc75c23bae94cb8d630fae5bfa",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/test/runtime.test.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/test/runtime.test.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "test/types.ts",
+    "git_blob": "d73b5708bdb5a151984dc949980b0d39dd874bd0",
+    "sha256": "012fc38155e561760fd63a0b624c47d22ba1905132e6f77bdc684c0b4694cdba",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/test/types.ts",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/test/types.ts"
+  },
+  {
+    "repository": "rauchg/gdp-ts",
+    "ref": "0b6ebeeec827b05210f3acfa4149a70dda9a0de5",
+    "path": "tsconfig.compat.json",
+    "git_blob": "9efdf6b63e667a882edde0512a7922d459cf4acc",
+    "sha256": "d1238c8ee3a901fd252a316e84412101500949185adccde72eb25cb9f3f6f3da",
+    "local_path": "snapshot/rauchg-gdp-ts/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/tsconfig.compat.json",
+    "url": "https://github.com/rauchg/gdp-ts/blob/0b6ebeeec827b05210f3acfa4149a70dda9a0de5/tsconfig.compat.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "docs/quickstart.mdx",
+    "git_blob": "b1bb5a1b0d81d8af315e7da57c83c96826a61969",
+    "sha256": "fb4ab492da719e165b450df8fe777c9f927bebb2d8b0632400252f2db79d5d2d",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/docs/quickstart.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/docs/quickstart.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "docs/reference/config.mdx",
+    "git_blob": "cdc7d114aee7ff5ad79c2b923a4292151401bc8c",
+    "sha256": "928dced9b3a6ff0ddf350ef90880daeabb29a323811cbcf6a1ff094b35a0ae4c",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/docs/reference/config.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/docs/reference/config.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "docs/reference/mcp.mdx",
+    "git_blob": "22934d339b080984ef6d848f0c718e7b60303ef9",
+    "sha256": "09c3b0975a97c17d9835569ad3205deb3caa0012990c80cbe60c1ec3f912db16",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/docs/reference/mcp.mdx",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/docs/reference/mcp.mdx"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/e2e/package.json",
+    "git_blob": "b17e0d413ed622c04dd51a5b600baa2c9817252e",
+    "sha256": "5a289e20638eae6b1568d2784a38e4a0832b36fb2a39dd5b406bc6d2f5e99f9b",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/e2e/package.json",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/e2e/package.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/e2e/src/cli/mcp.ts",
+    "git_blob": "c677fa2e3a15c6581cb4c9d43def9099b40baeea",
+    "sha256": "a1cb8f3b32533696261f0a50243e81da43ffd013ea3634fd24d7802f9f5803a1",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/e2e/src/cli/mcp.ts",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/e2e/src/cli/mcp.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/e2e/src/types.ts",
+    "git_blob": "cef3bbf0e37aa0dd767bf56c91bf0d2da45b6dec",
+    "sha256": "6ee65db123bcdf39e5980eec6d6c3f415feba51c0082152d3f6a7f79d65e7ec1",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/e2e/src/types.ts",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/e2e/src/types.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/web/package.json",
+    "git_blob": "080cfa83f8f76e204b2eb8256ace893a1d8a09be",
+    "sha256": "ba5818b730107430218a76c6bd8f6a5b716cbe8e0469a875e2d6a6c549f779b6",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/package.json",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/package.json"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/web/src/attempt-session.ts",
+    "git_blob": "af209b83498c92e8fd0abe0ba9c03d8f889a377f",
+    "sha256": "50e4becf26d10bdab5daf7c3d8916f902e78f81115086cab5d5015700948b95e",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/attempt-session.ts",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/attempt-session.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/web/src/browser.ts",
+    "git_blob": "18006c84f3caae945087a47cc087cae81ecea216",
+    "sha256": "3002fbc5132a6ee500ee02d6688d3576de2f6ce826c8a233aa2423c3ac6e2658",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/browser.ts",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/browser.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/web/src/cdp-recovery.ts",
+    "git_blob": "6a3d131940631a9c7b5206265a87842eab2d2cd5",
+    "sha256": "69fe6606c92697c3807b49f0b387f27373610c9316e630a2f117b1a3310c114a",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/cdp-recovery.ts",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/cdp-recovery.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "packages/web/src/surface.ts",
+    "git_blob": "9ddd195a0ca3d58261ce05a9346834cee741ead8",
+    "sha256": "2c8f039386f6a668a3b7cece5c7a0a06e566ad7cf80373fe950b03c69ab3cd5a",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/surface.ts",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/packages/web/src/surface.ts"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/SKILL.md",
+    "git_blob": "21373a884f2c36e546d4913a824e5131c886ca97",
+    "sha256": "99de53b787d3ecc7c55f169cf70b5d1605188a3010f31cb85e2c5e53cf9fe9aa",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/SKILL.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/SKILL.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/agent.md",
+    "git_blob": "915a06a990a966f89ec1c59da783d83c7dde6c89",
+    "sha256": "ed39c749bd09730ed23927283010b045fd32f75adc6f971fdbe6f557f34260db",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/agent.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/agent.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/bug-bash.md",
+    "git_blob": "c30973e9438a8862abc5489b0084e71480cd3154",
+    "sha256": "ae2f3f969ee14a725760ead9ede0ab0d2234d0e3f31454254158491a3e727f73",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/bug-bash.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/bug-bash.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/debugging.md",
+    "git_blob": "a884c62896aedc67643a6fbd66aa7ab281c6caf7",
+    "sha256": "2c19f060bb2a5c2667286731ef2cdfea6eed2f9b13b2592c708763fab35994c3",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/debugging.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/debugging.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/explore.md",
+    "git_blob": "94e5f0732295593a83079b8942def62be2eee4cf",
+    "sha256": "85e3090a3849522fd00446bdb1735524d92e5815070dc55ba2a45da1f30c665f",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/explore.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/explore.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/mcp.md",
+    "git_blob": "053e30632a899618e2db39b4c179a59c5a11ee7a",
+    "sha256": "e220368f6e9a0ef7728c00129271152f4b8b594fc046fce4bc9b49cd7c4c2319",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/mcp.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/mcp.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/running.md",
+    "git_blob": "e37855439ece75a5434d0deb10a2fbeee0dcc0a9",
+    "sha256": "1a3956de9fc93ee63afef8e1885a69d2ef67f7bda0d133b13856e5f844365424",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/running.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/running.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/setup.md",
+    "git_blob": "cf2fddbb1a413e749f003b5a7734bfecdd6e3f0b",
+    "sha256": "4a7d482f3d97fbaff91c4f47647570cd4e6d19a24c118a14a18c9531681bccb1",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/setup.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/setup.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "skills/e2e/references/writing-tests.md",
+    "git_blob": "bbd61af792714e6c92344788492146a3e41158a4",
+    "sha256": "10e8cdc7b08277c6622a35683ef8599b3f67addfcd42d52f29e6c7238c280b18",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/writing-tests.md",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/skills/e2e/references/writing-tests.md"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "LICENSE",
+    "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/LICENSE",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/LICENSE"
+  },
+  {
+    "repository": "tester-army/e2e",
+    "ref": "393005aa6952eaef62886cd03c8d8060f8f05a4f",
+    "path": "NOTICE",
+    "git_blob": "6f9b5e6750465647ce40fd9aaf58b7212ffb489c",
+    "sha256": "f1fe71e291193a7d4963799eef91ee8596e6a53099ccd85e33d3221ffea67f47",
+    "local_path": "snapshot/tester-army-e2e/393005aa6952eaef62886cd03c8d8060f8f05a4f/NOTICE",
+    "url": "https://github.com/tester-army/e2e/blob/393005aa6952eaef62886cd03c8d8060f8f05a4f/NOTICE"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/cliff.toml",
+    "git_blob": "3115eb2b176ec2aa13bde7f558ee8a4a47cc957c",
+    "sha256": "faf09261a54ffa7a7b964805f8ff61811288159cc22bea22bcd6f626e3c7ef3a",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/cliff.toml",
+    "local_path": "snapshot/MaaEnd/.github/cliff.toml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+    "git_blob": "a990e29a355e8d9b4c0be181d0a1e09cc186f41f",
+    "sha256": "e05bd39c782cff6b04ccf2252157904d63c464daeea47f71e88e694a9470a48a",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/ISSUE_TEMPLATE/bug_report.yml",
+    "local_path": "snapshot/MaaEnd/.github/ISSUE_TEMPLATE/bug_report.yml"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/copilot-instructions.md",
+    "git_blob": "2715fb60c20f9c9886eb5c82bd4ae206cf054f61",
+    "sha256": "f25b9e4fafeedada3615e47b01df3e86b058af244ed0680e7f933495df3b02ac",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/copilot-instructions.md",
+    "local_path": "snapshot/MaaEnd/.github/copilot-instructions.md"
+  },
+  {
+    "repository": "MaaEnd/MaaEnd",
+    "ref": "654aa96253303931a64361827f18701565edd65d",
+    "path": ".github/scripts/release_body.py",
+    "git_blob": "3ca16ed48cb83220f82a73a0e6f1f0cec780cc69",
+    "sha256": "2d4af852d0172a6d0dedba1230f4ff7f8aaf591f850d50f98adaf33bb98aeec2",
+    "url": "https://github.com/MaaEnd/MaaEnd/blob/654aa96253303931a64361827f18701565edd65d/.github/scripts/release_body.py",
+    "local_path": "snapshot/MaaEnd/.github/scripts/release_body.py"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "action.yml",
+    "git_blob": "228360ea85553207eb9eda9271d8d72a758abe0f",
+    "sha256": "eeb58f3208713af03c180e269eb2bfcd1536969cea95b02d3f20a779d584ff42",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/action.yml",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/action.yml"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "scripts/prepare.py",
+    "git_blob": "05b18ccad5b9dfcb5e9fa8f290f82d539ca6bb60",
+    "sha256": "bd690fb84c1914c71f4a0f4d0373490f38be7a7e6705c1189db668acc8b32e32",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/prepare.py",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/prepare.py"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "scripts/agents.py",
+    "git_blob": "14eaf262106d538ebb5a154ca748f7d7d16009a0",
+    "sha256": "6cea349491a7b3d4aa3e7602b1c664f2cc38cb95354bda691c8f9a300a94b34d",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/agents.py",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/agents.py"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "scripts/run_agent.py",
+    "git_blob": "eb1847eca28fe63bf38d32b8501bb93e0a185c21",
+    "sha256": "289850881cc0eea5b81647fe7373aee99bc036bc434af15c5acae71a6d9e57c5",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/run_agent.py",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/run_agent.py"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "scripts/finalize.py",
+    "git_blob": "60aa6bdb56954fbb534aa30f4a4d1f1f1b675cce",
+    "sha256": "a20f61a487b1af96546a25affb6c40ca4d4f3f063b8d335ea1c0bfe8662d159b",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/finalize.py",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/finalize.py"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "scripts/comment_body.py",
+    "git_blob": "16127a2b0d2d6e7bb84fe83035fd108b7f2401c6",
+    "sha256": "65ef683f74a7690cf233f4e28e69493810665df862de0801505bf137543a0d50",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/comment_body.py",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/scripts/comment_body.py"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "README.md",
+    "git_blob": "8620df892dfe2e9ffebdabeb2682968ff75f15ab",
+    "sha256": "a2831c0d5b7d8f15dd2918889dec71baea4e6f17b9686ad4018b1c8af52b09e0",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/README.md",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/README.md"
+  },
+  {
+    "repository": "MistEO/ai-issue-analysis",
+    "ref": "5c80167a21600e057e7dbc4d71263ea1486481e0",
+    "path": "LICENSE",
+    "git_blob": "cb564dabeb29dd072fb252024a34d129c0fa3c44",
+    "sha256": "446e755fae55ff034bbb21be44670b5f116c2b2667947e7036f2bfe6632539a8",
+    "url": "https://github.com/MistEO/ai-issue-analysis/blob/5c80167a21600e057e7dbc4d71263ea1486481e0/LICENSE",
+    "local_path": "snapshot/MistEO-ai-issue-analysis/5c80167a21600e057e7dbc4d71263ea1486481e0/LICENSE"
+  }
+]
