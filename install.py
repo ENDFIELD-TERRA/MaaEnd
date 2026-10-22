@@ -73,7 +73,7 @@ def mcp_servers() -> dict:
     common = {"command": command, "disabled": True, "trust": False, "timeout": 30000}
     return {
         "playwright": {**common, "args": prefix + ["-y", "@playwright/mcp@0.0.83", "--browser=chrome", "--isolated", "--no-webmcp"]},
-        "chrome-devtools": {**common, "args": prefix + ["-y", "chrome-devtools-mcp@1.11.0", "--isolated", "--no-usage-statistics", "--no-performance-crux"],
+        "chrome-devtools": {**common, "args": prefix + ["-y", "chrome-devtools-mcp@1.12.0", "--isolated", "--no-usage-statistics", "--no-performance-crux"],
                             "env": {"CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS": "1"}},
     }
 
@@ -180,10 +180,21 @@ def main() -> int:
         proposed[repo / destination] = content
         command_paths.append("/" + destination)
     proposed[repo / PRIVATE / "skill-map.json"] = encoded(maps)
+    snapshot_ref = os.environ.get("MAAEND_SNAPSHOT_REF", "654aa96253303931a64361827f18701565edd65d")
+    upstream_diff = subprocess.run(
+        ["git", "--no-optional-locks", "-C", str(repo), "diff", "--stat", snapshot_ref, audit["head"], "--",
+         "AGENTS.md", ".agents/skills", ".github/workflows", "docs/zh_cn/developers", "pyproject.toml"],
+        capture_output=True, encoding="utf-8", errors="replace", timeout=20,
+    )
+    drift = {"snapshot_ref": snapshot_ref, "head": audit["head"],
+             "audited_paths_changed": bool(upstream_diff.stdout.strip()) or upstream_diff.returncode != 0,
+             "status": "check-skipped" if upstream_diff.returncode != 0 else
+                       ("in-sync" if not upstream_diff.stdout.strip() else "re-audit-required")}
     proposed[repo / PRIVATE / "runtime.json"] = encoded({
         "global_agents": str(global_path), "global_sha256": digest(global_bytes),
         "config_root": str(config), "source_head": audit["head"],
-        "snapshot_ref": "654aa96253303931a64361827f18701565edd65d",
+        "snapshot_ref": snapshot_ref,
+        "snapshot_drift": drift,
         "source_agents_sha256": digest(safe_bytes(repo / "AGENTS.md")),
         "mcp_status": "Definitions available; inspect effective enablement and permissions, local handshake pending",
         "team_status": "Seven role definitions prepared; native Teams TUI lifecycle pending local qualification",

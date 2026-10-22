@@ -12,6 +12,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 
 
 def canonical(value):
@@ -64,9 +65,15 @@ def git(repo, *args):
 
 
 @contextmanager
-def locked(folder):
+def locked(folder, stale_seconds=600):
     folder.mkdir(parents=True, exist_ok=True)
     lock = folder / ".write-lock"
+    if lock.exists():
+        age = max(0.0, time.time() - lock.stat().st_mtime)
+        if age > stale_seconds:
+            raise ValueError(f"Stale write lock (age {int(age)}s) at {lock}; no writer survived. "
+                             "Verify no live caseflow process, then delete the lock file to recover.")
+        raise ValueError(f"Concurrent writer holds {lock} (age {int(age)}s); retry after it finishes")
     fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
     os.close(fd)
     try:

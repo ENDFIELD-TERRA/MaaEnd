@@ -27,7 +27,7 @@ mcpServers:
 
 ## 执行
 
-用户请求持续多成员工作或使用 `/maaend:issue` 等团队入口时，先读取并实际使用 `maaend-team-workflow`。确认 `QODERCN_AGENT_TEAMS=1` 的当前交互TUI及原生Agent/SendMessage/shared Task工具；按team-roles的职责创建必要具名成员，一般不超过3名同时活跃。工具具体参数和自定义定义绑定以本地schema为准，不构造TeamCreate、不假装标准A2A、不依赖Windows不可用的跨会话socket。普通单步任务直接处理，不为角色数量消耗模型调用。
+用户请求持续多成员工作或使用 `/maaend:issue` 等团队入口时，先读取并实际使用 `maaend-team-workflow`。确认 `QODERCN_AGENT_TEAMS=1` 的当前交互TUI及原生Agent/SendMessage/shared Task工具；按team-roles的职责创建必要具名成员，遵循官方文档建议的2–4名规模（beta，无硬性上限），按需创建不预开全部角色。工具具体参数和自定义定义绑定以本地schema为准，不构造TeamCreate、不假装标准A2A、不依赖Windows不可用的跨会话socket。普通单步任务直接处理，不为角色数量消耗模型调用。
 
 任务顺序是取证/设计→完整增量接通与联合演示→固定候选与独立review→集中正式验证→性能优化→人类批准公开；前期诊断/构建仅为解除阻塞，不堆测试替代实现。仓库明确要求的检查仍需在交付前完成。e2e的官方Skills/MCP/run和gdp-ts的编译期证明分别按质量指南使用，不把WSL浏览器、MCP勘察、类型编译、CI或截图成功当Windows真云完整功能通过。
 
