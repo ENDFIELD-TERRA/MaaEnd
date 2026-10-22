@@ -103,7 +103,7 @@ class PrivateImportTests(unittest.TestCase):
         self.assertEqual(installed.read_bytes(), target.read_bytes())
         self.assertFalse((self.repo / ".qoder/skills/dmp-analysis").exists())
         mapping = json.loads((self.repo / ".qoder/maaend-private/skill-map.json").read_bytes())
-        self.assertEqual(len(mapping), 23)
+        self.assertEqual(len(mapping), 24)
 
     def test_team_roles_commands_and_quality_materials_are_integrated(self):
         self.install("--apply")
