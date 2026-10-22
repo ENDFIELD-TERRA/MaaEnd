@@ -1,6 +1,6 @@
 # Skills 兼容裁决
 
-固定审阅来源：MaaEnd v2@654aa962；16份正文相对上一版未变，2份截图Python脚本随Python3.14升级。当前checkout更新后需重新核对。仓库与用户约束优先于技能示例。
+固定审阅来源：MaaEnd v2@051d17f2（654aa962 时审阅，至 051d17f2 全部 16 份正文与技能 tree hash 零变化，见 research/upstream-audit-2026-10-23.md）；16份正文相对上一版未变，2份截图Python脚本随Python3.14升级。当前checkout更新后需重新核对。仓库与用户约束优先于技能示例。
 
 ## 必须由兼容层裁决的冲突
 

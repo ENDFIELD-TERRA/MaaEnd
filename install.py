@@ -180,7 +180,7 @@ def main() -> int:
         proposed[repo / destination] = content
         command_paths.append("/" + destination)
     proposed[repo / PRIVATE / "skill-map.json"] = encoded(maps)
-    snapshot_ref = os.environ.get("MAAEND_SNAPSHOT_REF", "654aa96253303931a64361827f18701565edd65d")
+    snapshot_ref = os.environ.get("MAAEND_SNAPSHOT_REF", "051d17f2527e2e990952d6655f1f380d5d7de81e")
     upstream_diff = subprocess.run(
         ["git", "--no-optional-locks", "-C", str(repo), "diff", "--stat", snapshot_ref, audit["head"], "--",
          "AGENTS.md", ".agents/skills", ".github/workflows", "docs/zh_cn/developers", "pyproject.toml"],

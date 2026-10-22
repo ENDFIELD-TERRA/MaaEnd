@@ -4,7 +4,7 @@
 
 | 对象 | 本轮固定版本 | 工作边界 |
 | --- | --- | --- |
-| MaaEnd/MaaEnd v2 | 654aa96253303931a64361827f18701565edd65d | 主仓Pipeline、Go/Cpp、任务、测试定义与CI；当前Python目标3.14，新增ruff检查 |
+| MaaEnd/MaaEnd v2 | 051d17f2527e2e990952d6655f1f380d5d7de81e | 主仓Pipeline、Go/Cpp、任务、测试定义与CI；当前Python目标3.14，新增ruff检查 |
 | MaaEnd/MaaEndTestset main | 68f40d1290b5f1b6cb2a064b6b26efa44d8d9b6a | 主仓 tests/MaaEndTestset gitlink；ADB/CloudADB/Win32素材，不是独立runner |
 | MaaEnd/MaaEnd-AI main | fd3ed6462d2ee7191950131776e62136ae7bfb94 | assets/resource/model gitlink；OCR/检测/地图模型，保留模型来源、许可和校验和 |
 | MaaXYZ/MaaFramework | 实际发行runtime/SDK/binding组合 | 接口能力必须对实际DLL验证，不能拿main源码替发行包能力背书 |
