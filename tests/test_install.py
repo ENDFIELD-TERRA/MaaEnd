@@ -140,6 +140,20 @@ class PrivateImportTests(unittest.TestCase):
         self.install("--apply", expected=2)
         self.assertFalse((self.repo / ".qoder").exists())
 
+    def test_user_agent_shadow_blocks_until_explicitly_allowed(self):
+        target = self.config / "agents/perlica-maaend.md"
+        target.parent.mkdir(parents=True)
+        target.write_text("---\nname: perlica-maaend\n---\nPrivate user-level copy\n", encoding="utf-8")
+        # Default: the shadow is a hard stop, so nothing is written.
+        self.install("--apply", expected=2)
+        self.assertFalse((self.repo / ".qoder").exists())
+        # Explicit acknowledgement installs and records the shadow for audit.
+        self.install("--apply", "--allow-user-agents")
+        self.assertTrue((self.repo / ".qoder/agents/perlica-maaend.md").exists())
+        receipt = json.loads((self.repo / ".qoder/maaend-private/install-receipt.json").read_bytes())
+        self.assertIn("perlica-maaend", receipt["user_agent_shadow"])
+        self.assertEqual(self.original, self.tracked_hashes())
+
     def test_missing_global_needs_explicit_seed_and_never_replaces_existing(self):
         target = self.config / "AGENTS.md"
         target.unlink()

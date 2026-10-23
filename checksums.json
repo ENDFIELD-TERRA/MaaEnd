@@ -17,7 +17,7 @@
   "commands/maaend/verify.md": "3768b5b1598de7836ef22176bd11ae2cc39286b5600b3b505f53329509d31742",
   "examples/issue-event.json": "535e04150f0f14af4e3db5d9c012d2583f9b0e4e261734bfac5f824a61dcbd05",
   "examples/mcp.windows.json": "ab41ff3015db6cdff6dbe84ceb0fb31629ccf8437596ee9fa00302ebe9162803",
-  "install.py": "82f279f0fe0bd847d14437f28a3dfc6e2b3cf745d5c072f025127e9e963deb59",
+  "install.py": "7bc9f5a3f2abce8f3c31da6f2e6b3fd94724f3836cefa909f00163b0e6d89d08",
   "method-skills/e2e/LICENSE.upstream.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
   "method-skills/e2e/references/agent.md": "ed39c749bd09730ed23927283010b045fd32f75adc6f971fdbe6f557f34260db",
   "method-skills/e2e/references/bug-bash.md": "ae2f3f969ee14a725760ead9ede0ab0d2234d0e3f31454254158491a3e727f73",
@@ -254,7 +254,7 @@
   "team-templates/maaend-validator.md": "e2de26182c5e841f91fd935cb20de0bc53fce9a37ff52e5eda36366fd7ec9be1",
   "templates/perlica-maaend.md": "aac001ab0a64ffff13efd613bfdaed34c65b9c65bfd21606aee9176499e97f84",
   "tests/test_caseflow.py": "5c32a3d53e30757d65a93e36427d11fb6352ac745c36c09c04f571e31c884c88",
-  "tests/test_install.py": "2202b811ae0fd6b3cae87d965050b2a38c647276ef7e4bd069f40de1b6a3481f",
+  "tests/test_install.py": "921f833f4b06f6727aa85036867e2afb16006ca6a4c9d90b8bd1b2d9cd506c46",
   "third-party/ChromeDevTools-Apache-2.0.txt": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
   "third-party/MaaEnd-AGPL-3.0.txt": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
   "third-party/MistEO-LGPL-3.0.md": "446e755fae55ff034bbb21be44670b5f116c2b2667947e7036f2bfe6632539a8",
@@ -270,7 +270,7 @@
   "workflow-skills/maaend-persona-maintenance/scripts/fetch_endfield_lore.py": "33bcd0266cc35954e8d4d41c35fb549ffe9bae5c28aae5950372653613150e3d",
   "workflow-skills/maaend-persona-maintenance/SKILL.md": "f8ddc73eedef7859383f0b879f3483c44fc1b93a6e7a93e47969829826beead9",
   "workflow-skills/maaend-team-workflow/SKILL.md": "ee2623b4837ac22df4dee47bb80e64d8928252a0507402858c99bb60426fd988",
-  "使用说明.md": "0142af3d9c908c56b2787123c05e37fe6349d9c14b8bf6d0b6e75417f57d7800",
+  "使用说明.md": "8c0e542fbbc2f4462535b3dec2fdb5ce45597d5c55d92f67792267cef3cf652d",
   "启动指令.md": "f854c804126361e2d8103b0ee7c58563e6b6c64752745a797beae0f131a7abd6",
   "验证结果.md": "3f0c12c2a4ef6f3a5c67c67d666b3408c90b599daaf0ebc7c5e2a6744bcf9152"
 }

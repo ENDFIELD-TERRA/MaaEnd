@@ -96,6 +96,9 @@ def main() -> int:
     parser.add_argument("--config-root", type=Path, default=Path(os.environ.get("QODERCN_CONFIG_DIR", str(Path.home() / ".qoder-cn"))))
     parser.add_argument("--global-agents", type=Path)
     parser.add_argument("--seed-global", action="store_true", help="Create baseline only when the selected global file is absent")
+    parser.add_argument("--allow-user-agents", action="store_true",
+                        help="Install even when user-level agents share these names; Qoder's precedence is not asserted here, "
+                             "the shadowed names are recorded in the receipt for audit")
     parser.add_argument("--apply", action="store_true", help="Apply the displayed private-file plan")
     args = parser.parse_args()
     repo = args.repo.resolve(strict=True)
@@ -242,9 +245,12 @@ def main() -> int:
     else:
         revised = existing_exclude + ("\n" if existing_exclude and not existing_exclude.endswith("\n") else "") + block + "\n"
     proposed[exclude_path] = revised.encode()
+    # Names that also exist as user-level agents; recorded so the shadow is auditable.
+    user_agent_shadow = [name for name in agent_names if (config / "agents" / f"{name}.md").exists()]
     receipt = {"format": "qoder-maaend-import-v1",
                "managed": {str(p): digest(data) for p, data in proposed.items() if p != exclude_path},
                "audit": audit, "skills": maps,
+               "user_agent_shadow": user_agent_shadow,
                "runtime_qualification": "Pending; no Qoder or MCP was started"}
     receipt["integrity"] = digest(encoded(receipt))
     proposed[receipt_path] = encoded(receipt)
@@ -272,8 +278,9 @@ def main() -> int:
         path = Path(old_path)
         if path.is_relative_to(repo / ".qoder/skills") and path not in proposed and path.exists():
             raise ValueError(f"A removed source skill still has an installed file; review it manually: {path}")
-    if any((config / "agents" / f"{name}.md").exists() for name in agent_names):
-        raise ValueError("A user-level agent has the same name; inspect precedence before installing")
+    if user_agent_shadow and not args.allow_user_agents:
+        raise ValueError("A user-level agent has the same name: " + ", ".join(user_agent_shadow)
+                         + "; inspect Qoder precedence, then re-run with --allow-user-agents")
     changes = {p: data for p, data in proposed.items() if not p.exists() or safe_bytes(p) != data}
     summary = {"mode": "apply" if args.apply else "plan", "head": audit["head"],
                "repository_skills": sum(m["origin"] == "repository" for m in maps),
@@ -283,6 +290,7 @@ def main() -> int:
                "commands": command_paths,
                "skills": sorted(names), "changed_files": len(changes),
                "mcp": "Initial imports are disabled; existing local enablement preserved; runtime qualification pending",
+               "user_agent_shadow": user_agent_shadow,
                "issue_lifecycle": "Pending remote read during bootstrap"}
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     for target in changes:
