@@ -4,6 +4,7 @@ import (
 	"github.com/MaaXYZ/MaaEnd/agent/go-service/pkg/gamesetting"
 	"github.com/MaaXYZ/MaaEnd/agent/go-service/pkg/i18n"
 	"github.com/MaaXYZ/MaaEnd/agent/go-service/pkg/maafocus"
+	"github.com/MaaXYZ/MaaEnd/agent/go-service/pkg/pienv"
 	"github.com/MaaXYZ/maa-framework-go/v4"
 	"github.com/rs/zerolog/log"
 )
@@ -20,6 +21,12 @@ type HDRChecker struct {
 func (c *HDRChecker) OnTaskerTask(tasker *maa.Tasker, event maa.EventStatus, detail maa.TaskerTaskDetail) {
 	// Only check on task starting
 	if event != maa.EventStatusStarting {
+		return
+	}
+
+	// CloudWeb renders remotely; the local display HDR state is unrelated.
+	if tasker != nil && pienv.ResolveControllerKind(tasker.GetController()) == pienv.ControllerKindCloudWeb {
+		log.Debug().Msg("CloudWeb controller: skip local HDR check")
 		return
 	}
 

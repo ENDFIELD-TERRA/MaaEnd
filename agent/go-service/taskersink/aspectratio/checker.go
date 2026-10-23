@@ -147,6 +147,48 @@ func (c *AspectRatioChecker) OnTaskerTask(tasker *maa.Tasker, event maa.EventSta
 		return
 	}
 
+	if pienv.IsCloudWebControllerType(controlType) {
+		requirement := i18n.T("tasker.aspect_ratio_warning.requirement_exact", targetWidth, targetHeight)
+		log.Debug().
+			Uint64("task_id", detail.TaskID).
+			Str("entry", detail.Entry).
+			Str("controller_name", pienv.ControllerName()).
+			Str("controller_type", controlType).
+			Str("requirement", "exact_resolution").
+			Str("mode", "cloudweb_exact_resolution").
+			Int32("width", width).
+			Int32("height", height).
+			Msg("Using exact canonical resolution check for CloudWeb controller")
+
+		if isCloudWebResolutionOK(width, height) {
+			log.Debug().
+				Uint64("task_id", detail.TaskID).
+				Str("entry", detail.Entry).
+				Str("controller_name", pienv.ControllerName()).
+				Str("controller_type", controlType).
+				Str("mode", "cloudweb_exact_resolution").
+				Int32("width", width).
+				Int32("height", height).
+				Msg("CloudWeb canonical resolution check passed")
+			return
+		}
+
+		log.Error().
+			Uint64("task_id", detail.TaskID).
+			Str("entry", detail.Entry).
+			Str("controller_name", pienv.ControllerName()).
+			Str("controller_type", controlType).
+			Bool("stop_task", true).
+			Int32("width", width).
+			Int32("height", height).
+			Int("target_width", targetWidth).
+			Int("target_height", targetHeight).
+			Str("mode", "cloudweb_exact_resolution").
+			Msg("CloudWeb canonical resolution check failed")
+		c.stopWithWarning(tasker, controllerDisplay, int(width), int(height), requirement)
+		return
+	}
+
 	aspectRatioOK, minResolutionOK, resolutionOK, scaledW, scaledH := isNonADBResolutionOK(width, height)
 
 	log.Debug().
@@ -274,6 +316,10 @@ func readResolutionWithRetry(controller *maa.Controller) (int32, int32, bool) {
 		}
 	}
 	return width, height, false
+}
+
+func isCloudWebResolutionOK(width, height int32) bool {
+	return int(width) == targetWidth && int(height) == targetHeight
 }
 
 func isNonADBResolutionOK(width, height int32) (bool, bool, bool, int, int) {
@@ -577,6 +623,8 @@ func displayControllerType(controllerType string) string {
 		return "macOS"
 	case pienv.ControllerKindPlayCover:
 		return "PlayCover"
+	case pienv.ControllerKindCloudWeb:
+		return "CloudWeb"
 	default:
 		return controllerType
 	}

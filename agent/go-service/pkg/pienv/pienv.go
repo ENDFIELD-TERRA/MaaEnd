@@ -62,6 +62,16 @@ type LinuxConfig struct {
 	PipewireSource string `json:"pipewire_source,omitempty"`
 }
 
+// CloudWebConfig mirrors the private PI cloudweb sub-object.
+// Backend is the Host transport (sidecar/fake); it is not the runtime backend.
+type CloudWebConfig struct {
+	Backend        string `json:"backend,omitempty"`
+	Profile        string `json:"profile,omitempty"`
+	UIProfile      string `json:"ui_profile,omitempty"`
+	ServerRegion   string `json:"server_region,omitempty"`
+	InputSemantics string `json:"input_semantics,omitempty"`
+}
+
 // Controller is the parsed PI_CONTROLLER single-line JSON.
 // i18n-capable fields (label, description, icon) are pre-resolved by the Client.
 type Controller struct {
@@ -82,6 +92,7 @@ type Controller struct {
 	PlayCover          *PlayCoverConfig `json:"playcover,omitempty"`
 	Gamepad            *GamepadConfig   `json:"gamepad,omitempty"`
 	Linux              *LinuxConfig     `json:"linux,omitempty"`
+	CloudWeb           *CloudWebConfig  `json:"cloudweb,omitempty"`
 }
 
 // Resource is the parsed PI_RESOURCE single-line JSON.
@@ -250,6 +261,18 @@ const (
 	ControllerKindMacOS         = "macos"
 	ControllerKindLinux         = "linux"
 	ControllerKindGamepad       = "gamepad"
+	ControllerKindCloudWeb      = "cloudweb"
+
+	CloudWebBackendSidecar   = "sidecar"
+	CloudWebBackendFake      = "fake"
+	CloudWebUIProfileDefault = "cloud_web.default"
+	CloudWebInputSemanticsPC = "pc"
+
+	CapabilityFrameLatest   = "frame.latest"
+	CapabilityInputKeyboard = "input.keyboard"
+	CapabilityInputRelative = "input.relative"
+	CapabilityInputText     = "input.text"
+	CapabilityGeometryV1    = "geometry.v1"
 )
 
 // ControllerKind returns the normalized kind of the current PI environment,
@@ -277,6 +300,8 @@ func NormalizeControllerKind(controllerType string) string {
 		return ControllerKindLinux
 	case ControllerKindGamepad:
 		return ControllerKindGamepad
+	case ControllerKindCloudWeb, "cloud_web":
+		return ControllerKindCloudWeb
 	default:
 		return ControllerKindUnknown
 	}
@@ -326,11 +351,15 @@ func controllerKindFromInfo(info string) string {
 	}
 
 	var dto struct {
-		Type string `json:"type"`
+		Type    string `json:"type"`
+		Backend string `json:"backend"`
 	}
 	if err := json.Unmarshal([]byte(info), &dto); err != nil {
 		// Fallback: probe the raw string when it is not valid JSON.
 		lower := strings.ToLower(info)
+		if strings.Contains(lower, "cloud_web") || strings.Contains(lower, ControllerKindCloudWeb) {
+			return ControllerKindCloudWeb
+		}
 		for _, candidate := range []string{
 			ControllerKindWin32,
 			ControllerKindMacOS,
@@ -345,7 +374,115 @@ func controllerKindFromInfo(info string) string {
 		}
 		return ControllerKindUnknown
 	}
+	if backendKind := NormalizeControllerKind(dto.Backend); backendKind == ControllerKindCloudWeb {
+		return backendKind
+	}
 	return NormalizeControllerKind(dto.Type)
+}
+
+// IsCloudWebControllerType reports whether the raw controller type is the
+// private CloudWeb controller kind.
+func IsCloudWebControllerType(controllerType string) bool {
+	return NormalizeControllerKind(controllerType) == ControllerKindCloudWeb
+}
+
+// CloudWebProfile is the PI-side connection/profile metadata for CloudWeb.
+type CloudWebProfile struct {
+	Transport      string
+	Profile        string
+	UIProfile      string
+	ServerRegion   string
+	InputSemantics string
+}
+
+// CloudWebProfileValue returns the current PI CloudWeb profile, if selected.
+func CloudWebProfileValue() (CloudWebProfile, bool) {
+	return cloudWebProfileOf(GetController())
+}
+
+func cloudWebProfileOf(c *Controller) (CloudWebProfile, bool) {
+	if c == nil || !IsCloudWebControllerType(c.Type) || c.CloudWeb == nil {
+		return CloudWebProfile{}, false
+	}
+	return CloudWebProfile{
+		Transport:      c.CloudWeb.Backend,
+		Profile:        c.CloudWeb.Profile,
+		UIProfile:      c.CloudWeb.UIProfile,
+		ServerRegion:   c.CloudWeb.ServerRegion,
+		InputSemantics: c.CloudWeb.InputSemantics,
+	}, true
+}
+
+// ControllerRuntimeInfo is the parsed runtime info reported by the Host's
+// CustomController. It is intentionally separate from the PI profile.
+type ControllerRuntimeInfo struct {
+	Backend         string
+	BackendVersion  string
+	ProtocolVersion int
+	SessionID       string
+	Profile         string
+	UIProfile       string
+	Capabilities    []string
+}
+
+// ControllerRuntimeInfoValue reads the current callback's controller info.
+// ctrl must be the controller already obtained in this callback; the function
+// does not cache or retain the borrowed handle.
+func ControllerRuntimeInfoValue(ctrl *maa.Controller) (ControllerRuntimeInfo, bool) {
+	if ctrl == nil {
+		return ControllerRuntimeInfo{}, false
+	}
+	info, err := ctrl.GetInfo()
+	if err != nil {
+		return ControllerRuntimeInfo{}, false
+	}
+	return parseControllerRuntimeInfo(info)
+}
+
+func parseControllerRuntimeInfo(raw string) (ControllerRuntimeInfo, bool) {
+	if raw == "" {
+		return ControllerRuntimeInfo{}, false
+	}
+	var dto struct {
+		Backend         string   `json:"backend"`
+		BackendVersion  string   `json:"backend_version"`
+		ProtocolVersion int      `json:"protocol_version"`
+		SessionID       string   `json:"session_id"`
+		Profile         string   `json:"profile"`
+		UIProfile       string   `json:"ui_profile"`
+		Capabilities    []string `json:"capabilities"`
+	}
+	if err := json.Unmarshal([]byte(raw), &dto); err != nil || dto.Backend == "" {
+		return ControllerRuntimeInfo{}, false
+	}
+	return ControllerRuntimeInfo{
+		Backend:         dto.Backend,
+		BackendVersion:  dto.BackendVersion,
+		ProtocolVersion: dto.ProtocolVersion,
+		SessionID:       dto.SessionID,
+		Profile:         dto.Profile,
+		UIProfile:       dto.UIProfile,
+		Capabilities:    dto.Capabilities,
+	}, true
+}
+
+// HasControllerCapability reports whether the current runtime advertises the
+// exact capability string. Unknown or absent capabilities return false.
+func HasControllerCapability(ctrl *maa.Controller, capability string) bool {
+	info, ok := ControllerRuntimeInfoValue(ctrl)
+	if !ok {
+		return false
+	}
+	return hasCapability(info, capability)
+}
+
+func hasCapability(info ControllerRuntimeInfo, capability string) bool {
+	for _, candidate := range info.Capabilities {
+		if candidate == capability {
+			return true
+		}
+	}
+	return false
 }
 
 // ResourceName returns the resource name identifier, or empty if unavailable.

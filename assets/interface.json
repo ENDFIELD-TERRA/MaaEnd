@@ -57,6 +57,20 @@
             ]
         },
         {
+            "name": "CloudWeb",
+            "label": "$controller.CloudWeb.label",
+            "description": "$controller.CloudWeb.description",
+            "type": "CloudWeb",
+            "display_short_side": 720,
+            "cloudweb": {
+                "backend": "sidecar",
+                "profile": "default",
+                "ui_profile": "cloud_web.default",
+                "server_region": "CN",
+                "input_semantics": "pc"
+            }
+        },
+        {
             "name": "PlayCover",
             "type": "PlayCover",
             "attach_resource_path": [

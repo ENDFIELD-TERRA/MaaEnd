@@ -7,6 +7,17 @@
             "group": [
                 "sanity_sink"
             ],
+            "controller": [
+                "Win32-Front",
+                "ADB",
+                "CloudADB",
+                "PlayCover",
+                "Linux-Gamescope",
+                "Linux-ScreenCast",
+                "Linux-Wlroots",
+                "MacOS-Front",
+                "MacOS-Background"
+            ],
             "option": [
                 "AutoEssenceSchedule",
                 "AutoEssenceMenu",
