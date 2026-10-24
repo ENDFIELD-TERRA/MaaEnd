@@ -50,7 +50,11 @@
     {"id": "E5", "title": "Host 生命周期、唯一 frame reader 与只读预览", "milestone": "M5", "cw": "CW5", "status": "partial"},
     {"id": "E6", "title": "MaaEnd 云身份、薄 overlay 与任务适配", "milestone": "M6", "cw": "CW6", "status": "partial"},
     {"id": "E7", "title": "第一条真实纵向闭环", "milestone": "M7", "cw": "CW7", "status": "partial"},
-    {"id": "EF", "title": "FIX-RS 独立 binding 修复", "milestone": "FIX-RS", "cw": "FIX-RS", "status": "partial"}
+    {"id": "EF", "title": "FIX-RS 独立 binding 修复", "milestone": "FIX-RS", "cw": "FIX-RS", "status": "partial"},
+    {"id": "E8", "title": "全任务资格", "milestone": "M8", "cw": "CW8", "status": "in_progress"},
+    {"id": "E9", "title": "故障与长时稳定", "milestone": "M9", "cw": "CW9", "status": "in_progress"},
+    {"id": "E10", "title": "打包、兼容与上游收口", "milestone": "M10", "cw": "CW10", "status": "in_progress"},
+    {"id": "AC", "title": "CW0–CW7/FIX-RS 验收准备", "milestone": "AC", "cw": "AC", "status": "in_progress"}
   ],
   "milestones": [
     {"id": "M0", "cw": "CW0", "gate": "G0", "status": "partial"},
@@ -61,7 +65,11 @@
     {"id": "M5", "cw": "CW5", "gate": "G2-pre", "status": "partial"},
     {"id": "M6", "cw": "CW6", "gate": "G2-pre", "status": "partial"},
     {"id": "M7", "cw": "CW7", "gate": "G2", "status": "partial"},
-    {"id": "FIX-RS", "cw": "FIX-RS", "gate": "release-dependency", "status": "partial"}
+    {"id": "FIX-RS", "cw": "FIX-RS", "gate": "release-dependency", "status": "partial"},
+    {"id": "M8", "cw": "CW8", "gate": "G3", "status": "not_started"},
+    {"id": "M9", "cw": "CW9", "gate": "G4-pre", "status": "not_started"},
+    {"id": "M10", "cw": "CW10", "gate": "G4", "status": "not_started"},
+    {"id": "AC", "cw": "AC", "gate": "G0-G2", "status": "in_progress"}
   ],
   "issues": [
     {
@@ -190,6 +198,32 @@
       ],
       "evidence": ["unfixed c1c6173: Drop=0/Arc=101", "patch 953ec24: Drop=1/Arc=1", "record/Tasker/destroy regression pending"]
     }
+  ],
+  "future_issues": [
+    {"id": "CW8-1", "title": "在 c7fd1b25 重生成 task/option/preset/pretask inventory", "owner": "Perlica", "status": "in_progress", "dependencies": [], "acceptance": ["49/426/3/1 计数", "46 Windows 分类", "inventory hash"]},
+    {"id": "CW8-2", "title": "任务族矩阵与证据 schema", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW8-1"], "acceptance": ["每族一张矩阵", "空行保持 Pending"]},
+    {"id": "CW8-3", "title": "任务族适配（Daily/AutoEssence/ProtocolSpace/DeliveryJobs/ToS/RealTimeTask/生命周期/预设/ZiplineImport）", "owner": "task-family agents", "status": "pending", "dependencies": ["CW8-2", "CW7"], "acceptance": ["真实截图/ROI/跳转/游戏结果"]},
+    {"id": "CW8-4", "title": "option/route/preset/pretask 实际运行等价", "owner": "MaaEnd agents", "status": "pending", "dependencies": ["CW8-3"], "acceptance": ["每项实际运行", "不能只静态映射"]},
+    {"id": "CW8-5", "title": "46 项 Windows 业务逐项 Pass/Fail + 独立抽查", "owner": "Perlica+validator", "status": "pending", "dependencies": ["CW8-3", "CW8-4"], "acceptance": ["46 行有候选/证据/结果"]},
+    {"id": "CW9-1", "title": "故障矩阵与证据 schema", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW2"], "acceptance": ["每域输入/预期/证据/失败行为"]},
+    {"id": "CW9-2", "title": "控制面故障：ACK 丢失/半包/旧代次/Stop fence", "owner": "sidecar fault agent", "status": "pending", "dependencies": ["CW2"], "acceptance": ["无盲重放", "Faulted/未知账本保留"]},
+    {"id": "CW9-3", "title": "媒体故障：冻结/重复帧/页面重建/geometry 变化", "owner": "media fault agent", "status": "pending", "dependencies": ["CW4"], "acceptance": ["冻结不标 Fresh", "旧 token 失效"]},
+    {"id": "CW9-4", "title": "Host/API 故障：MXU 崩溃/无响应/Host-death/双实例", "owner": "MXU fault agent", "status": "in_progress", "dependencies": ["CW2", "CW5"], "acceptance": ["只回收自己的进程", "API 有界"]},
+    {"id": "CW9-5", "title": "人工接管 pause→fence→release→owner 转移", "owner": "integration agent", "status": "pending", "dependencies": ["CW2", "CW3"], "acceptance": ["无残留 held", "恢复不重放旧输入"]},
+    {"id": "CW9-6", "title": "100 循环 + 2 小时长运行", "owner": "validator", "status": "pending", "dependencies": ["CW9-2..5"], "acceptance": ["有界停止", "无泄漏/跨 run 事件"]},
+    {"id": "CW10-1", "title": "依赖/许可/最低工具链", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW0"], "acceptance": ["依赖表+许可+可复现构建"]},
+    {"id": "CW10-2", "title": "干净 Windows 安装/回滚", "owner": "release agent", "status": "pending", "dependencies": ["CW0", "CW1"], "acceptance": ["干净机安装/启动/回滚"]},
+    {"id": "CW10-3", "title": "跨 Host 兼容矩阵", "owner": "host agent", "status": "pending", "dependencies": ["CW1", "CW5"], "acceptance": ["版本矩阵+unsupported 明确"]},
+    {"id": "CW10-4", "title": "上游 PR 切片（PR-A/B/C/D/F）", "owner": "Perlica+reviewer", "status": "pending", "dependencies": ["CW1 合同接受"], "acceptance": ["每张可独立审阅", "不夹带私有实现"]},
+    {"id": "CW10-5", "title": "文档/诊断/版本/支持任务清单", "owner": "release agent", "status": "pending", "dependencies": ["CW8", "CW9"], "acceptance": ["文档与候选一致", "不夸大 Gate"]},
+    {"id": "AC-1", "title": "CW0–CW7/FIX-RS 验收 checklist 与证据模板", "owner": "Perlica", "status": "in_progress", "dependencies": [], "acceptance": ["每 CW 一张 checklist", "证据字段齐全"]},
+    {"id": "AC-2", "title": "独立 validator/reviewer 分工与 Gate 评审流程", "owner": "Perlica", "status": "in_progress", "dependencies": ["AC-1"], "acceptance": ["实施/验收分离", "未通过项保留"]}
+  ],
+  "claims": [
+    {"epic": "E8", "owner": "Perlica", "status": "in_progress", "scope": "CW8 planning/inventory/matrix; no GitHub writes"},
+    {"epic": "E9", "owner": "Perlica", "status": "in_progress", "scope": "CW9 fault matrix/harness design; no cloud runs"},
+    {"epic": "E10", "owner": "Perlica", "status": "in_progress", "scope": "CW10 dependency/license/PR mapping; no external writes"},
+    {"epic": "AC", "owner": "Perlica", "status": "in_progress", "scope": "CW0–CW7/FIX-RS acceptance checklists and gate review"}
   ],
   "gates": {
     "G0": {"status": "partial", "requires": ["CW0", "CW1"]},

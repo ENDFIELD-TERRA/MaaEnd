@@ -39,6 +39,10 @@ codegraph 1.6.2 已建索引：MaaEnd 1,412 文件/30,994 节点；sidecar 8/572
 | E6 MaaEnd 云身份、薄 overlay 与任务适配（CW6） | M6 | `partial` | G2 前置 |
 | E7 第一条真实纵向闭环（CW7） | M7 | `partial` | G2 |
 | EF FIX-RS 独立 binding 修复 | FIX-RS | `partial` | 正式发布依赖 |
+| E8 全任务资格（CW8） | M8 | `in_progress`（Perlica 认领，规划/矩阵） | G3 |
+| E9 故障与长时稳定（CW9） | M9 | `in_progress`（Perlica 认领，harness 设计） | G4 前置 |
+| E10 打包、兼容与上游收口（CW10） | M10 | `in_progress`（Perlica 认领，依赖/PR 映射） | G4 |
+| AC CW0–CW7/FIX-RS 验收准备 | AC | `in_progress`（Perlica 认领） | G0–G2 评审 |
 
 CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4）保留主报告定义；本轮先闭环 CW0–CW7，不缩小最终分母。
 
@@ -55,6 +59,25 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | CW6 | 恢复通用 modifier+target click、薄 overlay、legacy camera、region/UID、能力准入、云生命周期 | `partial` | CW1 后可先改；定稿依赖 CW3/4 | C++ `cloud_web` + DailyRewards 白名单已有；`AutoAltClickAction` 被全局改 Escape（材料 §0.1 明确反对）；region/UID、legacy camera、云生命周期未完成 |
 | CW7 | 真实 actuator/目标身份；连接→登录/排队→DailyRewards→Stop/重开；MapNavigator+AutoFight；后台隔离 | `partial` | CW3/4/5 + CW6 子集 | 一次 `run-20261024-172134` exit 0（从 Regional 界面启动）；冷启动 `172301`/`174331` 失败；Stop/重开、导航/战斗、隔离未验证 |
 | FIX-RS | last-owner 回收、record/Tasker retention、destroy quiescence；移植最新 upstream | `partial` | 可立即开始 | 已复现 Drop=0/Arc=101；patch `953ec24` Drop=1/Arc=1；未覆盖 record/Tasker/destroy 静默期与最新上游回归 |
+
+## 非 CW0–CW7 链路（Perlica 认领，2026-10-24）
+
+详细计划：`cases/cloudweb-cw8-cw10/plan.md`；验收准备：`cases/cloudweb-acceptance/plan.md`。
+
+| Issue/Epic | 事项 | owner | 状态 |
+| --- | --- | --- | --- |
+| E8 / CW8 | 46 项 Windows 业务 + 云 pretask 等价 + 必要 option/route/preset | Perlica | `in_progress`（规划/矩阵） |
+| CW8-1 | 在 `c7fd1b25` 重生成 task/option/preset/pretask inventory，核验 49/426/3/1 | Perlica | `in_progress` |
+| CW8-2 | 任务族矩阵与证据 schema | Perlica | `in_progress` |
+| CW8-3 | 任务族适配：Daily、AutoEssence、ProtocolSpace、DeliveryJobs/Seize、TrialOfSwordmancy、RealTimeTask、生命周期、预设/settings、ZiplineImport | task-family agents（待 CW7） | `pending` |
+| CW8-4 | option/route/preset/pretask 实际运行等价 | MaaEnd agents（待 CW7） | `pending` |
+| CW8-5 | 46 项逐项 Pass/Fail + 独立抽查 | Perlica + validator | `pending` |
+| E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（harness 设计） |
+| CW9-4 | 把 `run-175718` 的 `state_poll_error` 登记为 Host/API 无响应真实输入 | Perlica | `in_progress` |
+| E10 / CW10 | 依赖/许可、干净 Windows 安装/回滚、跨 Host、PR 切片、版本文档 | Perlica | `in_progress`（依赖/PR 映射） |
+| AC | CW0–CW7/FIX-RS 验收 checklist、Gate 评审、validator/reviewer 分工 | Perlica | `in_progress` |
+
+原则：CW8/CW9/CW10 的**执行**依赖 CW7/CW2/CW0 等前置；现在只做不依赖实现的 inventory/矩阵/harness 设计/依赖与 PR 映射/验收清单。不创建 GitHub issue/PR/评论，不把规划当 Gate 通过。
 
 ## Gate 判定
 
@@ -87,6 +110,7 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 
 ## 下一步顺序
 
+0. 并行（Perlica 独立推进）：CW8 inventory/任务族矩阵、CW9 harness 设计、CW10 依赖/PR 映射、AC 验收清单；不依赖 CW0–CW7 实现。
 1. CW0 证据/构建清单 + CW1 接线合同；FIX-RS 并行。
 2. CW2 最小停止；CW4 collector 可先做。
 3. CW3 relative/按钮/隔离；CW4 真实接线；CW5 frame reader/preview。
