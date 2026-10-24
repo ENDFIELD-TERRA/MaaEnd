@@ -1,0 +1,214 @@
+{
+  "schema": "cloudweb-roadmap/2",
+  "audited_at": "2026-10-24T18:10:00+08:00",
+  "single_source": {
+    "human": ".qoder/maaend-private/cases/cloudweb-roadmap.md",
+    "machine": ".qoder/maaend-private/cases/cloudweb-roadmap.json",
+    "plan": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/plan.md"
+  },
+  "materials": [
+    "<workspace>/collaboration files/MaaEnd-CloudWeb-Implementation-Review-2026-10-24.md",
+    "<workspace>/collaboration files/FeatureRequirementDoc-MaaEnd-CloudWeb-Neo.md",
+    "<workspace>/collaboration files/MaaEnd-CloudWeb-Coordinator-Report.md"
+  ],
+  "baselines": {
+    "sidecar": {"head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac", "branch": "main", "remote": "<sidecar-fork>", "worktree": "clean"},
+    "mxu": {"head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76", "branch": "feat/cloudweb-host", "remote": "<MXU-fork>", "worktree": "clean"},
+    "maaend": {"head": "c7fd1b25071d9976703635b7dda66812172d1629", "branch": "feat/cloudweb-cw28", "remote": "MaaEnd", "worktree": "clean"},
+    "maaend_v2": {"head": "051d17f2527e2e990952d6655f1f380d5d7de81e"},
+    "qoder_agentset": {"head": "e3dab67d997840c5d8ae4cf0328b2b36f308368c"},
+    "maa_framework_rs_patched": {"head": "953ec242d2542ab907211a4aa347b9a855f698aa"},
+    "maa_framework_rs_unfixed": {"head": "c1c617330b56205798609c7566e602b55adba74b"}
+  },
+  "codegraph": {
+    "version": "1.6.2",
+    "indexes": {
+      "maaend": {"files": 1412, "nodes": 30994, "edges": 69968},
+      "sidecar": {"files": 8, "nodes": 572, "edges": 1825},
+      "mxu": {"files": 161, "nodes": 4798, "edges": 11845},
+      "agentset": {"files": 194, "nodes": 4406, "edges": 9139},
+      "maa_framework_rs": {"files": 38, "nodes": 2059, "edges": 5605},
+      "maa_framework_rs_unfixed": {"files": 37, "nodes": 2052, "edges": 5589}
+    }
+  },
+  "product_denominator": {
+    "tasks": 49,
+    "option_definitions": 426,
+    "presets": 3,
+    "pretasks": 1,
+    "windows_applicable": 46,
+    "cloudweb_open_tasks": ["DailyRewards"],
+    "complete_gate": "46 Windows tasks + LaunchGamePC cloud equivalent + required options/routes/presets"
+  },
+  "status_levels": ["verified", "partial", "unverified", "blocked", "needs_review", "not_started"],
+  "epics": [
+    {"id": "E0", "title": "候选、合同与可复现基线", "milestone": "M0", "cw": "CW0", "status": "partial"},
+    {"id": "E1", "title": "最小公共接线与真实 provider 身份", "milestone": "M1", "cw": "CW1", "status": "partial"},
+    {"id": "E2", "title": "Session/run、续租与最小停止", "milestone": "M2", "cw": "CW2", "status": "partial"},
+    {"id": "E3", "title": "完整 PC 持续输入", "milestone": "M3", "cw": "CW3", "status": "partial"},
+    {"id": "E4", "title": "媒体、几何与 observation token", "milestone": "M4", "cw": "CW4", "status": "not_started"},
+    {"id": "E5", "title": "Host 生命周期、唯一 frame reader 与只读预览", "milestone": "M5", "cw": "CW5", "status": "partial"},
+    {"id": "E6", "title": "MaaEnd 云身份、薄 overlay 与任务适配", "milestone": "M6", "cw": "CW6", "status": "partial"},
+    {"id": "E7", "title": "第一条真实纵向闭环", "milestone": "M7", "cw": "CW7", "status": "partial"},
+    {"id": "EF", "title": "FIX-RS 独立 binding 修复", "milestone": "FIX-RS", "cw": "FIX-RS", "status": "partial"}
+  ],
+  "milestones": [
+    {"id": "M0", "cw": "CW0", "gate": "G0", "status": "partial"},
+    {"id": "M1", "cw": "CW1", "gate": "G0", "status": "partial"},
+    {"id": "M2", "cw": "CW2", "gate": "G1-pre", "status": "partial"},
+    {"id": "M3", "cw": "CW3", "gate": "G1", "status": "partial"},
+    {"id": "M4", "cw": "CW4", "gate": "G1", "status": "not_started"},
+    {"id": "M5", "cw": "CW5", "gate": "G2-pre", "status": "partial"},
+    {"id": "M6", "cw": "CW6", "gate": "G2-pre", "status": "partial"},
+    {"id": "M7", "cw": "CW7", "gate": "G2", "status": "partial"},
+    {"id": "FIX-RS", "cw": "FIX-RS", "gate": "release-dependency", "status": "partial"}
+  ],
+  "issues": [
+    {
+      "id": "CW0",
+      "title": "候选与契约盘点、可复现构建、实际配置、许可/工具链",
+      "status": "partial",
+      "owner": "coordinator+reviewer",
+      "dependencies": [],
+      "acceptance": [
+        "三仓固定 SHA/remote/worktree 与构建输入可复现",
+        "实际生效 backend/profile 配置与发行物绑定",
+        "许可、最低工具链、启动说明齐全",
+        "真实 backend 与 fake 判定表明确"
+      ],
+      "evidence": ["baselines in this JSON", "sidecar 37/0/1 + clippy 0", "material review section 0"]
+    },
+    {
+      "id": "CW1",
+      "title": "provider/launcher、最低版本、外层 adapter 与实际 actuator、生产显式 CDP",
+      "status": "partial",
+      "owner": "host/pi",
+      "dependencies": ["CW0"],
+      "acceptance": [
+        "真实 backend 未配置即失败，fake 不能误认真实",
+        "hello 返回实际 provider/backend/profile/capabilities",
+        "Host 校验并显示实际 kind",
+        "通用 factory/schema diff 可供维护者审阅"
+      ],
+      "evidence": ["sidecar --backend cdp --cdp-url", "default backend fake", "MXU cloudweb sidecar backend"]
+    },
+    {
+      "id": "CW2",
+      "title": "run/document epoch、独立 renew、typed held∪maybe、真实 deadline、owned launcher、Host-death 回收",
+      "status": "partial",
+      "owner": "sidecar+host",
+      "dependencies": ["CW0", "CW1"],
+      "acceptance": [
+        "2 秒长按不被 350ms lease 误释放",
+        "unknown down 后 Stop 真正尝试 up",
+        "慢 RPC 不阻塞安全预算",
+        "只回收自己的进程"
+      ],
+      "evidence": ["lease/supervisor exist", "possibly_held string", "no independent renew", "no owned launcher"]
+    },
+    {
+      "id": "CW3",
+      "title": "真实 relative、contact 映射、modifier/repeat、wheel/drag/text、SDK readiness、人工接管",
+      "status": "partial",
+      "owner": "browser-input",
+      "dependencies": ["CW2"],
+      "acceptance": [
+        "W+camera+right button+skill sustained combination",
+        "middle button target lock correct",
+        "real game not fake SDK",
+        "no global mouse/focus APIs"
+      ],
+      "evidence": ["CdpActuator::move_relative Err", "no input.relative", "contact mapping reversed", "wheel/text/takeover unverified"]
+    },
+    {
+      "id": "CW4",
+      "title": "rVFC/媒体进度、720p 规范化、document/geometry、snapshot token、帧去重/slot",
+      "status": "not_started",
+      "owner": "media",
+      "dependencies": ["CW0", "CW1", "CW2"],
+      "acceptance": [
+        "static scene still proves live media",
+        "frozen media + successful screenshot RPC is not Fresh",
+        "same-frame repeats and A/B overwrite do not mismatch",
+        "pixels and metadata atomically consistent"
+      ],
+      "evidence": ["production screenshot PNG + screenshot count", "geometry_revision=0", "no snapshot token"]
+    },
+    {
+      "id": "CW5",
+      "title": "唯一 frame reader/cache、preview/识别分离、pool/run/task ID、锁外 shutdown",
+      "status": "partial",
+      "owner": "mxu",
+      "dependencies": ["CW2", "CW4"],
+      "acceptance": [
+        "long actions keep preview live",
+        "A recognition / B preview does not rewrite observation basis",
+        "two instances do not write concurrently",
+        "cancel/exit has visible result"
+      ],
+      "evidence": ["MXU sidecar backend/frame/task/quit", "no unique reader/cache", "state API >60s unresponsive observed"]
+    },
+    {
+      "id": "CW6",
+      "title": "恢复通用 modifier+target click、薄 overlay、legacy camera、region/UID、能力准入、云生命周期",
+      "status": "partial",
+      "owner": "maaend",
+      "dependencies": ["CW1", "CW3", "CW4"],
+      "acceptance": [
+        "local Win32/HDR/process assumptions do not trigger",
+        "options/resources match actual profile",
+        "schema and host wiring synchronized",
+        "generic click restored; thin overlay only for confirmed entry"
+      ],
+      "evidence": ["C++ cloud_web + DailyRewards whitelist", "global AutoAltClick Escape branch (material section 0.1 rejects)", "region/UID/legacy camera/cloud lifecycle missing"]
+    },
+    {
+      "id": "CW7",
+      "title": "真实 actuator/目标身份；连接→登录/排队→DailyRewards→Stop/重开；MapNavigator+AutoFight；后台隔离",
+      "status": "partial",
+      "owner": "integration+validator",
+      "dependencies": ["CW3", "CW4", "CW5", "CW6-subset"],
+      "acceptance": [
+        "actual game and background isolation succeed",
+        "mail present/absent scenarios covered",
+        "fake/fake SDK/fixed PNG not counted",
+        "Stop/reopen and MapNavigator/AutoFight verified"
+      ],
+      "evidence": ["run-20261024-172134 exit 0 preconditioned", "172301/174331 cold-start failures", "175718 MXU API timeout", "Stop/reopen/nav/combat unverified"]
+    },
+    {
+      "id": "FIX-RS",
+      "title": "last-owner 回收、record/Tasker retention、destroy quiescence；移植最新 upstream",
+      "status": "partial",
+      "owner": "binding+native-reviewer",
+      "dependencies": [],
+      "acceptance": [
+        "callback exactly once and not before native use end",
+        "record/Tasker retention and destroy quiescence covered",
+        "port to latest upstream",
+        "independent PR, then formal release dependency"
+      ],
+      "evidence": ["unfixed c1c6173: Drop=0/Arc=101", "patch 953ec24: Drop=1/Arc=1", "record/Tasker/destroy regression pending"]
+    }
+  ],
+  "gates": {
+    "G0": {"status": "partial", "requires": ["CW0", "CW1"]},
+    "G1": {"status": "blocked", "requires": ["CW2", "CW3", "CW4"]},
+    "G2": {"status": "blocked", "requires": ["CW7"]},
+    "G3": {"status": "not_started", "requires": ["CW8"]},
+    "G4": {"status": "not_started", "requires": ["CW10"]}
+  },
+  "current_evidence": {
+    "success": "cloudweb-dist/EVIDENCE/run-20261024-172134.json",
+    "failures": ["run-20261024-172301.json", "run-20261024-174331.json", "run-20261024-175512.json", "run-20261024-175718.json"],
+    "delivery_audit": "cases/cloudweb-delivery-20261024-success/",
+    "delivery_status": "needs_review"
+  },
+  "stop_lines": [
+    "same failure twice: diagnose, no blind retry",
+    "no G1/G2/G3 claim without real Windows/session evidence",
+    "no automatic push/PR/issue/comment",
+    "old evidence invalid after candidate change",
+    "fake/fake SDK/fixed PNG/standalone Node script do not count"
+  ]
+}
