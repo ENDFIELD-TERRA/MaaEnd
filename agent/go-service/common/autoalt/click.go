@@ -5,6 +5,8 @@ import (
 
 	maa "github.com/MaaXYZ/maa-framework-go/v4"
 	"github.com/rs/zerolog/log"
+
+	"github.com/MaaXYZ/MaaEnd/agent/go-service/pkg/pienv"
 )
 
 const (
@@ -49,6 +51,13 @@ func (a *AutoAltClickAction) Run(ctx *maa.Context, arg *maa.CustomActionArg) boo
 				box[3] + p.TargetOffset[3],
 			}
 		}
+	}
+
+	// CloudWeb: the page does not forward Alt+click to the game, so the
+	// shared menu entry would retry forever. Escape reaches the game and is
+	// handled by the sidecar through CDP; keep the retry loop around it.
+	if pienv.ResolveControllerKind(nil) == pienv.ControllerKindCloudWeb {
+		return runPipelineAction(ctx, "AutoAltClickAction", "__AutoEscClickAction", box)
 	}
 
 	return runModifierClickActions(
