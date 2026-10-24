@@ -1,0 +1,2804 @@
+{
+  "maaend_head": "c7fd1b25071d9976703635b7dda66812172d1629",
+  "maaend_head_time": "2026-10-24T17:19:09+08:00",
+  "interface": "assets/interface.json",
+  "interface_imports": 71,
+  "counts": {
+    "tasks": 49,
+    "options": 426,
+    "presets": 3,
+    "settings": 2,
+    "pretasks": 1
+  },
+  "windows_applicable": 46,
+  "cloudweb_open_tasks": [
+    "DailyRewards"
+  ],
+  "duplicates": {
+    "tasks": [],
+    "options": []
+  },
+  "tasks": [
+    {
+      "name": "AccountSwitch",
+      "entry": "AccountSwitchStart",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "Win32-Front"
+      ],
+      "options": [
+        "AccountSwitchMatchMode"
+      ],
+      "file": "tasks/AccountSwitch.json"
+    },
+    {
+      "name": "AeroSalvage",
+      "entry": "AeroSalvageMain",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/AeroSalvage.json"
+    },
+    {
+      "name": "AndroidOpenGame",
+      "entry": "OpenGame",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB"
+      ],
+      "options": [
+        "ClientVersion",
+        "ClientVersionCloudLocked",
+        "EnterGameRecognitionMaxHit"
+      ],
+      "file": "tasks/AndroidOpenGame.json"
+    },
+    {
+      "name": "AutoCollect",
+      "entry": "AutoCollectSchedule",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "AutoCollectSchedule",
+        "AutoCollectValleyIV",
+        "AutoCollectWuling",
+        "AutoCollectMode",
+        "AutoCollectStashBackpackSubTask"
+      ],
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "name": "AutoEcoFarm",
+      "entry": "AutoEcoFarmTask",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "CollectWulingCityFarm",
+        "CollectSisPaintingFarm",
+        "CollectRanch"
+      ],
+      "file": "tasks/AutoEcoFarm.json"
+    },
+    {
+      "name": "AutoEssence",
+      "entry": "AutoEssenceSchedule",
+      "group": [
+        "sanity_sink"
+      ],
+      "controllers": [
+        "Win32-Front",
+        "ADB",
+        "CloudADB",
+        "PlayCover",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Front",
+        "MacOS-Background"
+      ],
+      "options": [
+        "AutoEssenceSchedule",
+        "AutoEssenceMenu",
+        "AutoFightSettingFull"
+      ],
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "name": "AutoSell",
+      "entry": "AutoSellMain",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "AutoSellValleyIV",
+        "AutoSellWuling",
+        "AutoSellPriceType"
+      ],
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "name": "AutoStockpile",
+      "entry": "AutoStockpileMain",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "AutoStockpileServerTime",
+        "AutoStockpileAllowDataUpload",
+        "AutoStockpileElasticValleyIV",
+        "AutoStockpileElasticWuling",
+        "AutoStockpileMinBuy"
+      ],
+      "file": "tasks/AutoStockpile.json"
+    },
+    {
+      "name": "AutoStockStaple",
+      "entry": "AutoStockStapleSchedule",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "AutoStockStapleSchedule",
+        "AutoStockStapleValleyIV",
+        "AutoStockStapleWuling"
+      ],
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "name": "BakerEntry",
+      "entry": "BakerEntry",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/BakerEntry.json"
+    },
+    {
+      "name": "BatchAddFriends",
+      "entry": "BatchAddFriendsMain",
+      "group": [
+        "dijiang_ship"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "Win32-Front"
+      ],
+      "options": [
+        "BatchAddFriends"
+      ],
+      "file": "tasks/BatchAddFriends.json"
+    },
+    {
+      "name": "BatchDeleteFriends",
+      "entry": "BatchDeleteFriendsMain",
+      "group": [
+        "dijiang_ship"
+      ],
+      "controllers": [
+        "Win32-Front"
+      ],
+      "options": [
+        "BatchDeleteFriendsInactiveDays"
+      ],
+      "file": "tasks/BatchDeleteFriends.json"
+    },
+    {
+      "name": "BatchUseDetector",
+      "entry": "BatchUseDetectorMain",
+      "group": [
+        "valuables_vault"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "BatchUseDetectorRegion",
+        "BatchUseDetectorCategory",
+        "BatchUseDetectorTimes"
+      ],
+      "file": "tasks/BatchUseDetector.json"
+    },
+    {
+      "name": "ClaimSimulationRewards",
+      "entry": "SimSpaceEntry",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "Win32-Front"
+      ],
+      "options": [
+        "ClaimSimulationArea"
+      ],
+      "file": "tasks/ClaimSimulationRewards.json"
+    },
+    {
+      "name": "CloseGame",
+      "entry": "CloseGame",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB"
+      ],
+      "options": [
+        "ClientVersion",
+        "ClientVersionCloudLocked"
+      ],
+      "file": "tasks/CloseGame.json"
+    },
+    {
+      "name": "CloseGamePC",
+      "entry": "CloseGamePC",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "Win32-Front",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots"
+      ],
+      "options": [
+        "CloseGamePCCloseLauncher",
+        "CloseGamePCApplyGameSetting"
+      ],
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "name": "Crafting",
+      "entry": "CraftingStart",
+      "group": [
+        "backpack"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/Crafting.json"
+    },
+    {
+      "name": "CreditShoppingN2",
+      "entry": "CreditShoppingMain",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "CreditShoppingReserve",
+        "CreditShoppingClueSend",
+        "CreditShoppingQuickGiveDuplicateClues",
+        "CreditShoppingClueStockLimit",
+        "CreditShoppingPriority1",
+        "CreditShoppingPriority2",
+        "CreditShoppingPriority3",
+        "CreditShoppingForce",
+        "CreditShoppingKeepShelfRecord"
+      ],
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "name": "DailyRewards",
+      "entry": "DailyRewardStart",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "CloudWeb",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "DailyEmailRewards",
+        "DailyTaskRewards",
+        "DailyClaimDeliveryJobsRewards",
+        "DailyEventRewards",
+        "DailyProtocolPassRewards",
+        "DailyActivityFullWarning"
+      ],
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "name": "DecomposeWeaponEssence",
+      "entry": "DecomposeWeaponEssenceStart",
+      "group": [
+        "valuables_vault"
+      ],
+      "controllers": [
+        "ADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "DecomposeWeaponEssenceThreshold"
+      ],
+      "file": "tasks/DecomposeWeaponEssence.json"
+    },
+    {
+      "name": "DeliveryJobs",
+      "entry": "DeliveryJobsMain",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "ValleyIV",
+        "Wuling",
+        "PackCargoSelectItem",
+        "DeliveryJobsAutoDeliveryPreferZipline",
+        "DeliveryJobsOngoingDeliveryFallback"
+      ],
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "name": "DijiangRewards",
+      "entry": "DijiangRewards",
+      "group": [
+        "dijiang_ship"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "StageTaskSetting",
+        "ClueSetting",
+        "SelectToGrow"
+      ],
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "name": "EnvironmentMonitoring",
+      "entry": "EnvironmentMonitoringMain",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/EnvironmentMonitoring.json"
+    },
+    {
+      "name": "EssenceFilter",
+      "entry": "EssenceFilterMain",
+      "group": [
+        "valuables_vault"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "ExportInventory"
+      ],
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "name": "GearAssembly",
+      "entry": "GearAssemblyStart",
+      "group": [
+        "valuables_vault"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "GearAssemblyType",
+        "GearAssemblySortOrder"
+      ],
+      "file": "tasks/GearAssembly.json"
+    },
+    {
+      "name": "GiftOperator",
+      "entry": "GiftOperatorMain",
+      "group": [
+        "dijiang_ship"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "StashBackpackSubTask",
+        "OnlyReceiveGift"
+      ],
+      "file": "tasks/GiftOperator.json"
+    },
+    {
+      "name": "ImportBluePrints",
+      "entry": "ImportBluePrints",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "Win32-Front"
+      ],
+      "options": [
+        "ImportBluePrints"
+      ],
+      "file": "tasks/ImportBluePrints.json"
+    },
+    {
+      "name": "IntelArchive",
+      "entry": "IntelArchiveMain",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/IntelArchive.json"
+    },
+    {
+      "name": "ItemTransfer",
+      "entry": "ItemTransfer",
+      "group": [
+        "backpack"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "Win32-Front"
+      ],
+      "options": [
+        "WhatToTransfer",
+        "TransferAll",
+        "EnableReturnTransfer",
+        "OriginRegion",
+        "DestinationRegion",
+        "ItemTransferStashBackpackWhenBothFull",
+        "ItemTransferStashBackpack"
+      ],
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "name": "LaunchGameLinux",
+      "entry": "GameLauncherMain",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-Wlroots"
+      ],
+      "options": [
+        "ExitLauncher"
+      ],
+      "file": "tasks/LaunchGameLinux.json"
+    },
+    {
+      "name": "LevelUpOperator",
+      "entry": "OperatorLevelUpStart",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "LevelUpOperatorMaxLevelThreshold"
+      ],
+      "file": "tasks/LevelUpOperator.json"
+    },
+    {
+      "name": "ProtocolSpace",
+      "entry": "ProtocolSpaceSchedule",
+      "group": [
+        "sanity_sink"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "PlayCover",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "Win32-Front"
+      ],
+      "options": [
+        "ProtocolSpaceSchedule",
+        "AutoFightSetting",
+        "ProtocolSpaceTeamChoose",
+        "ProtocolSpaceMode"
+      ],
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "name": "PullCountCalculator",
+      "entry": "PullCountCalculatorMain",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/PullCountCalculator.json"
+    },
+    {
+      "name": "PuzzleSolver",
+      "entry": "PuzzleSolverMain",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "Win32-Front"
+      ],
+      "options": [
+        "PuzzleSolverMode"
+      ],
+      "file": "tasks/PuzzleSolver.json"
+    },
+    {
+      "name": "ReadAllWiki",
+      "entry": "WikiReadAll",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/ReadAllWiki.json"
+    },
+    {
+      "name": "RealTimeTask",
+      "entry": "RealTimeTaskMain",
+      "group": [
+        "realtime"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "Win32-Front"
+      ],
+      "options": [
+        "SklandMap",
+        "VideoBrowser",
+        "AutoSkip",
+        "AutoCloseInteraction",
+        "AutoFight",
+        "AutoPick",
+        "QuickTeleport",
+        "AutoPuzzleSolving",
+        "AutoAeroSalvage",
+        "AutoZipline",
+        "AutoPat",
+        "AutoTaskInterval"
+      ],
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "name": "ReceiveProdManual",
+      "entry": "ProdManualStart",
+      "group": [
+        "backpack"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/ReceiveProdManual.json"
+    },
+    {
+      "name": "ResourceRecycleStation",
+      "entry": "ResourceRecycleStationStart",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "ResourceRecycleStationRegion"
+      ],
+      "file": "tasks/ResourceRecycleStation.json"
+    },
+    {
+      "name": "SeizeDeliveryJobs",
+      "entry": "SeizeDeliveryJobsCheckOngoingJob",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "SeizeDeliveryJobsReward",
+        "SeizeDeliveryJobsRefreshLimit",
+        "SeizeDeliveryJobsCommissionSource",
+        "SeizeDeliveryJobsPostProcessing"
+      ],
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "name": "SellProduct",
+      "entry": "OutpostTradingSchedule",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "SellProductSchedule",
+        "SellProductOperatorAutoSwitch",
+        "SellProductSelectionStrategy",
+        "SellProductPriorityRules",
+        "SellProductItemReserveRules",
+        "ValleyIVSell",
+        "WulingSell"
+      ],
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "name": "SharedZiplineDelete",
+      "entry": "SharedZiplineDeleteMain",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "Win32-Front"
+      ],
+      "options": [
+        "SharedZiplineDeleteValleyIV",
+        "SharedZiplineDeleteWuling"
+      ],
+      "file": "tasks/SharedZiplineDelete.json"
+    },
+    {
+      "name": "SimpleProductionBatchStart",
+      "entry": "SimpleProductionBatchStart",
+      "group": [
+        "backpack"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/SimpleProductionBatchStart.json"
+    },
+    {
+      "name": "StashBackpack",
+      "entry": "StashBackpackMain",
+      "group": [
+        "backpack"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "Win32-Front"
+      ],
+      "options": [
+        "StashBackpackType"
+      ],
+      "file": "tasks/StashBackpack.json"
+    },
+    {
+      "name": "SwitchTeam",
+      "entry": "SwitchTeamMain",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "SwitchTeamTeamChoose"
+      ],
+      "file": "tasks/SwitchTeam.json"
+    },
+    {
+      "name": "TrialOfSwordmancy",
+      "entry": "TrialOfSwordmancyMain",
+      "group": [
+        "regional_development"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "Win32-Front"
+      ],
+      "options": [
+        "TrialOfSwordmancyMode"
+      ],
+      "file": "tasks/TrialOfSwordmancy.json"
+    },
+    {
+      "name": "UmbralMonument",
+      "entry": "UmbralMonumentEntry",
+      "group": [
+        "other_menu"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "Win32-Front"
+      ],
+      "options": [
+        "UmbralMonumentTarget",
+        "UmbralMonumentTeamChoose",
+        "UmbralMonumentRetryCount",
+        "AutoFightSetting"
+      ],
+      "file": "tasks/UmbralMonument.json"
+    },
+    {
+      "name": "VisitFriends",
+      "entry": "VisitFriendsMain",
+      "group": [
+        "dijiang_ship"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [
+        "VisitFriendsRemark",
+        "VisitFriendsPriorityRemarkEnable",
+        "ProductionAssistControl"
+      ],
+      "file": "tasks/VisitFriends.json"
+    },
+    {
+      "name": "WeaponUpgrade",
+      "entry": "WeaponUpgradeStart",
+      "group": [
+        "valuables_vault"
+      ],
+      "controllers": [
+        "ADB",
+        "CloudADB",
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "MacOS-Background",
+        "MacOS-Front",
+        "PlayCover",
+        "Win32-Front"
+      ],
+      "options": [],
+      "file": "tasks/Weapon.json"
+    },
+    {
+      "name": "ZiplineImport",
+      "entry": "ZiplineImportMain",
+      "group": [
+        "open_world"
+      ],
+      "controllers": [
+        "Linux-Gamescope",
+        "Linux-ScreenCast",
+        "Linux-Wlroots",
+        "Win32-Front",
+        "ADB",
+        "PlayCover"
+      ],
+      "options": [
+        "ZiplineImportClearLogin"
+      ],
+      "file": "tasks/ZiplineImport.json"
+    }
+  ],
+  "options": [
+    {
+      "key": "AcceptAllGifts",
+      "file": "tasks/GiftOperator.json"
+    },
+    {
+      "key": "AccountSwitchEmail",
+      "file": "tasks/AccountSwitch.json"
+    },
+    {
+      "key": "AccountSwitchLastFourDigits",
+      "file": "tasks/AccountSwitch.json"
+    },
+    {
+      "key": "AccountSwitchMatchMode",
+      "file": "tasks/AccountSwitch.json"
+    },
+    {
+      "key": "AutoAeroSalvage",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoCloseInteraction",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoCollectMode",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectSchedule",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectStashBackpackSubTask",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectTargetInventory",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectValleyIV",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectValleyIVCommonRoutes",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectValleyIVRareRoutes",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectWuling",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectWulingCommonRoutes",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoCollectWulingRareRoutes",
+      "file": "tasks/AutoCollect.json"
+    },
+    {
+      "key": "AutoEssenceChooseLocation",
+      "file": "tasks/AutoEssence/Location/ChooseLocation.json"
+    },
+    {
+      "key": "AutoEssenceDoOverride",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_VFOriginiumSciencePark",
+      "file": "tasks/AutoEssence/Location/VFOriginiumSciencePark.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_VFOriginLodespring",
+      "file": "tasks/AutoEssence/Location/VFOriginLodespring.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_VFPowerPlateau",
+      "file": "tasks/AutoEssence/Location/VFPowerPlateau.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_VFTheHub",
+      "file": "tasks/AutoEssence/Location/VFTheHub.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLMarkerStone",
+      "file": "tasks/AutoEssence/Location/WLMarkerStone.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLNorthWulingExclusionZone",
+      "file": "tasks/AutoEssence/Location/WLNorthWulingExclusionZone.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLQingboStockade",
+      "file": "tasks/AutoEssence/Location/WLQingboStockade.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLSnowyForest",
+      "file": "tasks/AutoEssence/Location/WLSnowyForest.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLSwordVaultDale",
+      "file": "tasks/AutoEssence/Location/WLSwordVaultDale.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLTestArea",
+      "file": "tasks/AutoEssence/Location/WLTestArea.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLWulingCity",
+      "file": "tasks/AutoEssence/Location/WLWulingCity.json"
+    },
+    {
+      "key": "AutoEssenceLocationSecondary_WLYinglungPass",
+      "file": "tasks/AutoEssence/Location/WLYinglungPass.json"
+    },
+    {
+      "key": "AutoEssenceLocationSlot1",
+      "file": "tasks/AutoEssence/Location/Slot1.json"
+    },
+    {
+      "key": "AutoEssenceMenu",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceObtainMode",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceObtainModeClaimOnly",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceObtainModeClaimOnlyForcedFilter",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceRepeatCount",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceSchedule",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceSelectLocation",
+      "file": "tasks/AutoEssence/Location/SelectLocation.json"
+    },
+    {
+      "key": "AutoEssenceSpMedicationExpireWithinDays",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoEssenceWeaponsClaymore",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponsLance",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponsPistol",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponsSword",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponsWand",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponTypeClaymore",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponTypeLance",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponTypePistol",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponTypeSword",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoEssenceWeaponTypeWand",
+      "file": "tasks/AutoEssence/Target/Target.json"
+    },
+    {
+      "key": "AutoExtractSeed",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "AutoFight",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightAttack",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightAxis",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightAxisData",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightAxisFullSetting",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightAxisSkipComboCooldown",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightBreakAccumulatingPower",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightCombo",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightDodge",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightDodgeCompat",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightEndSkill",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightHealthDangerousSwitch",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightLockTarget",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightReserveSkillLevel",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightSetting",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "AutoFightSettingFull",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightSkill",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightSkillOperator1",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightSkillOperator2",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightSkillOperator3",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoFightSkillOperator4",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoPat",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoPick",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoPuzzleSolving",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoSellPriceGlobal",
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "key": "AutoSellPricePerCategory",
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "key": "AutoSellPriceType",
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "key": "AutoSellTicketOverflowValleyIV",
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "key": "AutoSellTicketOverflowWuling",
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "key": "AutoSellValleyIV",
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "key": "AutoSellWuling",
+      "file": "tasks/AutoSell.json"
+    },
+    {
+      "key": "AutoSkip",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoSkipAll",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoSkipChoose",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoSkipNext",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoStartExchange",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "AutoStockBuyCulturalGoodsValleyIV",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyCulturalGoodsValleyIVGiftLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyCulturalGoodsValleyIVItems",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyCulturalGoodsWuling",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyCulturalGoodsWulingGiftLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyCulturalGoodsWulingItems",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsValleyIV",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsValleyIVEngravingPermitLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsValleyIVFoodAndBuffLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsValleyIVItems",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsWuling",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsWulingEngravingPermitLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsWulingFoodAndBuffLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyDailyGoodsWulingItems",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyStockFactoryGoodsValleyIV",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyStockFactoryGoodsValleyIVDetectorCompassLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyStockFactoryGoodsValleyIVItems",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyStockFactoryGoodsWuling",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyStockFactoryGoodsWulingArtificingCatalystLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyStockFactoryGoodsWulingDetectorCompassLimit",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockBuyStockFactoryGoodsWulingItems",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockMinDiscountValleyIV",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockMinDiscountWuling",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockpileAllowDataUpload",
+      "file": "tasks/AutoStockpile.json"
+    },
+    {
+      "key": "AutoStockpileElasticValleyIV",
+      "file": "tasks/AutoStockpile.json"
+    },
+    {
+      "key": "AutoStockpileElasticWuling",
+      "file": "tasks/AutoStockpile.json"
+    },
+    {
+      "key": "AutoStockpileMinBuy",
+      "file": "tasks/AutoStockpile.json"
+    },
+    {
+      "key": "AutoStockpileServerTime",
+      "file": "tasks/AutoStockpile.json"
+    },
+    {
+      "key": "AutoStockReserveValleyIV",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockReserveWuling",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockStapleSchedule",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockStapleValleyIV",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoStockStapleWuling",
+      "file": "tasks/AutoStockStaple.json"
+    },
+    {
+      "key": "AutoTaskInterval",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "AutoUseSpMedication",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "AutoZipline",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "BatchAddFriends",
+      "file": "tasks/BatchAddFriends.json"
+    },
+    {
+      "key": "BatchDeleteFriendsInactiveDays",
+      "file": "tasks/BatchDeleteFriends.json"
+    },
+    {
+      "key": "BatchUseDetectorCategory",
+      "file": "tasks/BatchUseDetector.json"
+    },
+    {
+      "key": "BatchUseDetectorRegion",
+      "file": "tasks/BatchUseDetector.json"
+    },
+    {
+      "key": "BatchUseDetectorTimes",
+      "file": "tasks/BatchUseDetector.json"
+    },
+    {
+      "key": "BtwAutoStockpileElasticGoodsEnable",
+      "file": "tasks/VisitFriends.json"
+    },
+    {
+      "key": "BtwAutoStockpileSellableArea",
+      "file": "tasks/VisitFriends.json"
+    },
+    {
+      "key": "ClaimSimulationArea",
+      "file": "tasks/ClaimSimulationRewards.json"
+    },
+    {
+      "key": "ClientVersion",
+      "file": "tasks/AndroidOpenGame.json"
+    },
+    {
+      "key": "ClientVersionCloudLocked",
+      "file": "tasks/AndroidOpenGame.json"
+    },
+    {
+      "key": "CloseGamePCApplyGameSetting",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCAutoHDR",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCCloseLauncher",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCGameSettingDisplayType",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCGameSettingFrameRate",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCGameSettingGraphicsQuality",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCGameSettingLanguage",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCGameSettingRegion",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "CloseGamePCGameSettingResolution",
+      "file": "tasks/CloseGamePC.json"
+    },
+    {
+      "key": "ClueSend",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "ClueSetting",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "ClueStockLimit",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "CollectRanch",
+      "file": "tasks/AutoEcoFarm.json"
+    },
+    {
+      "key": "CollectSisPaintingFarm",
+      "file": "tasks/AutoEcoFarm.json"
+    },
+    {
+      "key": "CollectWulingCityFarm",
+      "file": "tasks/AutoEcoFarm.json"
+    },
+    {
+      "key": "CreditShoppingClueSend",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingClueStockLimit",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingForce",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingKeepShelfRecord",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority1",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority1AutoGetCredits",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority1DiscountValue",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority1Items",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority1UnconditionalPurchase",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority2",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority2AutoGetCredits",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority2DiscountValue",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority2Items",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority2UnconditionalPurchase",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority3",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority3AutoGetCredits",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority3DiscountValue",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority3Items",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingPriority3UnconditionalPurchase",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingQuickGiveDuplicateClues",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingRefreshCheckPrice",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CreditShoppingReserve",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "CrisisDrills",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "CustomSendClues",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "CustomSendCluesCheckbox",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "DailyActivityFullWarning",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyClaimDeliveryJobsRewards",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyEmailRewards",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyEventRewards",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyProtocolPassRewards",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyTaskAssemble",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyTaskCreation",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyTaskLevelUpOperator",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyTaskRewards",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DailyTaskUpgradeWeapon",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "DecomposeWeaponEssenceThreshold",
+      "file": "tasks/DecomposeWeaponEssence.json"
+    },
+    {
+      "key": "DeliveryJobsAtLeastMinimumQuoteActionOriginiumSciencePark",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsAtLeastMinimumQuoteActionOriginLodespring",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsAtLeastMinimumQuoteActionPowerPlateau",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsAtLeastMinimumQuoteActionTestArea",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsAtLeastMinimumQuoteActionWulingCity",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsAutoDeliveryPreferZipline",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsBelowMinimumQuoteActionOriginiumSciencePark",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsBelowMinimumQuoteActionOriginLodespring",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsBelowMinimumQuoteActionPowerPlateau",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsBelowMinimumQuoteActionTestArea",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsBelowMinimumQuoteActionWulingCity",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsOngoingDeliveryFallback",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsQuoteThresholdOriginiumSciencePark",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsQuoteThresholdOriginLodespring",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsQuoteThresholdPowerPlateau",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsQuoteThresholdTestArea",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DeliveryJobsQuoteThresholdWulingCity",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "DestinationRegion",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "DiscardUnmatched",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "EnableClickAnywhere",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "EnableCloseSpecialPanel",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "EnableReturnTransfer",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "EnableTutorialBook",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "EnableTutorialGuide",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "EnterGameRecognitionMaxHit",
+      "file": "tasks/AndroidOpenGame.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattle",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleDiscardUnmatched",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleFlawlessEssence",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleFuturePromisingMinTotal",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleKeepFuturePromising",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleKeepSlot3Level3Practical",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleLockFuturePromising",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleLockSlot3Practical",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattlePerfectMinLevelTotal",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattlePureEssence",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleRarity4Weapon",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleRarity5Weapon",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleRarity6Weapon",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleSelectEssence",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleSelectExtraRules",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleSelectWeaponRarity",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "EssenceFilterAfterBattleSlot3MinLevel",
+      "file": "tasks/AutoEssence/AutoEssence.json"
+    },
+    {
+      "key": "ExitLauncher",
+      "file": "tasks/LaunchGameLinux.json"
+    },
+    {
+      "key": "ExportCalculatorScript",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "ExportInventory",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "FastCollect",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "FastCollectClue",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "FastCollectProduction",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "FillItemPrioritiesValleyIV",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "FillItemPrioritiesWuling",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "FlawlessEssence",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "FuturePromisingMinTotal",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "GearAssemblySortOrder",
+      "file": "tasks/GearAssembly.json"
+    },
+    {
+      "key": "GearAssemblyType",
+      "file": "tasks/GearAssembly.json"
+    },
+    {
+      "key": "GiftCount",
+      "file": "tasks/GiftOperator.json"
+    },
+    {
+      "key": "GrowthChamberStage",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "ImportBluePrints",
+      "file": "tasks/ImportBluePrints.json"
+    },
+    {
+      "key": "ItemTransferStashBackpack",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "ItemTransferStashBackpackWhenBothFull",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "KeepFuturePromising",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "KeepSlot3Level3Practical",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "KeymapFight",
+      "file": "tasks/setting/Keymap.json"
+    },
+    {
+      "key": "KeymapGeneral",
+      "file": "tasks/setting/Keymap.json"
+    },
+    {
+      "key": "LaunchGamePCAutoHDR",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCDisplayType",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCFrameRate",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCGameSetting",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCGraphicsQuality",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCLanguage",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCLauncherExe",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCLauncherPath",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCRegion",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LaunchGamePCResolution",
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    },
+    {
+      "key": "LevelUpOperatorMaxLevelThreshold",
+      "file": "tasks/DailyRewards.json"
+    },
+    {
+      "key": "LockFuturePromising",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "LockSlot3Practical",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "ManufacturingStage",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "OnlyReceiveGift",
+      "file": "tasks/GiftOperator.json"
+    },
+    {
+      "key": "OperatorEXPRewardsSetOption",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "OperatorProgression",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "OriginiumSciencePark",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "OriginLodespring",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "OriginRegion",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "PackCargoSelectItem",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "PerfectMinLevelTotal",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "PowerPlateau",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "ProductionAssistControl",
+      "file": "tasks/VisitFriends.json"
+    },
+    {
+      "key": "PromotionsRewardsSetOption",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceFailedCount",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceLevel",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceMode",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceObtainMode",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceObtainModeClaim",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceSchedule",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceSpMedicationExpireWithinDays",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceSuccessCount",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceTab",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceTeamChoose",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "ProtocolSpaceUseSpMedication",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "PrudentRefresh",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "PrudentRefreshThreshold",
+      "file": "tasks/CreditShopping.json"
+    },
+    {
+      "key": "PureEssence",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "PuzzleSolverMode",
+      "file": "tasks/PuzzleSolver.json"
+    },
+    {
+      "key": "QuickGiveDuplicateClues",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "QuickTeleport",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "Rarity4Weapon",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "Rarity5Weapon",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "Rarity6Weapon",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "ReceptionRoomStage",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "RecoveryEmotionCabins",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "RecoveryEmotionStage",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "ResourceRecycleStationRegion",
+      "file": "tasks/ResourceRecycleStation.json"
+    },
+    {
+      "key": "ReturnTransferAll",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "ReturnTransferTimes",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "ReturnWhatToTransfer",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsCommissionSource",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsDeliveryPointOriginiumSciencePark",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsDeliveryPointOriginLodespring",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsDeliveryPointPowerPlateau",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsDeliveryPointTestArea",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsDeliveryPointWulingCity",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsPostDeparturePreferZipline",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsPostDepartureRiskAcknowledgement",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsPostProcessing",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsRefreshLimit",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsRepeatCount",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsReward",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointAllUnlimited",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointOriginiumSciencePark",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointOriginLodespring",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointPowerPlateau",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointTestArea",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointUnlimited",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointValleyIVUnlimited",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SeizeDeliveryJobsSpecifyDeliveryPointWulingCity",
+      "file": "tasks/SeizeDeliveryJobs.json"
+    },
+    {
+      "key": "SelectEssence",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "SelectExtraRules",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "SelectOperator",
+      "file": "tasks/GiftOperator.json"
+    },
+    {
+      "key": "SelectToGrow",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "SelectToGrowItems",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "SelectWeaponRarity",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "SellProductForceRefreshOperatorCache",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductItemReserveRules",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductOnlyPreferredItems",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductOperatorAutoSwitch",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductPriorityRules",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem1",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem1Mode",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem1Value",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem2",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem2Mode",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem2Value",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem3",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem3Mode",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem3Value",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem4",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem4Mode",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem4Value",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem5",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem5Mode",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem5Value",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem6",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem6Mode",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductReserveItem6Value",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductSchedule",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductSelectionStrategy",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductStockMinimumUnitPrice",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductValleyIVPriorityItem1",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductValleyIVPriorityItem2",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductValleyIVPriorityItem3",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductValleyIVPriorityItem4",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductValleyIVPriorityItem5",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductValleyIVPriorityItem6",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductValleyIVPriorityRules",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductWulingPriorityItem1",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductWulingPriorityItem2",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductWulingPriorityItem3",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductWulingPriorityItem4",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductWulingPriorityItem5",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductWulingPriorityItem6",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SellProductWulingPriorityRules",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "SendCluesDirect",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "SharedZiplineDeleteValleyIV",
+      "file": "tasks/SharedZiplineDelete.json"
+    },
+    {
+      "key": "SharedZiplineDeleteValleyIVRegions",
+      "file": "tasks/SharedZiplineDelete.json"
+    },
+    {
+      "key": "SharedZiplineDeleteWuling",
+      "file": "tasks/SharedZiplineDelete.json"
+    },
+    {
+      "key": "SharedZiplineDeleteWulingRegions",
+      "file": "tasks/SharedZiplineDelete.json"
+    },
+    {
+      "key": "SkillUpRewardsSetOption",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "SkipThumbDiscard",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "SkipThumbLock",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "SklandMap",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "SklandMapOpacity",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "Slot3MinLevel",
+      "file": "tasks/EssenceFilter.json"
+    },
+    {
+      "key": "SortBy",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "SortOrder",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "StageTaskSetting",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "StashBackpackSubTask",
+      "file": "tasks/StashBackpack.json"
+    },
+    {
+      "key": "StashBackpackType",
+      "file": "tasks/StashBackpack.json"
+    },
+    {
+      "key": "SupplyPlanLimits",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "SwitchTeamTeamChoose",
+      "file": "tasks/SwitchTeam.json"
+    },
+    {
+      "key": "TestArea",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "TransferAll",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "TransferTimes",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "TrialOfSwordmancyAutoFight",
+      "file": "tasks/TrialOfSwordmancy.json"
+    },
+    {
+      "key": "TrialOfSwordmancyMode",
+      "file": "tasks/TrialOfSwordmancy.json"
+    },
+    {
+      "key": "TrialOfSwordmancyOverflow",
+      "file": "tasks/TrialOfSwordmancy.json"
+    },
+    {
+      "key": "TrialOfSwordmancyRecoverBeforeBattle",
+      "file": "tasks/TrialOfSwordmancy.json"
+    },
+    {
+      "key": "TrialOfSwordmancyReturnToWorld",
+      "file": "tasks/TrialOfSwordmancy.json"
+    },
+    {
+      "key": "TrialOfSwordmancyStopOnOverflow",
+      "file": "tasks/TrialOfSwordmancy.json"
+    },
+    {
+      "key": "UmbralMonumentRetryCount",
+      "file": "tasks/UmbralMonument.json"
+    },
+    {
+      "key": "UmbralMonumentTarget",
+      "file": "tasks/UmbralMonument.json"
+    },
+    {
+      "key": "UmbralMonumentTeamChoose",
+      "file": "tasks/UmbralMonument.json"
+    },
+    {
+      "key": "ValleyIV",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "ValleyIVInfraStation",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "ValleyIVReconstructionHQ",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "ValleyIVRefugeeCamp",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "ValleyIVSell",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "VideoBrowser",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "VideoBrowserOpacity",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "VideoBrowserURL",
+      "file": "tasks/RealTimeTask.json"
+    },
+    {
+      "key": "VisitFriendsPriorityRemark",
+      "file": "tasks/VisitFriends.json"
+    },
+    {
+      "key": "VisitFriendsPriorityRemarkEnable",
+      "file": "tasks/VisitFriends.json"
+    },
+    {
+      "key": "VisitFriendsRemark",
+      "file": "tasks/VisitFriends.json"
+    },
+    {
+      "key": "WaitExchangeBeforeStart",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "WaitExchangeBeforeStartThreshold",
+      "file": "tasks/DijiangRewards.json"
+    },
+    {
+      "key": "WeaponProgression",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "WeaponTuneRewardsSetOption",
+      "file": "tasks/ProtocolSpace.json"
+    },
+    {
+      "key": "WhatToFillValleyIVPriority1",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToFillValleyIVPriority2",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToFillValleyIVPriority3",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToFillValleyIVPriority4",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToFillWulingPriority1",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToFillWulingPriority2",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToFillWulingPriority3",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToFillWulingPriority4",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WhatToTransfer",
+      "file": "tasks/ItemTransfer.json"
+    },
+    {
+      "key": "Wuling",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WulingCardiacRemediationStation",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "WulingCity",
+      "file": "tasks/DeliveryJobs.json"
+    },
+    {
+      "key": "WulingSell",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "WulingSkyKingFlatsConstructionSite",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "WulingXiranflowCloudseederStation",
+      "file": "tasks/OutpostTrading.json"
+    },
+    {
+      "key": "ZiplineImportClearLogin",
+      "file": "tasks/ZiplineImport.json"
+    },
+    {
+      "key": "ZiplineRouting",
+      "file": "tasks/setting/Zipline.json"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DailyFull",
+      "file": "tasks/preset/DailyFull.json"
+    },
+    {
+      "name": "QuickDaily",
+      "file": "tasks/preset/QuickDaily.json"
+    },
+    {
+      "name": "RealtimeAssist",
+      "file": "tasks/preset/RealtimeAssist.json"
+    }
+  ],
+  "settings": [
+    {
+      "name": "Keymap",
+      "file": "tasks/setting/Keymap.json"
+    },
+    {
+      "name": "Zipline",
+      "file": "tasks/setting/Zipline.json"
+    }
+  ],
+  "pretasks": [
+    {
+      "name": "LaunchGamePC",
+      "entry": null,
+      "file": "tasks/pretasks/LaunchGamePC.json"
+    }
+  ],
+  "baseline": {
+    "sha": "5155c76c398713d0ddd1fa638d71fad6aeedfd85",
+    "task_count": 47,
+    "added": [
+      "LevelUpOperator",
+      "UmbralMonument"
+    ],
+    "removed": []
+  },
+  "errors": []
+}

@@ -1,6 +1,6 @@
 {
   "schema": "cloudweb-roadmap/2",
-  "audited_at": "2026-10-24T18:10:00+08:00",
+  "audited_at": "2026-10-24T23:20:00+08:00",
   "single_source": {
     "human": ".qoder/maaend-private/cases/cloudweb-roadmap.md",
     "machine": ".qoder/maaend-private/cases/cloudweb-roadmap.json",
@@ -12,13 +12,38 @@
     "<workspace>/collaboration files/MaaEnd-CloudWeb-Coordinator-Report.md"
   ],
   "baselines": {
-    "sidecar": {"head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac", "branch": "main", "remote": "<sidecar-fork>", "worktree": "clean"},
-    "mxu": {"head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76", "branch": "feat/cloudweb-host", "remote": "<MXU-fork>", "worktree": "clean"},
+    "sidecar": {"head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac", "branch": "main", "remote": "<sidecar-fork>", "worktree": "clean at audit; CW1 candidate uncommitted"},
+    "mxu": {"head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76", "branch": "feat/cloudweb-host", "remote": "<MXU-fork>", "worktree": "clean at audit; CW1 candidate uncommitted"},
     "maaend": {"head": "c7fd1b25071d9976703635b7dda66812172d1629", "branch": "feat/cloudweb-cw28", "remote": "MaaEnd", "worktree": "clean"},
     "maaend_v2": {"head": "051d17f2527e2e990952d6655f1f380d5d7de81e"},
     "qoder_agentset": {"head": "e3dab67d997840c5d8ae4cf0328b2b36f308368c"},
     "maa_framework_rs_patched": {"head": "953ec242d2542ab907211a4aa347b9a855f698aa"},
     "maa_framework_rs_unfixed": {"head": "c1c617330b56205798609c7566e602b55adba74b"}
+  },
+  "cw1_candidate": {
+    "candidate_id": "f9706e2e942b932fa74b645002af4646021046cc28d2e662593c03de370b6cf7",
+    "protocol": {"major": 1, "minor": 1},
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "tracked_diff_sha256": "ecc4edc5d6c1d04fdbdedd97981e3062272cb4825cce2ab5cfcb9778cefe64df",
+      "readme_sha256": "5b156ec7003177b8b92c75eccfa124caf646d1ccb141bd09ed4d9c93043783e7",
+      "release_exe_sha256": "d98146a5f0cc447969ce1b9860cd2abaf6b3b737e9f7cfa53bb5e33caf3b12c0"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "tracked_diff_sha256": "9342a67ff7451a377e866282ddda0ef3803a544589ce7ca8cf7857e5c9dd3115"
+    },
+    "status": "partial",
+    "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw1/integration-report.md"
+  },
+  "toolchain": {
+    "rustc": "1.99.1",
+    "default_host": "x86_64-pc-windows-gnu",
+    "mxu_test_host": "x86_64-pc-windows-msvc",
+    "node": "26.12.1",
+    "pnpm": "12.15.0",
+    "sidecar_rust_version_declared": "1.85",
+    "sidecar_msrv_tested": false
   },
   "codegraph": {
     "version": "1.6.2",
@@ -84,7 +109,14 @@
         "许可、最低工具链、启动说明齐全",
         "真实 backend 与 fake 判定表明确"
       ],
-      "evidence": ["baselines in this JSON", "sidecar 37/0/1 + clippy 0", "material review section 0"]
+      "evidence": [
+        "baselines in this JSON",
+        "cw0/baseline-inventory.md (sha256 877c48cca742a6003c8b02b29b55cb90bae80db7bed2324a355d5bd2b08d79ef)",
+        "sidecar baseline rebuild 8e9d5a9f... byte-identical to dist",
+        "sidecar LICENSE missing; rust-version 1.85 declared, MSRV untested",
+        "MXU/MaaEnd clean build records still pending",
+        "cloudweb-dist/MANIFEST.md current 0fa1e985... differs from delivery binding ccc3a611..."
+      ]
     },
     {
       "id": "CW1",
@@ -98,7 +130,15 @@
         "Host 校验并显示实际 kind",
         "通用 factory/schema diff 可供维护者审阅"
       ],
-      "evidence": ["sidecar --backend cdp --cdp-url", "default backend fake", "MXU cloudweb sidecar backend"]
+      "evidence": [
+        "cw1/integration-report.md (sha256 5ee928d0bac9af8ec93428eb7f54be44facecf658f03f10ed1395a5c862da37b)",
+        "candidate f9706e2e...",
+        "sidecar requires explicit --backend; missing backend exits 2",
+        "hello_ok protocol minor 1 carries backend_kind/ui_profile",
+        "MXU rejects missing/mismatched/fake without CLOUDWEB_ALLOW_FAKE=1",
+        "sidecar 36/36 non-CDP tests, clippy 0; MXU MSVC 42 passed/1 env failure/1 ignored, real-process integration passed",
+        "real CDP session and UI badge still unverified"
+      ]
     },
     {
       "id": "CW2",
@@ -200,7 +240,7 @@
     }
   ],
   "future_issues": [
-    {"id": "CW8-1", "title": "在 c7fd1b25 重生成 task/option/preset/pretask inventory", "owner": "Perlica", "status": "in_progress", "dependencies": [], "acceptance": ["49/426/3/1 计数", "46 Windows 分类", "inventory hash"]},
+    {"id": "CW8-1", "title": "在 c7fd1b25 重生成 task/option/preset/pretask inventory", "owner": "Perlica", "status": "verified", "dependencies": [], "acceptance": ["49/426/3/1 计数", "46 Windows 分类", "inventory hash"], "evidence": ["49/426/3/2/1", "windows_applicable=46", "inventory-current.json sha256 bc0bb67d6b8b93e7efeb9b2c8e476ec519b912b613e048aff201428b5f514cc8", "baseline 47 + LevelUpOperator/UmbralMonument"]},
     {"id": "CW8-2", "title": "任务族矩阵与证据 schema", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW8-1"], "acceptance": ["每族一张矩阵", "空行保持 Pending"]},
     {"id": "CW8-3", "title": "任务族适配（Daily/AutoEssence/ProtocolSpace/DeliveryJobs/ToS/RealTimeTask/生命周期/预设/ZiplineImport）", "owner": "task-family agents", "status": "pending", "dependencies": ["CW8-2", "CW7"], "acceptance": ["真实截图/ROI/跳转/游戏结果"]},
     {"id": "CW8-4", "title": "option/route/preset/pretask 实际运行等价", "owner": "MaaEnd agents", "status": "pending", "dependencies": ["CW8-3"], "acceptance": ["每项实际运行", "不能只静态映射"]},
@@ -233,11 +273,40 @@
     "G4": {"status": "not_started", "requires": ["CW10"]}
   },
   "current_evidence": {
-    "success": "cloudweb-dist/EVIDENCE/run-20261024-172134.json",
+    "run_count": 30,
+    "exit_code_counts": {"0": 5, "1": 17, "2": 1, "3": 3, "7": 3, "9": 1},
+    "successes": [
+      {"run": "run-20261024-165438.json", "task_status": "Succeeded", "path": "no auto_start; precondition not recorded", "sidecar_exit": "graceful"},
+      {"run": "run-20261024-165556.json", "task_status": "Succeeded", "path": "no auto_start; precondition not recorded", "sidecar_exit": "force_kill"},
+      {"run": "run-20261024-165726.json", "task_status": "Succeeded", "path": "no auto_start; precondition not recorded", "sidecar_exit": "force_kill"},
+      {"run": "run-20261024-172134.json", "task_status": "Succeeded", "path": "Regional Development precondition recorded; menu click bypassed", "sidecar_exit": "force_kill"},
+      {"run": "run-20261024-174123.json", "task_status": "Succeeded", "path": "login restore + auto_start cold-start path; activationBefore=false -> activationAfter=true; reward delta unproven", "sidecar_exit": "force_kill"}
+    ],
+    "success_count": 5,
+    "cold_start_success": "run-20261024-174123.json (one success, not stable; later 174331 failed)",
+    "task_success_caveat": "MaaFramework task-status Succeeded is not proof that a new DailyRewards reward was claimed; the DailyRewards branch was entered but reward delta is not evidenced.",
     "failures": ["run-20261024-172301.json", "run-20261024-174331.json", "run-20261024-175512.json", "run-20261024-175718.json"],
+    "failure_summary": "172301/174331 cold-start menu failure; 175512 polling timeout; 175718 MXU API unresponsive",
+    "old_evidence_relation": "All runs predate the CW1 candidate; they remain historical facts but do not validate the current candidate and do not expose the inner backend kind.",
     "delivery_audit": "cases/cloudweb-delivery-20261024-success/",
-    "delivery_status": "needs_review"
+    "delivery_status": "needs_review",
+    "delivery_manifest_bound": "ccc3a611c4bc4228fc7caab3d5c73d4c2ad4f35e8adeda69be682f0f91e99e9c",
+    "delivery_manifest_current": "0fa1e98517b486ec45d7b52e8210c65f661de8d5f628d68d62d364a8181c599e"
   },
+  "decisions": [
+    {
+      "id": "D-LICENSE-SIDECAR",
+      "date": "2026-10-24",
+      "decision": "sidecar 采用 AGPL-3.0-only，与 MaaEnd/MXU 一致；LICENSE 与 Cargo license 字段待审查通过后落地。",
+      "owner": "administrator"
+    },
+    {
+      "id": "D-GLOBAL-AGENTS-DRIFT",
+      "date": "2026-10-24",
+      "decision": "保留当前全局 AGENTS.md（sha256 93cabb…）并重新登记到 runtime.json；工程行为继续受 perlica-maaend 角色、仓库规则与公开面内容闸约束。",
+      "owner": "administrator"
+    }
+  ],
   "stop_lines": [
     "same failure twice: diagnose, no blind retry",
     "no G1/G2/G3 claim without real Windows/session evidence",
