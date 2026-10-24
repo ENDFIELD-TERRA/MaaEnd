@@ -1,0 +1,2115 @@
+{
+  "schema": "cloudweb-fault-matrix/1",
+  "source": "cloudweb-roadmap.json",
+  "baselines": {
+    "sidecar": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+    "mxu": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+    "maaend": "c7fd1b25071d9976703635b7dda66812172d1629"
+  },
+  "counts": {
+    "rows": 51,
+    "domains": 8,
+    "by_domain": {
+      "D1": 9,
+      "D2": 6,
+      "D3": 6,
+      "D4": 8,
+      "D5": 6,
+      "D6": 7,
+      "D7": 3,
+      "D8": 6
+    },
+    "by_layer": {
+      "local_browser": 26,
+      "real_cloud_session": 10,
+      "protocol_fixture": 15
+    },
+    "by_gate": {
+      "G4-pre": 41,
+      "G4": 10
+    },
+    "by_mapped_cw": {
+      "CW9-3 / CW9-4": 4,
+      "CW9-4": 10,
+      "CW9-2": 9,
+      "CW9-6": 6,
+      "CW9-2 / CW9-4": 5,
+      "CW9-3": 8,
+      "CW9-5": 5,
+      "CW9-2 / CW9-5": 4
+    },
+    "status": "all pending"
+  },
+  "status_enum": [
+    "pending",
+    "pass",
+    "fail",
+    "blocked",
+    "not_applicable"
+  ],
+  "closure_layers": {
+    "protocol_fixture": "协议/fake actuator；可关闭协议与状态机缺陷，不证明真实浏览器/云行为。",
+    "local_browser": "专属本地 Chrome/profile；可关闭 CDP、页面、媒体与进程缺陷，不证明真实云会话。",
+    "real_cloud_session": "官方云会话；只有该层证据可用于 G4 的真实行为声明。"
+  },
+  "evidence_schema": {
+    "required_fields": [
+      "candidate_sha",
+      "runtime（MaaEnd/MXU/sidecar/MaaFramework/browser）",
+      "fault_injection（hook/信号/断链方式与参数）",
+      "identity（run/document/geometry generation + seq）",
+      "before_state（owner/generation/confirmed+maybe ledger）",
+      "timeline_ms",
+      "observed_state（状态机/disposition/ledger）",
+      "process_inventory（自有 PID 前后；用户浏览器未触碰）",
+      "frames（media progress/frame age/token/canonical）",
+      "ui_diagnostic",
+      "exit_code",
+      "logs+sha256",
+      "unverified"
+    ],
+    "rule": "缺任一字段不得标 pass；fixture 结果不能替代 real_cloud_session 行；fake/fixed PNG/fake SDK/独立 Node 脚本不计；旧候选证据在候选变化后失效。"
+  },
+  "domains": [
+    {
+      "id": "D1",
+      "name": "control_plane",
+      "title": "控制面派发、回执与未知结果",
+      "mapped_cw": "CW9-2",
+      "sources": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ],
+      "rows": 9,
+      "status": "pending"
+    },
+    {
+      "id": "D2",
+      "name": "lease_ownership",
+      "title": "租约、owner 与代次",
+      "mapped_cw": "CW9-2 / CW9-4",
+      "sources": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-2/CW9-4"
+      ],
+      "rows": 6,
+      "status": "pending"
+    },
+    {
+      "id": "D3",
+      "name": "stop_neutralize",
+      "title": "Stop、取消与中和",
+      "mapped_cw": "CW9-2 / CW9-5",
+      "sources": [
+        "Review §6.2",
+        "FRD §9.1 最小停止与断链退路",
+        "Plan CW9-2/CW9-5"
+      ],
+      "rows": 6,
+      "status": "pending"
+    },
+    {
+      "id": "D4",
+      "name": "media",
+      "title": "媒体进度、帧健康与几何",
+      "mapped_cw": "CW9-3",
+      "sources": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ],
+      "rows": 8,
+      "status": "pending"
+    },
+    {
+      "id": "D5",
+      "name": "browser_session",
+      "title": "浏览器、CDP 与云会话",
+      "mapped_cw": "CW9-3 / CW9-4",
+      "sources": [
+        "Review §6.3",
+        "FRD §9.1/§10.1 B02",
+        "Plan CW9-3/CW9-4"
+      ],
+      "rows": 6,
+      "status": "pending"
+    },
+    {
+      "id": "D6",
+      "name": "host_lifecycle",
+      "title": "Host、GUI 与进程生命周期",
+      "mapped_cw": "CW9-4",
+      "sources": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-4"
+      ],
+      "rows": 7,
+      "status": "pending"
+    },
+    {
+      "id": "D7",
+      "name": "manual_takeover",
+      "title": "人工接管与所有权转移",
+      "mapped_cw": "CW9-5",
+      "sources": [
+        "FRD §9.1 手动接管",
+        "Review §6.3",
+        "Plan CW9-5"
+      ],
+      "rows": 3,
+      "status": "pending"
+    },
+    {
+      "id": "D8",
+      "name": "long_run",
+      "title": "长运行、资源与跨 run 隔离",
+      "mapped_cw": "CW9-6",
+      "sources": [
+        "FRD §9.3",
+        "Review §7.1 CW9",
+        "Plan CW9-6"
+      ],
+      "rows": 6,
+      "status": "pending"
+    }
+  ],
+  "execution_order": [
+    {
+      "batch": "A",
+      "scope": "protocol_fixture rows (D1/D2)",
+      "rows": 15,
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "note": "Sidecar fake actuator / pipe harness first; no cloud session needed. Results close only protocol/state-machine claims."
+    },
+    {
+      "batch": "B",
+      "scope": "local_browser rows (D3/D4/D5/D6)",
+      "rows": 26,
+      "depends": [
+        "CW4",
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "note": "Dedicated local Chrome/profile; covers media, CDP, page, process and Stop behavior. Still not a real-cloud claim."
+    },
+    {
+      "batch": "C",
+      "scope": "real_cloud_session rows (D5/D6/D7/D8)",
+      "rows": 10,
+      "depends": [
+        "CW7"
+      ],
+      "gate": "G4",
+      "note": "Official cloud session; only these results may support G4 behavior claims. Long-run comes last."
+    }
+  ],
+  "rows": [
+    {
+      "id": "F-BR-01",
+      "domain": "D5",
+      "title": "CDP 断链",
+      "inject": "在持有输入时断开 CDP 连接。",
+      "expected": [
+        "输入派发显式失败，进入 fence/release；不静默回退 raw CDP 或 Win32。",
+        "重连前不继续派发。"
+      ],
+      "forbidden": [
+        "回退 Win32/OS 焦点",
+        "断链后继续输入",
+        "跳过 release"
+      ],
+      "evidence": [
+        "CDP state",
+        "dispatch error",
+        "ledger",
+        "fence time",
+        "reconnect policy",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-BR-02",
+      "domain": "D5",
+      "title": "浏览器进程崩溃",
+      "inject": "强杀专属浏览器进程，观察 Host/sidecar 状态与残留输入。",
+      "expected": [
+        "session 进入 Faulted/终止；只回收自有进程；残留输入按未知账本处理。",
+        "不得宣称云端已释放，不得杀用户浏览器。"
+      ],
+      "forbidden": [
+        "假释放",
+        "留下孤儿 Chrome",
+        "自动重开并继承旧 held"
+      ],
+      "evidence": [
+        "process tree before/after",
+        "exit code",
+        "unknown ledger",
+        "session state",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.3",
+        "FRD §9.1/§10.1 B02",
+        "Plan CW9-3/CW9-4"
+      ]
+    },
+    {
+      "id": "F-BR-03",
+      "domain": "D5",
+      "title": "目标页关闭/重建",
+      "inject": "关闭目标 target 后出现同名页面或新 target。",
+      "expected": [
+        "按 target identity 拒绝错误页面，不选第一个 page；旧 token 失效。",
+        "重新发现需显式确认身份。"
+      ],
+      "forbidden": [
+        "选第一个同名页面",
+        "沿用旧 target",
+        "静默重连"
+      ],
+      "evidence": [
+        "target id/url",
+        "selection result",
+        "token validity",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.3",
+        "FRD §9.1/§10.1 B02",
+        "Plan CW9-3/CW9-4"
+      ]
+    },
+    {
+      "id": "F-BR-04",
+      "domain": "D5",
+      "title": "云会话强制登出或超时",
+      "inject": "在任务中输入/等待至云会话被强制登出，或模拟 auth 过期。",
+      "expected": [
+        "检测为会话终止；UI 明确；不拿旧 auth 盲重试。",
+        "释放/未知账本按 Stop 规则处理。"
+      ],
+      "forbidden": [
+        "盲重试登录",
+        "把登出当任务成功",
+        "泄露 token/cookie/UID"
+      ],
+      "evidence": [
+        "logout evidence (redacted)",
+        "state transition",
+        "retry policy",
+        "release result",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §10.1 B02",
+        "Plan CW9-4"
+      ]
+    },
+    {
+      "id": "F-BR-05",
+      "domain": "D5",
+      "title": "重连/新会话的身份重建",
+      "inject": "断线后重连到同一实例或新实例。",
+      "expected": [
+        "重新识别 instance、geometry、input_ver；不继承旧 held/token。",
+        "身份不匹配则拒绝。"
+      ],
+      "forbidden": [
+        "沿用旧 input_ver",
+        "把新实例当旧实例",
+        "跳过 geometry 重建"
+      ],
+      "evidence": [
+        "instance/rtcType/input_ver",
+        "geometry revision",
+        "held reset",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.3",
+        "FRD §9.1/§10.1 B02",
+        "Plan CW9-3/CW9-4"
+      ]
+    },
+    {
+      "id": "F-BR-06",
+      "domain": "D5",
+      "title": "自有浏览器与用户浏览器边界",
+      "inject": "在用户已有 Chrome 会话旁启动专属 profile，并触发清理。",
+      "expected": [
+        "只 attach/drive 自有实例；清理只针对自有进程/profile。",
+        "不得按进程名批量 kill 或触碰用户浏览器。"
+      ],
+      "forbidden": [
+        "按进程名 kill",
+        "attach 用户页面",
+        "复用用户 profile"
+      ],
+      "evidence": [
+        "process ownership",
+        "profile path (redacted)",
+        "cleanup scope",
+        "user browser untouched",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.3",
+        "FRD §9.1/§10.1 B02",
+        "Plan CW9-3/CW9-4"
+      ]
+    },
+    {
+      "id": "F-CP-01",
+      "domain": "D1",
+      "title": "下行 ACK 丢失（key_down 已派发）",
+      "inject": "fake actuator 在应用 key_down 后丢弃回执；命令停留在未知结果。",
+      "expected": [
+        "记录 confirmed→maybe_held，不把丢失回执当作未执行。",
+        "Stop 对 maybe_held 发送幂等 up；无法确认释放则保留 Faulted/未知账本并禁止新 run。"
+      ],
+      "forbidden": [
+        "自动重放 down",
+        "标记成功或已释放",
+        "用新 run 覆盖旧账本"
+      ],
+      "evidence": [
+        "command_id/seq",
+        "disposition",
+        "ledger before/after",
+        "state",
+        "timeline",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10"
+      ]
+    },
+    {
+      "id": "F-CP-02",
+      "domain": "D1",
+      "title": "上行 ACK 丢失（release）",
+      "inject": "fake actuator 应用 key_up 后丢弃回执；或回执在超时后到达。",
+      "expected": [
+        "得到确定响应前不得清除 maybe_held。",
+        "超时后重复 up 并保持 Faulted，直到确认；不得把重复 up 当新输入。"
+      ],
+      "forbidden": [
+        "假释放",
+        "把超时回执当成功",
+        "静默继续派发"
+      ],
+      "evidence": [
+        "command_id/seq",
+        "release 次数",
+        "ledger",
+        "state",
+        "timeline",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-CP-03",
+      "domain": "D1",
+      "title": "半包、超长与畸形控制帧",
+      "inject": "在管道写入截断长度头、声明超大 payload、非法 JSON/字段类型。",
+      "expected": [
+        "解析有界，拒绝并返回明确错误；连接策略有界。",
+        "拒绝前后状态不变，不触发派发或释放。"
+      ],
+      "forbidden": [
+        "进程崩溃",
+        "无界分配",
+        "把畸形帧当合法命令",
+        "无限重连"
+      ],
+      "evidence": [
+        "frame bytes/上限",
+        "error code",
+        "state before/after",
+        "process exit",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-CP-04",
+      "domain": "D1",
+      "title": "seq 错乱与重复旧命令",
+      "inject": "重发旧 seq、跳号 seq、同一 command_id 重复提交。",
+      "expected": [
+        "旧/重复命令在执行前被拒绝；去重缓存有界。",
+        "不得因重放再次产生 down/up。"
+      ],
+      "forbidden": [
+        "重复派发",
+        "用无界缓存吞掉内存",
+        "把跳号当新代次"
+      ],
+      "evidence": [
+        "command_id/seq",
+        "dedup result",
+        "dispatch count",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-CP-05",
+      "domain": "D1",
+      "title": "旧 generation 命令",
+      "inject": "连接换代后仍提交上一代 run/document 命令。",
+      "expected": [
+        "派发前 fence，返回 GENERATION_STALE；旧代次不写目标。",
+        "不得把旧命令迁移到新代次执行。"
+      ],
+      "forbidden": [
+        "执行旧命令",
+        "静默丢弃但不返回错误",
+        "沿用旧 held 假设"
+      ],
+      "evidence": [
+        "generation before/after",
+        "disposition",
+        "dispatch count",
+        "state",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-CP-06",
+      "domain": "D1",
+      "title": "派发在途超时（结果未知）",
+      "inject": "actuator 延迟响应超过 deadline，随后可能实际执行。",
+      "expected": [
+        "标记结果未知并入 maybe_held；Stop 先 fence 再中和。",
+        "不得自动重放原命令；未知未确认则 Faulted。"
+      ],
+      "forbidden": [
+        "把超时当拒绝",
+        "自动重试 down",
+        "宣称云端未执行"
+      ],
+      "evidence": [
+        "deadline",
+        "disposition",
+        "ledger",
+        "fence 顺序",
+        "state",
+        "timeline"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-CP-07",
+      "domain": "D1",
+      "title": "慢 RPC 不得阻塞续租与安全释放",
+      "inject": "在按住键时注入长截图/长 CDP 调用，同时观察租约 tick 与 Stop。",
+      "expected": [
+        "renew 独立于长 RPC；2 秒长按不被 350ms 租约误释放。",
+        "Stop/release 不排在图像路径后面，有明确总预算。"
+      ],
+      "forbidden": [
+        "长 RPC 共锁续租",
+        "用超时自动松键掩盖",
+        "Stop 等待无界"
+      ],
+      "evidence": [
+        "hold duration",
+        "renew timestamps",
+        "lease state",
+        "stop latency p50/p95",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-CP-08",
+      "domain": "D1",
+      "title": "pending 队列超过 64",
+      "inject": "快速提交超过上限的命令并混入 Stop/release。",
+      "expected": [
+        "过载明确拒绝/背压；安全信号不被大图像或普通命令阻塞。",
+        "拒绝不改变已确认账本。"
+      ],
+      "forbidden": [
+        "无界排队",
+        "丢弃 release/fault 信号",
+        "用队列长度冒充健康"
+      ],
+      "evidence": [
+        "queue depth",
+        "reject code",
+        "safety latency",
+        "ledger",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-CP-09",
+      "domain": "D1",
+      "title": "Stop 时命令队列非空",
+      "inject": "在长动作与多个未完成命令期间触发 Stop。",
+      "expected": [
+        "先 fence，再丢弃后续命令，再中和 held∪maybe；有界等待并报告未确认项。",
+        "Stop 之后不得再出现目标输入。"
+      ],
+      "forbidden": [
+        "先排空工作队列再 fence",
+        "Stop 后继续派发",
+        "把取消当成功"
+      ],
+      "evidence": [
+        "queue snapshot",
+        "fence order",
+        "neutralized keys",
+        "post-stop dispatch count",
+        "exit_code"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §10.1 B10",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-HS-01",
+      "domain": "D6",
+      "title": "MXU 崩溃",
+      "inject": "强杀 MXU/Host 进程，保留 sidecar 与浏览器。",
+      "expected": [
+        "sidecar 检测 Host death，释放/fence 并有界退出；浏览器按 owned 策略回收。",
+        "无孤儿进程、无持续输入。"
+      ],
+      "forbidden": [
+        "孤儿 sidecar",
+        "继续派发",
+        "只杀浏览器不释放账本"
+      ],
+      "evidence": [
+        "process tree before/after",
+        "release/fence",
+        "exit code",
+        "orphan check",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW2",
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-4"
+      ]
+    },
+    {
+      "id": "F-HS-02",
+      "domain": "D6",
+      "title": "GUI/WebView 崩溃但后端存活",
+      "inject": "强杀 GUI 窗口/WebView，保留 controller 与任务。",
+      "expected": [
+        "API 有界响应，controller 状态可查询；无卡死写锁。",
+        "任务结果不因 GUI 消失而伪造成功。"
+      ],
+      "forbidden": [
+        "API 无响应",
+        "任务状态丢失",
+        "后台继续无限派发"
+      ],
+      "evidence": [
+        "API latency",
+        "controller state",
+        "task state",
+        "process inventory",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-4"
+      ]
+    },
+    {
+      "id": "F-HS-03",
+      "domain": "D6",
+      "title": "state API 长时间无响应",
+      "inject": "在任务运行中让 `/api/maa/state` 持续超时；同时观察 supervisor 与任务。",
+      "expected": [
+        "请求有界、诊断可见；supervisor 的超时策略不得无证据地杀死运行中任务。",
+        "任务是否仍在执行、是否进入菜单，必须有独立证据，不由 API 单一来源推断。"
+      ],
+      "forbidden": [
+        "把 API 超时当任务失败",
+        "无界等待",
+        "轮询超时误杀",
+        "宣称根因已定"
+      ],
+      "evidence": [
+        "API latency/samples",
+        "supervisor policy",
+        "task process state",
+        "task result evidence",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW5",
+        "CW7"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [
+        "run-20261024-175718: 6 次连续 state_poll_error，MXU API >60s 不可用，exit 2；任务已进入 MenuListEnterMenuRegionalDevelopment，但无法从 API 取得结果；根因未验证。",
+        "run-20261024-175512: 5s 状态轮询超时触发误杀，exit 7；属 supervisor 策略问题，不归因产品 controller。"
+      ],
+      "source": [
+        "Review §6.2",
+        "Plan CW9-4",
+        "cases/cloudweb-goal-20261024/root-cause.md §5"
+      ]
+    },
+    {
+      "id": "F-HS-04",
+      "domain": "D6",
+      "title": "control pipe 中途关闭",
+      "inject": "在任务中关闭 MXU control pipe（或模拟写失败）。",
+      "expected": [
+        "显式失败并保留原始错误；不静默重试或改写状态。",
+        "按 owned 进程与未知账本处理，留下可定位证据。"
+      ],
+      "forbidden": [
+        "静默重连并继续",
+        "把写失败当成功",
+        "删除原始日志"
+      ],
+      "evidence": [
+        "pipe error",
+        "first failure time",
+        "backend last_error",
+        "observation age",
+        "exit code",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [
+        "run-20261024-172548: CDP 鼠标实验（提交已 revert，不入候选）期间 MXU control pipe 关闭；screencap 连续失败，backend last_error=cloudweb_cloudweb_control_write，observation_age_ms=4930；exit 7。仅作故障输入，不代表当前候选行为。"
+      ],
+      "source": [
+        "cases/cloudweb-delivery-20261024-success/delivery-report.md §4",
+        "Plan CW9-4"
+      ]
+    },
+    {
+      "id": "F-HS-05",
+      "domain": "D6",
+      "title": "双实例与同 session 争写",
+      "inject": "启动第二个 MaaEnd/MXU 实例并尝试连接同一 session。",
+      "expected": [
+        "pool/run/session identity 阻止第二个可写 controller；失败不入 pool。",
+        "不得产生双写或跨实例事件。"
+      ],
+      "forbidden": [
+        "两个可写 controller",
+        "跨实例覆盖任务",
+        "共享 held"
+      ],
+      "evidence": [
+        "instance ids",
+        "pool state",
+        "second connect result",
+        "write count",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-4"
+      ]
+    },
+    {
+      "id": "F-HS-06",
+      "domain": "D6",
+      "title": "idle 回收与进程所有权",
+      "inject": "任务结束/空闲后检查 MaaEnd、MXU、sidecar、Chrome 进程与临时 profile。",
+      "expected": [
+        "只回收自有进程；无多个 MaaEnd 实例；无用户浏览器影响。",
+        "回收失败有界重试并留证，不按进程名批量 kill。"
+      ],
+      "forbidden": [
+        "kill 用户浏览器",
+        "留下孤儿进程",
+        "删除用户 profile"
+      ],
+      "evidence": [
+        "process inventory",
+        "ownership",
+        "temp/profile cleanup",
+        "retry result",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-4"
+      ]
+    },
+    {
+      "id": "F-HS-07",
+      "domain": "D6",
+      "title": "Host-death（父进程强杀）",
+      "inject": "对 Host 父进程发送强杀信号，观察 sidecar 的父死检测与退出。",
+      "expected": [
+        "sidecar 在有限时间内检测父死，释放/fence 并退出；owned Chrome 按策略回收。",
+        "无孤儿、无持续输入。"
+      ],
+      "forbidden": [
+        "sidecar 永久存活",
+        "跳过释放",
+        "未授权终止用户进程"
+      ],
+      "evidence": [
+        "parent pid/child pid",
+        "detection time",
+        "release/fence",
+        "exit code",
+        "orphan check"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-4"
+      ]
+    },
+    {
+      "id": "F-LR-01",
+      "domain": "D8",
+      "title": "100 次 connect/start/cancel/disconnect",
+      "inject": "固定候选上循环 100 次连接、启动、取消、断开；每轮记录退出与清理。",
+      "expected": [
+        "每轮有界停止，无孤儿进程/临时 profile/端口残留；失败可复现。",
+        "不得只统计成功轮次或跳过失败轮。"
+      ],
+      "forbidden": [
+        "只报成功轮",
+        "跳过清理",
+        "用平均掩盖失败"
+      ],
+      "evidence": [
+        "cycle results",
+        "exit codes",
+        "process/temp inventory",
+        "failure list",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "validator",
+      "mapped_cw": "CW9-6",
+      "depends": [
+        "CW9-2",
+        "CW9-3",
+        "CW9-4",
+        "CW9-5"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.3",
+        "Review §7.1 CW9",
+        "Plan CW9-6"
+      ]
+    },
+    {
+      "id": "F-LR-02",
+      "domain": "D8",
+      "title": "2 小时混合任务、预览与重连",
+      "inject": "连续运行 2 小时，混合任务、只读预览、断线重连与空闲。",
+      "expected": [
+        "记录 frame age p50/p95、资源趋势与清理后基线；无崩溃/跨 run 事件。",
+        "不得用一次短时成功代替长运行。"
+      ],
+      "forbidden": [
+        "只看 RSS 一次升高",
+        "省略 p95",
+        "把重连当新 run 而不清理"
+      ],
+      "evidence": [
+        "duration",
+        "frame age p50/p95",
+        "resource trend",
+        "reconnect results",
+        "cleanup baseline",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "validator",
+      "mapped_cw": "CW9-6",
+      "depends": [
+        "CW9-2",
+        "CW9-3",
+        "CW9-4",
+        "CW9-5"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.3",
+        "Review §7.1 CW9",
+        "Plan CW9-6"
+      ]
+    },
+    {
+      "id": "F-LR-03",
+      "domain": "D8",
+      "title": "重复失败后的资源清理",
+      "inject": "连续制造连接失败、启动失败与取消失败，检查残留。",
+      "expected": [
+        "失败路径同样释放/回收；下一轮不继承旧锁、旧代次、旧进程。",
+        "失败如实保留，不因清理成功改成 Pass。"
+      ],
+      "forbidden": [
+        "失败后不清理",
+        "用清理成功掩盖功能失败",
+        "复用旧 profile"
+      ],
+      "evidence": [
+        "failure cases",
+        "cleanup result",
+        "next-cycle state",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "validator",
+      "mapped_cw": "CW9-6",
+      "depends": [
+        "CW9-2",
+        "CW9-4"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.3",
+        "Review §7.1 CW9",
+        "Plan CW9-6"
+      ]
+    },
+    {
+      "id": "F-LR-04",
+      "domain": "D8",
+      "title": "跨 run 事件、token 与账本隔离",
+      "inject": "在 run A 结束后立即启动 run B，并注入 A 的迟到事件/回执。",
+      "expected": [
+        "A 的事件、token、held 账本不得进入 B；迟到回调被拒绝。",
+        "B 不得因 A 的未知账本被污染。"
+      ],
+      "forbidden": [
+        "跨 run 复用状态",
+        "迟到事件写入 B",
+        "A 的 held 留在 B"
+      ],
+      "evidence": [
+        "run ids",
+        "late event disposition",
+        "token validity",
+        "ledger isolation",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "validator",
+      "mapped_cw": "CW9-6",
+      "depends": [
+        "CW9-2",
+        "CW9-4"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.3",
+        "Review §7.1 CW9",
+        "Plan CW9-6"
+      ]
+    },
+    {
+      "id": "F-LR-05",
+      "domain": "D8",
+      "title": "controller 关闭后资源归零",
+      "inject": "在任务与预览均关闭后检查 callback、订阅、URL、进程与内存基线。",
+      "expected": [
+        "owned callback/订阅/URL/进程归零；预热后无持续增长。",
+        "关闭结果与任务结果分开报告。"
+      ],
+      "forbidden": [
+        "只测一次 RSS",
+        "把进程存活当正常",
+        "忽略 callback 泄漏"
+      ],
+      "evidence": [
+        "callback count",
+        "subscriptions",
+        "process/url inventory",
+        "memory after warmup",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "validator",
+      "mapped_cw": "CW9-6",
+      "depends": [
+        "CW9-2",
+        "CW9-4"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.3",
+        "Review §7.1 CW9",
+        "Plan CW9-6"
+      ]
+    },
+    {
+      "id": "F-LR-06",
+      "domain": "D8",
+      "title": "停止后无后台重连或新输入",
+      "inject": "任务 Stop/close 后继续观察 5 分钟，检查是否自动重连或产生输入。",
+      "expected": [
+        "停止后无新输入、无自动重连、无后台任务；进程按策略退出。",
+        "不得把“未观察到”写成“已证明无残留”。"
+      ],
+      "forbidden": [
+        "Stop 后重连",
+        "后台继续派发",
+        "省略观察窗口"
+      ],
+      "evidence": [
+        "stop time",
+        "post-stop events",
+        "process state",
+        "observation window",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "validator",
+      "mapped_cw": "CW9-6",
+      "depends": [
+        "CW9-2",
+        "CW9-4"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.3",
+        "Review §7.1 CW9",
+        "Plan CW9-6"
+      ]
+    },
+    {
+      "id": "F-LS-01",
+      "domain": "D2",
+      "title": "持有期间租约过期",
+      "inject": "暂停 renew，让 owner lease 过期；保持键按下。",
+      "expected": [
+        "tick 周期内 fence 代次并释放 held；迟到命令被拒绝。",
+        "不得让过期 owner 继续写目标。"
+      ],
+      "forbidden": [
+        "过期后继续派发",
+        "不释放直接换代",
+        "把 tick 当可选优化"
+      ],
+      "evidence": [
+        "lease expiry",
+        "tick time",
+        "generation +1",
+        "released keys",
+        "late command disposition"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-2"
+      ]
+    },
+    {
+      "id": "F-LS-02",
+      "domain": "D2",
+      "title": "renew 通道丢失或延迟",
+      "inject": "阻断 renew 通道或注入延迟，让安全预算先到期。",
+      "expected": [
+        "在继续不安全写入前进入 Faulted，UI/诊断可见。",
+        "不得静默续用旧租约。"
+      ],
+      "forbidden": [
+        "假续租",
+        "无提示继续任务",
+        "等待超过安全预算"
+      ],
+      "evidence": [
+        "renew gaps",
+        "fault transition time",
+        "ui state",
+        "ledger",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-2/CW9-4"
+      ]
+    },
+    {
+      "id": "F-LS-03",
+      "domain": "D2",
+      "title": "owner 冲突与第二写入者",
+      "inject": "第二个 Host/会话携带同一 session 身份请求 owner。",
+      "expected": [
+        "拒绝第二 owner；同一 session 不产生两个可写 controller。",
+        "不得双写或互相覆盖 held。"
+      ],
+      "forbidden": [
+        "第二个 owner 静默接管",
+        "双写目标",
+        "清除第一个 owner 的账本"
+      ],
+      "evidence": [
+        "owner ids",
+        "reject code",
+        "write count",
+        "pool identity",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "MXU fault agent",
+      "mapped_cw": "CW9-4",
+      "depends": [
+        "CW2",
+        "CW5"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-2/CW9-4"
+      ]
+    },
+    {
+      "id": "F-LS-04",
+      "domain": "D2",
+      "title": "Host 管道 EOF",
+      "inject": "Host 端关闭控制管道，同时保留目标页面。",
+      "expected": [
+        "识别 EOF，释放 held 并 fence；退出/回收有界。",
+        "不得留下继续派发的孤儿 sidecar。"
+      ],
+      "forbidden": [
+        "EOF 后继续输入",
+        "把 EOF 当任务成功",
+        "留下孤儿进程"
+      ],
+      "evidence": [
+        "EOF time",
+        "released keys",
+        "generation",
+        "process inventory",
+        "exit_code"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-2/CW9-4"
+      ]
+    },
+    {
+      "id": "F-LS-05",
+      "domain": "D2",
+      "title": "hello token 错误",
+      "inject": "使用错误/空 token 发起 hello。",
+      "expected": [
+        "拒绝连接，不创建 session，不泄露目标信息。",
+        "正确 token 仍可建立会话（正对照）。"
+      ],
+      "forbidden": [
+        "错误 token 进入 Ready",
+        "错误信息泄露 token/路径",
+        "无限重试"
+      ],
+      "evidence": [
+        "hello request/response",
+        "session created?",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-4",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-2/CW9-4"
+      ]
+    },
+    {
+      "id": "F-LS-06",
+      "domain": "D2",
+      "title": "重连后 generation 递增与旧状态隔离",
+      "inject": "断开后重连，复用旧 run/document/geometry 与旧 snapshot token。",
+      "expected": [
+        "代次递增；旧 pending/queued/token 全部失效。",
+        "新会话不继承旧 held 假设，重新识别 document 与 geometry。"
+      ],
+      "forbidden": [
+        "旧 token 继续识别",
+        "跨代次复用 held",
+        "把重连当同一 run"
+      ],
+      "evidence": [
+        "old/new generation",
+        "token validity",
+        "held reset",
+        "document identity",
+        "logs+sha256"
+      ],
+      "closure_layer": "protocol_fixture",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-4",
+      "depends": [
+        "CW2",
+        "CW4"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-2/CW9-4"
+      ]
+    },
+    {
+      "id": "F-MD-01",
+      "domain": "D4",
+      "title": "rVFC 回调停止但页面仍存活",
+      "inject": "停止视频呈现/挂起 rVFC 回调，保持页面与截图 RPC 可用。",
+      "expected": [
+        "媒体进度停走，判 MEDIA_STALLED；帧不标 Fresh。",
+        "截图 RPC 成功不能替代媒体进度。"
+      ],
+      "forbidden": [
+        "用截图计数冒充进度",
+        "冻结画面标 Fresh",
+        "继续基于旧反馈控制"
+      ],
+      "evidence": [
+        "media progress",
+        "frame age",
+        "health state",
+        "screenshot counter separately",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MD-02",
+      "domain": "D4",
+      "title": "重复相同帧",
+      "inject": "保持静止画面，重复取帧；像素相同但媒体仍在推进。",
+      "expected": [
+        "freshness 由媒体进度判定，像素相同不自动等于死流。",
+        "token/序号区分同一帧与新帧。"
+      ],
+      "forbidden": [
+        "按像素哈希判死流",
+        "把重复帧当新反馈",
+        "跳过健康检查"
+      ],
+      "evidence": [
+        "pixel hash",
+        "media progress",
+        "token sequence",
+        "health state"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MD-03",
+      "domain": "D4",
+      "title": "latest slot A/B 覆盖",
+      "inject": "在读取 A 帧时快速写入 B 帧，检查像素与 metadata 是否同源。",
+      "expected": [
+        "单次快照像素与 metadata 原子一致；旧 token 失效。",
+        "不得混合 A 的像素与 B 的 geometry/序号。"
+      ],
+      "forbidden": [
+        "半新半旧",
+        "读到 torn frame",
+        "用 B metadata 解释 A 像素"
+      ],
+      "evidence": [
+        "token A/B",
+        "pixel+metadata hash",
+        "slot state",
+        "reader result"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MD-04",
+      "domain": "D4",
+      "title": "旧 snapshot token 用于识别",
+      "inject": "在产生新帧/新 geometry 后继续提交旧 token。",
+      "expected": [
+        "拒绝 stale token，识别回到新 observation。",
+        "不得用旧 token 的坐标执行动作。"
+      ],
+      "forbidden": [
+        "接受旧 token",
+        "静默替换为新帧",
+        "用旧几何点击"
+      ],
+      "evidence": [
+        "token age",
+        "reject code",
+        "geometry revision",
+        "action blocked",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MD-05",
+      "domain": "D4",
+      "title": "截图 RPC 成功但媒体冻结",
+      "inject": "冻结视频后仍允许 screenshot 返回成功。",
+      "expected": [
+        "健康判定仍为 stale/frozen；不得只凭 RPC 成功标 Fresh。",
+        "分别记录截图成功与媒体进度。"
+      ],
+      "forbidden": [
+        "把 screenshot 成功当直播",
+        "混用两个计数器",
+        "继续自动任务"
+      ],
+      "evidence": [
+        "screenshot result",
+        "media progress",
+        "health",
+        "task paused?",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MD-06",
+      "domain": "D4",
+      "title": "页面重建与新 document",
+      "inject": "刷新/重导航目标页，替换 video 与 document。",
+      "expected": [
+        "旧 collector epoch/token 失效；迟到回调被 epoch 丢弃。",
+        "重新获取 video/source/track，Start/Stop 幂等。"
+      ],
+      "forbidden": [
+        "跨 document 复用回调",
+        "迟到回调写入新状态",
+        "重复订阅"
+      ],
+      "evidence": [
+        "old/new document id",
+        "epoch",
+        "late callback count",
+        "token validity",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MD-07",
+      "domain": "D4",
+      "title": "geometry 变化与 resize",
+      "inject": "改变视口/视频尺寸，触发 geometry revision。",
+      "expected": [
+        "revision 递增，旧坐标/token 失效；重新做 canonical 检查。",
+        "不得沿用旧 ROI 或点击坐标。"
+      ],
+      "forbidden": [
+        "geometry 恒 0",
+        "旧坐标继续点击",
+        "把非 canonical 帧放大冒充"
+      ],
+      "evidence": [
+        "geometry before/after",
+        "revision",
+        "canonical check",
+        "old token reject",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MD-08",
+      "domain": "D4",
+      "title": "非 1280×720 视频",
+      "inject": "将视频源设为非 canonical 尺寸。",
+      "expected": [
+        "不出帧，返回明确错误；session 以 FRAME_STALE/等价错误拒绝。",
+        "不得用 upscale 或截图裁剪冒充 canonical。"
+      ],
+      "forbidden": [
+        "输出非 canonical 帧",
+        "静默缩放",
+        "把截图当视频帧"
+      ],
+      "evidence": [
+        "videoWidth/Height",
+        "error code",
+        "frame emitted?",
+        "session state"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-3",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.3",
+        "Plan CW9-3"
+      ]
+    },
+    {
+      "id": "F-MT-01",
+      "domain": "D7",
+      "title": "pause→fence→release→owner 转移",
+      "inject": "在自动化持有输入时请求人工接管。",
+      "expected": [
+        "按顺序停止自动化、fence、释放、确认后转移 owner；状态可见。",
+        "转移后自动化不得再写入。"
+      ],
+      "forbidden": [
+        "未释放就转移",
+        "转移后自动输入",
+        "把暂停当已释放"
+      ],
+      "evidence": [
+        "state transitions",
+        "fence time",
+        "release result",
+        "owner ids",
+        "post-transfer inputs"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "integration agent",
+      "mapped_cw": "CW9-5",
+      "depends": [
+        "CW2",
+        "CW3"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.1 手动接管",
+        "Review §6.3",
+        "Plan CW9-5"
+      ]
+    },
+    {
+      "id": "F-MT-02",
+      "domain": "D7",
+      "title": "接管后恢复识别",
+      "inject": "人工操作改变界面/镜头后恢复自动化。",
+      "expected": [
+        "重新取帧与识别，使用新 document/geometry/token；不重放接管前输入。",
+        "旧 held/旧坐标不得沿用。"
+      ],
+      "forbidden": [
+        "恢复时重放旧输入",
+        "沿用旧 frame/token",
+        "跳过重新识别"
+      ],
+      "evidence": [
+        "new frame token",
+        "geometry",
+        "re-identification result",
+        "replayed inputs=0",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "integration agent",
+      "mapped_cw": "CW9-5",
+      "depends": [
+        "CW2",
+        "CW3",
+        "CW4"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.1 手动接管",
+        "Review §6.3",
+        "Plan CW9-5"
+      ]
+    },
+    {
+      "id": "F-MT-03",
+      "domain": "D7",
+      "title": "接管时仍有 held 键",
+      "inject": "在 W/右键/技能按住时请求接管并立即断开自动化。",
+      "expected": [
+        "转移前逐项释放并确认；无法确认则保持 Faulted，不得把卡键留给用户。",
+        "用户获得明确的所有权状态。"
+      ],
+      "forbidden": [
+        "把卡键留给用户",
+        "未确认就标释放",
+        "继续自动化"
+      ],
+      "evidence": [
+        "held ledger",
+        "per-key release",
+        "residual state",
+        "owner transfer",
+        "ui message"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "integration agent",
+      "mapped_cw": "CW9-5",
+      "depends": [
+        "CW2",
+        "CW3"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §9.1 手动接管",
+        "Review §6.3",
+        "Plan CW9-5"
+      ]
+    },
+    {
+      "id": "F-ST-01",
+      "domain": "D3",
+      "title": "confirmed 与 maybe_held 并集释放",
+      "inject": "同时制造已确认按下与回执未知的键/按钮，然后 Stop。",
+      "expected": [
+        "遍历并集，逐项发送幂等 up；每项有独立结果。",
+        "已确认与未知项都不得被遗漏。"
+      ],
+      "forbidden": [
+        "只遍历 confirmed",
+        "用一次总 release 冒充逐项",
+        "未确认项标成功"
+      ],
+      "evidence": [
+        "ledger snapshot",
+        "per-key release result",
+        "residual ledger",
+        "state"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-5",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.1 最小停止与断链退路",
+        "Plan CW9-2/CW9-5"
+      ]
+    },
+    {
+      "id": "F-ST-02",
+      "domain": "D3",
+      "title": "释放失败或浏览器无响应",
+      "inject": "Stop 时让目标页/浏览器不可达，使 up 无法确认。",
+      "expected": [
+        "保留 Faulted/未知账本，禁止新 run；UI 与诊断明确。",
+        "不得把 kill 进程或关闭管道等同于云端已松键。"
+      ],
+      "forbidden": [
+        "假成功",
+        "自动开新 run",
+        "宣称云端按键已释放"
+      ],
+      "evidence": [
+        "release attempts",
+        "error/timeout",
+        "faulted state",
+        "new-run blocked",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-5",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.1 最小停止与断链退路",
+        "Plan CW9-2/CW9-5"
+      ]
+    },
+    {
+      "id": "F-ST-03",
+      "domain": "D3",
+      "title": "长动作中 cancel",
+      "inject": "在导航/战斗长动作与持续 held 输入期间取消任务。",
+      "expected": [
+        "先 fence，再释放，再有界等待；取消结果与释放结果分开报告。",
+        "Stop 后不再产生目标输入，恢复不重放旧输入。"
+      ],
+      "forbidden": [
+        "取消普通工作队列代替 fence",
+        "取消后继续动作",
+        "恢复时重放"
+      ],
+      "evidence": [
+        "cancel time",
+        "fence order",
+        "release result",
+        "post-stop inputs",
+        "exit_code"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "integration agent",
+      "mapped_cw": "CW9-5",
+      "depends": [
+        "CW2",
+        "CW3"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.1 最小停止与断链退路",
+        "Plan CW9-2/CW9-5"
+      ]
+    },
+    {
+      "id": "F-ST-04",
+      "domain": "D3",
+      "title": "页面已死时 close",
+      "inject": "关闭/崩溃目标页后执行 close，无法执行 up。",
+      "expected": [
+        "记录不可确认的残留输入，按 owned session 策略终结并留证。",
+        "不得猜测已释放，也不得擅自终结用户浏览器。"
+      ],
+      "forbidden": [
+        "把 close 当 100% 释放",
+        "杀用户浏览器",
+        "省略未知账本"
+      ],
+      "evidence": [
+        "close time",
+        "unconfirmed ledger",
+        "session terminal state",
+        "process ownership",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-5",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.1 最小停止与断链退路",
+        "Plan CW9-2/CW9-5"
+      ]
+    },
+    {
+      "id": "F-ST-05",
+      "domain": "D3",
+      "title": "Stop 预算实测",
+      "inject": "在持有输入、慢 RPC、队列非空三种条件下重复 Stop。",
+      "expected": [
+        "记录 p50/p95 停止时延与最坏路径；安全信号不等待图像。",
+        "超预算如实 Fail，不取平均掩盖长尾。"
+      ],
+      "forbidden": [
+        "只报单次最好值",
+        "用平均掩盖长尾",
+        "把 exit 0 当释放成功"
+      ],
+      "evidence": [
+        "samples",
+        "p50/p95",
+        "path breakdown",
+        "exit_code",
+        "logs+sha256"
+      ],
+      "closure_layer": "local_browser",
+      "owner": "sidecar fault agent",
+      "mapped_cw": "CW9-2 / CW9-5",
+      "depends": [
+        "CW2"
+      ],
+      "gate": "G4-pre",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "Review §6.2",
+        "FRD §9.1 最小停止与断链退路",
+        "Plan CW9-2/CW9-5"
+      ]
+    },
+    {
+      "id": "F-ST-06",
+      "domain": "D3",
+      "title": "远端残留输入不可确认的收口",
+      "inject": "浏览器/页面无法响应，close 后仍无法确认云端 held 是否释放。",
+      "expected": [
+        "保留未知账本与 Faulted，禁止新 run；记录可恢复或结束专属会话的退路。",
+        "用户可见地要求人工确认，不以 kill 进程或关闭管道推断已释放。"
+      ],
+      "forbidden": [
+        "宣称已释放",
+        "自动重开并继承旧 held",
+        "删除未知账本"
+      ],
+      "evidence": [
+        "unknown ledger",
+        "manual confirmation",
+        "new-run blocked",
+        "session exit path",
+        "logs+sha256"
+      ],
+      "closure_layer": "real_cloud_session",
+      "owner": "integration agent",
+      "mapped_cw": "CW9-5",
+      "depends": [
+        "CW2",
+        "CW7"
+      ],
+      "gate": "G4",
+      "status": "pending",
+      "observed": [],
+      "source": [
+        "FRD §10.1 B10",
+        "Review §6.3",
+        "Plan CW9-5"
+      ]
+    }
+  ],
+  "observed_inputs": [
+    {
+      "id": "OBS-01",
+      "run": "run-20261024-175718",
+      "mapped_faults": [
+        "F-HS-03"
+      ],
+      "observation": "6 次连续 state_poll_error，MXU API 持续 >60s 不可用，exit 2；任务已进入 MenuListEnterMenuRegionalDevelopment，无法从 API 取得结果。",
+      "root_cause": "unverified",
+      "evidence": [
+        "run-20261024-175718.json",
+        "cases/cloudweb-goal-20261024/root-cause.md §5"
+      ]
+    },
+    {
+      "id": "OBS-02",
+      "run": "run-20261024-172548",
+      "mapped_faults": [
+        "F-HS-04"
+      ],
+      "observation": "CDP 鼠标实验期间 MXU control pipe 关闭；screencap 连续失败，backend last_error=cloudweb_cloudweb_control_write，observation_age_ms=4930；exit 7。实验提交已 revert，不入候选。",
+      "root_cause": "unverified; not attributable to the current candidate",
+      "evidence": [
+        "run-20261024-172548.json",
+        "cases/cloudweb-delivery-20261024-success/delivery-report.md §4"
+      ]
+    },
+    {
+      "id": "OBS-03",
+      "run": "run-20261024-175512",
+      "mapped_faults": [
+        "F-HS-03"
+      ],
+      "observation": "5s 状态轮询超时触发误杀，exit 7；属 supervisor 策略问题，不归因产品 controller。",
+      "root_cause": "supervisor timeout policy",
+      "evidence": [
+        "run-20261024-175512.json",
+        "cases/cloudweb-cw0-cw7/cw0/baseline-inventory.md"
+      ]
+    }
+  ],
+  "non_claims": [
+    "本文件只定义故障矩阵；51 行全部 pending，未执行任何故障注入。",
+    "OBS-01/02/03 是历史运行输入，根因未闭合，不代表当前候选行为。",
+    "CW9-1 verified 仅指矩阵与证据 schema 已建立，不关闭 CW9-2..6，也不代表 G4。",
+    "不创建 GitHub issue/PR/评论；不泄露 token/cookie/UID/本机路径。"
+  ]
+}

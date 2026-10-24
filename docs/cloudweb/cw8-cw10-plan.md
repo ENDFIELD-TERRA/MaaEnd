@@ -74,19 +74,32 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 
 | ID | 事项 | owner | 依赖 | 验收 |
 | --- | --- | --- | --- | --- |
-| CW9-1 | 故障矩阵与证据 schema：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、远端残留输入 | Perlica | CW2 合同 | 每域有输入/预期/证据/失败行为 |
+| CW9-1 | 故障矩阵与证据 schema：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、远端残留输入 | Perlica | CW2 合同 | **verified**：8 域 / 51 行全 Pending；每行含注入/预期/禁止/证据/owner/依赖/层级/gate；`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…` |
 | CW9-2 | 控制面故障：ACK 丢失/半包/seq 错乱/旧 generation；Stop 先 fence 再中和 | sidecar fault agent | CW2 | 无盲重放；Faulted/未知账本保留 |
 | CW9-3 | 媒体故障：rVFC 冻结、重复帧、A/B 覆盖、页面重建、document/geometry 变化 | media fault agent | CW4 | 冻结不标 Fresh；旧 token 失效 |
 | CW9-4 | Host 故障：MXU 崩溃、GUI 崩溃、API 无响应、Host-death 回收、双实例 | MXU fault agent | CW2/CW5 | 只回收自己的进程；API 有界 |
 | CW9-5 | 人工接管：pause→fence→release→owner 转移→重新识别 | integration agent | CW2/CW3 | 无残留 held；恢复不重放旧输入 |
 | CW9-6 | 长运行：100 次 connect/start/cancel/disconnect、2 小时混合任务/预览/重连、资源趋势 | validator | CW9-2..5 | 有界停止；无泄漏/无跨 run 事件 |
 
+### CW9-1 结果（verified）
+
+- 生成器：`fault-matrix.mjs`（读取 `cloudweb-roadmap.json` 的基线；输出不含时间戳，连续两次运行哈希一致）。
+- 规模：**8 域 / 51 行**；D1 9、D2 6、D3 6、D4 8、D5 6、D6 7、D7 3、D8 6。
+- 关闭层级：`protocol_fixture` 15、`local_browser` 26、`real_cloud_session` 10；G4-pre 41、G4 10。
+- 每行字段：注入方式、预期行为、禁止行为、证据字段、owner、依赖、关闭层级、gate、状态；全部 `pending`，未执行故障注入。
+- 证据 schema 13 项：候选 SHA、runtime、注入方式、run/document/geometry 身份、owner/generation/ledger、时间线、状态/disposition、进程清单、帧/媒体进度/token、UI 诊断、exit code、日志+hash、未验证项。
+- 判据：缺任一字段不得 Pass；fixture 不能关闭 `real_cloud_session` 行；fake/fixed PNG/fake SDK/独立 Node 脚本不计；候选变化后旧证据失效。
+- 真实输入登记（根因均未闭合）：`run-175718` 连续 `state_poll_error`/API >60s 无响应（F-HS-03）；`run-172548` control pipe 关闭/exit 7（F-HS-04，实验已 revert，不归因当前候选）；`run-175512` supervisor 轮询误杀（F-HS-03）。
+- 产物：`fault-matrix.json` sha256 `ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d`；`fault-matrix.md` sha256 `2d9daa73dcb1524c4c94a0178ecc946c7ff7708d1a1d8ac231c3b7da489ebb57`。
+- CW9-1 `verified` 仅指矩阵与 schema 已建立；不关闭 CW9-2..6，也不代表 G4。
+
 ### 首批动作
 
-1. 先把本轮已观察到的 `state_poll_error`（`run-175718`）登记为 CW9-4 的真实输入，不猜测根因。
-2. 用 sidecar 的 `FaultyActuator`/fake 先做协议故障 harness；真实 CDP 断链另测。
-3. 定义“不可确认即 Faulted/未知账本，禁止新 run”的判据；禁止自动重放。
-4. 长运行只在 CW7 真机链路稳定后执行；此前只做单元/fixture。
+1. **[done]** 建立 `fault-matrix.json` / `.md`，登记 `run-175718`/`run-172548`/`run-175512` 三个真实输入，不猜测根因。
+2. 先做 Batch A（D1/D2，15 行 protocol_fixture）：用 sidecar fake actuator/管道 harness 验证 ACK 丢失、半包、seq/代次、Stop fence；结果只能关闭协议层。
+3. 再做 Batch B（D3/D4/D5/D6，26 行 local_browser）：专属本地 Chrome/profile 验证媒体、CDP、页面重建、进程与 Stop；仍不是真实云声明。
+4. Batch C（10 行 real_cloud_session）依赖 CW7；长运行放在最后；此前只做 fixture/本地。
+5. 定义“不可确认即 Faulted/未知账本，禁止新 run”的判据；禁止自动重放。
 
 ## E10 / CW10 打包、兼容与上游收口
 
@@ -147,9 +160,10 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 
 ## 并行与依赖
 
-- 现在可做：CW8-1/2 静态 inventory/矩阵；CW9-1 harness 设计；CW10-1/4 依赖/PR 映射；AC 清单。
-- CW7 关闭后：CW8-3/4/5、CW9-6。
-- CW2 合同稳定后：CW9-2/3/4。
+- 现在可做：CW8-1/2 静态 inventory/矩阵（done）、CW9-1 故障矩阵（done）、CW10-1/4 依赖/PR 映射、AC 清单。
+- CW2 合同稳定后：CW9-2 Batch A（D1/D2，15 行 protocol_fixture）。
+- CW4/CW5 稳定后：CW9-3/CW9-4 Batch B（D3/D4/D5/D6，26 行 local_browser）。
+- CW7 关闭后：CW8-3/4/5、CW9-5/CW9-6、Batch C（10 行 real_cloud_session）。
 - CW10-2/3 依赖 CW0/CW1/CW5；CW10-4 依赖 CW1 合同接受。
 
 ## 停线

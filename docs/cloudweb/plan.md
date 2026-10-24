@@ -3,6 +3,8 @@
 状态：规划稿，2026-10-24。单一源进度以同目录 `cloudweb-roadmap.md` / `cloudweb-roadmap.json` 为准；本文定义各 CW 的合同、验收和首批任务。
 材料权威顺序：`MaaEnd-CloudWeb-Implementation-Review-2026-10-24.md`（主报告）→ `FeatureRequirementDoc-MaaEnd-CloudWeb-Neo.md` v1.1 §0 → `MaaEnd-CloudWeb-Coordinator-Report.md` §0。旧 P00–P17/CW-xx 编号只作历史映射，不再作为进度源。
 
+> **2026-10-24 管理员流程裁定**：CW1–CW6 不设中间独立 review/validation 门禁。每个增量只做编译/构建、针对性测试、联合 smoke/demo 和固定候选 hash；完整审计与验证集中在 CW7 一次执行。本文各 CW 的 reviewer/validator 条款仅在 CW7 生效。仓库要求的检查、停线规则、真实证据判定和公开写入审批不因此放松；FIX-RS 作为独立交付，在向上游提交前仍按自身范围复核。
+
 ## 固定基线
 
 | 组件 | SHA |

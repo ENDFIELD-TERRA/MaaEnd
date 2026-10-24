@@ -50,8 +50,8 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 
 | ID | 事项 | 状态 | 依赖 | 当前证据/缺口 |
 | --- | --- | --- | --- | --- |
-| CW0 | 候选与契约盘点、可复现构建、实际配置、许可/工具链 | `partial` | 无 | 三仓 SHA 已固定；`cw0/baseline-inventory.md` 记录 sidecar 基线重建 `8e9d…` 与 dist 逐字节一致、实际 cdp 配置、真实/fake 判定表、5 条 exit 0 证据审计；缺口：sidecar LICENSE、MSRV 1.85 实测、MXU/MaaEnd 干净构建记录、MANIFEST 重绑 |
-| CW1 | provider/launcher、最低版本、外层 adapter 与实际 actuator 分离、生产显式 CDP | `partial` | CW0 | 候选 `f9706e2e…`：sidecar 缺 backend 即失败；`hello_ok` minor 1 返回 `backend_kind`/`ui_profile`；MXU 校验 readiness+hello 并拒绝未授权 fake；sidecar 36/36 非 CDP 测试、clippy 0；MXU MSVC 42/44（1 环境失败、1 ignored 真实进程测试单独通过）；真实 CDP 会话、UI 徽标、旧证据重生成未闭合 |
+| CW0 | 候选与契约盘点、可复现构建、实际配置、许可/工具链 | `partial` | 无 | 三仓 SHA 已固定；`cw0/baseline-inventory.md` 记录 sidecar 基线重建 `8e9d…` 与 dist 逐字节一致、实际 cdp 配置、真实/fake 判定表、5 条 exit 0 证据审计；sidecar LICENSE 已落 `AGPL-3.0-only`（`8486a10c…`）；缺口：MSRV 1.85 实测、MXU/MaaEnd 干净构建记录、MANIFEST 重绑 |
+| CW1 | provider/launcher、最低版本、外层 adapter 与实际 actuator 分离、生产显式 CDP | `partial`（本地实现完成，最终审计并入 CW7） | CW0 | 候选 `adaa5905…`：sidecar 缺 backend 即失败；`hello_ok` minor 1 返回 `backend_kind`/`ui_profile`；MXU 校验 readiness+hello 并拒绝未授权 fake；sidecar 36/36 非 CDP 测试、clippy 0；MXU MSVC 42/44（1 环境失败、1 ignored 真实进程测试单独通过）。按新流程不设 CW1 独立复核门禁；真实 CDP 会话、UI 徽标、旧证据重生成并入 CW7 完整审计 |
 | CW2 | run/document epoch、独立 renew、typed held∪maybe、真实 deadline、owned launcher、Host-death 回收 | `partial` | CW0/1 | 已有 lease/supervisor/逐键 release；长 CDP 共锁续租、`possibly_held` 字符串、Stop 仅 confirmed、无 owned launcher |
 | CW3 | 真实 relative、contact 映射、modifier/repeat、wheel/drag/text、SDK readiness、人工接管 | `partial` | CW2 | 绝对点击/键盘可用；`move_relative` Err、无 `input.relative`；contact1/2 映射相反；wheel/text/接管未证 |
 | CW4 | rVFC/媒体进度、720p 规范化、document/geometry、snapshot token、帧去重/slot | `not_started` | CW0/1；真实接线依赖 CW2 | 生产仍是整页 PNG+截图计数；geometry 恒 0；无 snapshot token；媒体冻结仍可能返回截图成功 |
@@ -72,12 +72,13 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | CW8-3 | 任务族适配：Daily、AutoEssence、ProtocolSpace、DeliveryJobs/Seize、TrialOfSwordmancy、RealTimeTask、生命周期、预设/settings、ZiplineImport | task-family agents（待 CW7） | `pending` |
 | CW8-4 | option/route/preset/pretask 实际运行等价 | MaaEnd agents（待 CW7） | `pending` |
 | CW8-5 | 46 项逐项 Pass/Fail + 独立抽查 | Perlica + validator | `pending` |
-| E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（harness 设计） |
-| CW9-4 | 把 `run-175718` 的 `state_poll_error` 登记为 Host/API 无响应真实输入 | Perlica | `in_progress` |
+| E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（CW9-1 矩阵完成，待 CW2/CW4/CW7 执行） |
+| CW9-1 | 故障矩阵与证据 schema：8 域、注入/预期/禁止/证据/owner/依赖/层级/gate | Perlica | `verified`（51 行全 Pending；protocol_fixture 15、local_browser 26、real_cloud_session 10；`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…`；不关闭 CW9-2..6） |
+| CW9-4 前置登记 | 把 `run-175718` 的 `state_poll_error` 登记为 Host/API 无响应真实输入 | Perlica | `verified`（已登记为 F-HS-03；同域 `run-175512` 轮询误杀、`run-172548` control pipe 关闭，根因未闭合；CW9-4 本体仍 pending） |
 | E10 / CW10 | 依赖/许可、干净 Windows 安装/回滚、跨 Host、PR 切片、版本文档 | Perlica | `in_progress`（依赖/PR 映射） |
 | AC | CW0–CW7/FIX-RS 验收 checklist、Gate 评审、validator/reviewer 分工 | Perlica | `in_progress` |
 
-原则：CW8/CW9/CW10 的**执行**依赖 CW7/CW2/CW0 等前置；现在只做不依赖实现的 inventory/矩阵/harness 设计/依赖与 PR 映射/验收清单。不创建 GitHub issue/PR/评论，不把规划当 Gate 通过。
+原则：CW8/CW9/CW10 的**执行**依赖 CW7/CW2/CW0 等前置；现在完成不依赖实现的 inventory/任务矩阵/故障矩阵（CW9-1）/依赖与 PR 映射/验收清单。CW9-2..6 按 Batch A（15 行 protocol_fixture）→ Batch B（26 行 local_browser）→ Batch C（10 行 real_cloud_session）执行；fixture/本地结果不能替代真实云声明。不创建 GitHub issue/PR/评论，不把规划当 Gate 通过。
 
 ## Gate 判定
 
@@ -87,7 +88,7 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | G1 | CW2 最小停止 + CW3 输入 + CW4 媒体/隔离（真实 Windows） | `blocked`（未闭环） |
 | G2 | CW7 实际 MaaEnd UI 连接→识别/动作→新帧→预览→取消→销毁 | `blocked`（仅有条件成功） |
 | G3 | CW8 46 项 + pretask/选项/预设实际 Pass | 未开始 |
-| G4 | CW10 故障/长时/跨 Host/干净安装/上游 review | 未开始 |
+| G4 | CW9 故障/长时（51 行矩阵全部闭合）+ CW10 跨 Host/干净安装/上游 review | 未开始（CW9-1 仅矩阵） |
 
 ## 与旧 CW-xx 的映射
 
@@ -110,6 +111,7 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 - `174123`：login restore + auto_start 的**冷启动路径一次成功**；`activationBefore.active=false → activationAfter.active=true` 需复核 OS 焦点语义；窗口事件曾出现 inner 854×480/dpr 1.5；reward delta 未证明。冷启动不是“从未成功”，但后续 `174331` 仍失败，属不稳定。
 - 任务级 `Succeeded` ≠ 实际领取新奖励：DailyRewards 上游只启用 `DailyClaimDeliveryJobsRewardSub`，其余四项 `enabled:false`；分支可达不等于奖励状态变化。
 - 失败：`172301`（菜单冷启动 exit 1）、`174331`（Regional 超时 exit 1）、`175512`（轮询误杀 exit 7）、`175718`（MXU API 连续超时 exit 2）。
+- CW9-1 故障矩阵：`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…`；8 域 51 行全 Pending；已登记 `175718`/`175512`/`172548` 三个真实输入，根因未闭合；矩阵存在不等于故障已执行或 G4 通过。
 - 旧运行没有 `backend_kind` 字段，无法区分内层 fake/cdp；按配置、首帧 `0x0`/281ms 等只能稳妥推断为 cdp，不能标已验证。CW1 候选改变后旧证据失效，需重生成。
 - 已修运行时项：标题双击、`InMenuList` OCR-only/右侧兜底、`Regional` 两行 OCR、`MenuListEnterWorld` Escape、轮询容忍、best-effort kill；均未形成产品候选，`cloudweb-run.ps1` 为本地联调 supervisor。
 - 交付审计：`cases/cloudweb-delivery-20261024-success/`（status `needs_review`，绑定旧 MANIFEST `ccc3a611…`；当前 MANIFEST `0fa1e985…`，最终冻结需重绑）。
@@ -118,27 +120,30 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 
 | 项 | 值 |
 | --- | --- |
-| sidecar | HEAD `8b9cc6f` + tracked diff `ecc4edc5…` + README `5b156ec7…`；release exe `d98146a5…` |
+| sidecar | HEAD `8b9cc6f` + tracked diff `9dc8faf9…` + README `fbc10ab3…` + LICENSE `8486a10c…`；release exe `d98146a5…` |
 | MXU | HEAD `8bddfee` + diff `9342a67f…` |
 | MaaEnd | HEAD `c7fd1b25`，本轮未改 |
 | 协议 | 1.1（`hello_ok` 增加 `backend_kind`/`ui_profile`） |
-| candidate ID | `f9706e2e942b932fa74b645002af4646021046cc28d2e662593c03de370b6cf7` |
+| 许可 | sidecar `AGPL-3.0-only` |
+| candidate ID | `adaa5905d12f1f21859dbb32ec01255206acafc432bb39bb3076bd8660e15b4c` |
 | 报告 | `cases/cloudweb-cw0-cw7/cw0/baseline-inventory.md`、`cases/cloudweb-cw0-cw7/cw1/integration-report.md` |
 
 工具链：rustc/cargo `1.99.1`；sidecar 用默认 GNU host；MXU 测试必须用 `+stable-x86_64-pc-windows-msvc`（GNU 测试二进制在 WinRT API set 上加载失败）。sidecar `rust-version = "1.85"` 为声明值，MSRV 未实测。
 
 ## 管理员裁定（2026-10-24）
 
-- **sidecar 许可**：采用 `AGPL-3.0-only`，与 MaaEnd/MXU 一致；LICENSE 与 Cargo `license` 字段待独立审查通过后落地。
+- **sidecar 许可**：采用 `AGPL-3.0-only`，与 MaaEnd/MXU 一致；`LICENSE`（sha256 `8486a10c…`）与 Cargo `license` 字段已落地。
 - **全局 AGENTS drift**：保留当前全局文件（sha256 `93cabb…`）并重新登记到 `runtime.json`；工程行为继续受 perlica-maaend 角色、仓库规则和公开面内容闸约束。当前 `runtime.json` 已改为 `93cabb…`。
+- **中间态 review/validation**：CW1–CW6 不再设独立 review/validation 门禁；每增量只保留编译/构建、针对性测试、联合 smoke/demo 与固定候选 hash。完整审计与验证集中在 CW7 一次执行。CW1 已启动的 reviewer 结果仅作参考，不再阻塞或改变 CW1 状态。仓库强制检查、停线规则、真实证据判定和公开写入审批不放松；FIX-RS 在向上游提交前仍按独立范围复核。
 
 ## 下一步顺序
 
-0. 并行（Perlica 独立推进）：CW8 inventory/任务族矩阵、CW9 harness 设计、CW10 依赖/PR 映射、AC 验收清单；不依赖 CW0–CW7 实现。
-1. CW0 剩余证据（LICENSE/MSRV/干净构建）+ CW1 独立复核与修补；FIX-RS 并行。
+0. 并行（Perlica 独立推进）：CW8 inventory/任务族矩阵（done）、CW9-1 故障矩阵（done）、CW10 依赖/PR 映射、AC 验收清单；CW9-2..6 的执行按 Batch A/B/C 等待 CW2/CW4/CW7。
+1. CW0 剩余证据（MSRV/干净构建）+ CW1 实现收尾；不设中间独立复核；FIX-RS 并行。
 2. CW2 最小停止；CW4 collector 可先做；CW6 的全局 AutoAltClick→Escape 撤销可作为 CW1 后的独立语义修复。
 3. CW3 relative/按钮/隔离；CW4 真实接线；CW5 frame reader/preview。
 4. CW6 薄 overlay/region/legacy camera；CW7 冷启动→DailyRewards→Stop/重开→MapNavigator/AutoFight。
+5. **CW7 唯一完整审计/验证门**：对 CW0–CW6 的候选、真实 CDP/Windows、后台隔离、证据、许可、干净构建与文档做一次集中审计；在此之前不宣称 G0–G2 或完整功能通过。
 
 ## 停线
 

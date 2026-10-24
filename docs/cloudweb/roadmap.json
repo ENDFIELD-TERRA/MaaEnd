@@ -23,12 +23,13 @@
     "fix_rs_candidate": {"head": "2fb895a9d845a3d58aef525b82fe03c6f6fce99f", "base": "a73f3303287ae48314f885d7a6e7a64882b48827", "diff_sha256": "6188ae46fd7c990fe1c3bd33dfb5fb104d885d7b290a1e7923c29a60db7e189c"}
   },
   "cw1_candidate": {
-    "candidate_id": "f9706e2e942b932fa74b645002af4646021046cc28d2e662593c03de370b6cf7",
+    "candidate_id": "adaa5905d12f1f21859dbb32ec01255206acafc432bb39bb3076bd8660e15b4c",
     "protocol": {"major": 1, "minor": 1},
     "sidecar": {
       "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
-      "tracked_diff_sha256": "ecc4edc5d6c1d04fdbdedd97981e3062272cb4825cce2ab5cfcb9778cefe64df",
-      "readme_sha256": "5b156ec7003177b8b92c75eccfa124caf646d1ccb141bd09ed4d9c93043783e7",
+      "tracked_diff_sha256": "9dc8faf912e3c419b17945e0ddfd7ada53a8e1dbd1110b23b970282dfe49ca18",
+      "readme_sha256": "fbc10ab3b5a7dfa000d3f2f41d8eeda244dc8878b70ee11d275f4389bb60e8cc",
+      "license_sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef",
       "release_exe_sha256": "d98146a5f0cc447969ce1b9860cd2abaf6b3b737e9f7cfa53bb5e33caf3b12c0"
     },
     "mxu": {
@@ -37,6 +38,32 @@
     },
     "status": "partial",
     "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw1/integration-report.md"
+  },
+  "verification_policy": {
+    "intermediate_review": "deferred",
+    "intermediate_validation": "deferred",
+    "per_increment_checks": [
+      "compile/build",
+      "targeted tests",
+      "joint smoke/demo",
+      "fixed candidate hash"
+    ],
+    "final_audit_at": "CW7",
+    "final_audit_scope": [
+      "CW0-CW6 candidate and diff audit",
+      "real CDP and Windows game behavior",
+      "background isolation and foreground unchanged",
+      "regenerated evidence bound to the final candidate",
+      "license, MSRV and clean build records",
+      "docs and task/option/profile consistency"
+    ],
+    "not_waived": [
+      "repository-required checks",
+      "two-failure stop line",
+      "real-evidence rules (no fake/fixed PNG/fake SDK)",
+      "public-write approval",
+      "FIX-RS independent review before upstream submission"
+    ]
   },
   "toolchain": {
     "rustc": "1.99.1",
@@ -94,7 +121,7 @@
     {"id": "M7", "cw": "CW7", "gate": "G2", "status": "partial"},
     {"id": "FIX-RS", "cw": "FIX-RS", "gate": "release-dependency", "status": "partial"},
     {"id": "M8", "cw": "CW8", "gate": "G3", "status": "not_started"},
-    {"id": "M9", "cw": "CW9", "gate": "G4-pre", "status": "not_started"},
+    {"id": "M9", "cw": "CW9", "gate": "G4-pre", "status": "in_progress"},
     {"id": "M10", "cw": "CW10", "gate": "G4", "status": "not_started"},
     {"id": "AC", "cw": "AC", "gate": "G0-G2", "status": "in_progress"}
   ],
@@ -113,9 +140,9 @@
       ],
       "evidence": [
         "baselines in this JSON",
-        "cw0/baseline-inventory.md (sha256 877c48cca742a6003c8b02b29b55cb90bae80db7bed2324a355d5bd2b08d79ef)",
+        "cw0/baseline-inventory.md (sha256 b4c838839eb0338555b4973f76053c139b970c1532c3ddb0f70c912596ee57c0)",
         "sidecar baseline rebuild 8e9d5a9f... byte-identical to dist",
-        "sidecar LICENSE missing; rust-version 1.85 declared, MSRV untested",
+        "sidecar LICENSE AGPL-3.0-only applied (sha256 8486a10c...); rust-version 1.85 declared, MSRV untested",
         "MXU/MaaEnd clean build records still pending",
         "cloudweb-dist/MANIFEST.md current 0fa1e985... differs from delivery binding ccc3a611..."
       ]
@@ -133,8 +160,8 @@
         "通用 factory/schema diff 可供维护者审阅"
       ],
       "evidence": [
-        "cw1/integration-report.md (sha256 5ee928d0bac9af8ec93428eb7f54be44facecf658f03f10ed1395a5c862da37b)",
-        "candidate f9706e2e...",
+        "cw1/integration-report.md (sha256 24be9b2f258b7cffa6aa4b5839038384e71eee1a7464ba10aa71b9f52a0ceca9)",
+        "candidate adaa5905...",
         "sidecar requires explicit --backend; missing backend exits 2",
         "hello_ok protocol minor 1 carries backend_kind/ui_profile",
         "MXU rejects missing/mismatched/fake without CLOUDWEB_ALLOW_FAKE=1",
@@ -253,10 +280,10 @@
     {"id": "CW8-3", "title": "任务族适配（Daily/AutoEssence/ProtocolSpace/DeliveryJobs/ToS/RealTimeTask/生命周期/预设/ZiplineImport）", "owner": "task-family agents", "status": "pending", "dependencies": ["CW8-2", "CW7"], "acceptance": ["真实截图/ROI/跳转/游戏结果"]},
     {"id": "CW8-4", "title": "option/route/preset/pretask 实际运行等价", "owner": "MaaEnd agents", "status": "pending", "dependencies": ["CW8-3"], "acceptance": ["每项实际运行", "不能只静态映射"]},
     {"id": "CW8-5", "title": "46 项 Windows 业务逐项 Pass/Fail + 独立抽查", "owner": "Perlica+validator", "status": "pending", "dependencies": ["CW8-3", "CW8-4"], "acceptance": ["46 行有候选/证据/结果"]},
-    {"id": "CW9-1", "title": "故障矩阵与证据 schema", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW2"], "acceptance": ["每域输入/预期/证据/失败行为"]},
+    {"id": "CW9-1", "title": "故障矩阵与证据 schema", "owner": "Perlica", "status": "verified", "dependencies": ["CW2"], "acceptance": ["每域输入/预期/证据/失败行为"], "evidence": ["8 domains / 51 rows, all pending", "protocol_fixture 15, local_browser 26, real_cloud_session 10", "fault-matrix.json sha256 ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d", "fault-matrix.md sha256 2d9daa73dcb1524c4c94a0178ecc946c7ff7708d1a1d8ac231c3b7da489ebb57", "verified means matrix/schema only; CW9-2..6 and G4 remain open"]},
     {"id": "CW9-2", "title": "控制面故障：ACK 丢失/半包/旧代次/Stop fence", "owner": "sidecar fault agent", "status": "pending", "dependencies": ["CW2"], "acceptance": ["无盲重放", "Faulted/未知账本保留"]},
     {"id": "CW9-3", "title": "媒体故障：冻结/重复帧/页面重建/geometry 变化", "owner": "media fault agent", "status": "pending", "dependencies": ["CW4"], "acceptance": ["冻结不标 Fresh", "旧 token 失效"]},
-    {"id": "CW9-4", "title": "Host/API 故障：MXU 崩溃/无响应/Host-death/双实例", "owner": "MXU fault agent", "status": "in_progress", "dependencies": ["CW2", "CW5"], "acceptance": ["只回收自己的进程", "API 有界"]},
+    {"id": "CW9-4", "title": "Host/API 故障：MXU 崩溃/无响应/Host-death/双实例", "owner": "MXU fault agent", "status": "pending", "dependencies": ["CW2", "CW5"], "acceptance": ["只回收自己的进程", "API 有界"], "evidence": ["run-175718 state_poll_error registered as F-HS-03", "run-175512 supervisor polling kill registered as F-HS-03", "run-172548 control pipe close registered as F-HS-04 (experiment reverted)"]},
     {"id": "CW9-5", "title": "人工接管 pause→fence→release→owner 转移", "owner": "integration agent", "status": "pending", "dependencies": ["CW2", "CW3"], "acceptance": ["无残留 held", "恢复不重放旧输入"]},
     {"id": "CW9-6", "title": "100 循环 + 2 小时长运行", "owner": "validator", "status": "pending", "dependencies": ["CW9-2..5"], "acceptance": ["有界停止", "无泄漏/跨 run 事件"]},
     {"id": "CW10-1", "title": "依赖/许可/最低工具链", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW0"], "acceptance": ["依赖表+许可+可复现构建"]},
@@ -269,7 +296,7 @@
   ],
   "claims": [
     {"epic": "E8", "owner": "Perlica", "status": "in_progress", "scope": "CW8 planning/inventory/matrix; no GitHub writes"},
-    {"epic": "E9", "owner": "Perlica", "status": "in_progress", "scope": "CW9 fault matrix/harness design; no cloud runs"},
+    {"epic": "E9", "owner": "Perlica", "status": "in_progress", "scope": "CW9-1 matrix done; CW9-2..6 execution waits on CW2/CW4/CW7; no cloud runs"},
     {"epic": "E10", "owner": "Perlica", "status": "in_progress", "scope": "CW10 dependency/license/PR mapping; no external writes"},
     {"epic": "AC", "owner": "Perlica", "status": "in_progress", "scope": "CW0–CW7/FIX-RS acceptance checklists and gate review"}
   ],
@@ -278,7 +305,7 @@
     "G1": {"status": "blocked", "requires": ["CW2", "CW3", "CW4"]},
     "G2": {"status": "blocked", "requires": ["CW7"]},
     "G3": {"status": "not_started", "requires": ["CW8"]},
-    "G4": {"status": "not_started", "requires": ["CW10"]}
+    "G4": {"status": "not_started", "requires": ["CW9", "CW10"]}
   },
   "current_evidence": {
     "run_count": 30,
@@ -296,6 +323,18 @@
     "failures": ["run-20261024-172301.json", "run-20261024-174331.json", "run-20261024-175512.json", "run-20261024-175718.json"],
     "failure_summary": "172301/174331 cold-start menu failure; 175512 polling timeout; 175718 MXU API unresponsive",
     "old_evidence_relation": "All runs predate the CW1 candidate; they remain historical facts but do not validate the current candidate and do not expose the inner backend kind.",
+    "cw9_1": {
+      "matrix": "cases/cloudweb-cw8-cw10/fault-matrix.json",
+      "matrix_sha256": "ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d",
+      "markdown_sha256": "2d9daa73dcb1524c4c94a0178ecc946c7ff7708d1a1d8ac231c3b7da489ebb57",
+      "rows": 51,
+      "domains": 8,
+      "status": "all pending",
+      "by_layer": {"protocol_fixture": 15, "local_browser": 26, "real_cloud_session": 10},
+      "by_gate": {"G4-pre": 41, "G4": 10},
+      "observed_inputs": ["run-175718 -> F-HS-03", "run-175512 -> F-HS-03", "run-172548 -> F-HS-04 (experiment reverted)"],
+      "scope_note": "Matrix/schema only; CW9-2..6 and G4 remain open."
+    },
     "delivery_audit": "cases/cloudweb-delivery-20261024-success/",
     "delivery_status": "needs_review",
     "delivery_manifest_bound": "ccc3a611c4bc4228fc7caab3d5c73d4c2ad4f35e8adeda69be682f0f91e99e9c",
@@ -305,13 +344,19 @@
     {
       "id": "D-LICENSE-SIDECAR",
       "date": "2026-10-24",
-      "decision": "sidecar 采用 AGPL-3.0-only，与 MaaEnd/MXU 一致；LICENSE 与 Cargo license 字段待审查通过后落地。",
+      "decision": "sidecar 采用 AGPL-3.0-only，与 MaaEnd/MXU 一致；LICENSE（sha256 8486a10c...）与 Cargo license 字段已落地。",
       "owner": "administrator"
     },
     {
       "id": "D-GLOBAL-AGENTS-DRIFT",
       "date": "2026-10-24",
       "decision": "保留当前全局 AGENTS.md（sha256 93cabb…）并重新登记到 runtime.json；工程行为继续受 perlica-maaend 角色、仓库规则与公开面内容闸约束。",
+      "owner": "administrator"
+    },
+    {
+      "id": "D-CW7-FINAL-AUDIT",
+      "date": "2026-10-24",
+      "decision": "CW1–CW6 取消中间独立 review/validation 门禁；每增量只做编译/构建、针对性测试、联合 smoke/demo 和固定候选 hash；完整审计与验证集中在 CW7 一次执行。仓库强制检查、停线、真实证据规则与公开写入审批不放松。",
       "owner": "administrator"
     }
   ],
