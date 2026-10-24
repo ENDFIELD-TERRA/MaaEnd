@@ -86,11 +86,13 @@ DesktopInputBackend::DesktopInputBackend(
     MaaController* ctrl,
     std::string controller_type,
     std::string backend_name,
-    DesktopKeyCodes key_codes)
+    DesktopKeyCodes key_codes,
+    bool allow_win32_options)
     : ctrl_(ctrl)
     , controller_type_(std::move(controller_type))
     , backend_name_(std::move(backend_name))
     , key_codes_(key_codes)
+    , allow_win32_options_(allow_win32_options)
     , hover_x_(kDesktopDefaultHoverAnchorX)
     , hover_y_(kDesktopDefaultHoverAnchorY)
 {
@@ -100,6 +102,11 @@ DesktopInputBackend::DesktopInputBackend(
 
     if (ctrl_ == nullptr) {
         unsupported_reason_ = "controller handle is null";
+        return;
+    }
+
+    if (!allow_win32_options_) {
+        LogInfo << backend_name_ << " backend: Win32 mouse lock and background managed keys skipped." << VAR(controller_type_);
         return;
     }
 
@@ -349,10 +356,16 @@ DesktopKeyCodes MakeDesktopKeyCodes()
     };
 }
 
-std::unique_ptr<IInputBackend> CreateDesktopInputBackend(MaaController* ctrl, std::string controller_type, std::string backend_name)
+std::unique_ptr<IInputBackend>
+    CreateDesktopInputBackend(MaaController* ctrl, std::string controller_type, std::string backend_name, bool allow_win32_options)
 {
     LogInfo << "MapNavigator input backend selected." << VAR(controller_type) << VAR(backend_name);
-    return std::make_unique<DesktopInputBackend>(ctrl, std::move(controller_type), std::move(backend_name), MakeDesktopKeyCodes());
+    return std::make_unique<DesktopInputBackend>(
+        ctrl,
+        std::move(controller_type),
+        std::move(backend_name),
+        MakeDesktopKeyCodes(),
+        allow_win32_options);
 }
 
 } // namespace mapnavigator::backend::desktop

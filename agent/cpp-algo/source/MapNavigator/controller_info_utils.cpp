@@ -6,6 +6,7 @@
 
 #include "../utils.h"
 #include "controller_info_utils.h"
+#include "controller_type_utils.h"
 
 namespace mapnavigator
 {
@@ -16,9 +17,10 @@ namespace
 struct ControllerInfo
 {
     std::string type;
+    std::string backend;
     std::optional<int> mouse_method;
 
-    MEO_JSONIZATION(MEO_OPT type, MEO_OPT mouse_method)
+    MEO_JSONIZATION(MEO_OPT type, MEO_OPT backend, MEO_OPT mouse_method)
 };
 
 ControllerInfo ParseControllerInfo(MaaController* controller)
@@ -53,6 +55,10 @@ ControllerInfo ParseControllerInfo(MaaController* controller)
 std::string DetectControllerType(MaaController* controller)
 {
     const auto info = ParseControllerInfo(controller);
+    // custom + backend=cloud_web 是 CloudWeb 的能力族（P01 合同），不能和 Win32 桌面混为一类。
+    if (IsCloudWebControllerInfo(info.type, info.backend)) {
+        return "cloud_web";
+    }
     return info.type;
 }
 

@@ -28,6 +28,12 @@ std::unique_ptr<IInputBackend> CreateInputBackend(MaaController* ctrl)
         return backend::Linux::CreateLinuxInputBackend(ctrl, std::move(controller_type));
     }
 
+    if (IsCloudWebControllerType(controller_type)) {
+        // CloudWeb 复用桌面输入原语（generic PostClick/PostKeyDown/PostRelativeMove），
+        // 但不得挂 Win32 专属的 mouse lock / background managed keys，后端名也不得记成 win32。
+        return backend::desktop::CreateDesktopInputBackend(ctrl, std::move(controller_type), "cloud_web", false);
+    }
+
     return backend::desktop::CreateDesktopInputBackend(ctrl, std::move(controller_type), "win32");
 }
 

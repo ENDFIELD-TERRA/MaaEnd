@@ -43,8 +43,21 @@ inline bool IsLinuxControllerType(std::string_view controller_type)
     return EqualsIgnoreCase(controller_type, "linux");
 }
 
+// CloudWeb 运行时是 native CustomController：info.type 报 custom，能力族由 info.backend 报 cloud_web（P01 合同）。
+// type=custom 且 backend 命中 cloud_web/cloudweb 时才算 CloudWeb，其余 custom 不认领。
+inline bool IsCloudWebControllerInfo(std::string_view controller_type, std::string_view backend)
+{
+    return EqualsIgnoreCase(controller_type, "custom") && (EqualsIgnoreCase(backend, "cloud_web") || EqualsIgnoreCase(backend, "cloudweb"));
+}
+
+inline bool IsCloudWebControllerType(std::string_view controller_type)
+{
+    return EqualsIgnoreCase(controller_type, "cloud_web") || EqualsIgnoreCase(controller_type, "cloudweb");
+}
+
 // 框架先加载 ./resource, 再把控制器自己的 overlay 叠上去, 所以 overlay 里的同名图会胜出; 这里照同一个
-// 顺序找, 基础资源永远排最后。云游戏与本地 ADB 在控制器类型上无法区分, 所以 resource_cloud_adb 不参与。
+// 顺序找, 基础资源永远排最后。云游戏与本地 ADB 在控制器类型上无法区分, 所以 resource_cloud_adb 不参与;
+// CloudWeb 由 info.backend 显式区分, 可以挂 resource_cloud_web, 目录不存在时逐层回落到基础 resource。
 inline std::vector<std::filesystem::path> ResourceImageRoots(std::string_view controller_type)
 {
     const std::filesystem::path install_dir = std::filesystem::absolute(get_install_dir());
@@ -62,6 +75,9 @@ inline std::vector<std::filesystem::path> ResourceImageRoots(std::string_view co
     }
     else if (EqualsIgnoreCase(controller_type, "macos")) {
         dirs.emplace_back("resource_macos");
+    }
+    else if (IsCloudWebControllerType(controller_type)) {
+        dirs.emplace_back("resource_cloud_web");
     }
     dirs.emplace_back("resource");
 

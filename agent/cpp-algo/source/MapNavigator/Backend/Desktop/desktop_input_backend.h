@@ -22,7 +22,12 @@ struct DesktopKeyCodes
 class DesktopInputBackend : public IInputBackend
 {
 public:
-    DesktopInputBackend(MaaController* ctrl, std::string controller_type, std::string backend_name, DesktopKeyCodes key_codes);
+    DesktopInputBackend(
+        MaaController* ctrl,
+        std::string controller_type,
+        std::string backend_name,
+        DesktopKeyCodes key_codes,
+        bool allow_win32_options = true);
     ~DesktopInputBackend() override;
 
     MaaController* GetCtrl() const override;
@@ -70,6 +75,7 @@ private:
     double default_pitch_units_per_degree_ = 0.0;
     bool mouse_lock_follow_enabled_ = false;
     bool background_managed_keys_enabled_ = false;
+    bool allow_win32_options_ = true;
     int hover_x_ = 0;
     int hover_y_ = 0;
     bool hover_inited_ = false;
@@ -81,6 +87,7 @@ private:
 
 DesktopKeyCodes MakeDesktopKeyCodes();
 
-std::unique_ptr<IInputBackend> CreateDesktopInputBackend(MaaController* ctrl, std::string controller_type, std::string backend_name);
+std::unique_ptr<IInputBackend>
+    CreateDesktopInputBackend(MaaController* ctrl, std::string controller_type, std::string backend_name, bool allow_win32_options = true);
 
 } // namespace mapnavigator::backend::desktop

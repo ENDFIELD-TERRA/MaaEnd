@@ -12,6 +12,7 @@
 #include <meojson/json.hpp>
 
 #include "../Common/output_paths.h"
+#include "../MapNavigator/controller_info_utils.h"
 #include "../utils.h"
 #include "IconRecognizer.h"
 #include "detail/Attach.h"
@@ -110,17 +111,7 @@ std::string ControllerTypeFromContext(MaaContext* context)
         return {};
     }
 
-    ScopedStringBuffer buffer;
-    if (buffer.Get() == nullptr || !MaaControllerGetInfo(controller, buffer.Get()) || MaaStringBufferIsEmpty(buffer.Get())) {
-        return {};
-    }
-    const char* raw = MaaStringBufferGet(buffer.Get());
-    const auto parsed = raw == nullptr ? std::optional<json::value> {} : json::parse(raw);
-    if (!parsed || !parsed->is_object() || !parsed->as_object().contains("type")) {
-        return {};
-    }
-    const auto& type = parsed->as_object().at("type");
-    return type.is_string() ? type.as_string() : std::string {};
+    return mapnavigator::DetectControllerType(controller);
 }
 
 void WriteDetail(MaaStringBuffer* buffer, const RecognitionResult& result)

@@ -16,6 +16,8 @@
 #else
 #include <unistd.h>
 #endif
+#include "../MapNavigator/controller_info_utils.h"
+#include "../MapNavigator/controller_type_utils.h"
 #include "../utils.h"
 
 #include "MapLocateAction.h"
@@ -254,36 +256,12 @@ std::string DetectControllerType(MaaContext* context)
         return {};
     }
 
-    MaaStringBuffer* buffer = MaaStringBufferCreate();
-    if (buffer == nullptr) {
-        return {};
-    }
-
-    std::string controller_type;
-    if (MaaControllerGetInfo(controller, buffer) && !MaaStringBufferIsEmpty(buffer)) {
-        const char* raw = MaaStringBufferGet(buffer);
-        if (raw != nullptr && raw[0] != '\0') {
-            const auto info = json::parse(raw).value_or(json::object {});
-            if (info.contains("type") && info.at("type").is_string()) {
-                controller_type = info.at("type").as_string();
-            }
-        }
-    }
-
-    MaaStringBufferDestroy(buffer);
-    return controller_type;
+    return mapnavigator::DetectControllerType(controller);
 }
 
 bool UsesAdbMinimapRoi(std::string_view controller_type)
 {
-    auto equals_ignore_case = [controller_type](std::string_view candidate) {
-        return controller_type.size() == candidate.size() && std::ranges::equal(controller_type, candidate, [](char lhs, char rhs) {
-                   return std::tolower(static_cast<unsigned char>(lhs)) == std::tolower(static_cast<unsigned char>(rhs));
-               });
-    };
-
-    return equals_ignore_case("adb") || equals_ignore_case("playcover") || equals_ignore_case("play_cover")
-           || equals_ignore_case("native_android");
+    return mapnavigator::IsAdbLikeControllerType(controller_type);
 }
 
 bool TryLocateOnMinimap(MaaContext* context, const MaaImageBuffer* image, const LocateOptions& options, LocateResult* out_result)

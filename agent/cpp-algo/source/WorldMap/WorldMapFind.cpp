@@ -14,6 +14,7 @@
 #include <MaaUtils/Logger.h>
 #include <meojson/json.hpp>
 
+#include "../MapNavigator/controller_info_utils.h"
 #include "WorldMapSolver.h"
 #include "utils.h"
 
@@ -174,28 +175,11 @@ bool ParseParam(const char* raw, FindParam* out)
 std::string ControllerType(MaaController* controller)
 {
     // 取不到就只剩基础资源层可用, 端上那层图会被静默跳过, 所以每条空路径都得留下痕迹
-    ScopedStringBuffer buffer;
-    if (buffer.Get() == nullptr || !MaaControllerGetInfo(controller, buffer.Get()) || MaaStringBufferIsEmpty(buffer.Get())) {
-        LogError << "WorldMap: controller info unavailable";
-        return {};
+    const std::string controller_type = mapnavigator::DetectControllerType(controller);
+    if (controller_type.empty()) {
+        LogError << "WorldMap: controller type unavailable";
     }
-
-    const char* raw = MaaStringBufferGet(buffer.Get());
-    if (raw == nullptr || raw[0] == '\0') {
-        LogError << "WorldMap: controller info is empty";
-        return {};
-    }
-
-    const auto info = json::parse(raw);
-    if (!info) {
-        LogError << "WorldMap: controller info is not valid json" << VAR(raw);
-        return {};
-    }
-    if (!info->contains("type") || !info->at("type").is_string()) {
-        LogError << "WorldMap: controller info carries no 'type' string" << VAR(raw);
-        return {};
-    }
-    return info->at("type").as_string();
+    return controller_type;
 }
 
 bool CaptureScreen(MaaController* controller, ScopedImageBuffer* buffer, cv::Mat* out)
