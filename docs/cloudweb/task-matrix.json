@@ -1,0 +1,830 @@
+{
+  "schema": "cloudweb-task-matrix/1",
+  "source_inventory": "inventory-current.json",
+  "source_inventory_sha256": "bc0bb67d6b8b93e7efeb9b2c8e476ec519b912b613e048aff201428b5f514cc8",
+  "maaend_head": "c7fd1b25071d9976703635b7dda66812172d1629",
+  "counts": {
+    "tasks_total": 49,
+    "windows_applicable": 46,
+    "families": {
+      "lifecycle": 2,
+      "open_world": 9,
+      "auto_essence": 1,
+      "regional": 5,
+      "other_menu": 8,
+      "dijiang": 5,
+      "valuables": 5,
+      "backpack": 5,
+      "daily_claim": 1,
+      "delivery_jobs": 2,
+      "protocol_space": 1,
+      "realtime_assist": 1,
+      "trial_of_swordmancy": 1
+    },
+    "presets": 3,
+    "settings": 2,
+    "pretasks": 1
+  },
+  "evidence_schema": {
+    "status_enum": [
+      "pending",
+      "pass",
+      "fail",
+      "blocked_fixture",
+      "not_applicable",
+      "not_implemented"
+    ],
+    "required_fields": [
+      "candidate_sha",
+      "runtime（MaaEnd/MXU/sidecar/MaaFramework/browser）",
+      "actuator（kind/target/profile）",
+      "options/routes/presets",
+      "preconditions",
+      "steps",
+      "game_result",
+      "cancel/recover",
+      "evidence_paths+sha256",
+      "unverified"
+    ],
+    "rule": "缺任一字段不得标 pass；fake/假 SDK/固定 PNG/独立 Node 脚本不计。"
+  },
+  "tasks": [
+    {
+      "task": "AccountSwitch",
+      "family": "lifecycle",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "AccountSwitchStart",
+      "options_count": 1,
+      "options": [
+        "AccountSwitchMatchMode"
+      ],
+      "status": "pending",
+      "note": "云账号 profile/退出登录语义。",
+      "evidence": null
+    },
+    {
+      "task": "AeroSalvage",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "AeroSalvageMain",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "AutoCollect",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "AutoCollectSchedule",
+      "options_count": 5,
+      "options": [
+        "AutoCollectMode",
+        "AutoCollectSchedule",
+        "AutoCollectStashBackpackSubTask",
+        "AutoCollectValleyIV",
+        "AutoCollectWuling"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "AutoEcoFarm",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "AutoEcoFarmTask",
+      "options_count": 3,
+      "options": [
+        "CollectRanch",
+        "CollectSisPaintingFarm",
+        "CollectWulingCityFarm"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "AutoEssence",
+      "family": "auto_essence",
+      "group": [
+        "sanity_sink"
+      ],
+      "entry": "AutoEssenceSchedule",
+      "options_count": 3,
+      "options": [
+        "AutoEssenceMenu",
+        "AutoEssenceSchedule",
+        "AutoFightSettingFull"
+      ],
+      "status": "pending",
+      "note": "地点与战斗配置/导航路线需分别取证，不能只测一个点。",
+      "evidence": null
+    },
+    {
+      "task": "AutoSell",
+      "family": "regional",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "AutoSellMain",
+      "options_count": 3,
+      "options": [
+        "AutoSellPriceType",
+        "AutoSellValleyIV",
+        "AutoSellWuling"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "AutoStockpile",
+      "family": "regional",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "AutoStockpileMain",
+      "options_count": 5,
+      "options": [
+        "AutoStockpileAllowDataUpload",
+        "AutoStockpileElasticValleyIV",
+        "AutoStockpileElasticWuling",
+        "AutoStockpileMinBuy",
+        "AutoStockpileServerTime"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "AutoStockStaple",
+      "family": "regional",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "AutoStockStapleSchedule",
+      "options_count": 3,
+      "options": [
+        "AutoStockStapleSchedule",
+        "AutoStockStapleValleyIV",
+        "AutoStockStapleWuling"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "BakerEntry",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "BakerEntry",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "BatchAddFriends",
+      "family": "dijiang",
+      "group": [
+        "dijiang_ship"
+      ],
+      "entry": "BatchAddFriendsMain",
+      "options_count": 1,
+      "options": [
+        "BatchAddFriends"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "BatchDeleteFriends",
+      "family": "dijiang",
+      "group": [
+        "dijiang_ship"
+      ],
+      "entry": "BatchDeleteFriendsMain",
+      "options_count": 1,
+      "options": [
+        "BatchDeleteFriendsInactiveDays"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "BatchUseDetector",
+      "family": "valuables",
+      "group": [
+        "valuables_vault"
+      ],
+      "entry": "BatchUseDetectorMain",
+      "options_count": 3,
+      "options": [
+        "BatchUseDetectorCategory",
+        "BatchUseDetectorRegion",
+        "BatchUseDetectorTimes"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "ClaimSimulationRewards",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "SimSpaceEntry",
+      "options_count": 1,
+      "options": [
+        "ClaimSimulationArea"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "CloseGamePC",
+      "family": "lifecycle",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "CloseGamePC",
+      "options_count": 2,
+      "options": [
+        "CloseGamePCApplyGameSetting",
+        "CloseGamePCCloseLauncher"
+      ],
+      "status": "pending",
+      "note": "云会话结束语义，不是本地进程 kill。",
+      "evidence": null
+    },
+    {
+      "task": "Crafting",
+      "family": "backpack",
+      "group": [
+        "backpack"
+      ],
+      "entry": "CraftingStart",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "CreditShoppingN2",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "CreditShoppingMain",
+      "options_count": 9,
+      "options": [
+        "CreditShoppingClueSend",
+        "CreditShoppingClueStockLimit",
+        "CreditShoppingForce",
+        "CreditShoppingKeepShelfRecord",
+        "CreditShoppingPriority1",
+        "CreditShoppingPriority2",
+        "CreditShoppingPriority3",
+        "CreditShoppingQuickGiveDuplicateClues",
+        "CreditShoppingReserve"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "DailyRewards",
+      "family": "daily_claim",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "DailyRewardStart",
+      "options_count": 6,
+      "options": [
+        "DailyActivityFullWarning",
+        "DailyClaimDeliveryJobsRewards",
+        "DailyEmailRewards",
+        "DailyEventRewards",
+        "DailyProtocolPassRewards",
+        "DailyTaskRewards"
+      ],
+      "status": "pending",
+      "note": "上游只启用 DailyClaimDeliveryJobsRewardSub；其余四项 enabled=false，不计通过。",
+      "evidence": null
+    },
+    {
+      "task": "DecomposeWeaponEssence",
+      "family": "valuables",
+      "group": [
+        "valuables_vault"
+      ],
+      "entry": "DecomposeWeaponEssenceStart",
+      "options_count": 1,
+      "options": [
+        "DecomposeWeaponEssenceThreshold"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "DeliveryJobs",
+      "family": "delivery_jobs",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "DeliveryJobsMain",
+      "options_count": 5,
+      "options": [
+        "DeliveryJobsAutoDeliveryPreferZipline",
+        "DeliveryJobsOngoingDeliveryFallback",
+        "PackCargoSelectItem",
+        "ValleyIV",
+        "Wuling"
+      ],
+      "status": "pending",
+      "note": "导航与送货分支。",
+      "evidence": null
+    },
+    {
+      "task": "DijiangRewards",
+      "family": "dijiang",
+      "group": [
+        "dijiang_ship"
+      ],
+      "entry": "DijiangRewards",
+      "options_count": 3,
+      "options": [
+        "ClueSetting",
+        "SelectToGrow",
+        "StageTaskSetting"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "EnvironmentMonitoring",
+      "family": "regional",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "EnvironmentMonitoringMain",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "EssenceFilter",
+      "family": "valuables",
+      "group": [
+        "valuables_vault"
+      ],
+      "entry": "EssenceFilterMain",
+      "options_count": 1,
+      "options": [
+        "ExportInventory"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "GearAssembly",
+      "family": "valuables",
+      "group": [
+        "valuables_vault"
+      ],
+      "entry": "GearAssemblyStart",
+      "options_count": 2,
+      "options": [
+        "GearAssemblySortOrder",
+        "GearAssemblyType"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "GiftOperator",
+      "family": "dijiang",
+      "group": [
+        "dijiang_ship"
+      ],
+      "entry": "GiftOperatorMain",
+      "options_count": 2,
+      "options": [
+        "OnlyReceiveGift",
+        "StashBackpackSubTask"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "ImportBluePrints",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "ImportBluePrints",
+      "options_count": 1,
+      "options": [
+        "ImportBluePrints"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "IntelArchive",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "IntelArchiveMain",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "ItemTransfer",
+      "family": "backpack",
+      "group": [
+        "backpack"
+      ],
+      "entry": "ItemTransfer",
+      "options_count": 7,
+      "options": [
+        "DestinationRegion",
+        "EnableReturnTransfer",
+        "ItemTransferStashBackpack",
+        "ItemTransferStashBackpackWhenBothFull",
+        "OriginRegion",
+        "TransferAll",
+        "WhatToTransfer"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "LevelUpOperator",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "OperatorLevelUpStart",
+      "options_count": 1,
+      "options": [
+        "LevelUpOperatorMaxLevelThreshold"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "ProtocolSpace",
+      "family": "protocol_space",
+      "group": [
+        "sanity_sink"
+      ],
+      "entry": "ProtocolSpaceSchedule",
+      "options_count": 4,
+      "options": [
+        "AutoFightSetting",
+        "ProtocolSpaceMode",
+        "ProtocolSpaceSchedule",
+        "ProtocolSpaceTeamChoose"
+      ],
+      "status": "pending",
+      "note": "关键战斗模式需分别取证，不能只测入口。",
+      "evidence": null
+    },
+    {
+      "task": "PullCountCalculator",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "PullCountCalculatorMain",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "PuzzleSolver",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "PuzzleSolverMain",
+      "options_count": 1,
+      "options": [
+        "PuzzleSolverMode"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "ReadAllWiki",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "WikiReadAll",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "RealTimeTask",
+      "family": "realtime_assist",
+      "group": [
+        "realtime"
+      ],
+      "entry": "RealTimeTaskMain",
+      "options_count": 12,
+      "options": [
+        "AutoAeroSalvage",
+        "AutoCloseInteraction",
+        "AutoFight",
+        "AutoPat",
+        "AutoPick",
+        "AutoPuzzleSolving",
+        "AutoSkip",
+        "AutoTaskInterval",
+        "AutoZipline",
+        "QuickTeleport",
+        "SklandMap",
+        "VideoBrowser"
+      ],
+      "status": "pending",
+      "note": "AutoSkip/AutoClose/AutoFight/AutoPick/QuickTeleport/AutoPuzzle/AeroSalvage/AutoZipline/AutoPat；SklandMap/VideoBrowser 附属。",
+      "evidence": null
+    },
+    {
+      "task": "ReceiveProdManual",
+      "family": "backpack",
+      "group": [
+        "backpack"
+      ],
+      "entry": "ProdManualStart",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "ResourceRecycleStation",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "ResourceRecycleStationStart",
+      "options_count": 1,
+      "options": [
+        "ResourceRecycleStationRegion"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "SeizeDeliveryJobs",
+      "family": "delivery_jobs",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "SeizeDeliveryJobsCheckOngoingJob",
+      "options_count": 4,
+      "options": [
+        "SeizeDeliveryJobsCommissionSource",
+        "SeizeDeliveryJobsPostProcessing",
+        "SeizeDeliveryJobsRefreshLimit",
+        "SeizeDeliveryJobsReward"
+      ],
+      "status": "pending",
+      "note": "导航与抢占分支。",
+      "evidence": null
+    },
+    {
+      "task": "SellProduct",
+      "family": "regional",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "OutpostTradingSchedule",
+      "options_count": 7,
+      "options": [
+        "SellProductItemReserveRules",
+        "SellProductOperatorAutoSwitch",
+        "SellProductPriorityRules",
+        "SellProductSchedule",
+        "SellProductSelectionStrategy",
+        "ValleyIVSell",
+        "WulingSell"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "SharedZiplineDelete",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "SharedZiplineDeleteMain",
+      "options_count": 2,
+      "options": [
+        "SharedZiplineDeleteValleyIV",
+        "SharedZiplineDeleteWuling"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "SimpleProductionBatchStart",
+      "family": "backpack",
+      "group": [
+        "backpack"
+      ],
+      "entry": "SimpleProductionBatchStart",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "StashBackpack",
+      "family": "backpack",
+      "group": [
+        "backpack"
+      ],
+      "entry": "StashBackpackMain",
+      "options_count": 1,
+      "options": [
+        "StashBackpackType"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "SwitchTeam",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "SwitchTeamMain",
+      "options_count": 1,
+      "options": [
+        "SwitchTeamTeamChoose"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "TrialOfSwordmancy",
+      "family": "trial_of_swordmancy",
+      "group": [
+        "regional_development"
+      ],
+      "entry": "TrialOfSwordmancyMain",
+      "options_count": 1,
+      "options": [
+        "TrialOfSwordmancyMode"
+      ],
+      "status": "pending",
+      "note": "Daily/Coating/Farm25 分开，不得由 Daily 推断其余。",
+      "evidence": null
+    },
+    {
+      "task": "UmbralMonument",
+      "family": "other_menu",
+      "group": [
+        "other_menu"
+      ],
+      "entry": "UmbralMonumentEntry",
+      "options_count": 4,
+      "options": [
+        "AutoFightSetting",
+        "UmbralMonumentRetryCount",
+        "UmbralMonumentTarget",
+        "UmbralMonumentTeamChoose"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "VisitFriends",
+      "family": "dijiang",
+      "group": [
+        "dijiang_ship"
+      ],
+      "entry": "VisitFriendsMain",
+      "options_count": 3,
+      "options": [
+        "ProductionAssistControl",
+        "VisitFriendsPriorityRemarkEnable",
+        "VisitFriendsRemark"
+      ],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "WeaponUpgrade",
+      "family": "valuables",
+      "group": [
+        "valuables_vault"
+      ],
+      "entry": "WeaponUpgradeStart",
+      "options_count": 0,
+      "options": [],
+      "status": "pending",
+      "note": "",
+      "evidence": null
+    },
+    {
+      "task": "ZiplineImport",
+      "family": "open_world",
+      "group": [
+        "open_world"
+      ],
+      "entry": "ZiplineImportMain",
+      "options_count": 1,
+      "options": [
+        "ZiplineImportClearLogin"
+      ],
+      "status": "pending",
+      "note": "独立 Firefox/profile 与云游戏 profile 生命周期分开。",
+      "evidence": null
+    }
+  ],
+  "pretask": [
+    {
+      "name": "LaunchGamePC",
+      "entry": null,
+      "status": "pending",
+      "note": "LaunchGamePC 需改成 CloudWeb 启动/连接流程；不是本地进程启动。"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DailyFull",
+      "status": "pending"
+    },
+    {
+      "name": "QuickDaily",
+      "status": "pending"
+    },
+    {
+      "name": "RealtimeAssist",
+      "status": "pending"
+    }
+  ],
+  "settings": [
+    {
+      "name": "Keymap",
+      "status": "pending"
+    },
+    {
+      "name": "Zipline",
+      "status": "pending"
+    }
+  ]
+}

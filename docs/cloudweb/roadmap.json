@@ -18,7 +18,9 @@
     "maaend_v2": {"head": "051d17f2527e2e990952d6655f1f380d5d7de81e"},
     "qoder_agentset": {"head": "e3dab67d997840c5d8ae4cf0328b2b36f308368c"},
     "maa_framework_rs_patched": {"head": "953ec242d2542ab907211a4aa347b9a855f698aa"},
-    "maa_framework_rs_unfixed": {"head": "c1c617330b56205798609c7566e602b55adba74b"}
+    "maa_framework_rs_unfixed": {"head": "c1c617330b56205798609c7566e602b55adba74b"},
+    "maa_framework_rs_latest": {"head": "a73f3303287ae48314f885d7a6e7a64882b48827"},
+    "fix_rs_candidate": {"head": "2fb895a9d845a3d58aef525b82fe03c6f6fce99f", "base": "a73f3303287ae48314f885d7a6e7a64882b48827", "diff_sha256": "6188ae46fd7c990fe1c3bd33dfb5fb104d885d7b290a1e7923c29a60db7e189c"}
   },
   "cw1_candidate": {
     "candidate_id": "f9706e2e942b932fa74b645002af4646021046cc28d2e662593c03de370b6cf7",
@@ -236,12 +238,18 @@
         "port to latest upstream",
         "independent PR, then formal release dependency"
       ],
-      "evidence": ["unfixed c1c6173: Drop=0/Arc=101", "patch 953ec24: Drop=1/Arc=1", "record/Tasker/destroy regression pending"]
+      "evidence": [
+        "unfixed c1c6173: 6/8 ownership tests failed (Drop=0)",
+        "reference patch 953ec24: 8/8 tests passed on Windows MSVC",
+        "latest candidate 2fb895a on upstream a73f330; diff 6188ae46...",
+        "native destroy path source-verified: ControllerAgent destructor joins action thread",
+        "record/Tasker retention, concurrent destroy, static-link, Linux/macOS and independent review still pending"
+      ]
     }
   ],
   "future_issues": [
     {"id": "CW8-1", "title": "在 c7fd1b25 重生成 task/option/preset/pretask inventory", "owner": "Perlica", "status": "verified", "dependencies": [], "acceptance": ["49/426/3/1 计数", "46 Windows 分类", "inventory hash"], "evidence": ["49/426/3/2/1", "windows_applicable=46", "inventory-current.json sha256 bc0bb67d6b8b93e7efeb9b2c8e476ec519b912b613e048aff201428b5f514cc8", "baseline 47 + LevelUpOperator/UmbralMonument"]},
-    {"id": "CW8-2", "title": "任务族矩阵与证据 schema", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW8-1"], "acceptance": ["每族一张矩阵", "空行保持 Pending"]},
+    {"id": "CW8-2", "title": "任务族矩阵与证据 schema", "owner": "Perlica", "status": "verified", "dependencies": ["CW8-1"], "acceptance": ["每族一张矩阵", "空行保持 Pending"], "evidence": ["46 rows all pending", "task-matrix.json sha256 46994117006bbeeadf8eb134d216346d1b472fa2ade15ded56edaa922f3b0061", "task-matrix.md sha256 9ecaea440542bc98213f00a09c4d10233204eea2e724560bbebd3375f49b8464"]},
     {"id": "CW8-3", "title": "任务族适配（Daily/AutoEssence/ProtocolSpace/DeliveryJobs/ToS/RealTimeTask/生命周期/预设/ZiplineImport）", "owner": "task-family agents", "status": "pending", "dependencies": ["CW8-2", "CW7"], "acceptance": ["真实截图/ROI/跳转/游戏结果"]},
     {"id": "CW8-4", "title": "option/route/preset/pretask 实际运行等价", "owner": "MaaEnd agents", "status": "pending", "dependencies": ["CW8-3"], "acceptance": ["每项实际运行", "不能只静态映射"]},
     {"id": "CW8-5", "title": "46 项 Windows 业务逐项 Pass/Fail + 独立抽查", "owner": "Perlica+validator", "status": "pending", "dependencies": ["CW8-3", "CW8-4"], "acceptance": ["46 行有候选/证据/结果"]},

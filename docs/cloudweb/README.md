@@ -8,6 +8,7 @@ This directory is the public snapshot of the CloudWeb planning set:
 - `cw8-cw10-plan.md` — CW8 full task qualification, CW9 fault/long-run, CW10 packaging/upstream plan.
 - `acceptance-plan.md` — acceptance checklists for CW0–CW7/FIX-RS and the gate review flow.
 - `inventory-current.json` — generated task/option/preset/pretask inventory at the fixed MaaEnd baseline (49/426/3/2/1, 46 Windows).
+- `task-matrix.json` / `task-matrix.md` — 46-row Windows task matrix, all rows Pending, with evidence schema.
 
 Scope note:
 

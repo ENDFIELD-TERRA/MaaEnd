@@ -26,7 +26,7 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 | ID | 事项 | owner | 依赖 | 验收 |
 | --- | --- | --- | --- | --- |
 | CW8-1 | 在 `c7fd1b25` 重生成 task/option/preset/pretask inventory；核验 49/426/3/1 | Perlica | 无 | **verified**：`inventory-current.json` `bc0bb67d…`，49/426/3/2/1，46 Windows；基线 47 + `LevelUpOperator`/`UmbralMonument` |
-| CW8-2 | 建立任务族矩阵与证据 schema（真实 actuator/target/profile、options/routes、结果、取消/恢复、证据） | Perlica | CW8-1 | 每族一张矩阵；空行保持 Pending |
+| CW8-2 | 建立任务族矩阵与证据 schema（真实 actuator/target/profile、options/routes、结果、取消/恢复、证据） | Perlica | CW8-1 | **verified**：`task-matrix.json` `46994117…` / `task-matrix.md` `9ecaea44…`；46 行全 Pending；schema 含 10 项必需字段 |
 | CW8-3 | 任务族适配清单：Daily/claim、AutoEssence、ProtocolSpace、DeliveryJobs/Seize、TrialOfSwordmancy、RealTimeTask（AutoSkip/Close/Fight/Pick/Teleport/Puzzle/AeroSalvage/Zipline/AutoPat、SklandMap/VideoBrowser）、AccountSwitch/Launch/Close、presets/settings、ZiplineImport | task-family agents | CW8-2；CW7 子集 | 每族有真实截图/ROI/跳转/游戏结果 |
 | CW8-4 | option/route/preset/pretask 等价：DailyRewards 6 根/13 递归、三个 preset、Keymap/Zipline settings、LaunchGamePC 云端等价 | MaaEnd agents | CW8-3 | 每项实际运行；不能只静态映射 |
 | CW8-5 | 46 项 Windows 业务逐项 Pass/Fail 与证据绑定；独立 validator 抽查 | Perlica + validator | CW8-3/4 | 46 项逐行有候选/证据/结果；未通过如实保留 |
@@ -37,6 +37,14 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 - 基线 `c7fd1b25`：**49 tasks / 426 option / 3 preset / 2 setting / 1 pretask**；`windows_applicable=46`；无重复 task/option。
 - 与证据包旧基线（`5155c76c`，47 tasks）比较：新增 `LevelUpOperator`、`UmbralMonument`，无移除；`cloudweb_open_tasks` 仅 `DailyRewards`。
 - 产物：`inventory-current.json` sha256 `bc0bb67d6b8b93e7efeb9b2c8e476ec519b912b613e048aff201428b5f514cc8`；连续两次运行 stdout/文件哈希一致（幂等）。
+
+### CW8-2 结果（verified）
+
+- 生成器 `matrix.mjs` 从 `inventory-current.json` 生成 46 行 Windows 任务矩阵；全部为 `pending`，没有预填通过。
+- 任务族分布：open_world 9、other_menu 8、regional 5、dijiang 5、valuables 5、backpack 5、lifecycle 2、delivery_jobs 2、auto_essence 1、protocol_space 1、realtime_assist 1、trial_of_swordmancy 1、daily_claim 1。
+- 证据 schema 字段：candidate SHA、runtime、actuator（kind/target/profile）、options/routes/presets、preconditions、steps、game_result、cancel/recover、evidence paths+sha256、unverified；状态枚举 pending/pass/fail/blocked_fixture/not_applicable/not_implemented。
+- 独立列：1 个 pretask（LaunchGamePC 云端等价）、3 个 preset、2 个 setting。
+- 产物：`task-matrix.json` sha256 `46994117006bbeeadf8eb134d216346d1b472fa2ade15ded56edaa922f3b0061`；`task-matrix.md` sha256 `9ecaea440542bc98213f00a09c4d10233204eea2e724560bbebd3375f49b8464`；连续两次生成哈希一致。
 
 ### 任务族矩阵（首批）
 
@@ -55,7 +63,7 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 ### 首批动作
 
 1. **[done]** 用 `c7fd1b25` 的 `assets/tasks`/interface 重生成 inventory；结果 49/426/3/2/1、46 Windows，见上方 CW8-1 结果；旧证据 47 项仅作差异对照。
-2. 生成 46 行 Windows 任务矩阵空表（任务、族、必需 options/routes、证据字段、状态）。
+2. **[done]** 生成 46 行 Windows 任务矩阵空表（任务、族、必需 options/routes、证据字段、状态），见 CW8-2 结果。
 3. 定义每族最小证据包：候选 SHA、真实 actuator/target/profile、截图/ROI/跳转、游戏结果、取消/恢复、未验证边界。
 4. CW7 关闭后按族分配；CW7 未关闭前只做静态/资源准备，不宣称 G3。
 5. 上游合并副产物：把任务族适配按 PR 切片记录，不自动开 PR。

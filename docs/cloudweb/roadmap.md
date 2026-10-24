@@ -58,7 +58,7 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | CW5 | 唯一 frame reader/cache、preview/识别分离、pool/run/task ID、锁外 shutdown | `partial` | CW2/4 | MXU sidecar backend/帧/任务/退出可用；无唯一 reader/cache 与 preview 分离；任务中 `/api/maa/state` 可 >60s 无响应 |
 | CW6 | 恢复通用 modifier+target click、薄 overlay、legacy camera、region/UID、能力准入、云生命周期 | `partial` | CW1 后可先改；定稿依赖 CW3/4 | C++ `cloud_web` + DailyRewards 白名单已有；`AutoAltClickAction` 被全局改 Escape（材料 §0.1 明确反对）；region/UID、legacy camera、云生命周期未完成 |
 | CW7 | 真实 actuator/目标身份；连接→登录/排队→DailyRewards→Stop/重开；MapNavigator+AutoFight；后台隔离 | `partial` | CW3/4/5 + CW6 子集 | 一次 `run-20261024-172134` exit 0（从 Regional 界面启动）；冷启动 `172301`/`174331` 失败；Stop/重开、导航/战斗、隔离未验证 |
-| FIX-RS | last-owner 回收、record/Tasker retention、destroy quiescence；移植最新 upstream | `partial` | 可立即开始 | 已复现 Drop=0/Arc=101；patch `953ec24` Drop=1/Arc=1；未覆盖 record/Tasker/destroy 静默期与最新上游回归 |
+| FIX-RS | last-owner 回收、record/Tasker retention、destroy quiescence；移植最新 upstream | `partial` | 可立即开始 | 最新候选 `2fb895a`（base `a73f330`，diff `6188ae46…`）：Windows MSVC 8/8 ownership 测试通过；unfixed `c1c6173` 6/8 失败（Drop=0）；native destroy 路径源码核对为 ControllerAgent 析构 join action thread；record/Tasker retention、并发 destroy、static-link、Linux/macOS 与独立 review 未闭合 |
 
 ## 非 CW0–CW7 链路（Perlica 认领，2026-10-24）
 
@@ -68,7 +68,7 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | --- | --- | --- | --- |
 | E8 / CW8 | 46 项 Windows 业务 + 云 pretask 等价 + 必要 option/route/preset | Perlica | `in_progress`（规划/矩阵） |
 | CW8-1 | 在 `c7fd1b25` 重生成 task/option/preset/pretask inventory，核验 49/426/3/1 | Perlica | `verified`（49/426/3/2/1，46 Windows；`inventory-current.json` `bc0bb67d…`；旧基线 47 + LevelUpOperator/UmbralMonument） |
-| CW8-2 | 任务族矩阵与证据 schema | Perlica | `in_progress` |
+| CW8-2 | 任务族矩阵与证据 schema | Perlica | `verified`（46 行全 Pending；`task-matrix.json` `46994117…` / `.md` `9ecaea44…`） |
 | CW8-3 | 任务族适配：Daily、AutoEssence、ProtocolSpace、DeliveryJobs/Seize、TrialOfSwordmancy、RealTimeTask、生命周期、预设/settings、ZiplineImport | task-family agents（待 CW7） | `pending` |
 | CW8-4 | option/route/preset/pretask 实际运行等价 | MaaEnd agents（待 CW7） | `pending` |
 | CW8-5 | 46 项逐项 Pass/Fail + 独立抽查 | Perlica + validator | `pending` |
