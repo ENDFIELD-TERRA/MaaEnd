@@ -12,19 +12,51 @@
     "<workspace>/collaboration files/MaaEnd-CloudWeb-Coordinator-Report.md"
   ],
   "baselines": {
-    "sidecar": {"head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac", "branch": "main", "remote": "<sidecar-fork>", "worktree": "clean at audit; CW1 candidate uncommitted"},
-    "mxu": {"head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76", "branch": "feat/cloudweb-host", "remote": "<MXU-fork>", "worktree": "clean at audit; CW1 candidate uncommitted"},
-    "maaend": {"head": "c7fd1b25071d9976703635b7dda66812172d1629", "branch": "feat/cloudweb-cw28", "remote": "MaaEnd", "worktree": "clean"},
-    "maaend_v2": {"head": "051d17f2527e2e990952d6655f1f380d5d7de81e"},
-    "qoder_agentset": {"head": "e3dab67d997840c5d8ae4cf0328b2b36f308368c"},
-    "maa_framework_rs_patched": {"head": "953ec242d2542ab907211a4aa347b9a855f698aa"},
-    "maa_framework_rs_unfixed": {"head": "c1c617330b56205798609c7566e602b55adba74b"},
-    "maa_framework_rs_latest": {"head": "a73f3303287ae48314f885d7a6e7a64882b48827"},
-    "fix_rs_candidate": {"head": "2fb895a9d845a3d58aef525b82fe03c6f6fce99f", "base": "a73f3303287ae48314f885d7a6e7a64882b48827", "diff_sha256": "6188ae46fd7c990fe1c3bd33dfb5fb104d885d7b290a1e7923c29a60db7e189c"}
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "branch": "main",
+      "remote": "<sidecar-fork>",
+      "worktree": "clean at audit; CW1 candidate uncommitted"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "branch": "feat/cloudweb-host",
+      "remote": "<MXU-fork>",
+      "worktree": "clean at audit; CW1 candidate uncommitted"
+    },
+    "maaend": {
+      "head": "c7fd1b25071d9976703635b7dda66812172d1629",
+      "branch": "feat/cloudweb-cw28",
+      "remote": "MaaEnd",
+      "worktree": "clean"
+    },
+    "maaend_v2": {
+      "head": "051d17f2527e2e990952d6655f1f380d5d7de81e"
+    },
+    "qoder_agentset": {
+      "head": "e3dab67d997840c5d8ae4cf0328b2b36f308368c"
+    },
+    "maa_framework_rs_patched": {
+      "head": "953ec242d2542ab907211a4aa347b9a855f698aa"
+    },
+    "maa_framework_rs_unfixed": {
+      "head": "c1c617330b56205798609c7566e602b55adba74b"
+    },
+    "maa_framework_rs_latest": {
+      "head": "a73f3303287ae48314f885d7a6e7a64882b48827"
+    },
+    "fix_rs_candidate": {
+      "head": "2fb895a9d845a3d58aef525b82fe03c6f6fce99f",
+      "base": "a73f3303287ae48314f885d7a6e7a64882b48827",
+      "diff_sha256": "6188ae46fd7c990fe1c3bd33dfb5fb104d885d7b290a1e7923c29a60db7e189c"
+    }
   },
   "cw1_candidate": {
     "candidate_id": "adaa5905d12f1f21859dbb32ec01255206acafc432bb39bb3076bd8660e15b4c",
-    "protocol": {"major": 1, "minor": 1},
+    "protocol": {
+      "major": 1,
+      "minor": 1
+    },
     "sidecar": {
       "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
       "tracked_diff_sha256": "9dc8faf912e3c419b17945e0ddfd7ada53a8e1dbd1110b23b970282dfe49ca18",
@@ -65,6 +97,37 @@
       "FIX-RS independent review before upstream submission"
     ]
   },
+  "cw2_candidate": {
+    "candidate_id": "391659fbb603f2c97e18659861d326385c991451f04d5e1d185b7194d70ebd52",
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "tracked_diff_sha256": "9d47761670209b544e42ca6c169d3c17e12104ae3466106392483c059845ad16",
+      "release_exe_sha256": "39c2f4274f3557dc9ef9aad115a3074373dafb2554d4f351043e2ca34875bb4b"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "tracked_diff_sha256": "da21b658579460d210758a8467215c30eea4d862126c5bd53a2fad15962d8a5b"
+    },
+    "status": "partial",
+    "superseded_by": "574f4b0fc59616b072ef0ea8eb9d45ed49ff9b750d5e51e8466e7e056ac1743b",
+    "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw2/integration-report.md"
+  },
+  "cw3_candidate": {
+    "candidate_id": "574f4b0fc59616b072ef0ea8eb9d45ed49ff9b750d5e51e8466e7e056ac1743b",
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "tracked_diff_sha256": "2681e739715d742cc749169a9ced9acdedd398d3be79b4b1981dc28dfb227839",
+      "readme_sha256": "4eead4ef4aa5d6f6122a4af2193e3913105a7df31a0db0eaf5ce7906946c890b",
+      "release_exe_sha256": "8c90324bb061a58d140409f373c3dad9813970c39856424155c25003f2d81b27"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "tracked_diff_sha256": "201e5bb9f1362ffdcb8600e9e63e171a95d0c060c9882582776b082ada66a28e"
+    },
+    "status": "partial",
+    "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw3/integration-report.md",
+    "superseded_by": "6d7393bb82b1fc68c3ca1b20e99dc754dc6045783bafc91c1fe6dcf3171a6f60"
+  },
   "toolchain": {
     "rustc": "1.99.1",
     "default_host": "x86_64-pc-windows-gnu",
@@ -77,12 +140,36 @@
   "codegraph": {
     "version": "1.6.2",
     "indexes": {
-      "maaend": {"files": 1412, "nodes": 30994, "edges": 69968},
-      "sidecar": {"files": 8, "nodes": 572, "edges": 1825},
-      "mxu": {"files": 161, "nodes": 4798, "edges": 11845},
-      "agentset": {"files": 194, "nodes": 4406, "edges": 9139},
-      "maa_framework_rs": {"files": 38, "nodes": 2059, "edges": 5605},
-      "maa_framework_rs_unfixed": {"files": 37, "nodes": 2052, "edges": 5589}
+      "maaend": {
+        "files": 1412,
+        "nodes": 30994,
+        "edges": 69968
+      },
+      "sidecar": {
+        "files": 8,
+        "nodes": 572,
+        "edges": 1825
+      },
+      "mxu": {
+        "files": 161,
+        "nodes": 4798,
+        "edges": 11845
+      },
+      "agentset": {
+        "files": 194,
+        "nodes": 4406,
+        "edges": 9139
+      },
+      "maa_framework_rs": {
+        "files": 38,
+        "nodes": 2059,
+        "edges": 5605
+      },
+      "maa_framework_rs_unfixed": {
+        "files": 37,
+        "nodes": 2052,
+        "edges": 5589
+      }
     }
   },
   "product_denominator": {
@@ -91,39 +178,191 @@
     "presets": 3,
     "pretasks": 1,
     "windows_applicable": 46,
-    "cloudweb_open_tasks": ["DailyRewards"],
+    "cloudweb_open_tasks": [
+      "DailyRewards"
+    ],
     "complete_gate": "46 Windows tasks + LaunchGamePC cloud equivalent + required options/routes/presets"
   },
-  "status_levels": ["verified", "partial", "unverified", "blocked", "needs_review", "not_started"],
+  "status_levels": [
+    "verified",
+    "partial",
+    "unverified",
+    "blocked",
+    "needs_review",
+    "not_started"
+  ],
   "epics": [
-    {"id": "E0", "title": "候选、合同与可复现基线", "milestone": "M0", "cw": "CW0", "status": "partial"},
-    {"id": "E1", "title": "最小公共接线与真实 provider 身份", "milestone": "M1", "cw": "CW1", "status": "partial"},
-    {"id": "E2", "title": "Session/run、续租与最小停止", "milestone": "M2", "cw": "CW2", "status": "partial"},
-    {"id": "E3", "title": "完整 PC 持续输入", "milestone": "M3", "cw": "CW3", "status": "partial"},
-    {"id": "E4", "title": "媒体、几何与 observation token", "milestone": "M4", "cw": "CW4", "status": "not_started"},
-    {"id": "E5", "title": "Host 生命周期、唯一 frame reader 与只读预览", "milestone": "M5", "cw": "CW5", "status": "partial"},
-    {"id": "E6", "title": "MaaEnd 云身份、薄 overlay 与任务适配", "milestone": "M6", "cw": "CW6", "status": "partial"},
-    {"id": "E7", "title": "第一条真实纵向闭环", "milestone": "M7", "cw": "CW7", "status": "partial"},
-    {"id": "EF", "title": "FIX-RS 独立 binding 修复", "milestone": "FIX-RS", "cw": "FIX-RS", "status": "partial"},
-    {"id": "E8", "title": "全任务资格", "milestone": "M8", "cw": "CW8", "status": "in_progress"},
-    {"id": "E9", "title": "故障与长时稳定", "milestone": "M9", "cw": "CW9", "status": "in_progress"},
-    {"id": "E10", "title": "打包、兼容与上游收口", "milestone": "M10", "cw": "CW10", "status": "in_progress"},
-    {"id": "AC", "title": "CW0–CW7/FIX-RS 验收准备", "milestone": "AC", "cw": "AC", "status": "in_progress"}
+    {
+      "id": "E0",
+      "title": "候选、合同与可复现基线",
+      "milestone": "M0",
+      "cw": "CW0",
+      "status": "partial"
+    },
+    {
+      "id": "E1",
+      "title": "最小公共接线与真实 provider 身份",
+      "milestone": "M1",
+      "cw": "CW1",
+      "status": "partial"
+    },
+    {
+      "id": "E2",
+      "title": "Session/run、续租与最小停止",
+      "milestone": "M2",
+      "cw": "CW2",
+      "status": "partial"
+    },
+    {
+      "id": "E3",
+      "title": "完整 PC 持续输入",
+      "milestone": "M3",
+      "cw": "CW3",
+      "status": "partial"
+    },
+    {
+      "id": "E4",
+      "title": "媒体、几何与 observation token",
+      "milestone": "M4",
+      "cw": "CW4",
+      "status": "partial"
+    },
+    {
+      "id": "E5",
+      "title": "Host 生命周期、唯一 frame reader 与只读预览",
+      "milestone": "M5",
+      "cw": "CW5",
+      "status": "partial"
+    },
+    {
+      "id": "E6",
+      "title": "MaaEnd 云身份、薄 overlay 与任务适配",
+      "milestone": "M6",
+      "cw": "CW6",
+      "status": "partial"
+    },
+    {
+      "id": "E7",
+      "title": "第一条真实纵向闭环",
+      "milestone": "M7",
+      "cw": "CW7",
+      "status": "partial"
+    },
+    {
+      "id": "EF",
+      "title": "FIX-RS 独立 binding 修复",
+      "milestone": "FIX-RS",
+      "cw": "FIX-RS",
+      "status": "partial"
+    },
+    {
+      "id": "E8",
+      "title": "全任务资格",
+      "milestone": "M8",
+      "cw": "CW8",
+      "status": "in_progress"
+    },
+    {
+      "id": "E9",
+      "title": "故障与长时稳定",
+      "milestone": "M9",
+      "cw": "CW9",
+      "status": "in_progress"
+    },
+    {
+      "id": "E10",
+      "title": "打包、兼容与上游收口",
+      "milestone": "M10",
+      "cw": "CW10",
+      "status": "in_progress"
+    },
+    {
+      "id": "AC",
+      "title": "CW0–CW7/FIX-RS 验收准备",
+      "milestone": "AC",
+      "cw": "AC",
+      "status": "in_progress"
+    }
   ],
   "milestones": [
-    {"id": "M0", "cw": "CW0", "gate": "G0", "status": "partial"},
-    {"id": "M1", "cw": "CW1", "gate": "G0", "status": "partial"},
-    {"id": "M2", "cw": "CW2", "gate": "G1-pre", "status": "partial"},
-    {"id": "M3", "cw": "CW3", "gate": "G1", "status": "partial"},
-    {"id": "M4", "cw": "CW4", "gate": "G1", "status": "not_started"},
-    {"id": "M5", "cw": "CW5", "gate": "G2-pre", "status": "partial"},
-    {"id": "M6", "cw": "CW6", "gate": "G2-pre", "status": "partial"},
-    {"id": "M7", "cw": "CW7", "gate": "G2", "status": "partial"},
-    {"id": "FIX-RS", "cw": "FIX-RS", "gate": "release-dependency", "status": "partial"},
-    {"id": "M8", "cw": "CW8", "gate": "G3", "status": "not_started"},
-    {"id": "M9", "cw": "CW9", "gate": "G4-pre", "status": "in_progress"},
-    {"id": "M10", "cw": "CW10", "gate": "G4", "status": "not_started"},
-    {"id": "AC", "cw": "AC", "gate": "G0-G2", "status": "in_progress"}
+    {
+      "id": "M0",
+      "cw": "CW0",
+      "gate": "G0",
+      "status": "partial"
+    },
+    {
+      "id": "M1",
+      "cw": "CW1",
+      "gate": "G0",
+      "status": "partial"
+    },
+    {
+      "id": "M2",
+      "cw": "CW2",
+      "gate": "G1-pre",
+      "status": "partial"
+    },
+    {
+      "id": "M3",
+      "cw": "CW3",
+      "gate": "G1",
+      "status": "partial"
+    },
+    {
+      "id": "M4",
+      "cw": "CW4",
+      "gate": "G1",
+      "status": "partial"
+    },
+    {
+      "id": "M5",
+      "cw": "CW5",
+      "gate": "G2-pre",
+      "status": "partial"
+    },
+    {
+      "id": "M6",
+      "cw": "CW6",
+      "gate": "G2-pre",
+      "status": "partial"
+    },
+    {
+      "id": "M7",
+      "cw": "CW7",
+      "gate": "G2",
+      "status": "partial"
+    },
+    {
+      "id": "FIX-RS",
+      "cw": "FIX-RS",
+      "gate": "release-dependency",
+      "status": "partial"
+    },
+    {
+      "id": "M8",
+      "cw": "CW8",
+      "gate": "G3",
+      "status": "not_started"
+    },
+    {
+      "id": "M9",
+      "cw": "CW9",
+      "gate": "G4-pre",
+      "status": "in_progress"
+    },
+    {
+      "id": "M10",
+      "cw": "CW10",
+      "gate": "G4",
+      "status": "not_started"
+    },
+    {
+      "id": "AC",
+      "cw": "AC",
+      "gate": "G0-G2",
+      "status": "in_progress"
+    }
   ],
   "issues": [
     {
@@ -142,8 +381,11 @@
         "baselines in this JSON",
         "cw0/baseline-inventory.md (sha256 b4c838839eb0338555b4973f76053c139b970c1532c3ddb0f70c912596ee57c0)",
         "sidecar baseline rebuild 8e9d5a9f... byte-identical to dist",
-        "sidecar LICENSE AGPL-3.0-only applied (sha256 8486a10c...); rust-version 1.85 declared, MSRV untested",
-        "MXU/MaaEnd clean build records still pending",
+        "sidecar LICENSE AGPL-3.0-only applied (sha256 8486a10c...)",
+        "sidecar MSRV verified on Rust 1.88.0 (1.85 rejected by locked icu deps/let-chains); rust-version updated to 1.88",
+        "MXU clean build from 8bddfee: pnpm tauri build --no-bundle, exit 0, 4m54s, mxu.exe f2fef2dd...; differs from dist 6e598f... (profile/size difference)",
+        "MaaEnd Go clean build on Go 1.27.3: go-service fb2e9ab5...; dist 72eb72c5... built with Go 1.25.6",
+        "MaaEnd C++ install: cpp-algo c32f1e32... and interface f7084f06... match dist; CMake reuse, clean rebuild pending",
         "cloudweb-dist/MANIFEST.md current 0fa1e985... differs from delivery binding ccc3a611..."
       ]
     },
@@ -152,7 +394,9 @@
       "title": "provider/launcher、最低版本、外层 adapter 与实际 actuator、生产显式 CDP",
       "status": "partial",
       "owner": "host/pi",
-      "dependencies": ["CW0"],
+      "dependencies": [
+        "CW0"
+      ],
       "acceptance": [
         "真实 backend 未配置即失败，fake 不能误认真实",
         "hello 返回实际 provider/backend/profile/capabilities",
@@ -174,84 +418,146 @@
       "title": "run/document epoch、独立 renew、typed held∪maybe、真实 deadline、owned launcher、Host-death 回收",
       "status": "partial",
       "owner": "sidecar+host",
-      "dependencies": ["CW0", "CW1"],
+      "dependencies": [
+        "CW0",
+        "CW1"
+      ],
       "acceptance": [
         "2 秒长按不被 350ms lease 误释放",
         "unknown down 后 Stop 真正尝试 up",
         "慢 RPC 不阻塞安全预算",
         "只回收自己的进程"
       ],
-      "evidence": ["lease/supervisor exist", "possibly_held string", "no independent renew", "no owned launcher"]
+      "evidence": [
+        "cw2/integration-report.md",
+        "typed confirmed∪maybe_held ledger; Stop/ReleaseOwner/Close sweep the union",
+        "Host periodic renewal thread in MXU; 2s real-process long press keeps health.held_keys=[65]",
+        "sidecar command grace refreshes the same owner generation after an authorized slow command",
+        "sidecar 40/40 non-CDP tests, clippy 0; MXU 42 passed/1 env failure/1 ignored; real-process test passed",
+        "remaining: immediate Stop preemption during an in-flight RPC, owned launcher/profile, Host-death process reclamation"
+      ]
     },
     {
       "id": "CW3",
       "title": "真实 relative、contact 映射、modifier/repeat、wheel/drag/text、SDK readiness、人工接管",
       "status": "partial",
       "owner": "browser-input",
-      "dependencies": ["CW2"],
+      "dependencies": [
+        "CW2"
+      ],
       "acceptance": [
         "W+camera+right button+skill sustained combination",
         "middle button target lock correct",
         "real game not fake SDK",
         "no global mouse/focus APIs"
       ],
-      "evidence": ["CdpActuator::move_relative Err", "no input.relative", "contact mapping reversed", "wheel/text/takeover unverified"]
+      "evidence": [
+        "cw3/integration-report.md",
+        "real relative: page pending delta + trusted CDP mousemove at 640,360; 127-step partition; input.relative advertised",
+        "headless CDP test: 3 partitioned trusted events, sums 200/-300, buttons=2, shift=true",
+        "contact1->wire2 (right), contact2->wire1 (middle); contact3 rejected",
+        "modifier state in CDP key/relative events; wheel/drag/text smoke passed",
+        "sidecar 40/40 non-CDP tests, clippy 0; MXU 43 passed/1 env failure/1 ignored; real-process 2s+contacts passed",
+        "remaining: real cloud game sustained W+camera+right+skill/middle lock, positive SDK readiness, human takeover, Windows isolation"
+      ]
     },
     {
       "id": "CW4",
       "title": "rVFC/媒体进度、720p 规范化、document/geometry、snapshot token、帧去重/slot",
-      "status": "not_started",
+      "status": "partial",
       "owner": "media",
-      "dependencies": ["CW0", "CW1", "CW2"],
+      "dependencies": [
+        "CW0",
+        "CW1",
+        "CW2"
+      ],
       "acceptance": [
         "static scene still proves live media",
         "frozen media + successful screenshot RPC is not Fresh",
         "same-frame repeats and A/B overwrite do not mismatch",
         "pixels and metadata atomically consistent"
       ],
-      "evidence": ["production screenshot PNG + screenshot count", "geometry_revision=0", "no snapshot token"]
+      "evidence": [
+        "cw4/integration-report.md",
+        "rVFC collector Start/Stop idempotent; 1280x720 letterbox; doc_nonce+geometry_revision; atomic image+metadata slot",
+        "headless CDP test: rvfc probe, canonical JPEG, doc nonce, geometry revision, viewport 1280x720, stop twice",
+        "session continuous/frozen/dedupe semantics covered by ScriptedFrameSource tests",
+        "remaining: sidecar<->CDP full pipeline, real cloud video, static/frozen real rVFC, snapshot token, Host frame dedupe/slot/receipt, performance"
+      ]
     },
     {
       "id": "CW5",
       "title": "唯一 frame reader/cache、preview/识别分离、pool/run/task ID、锁外 shutdown",
       "status": "partial",
       "owner": "mxu",
-      "dependencies": ["CW2", "CW4"],
+      "dependencies": [
+        "CW2",
+        "CW4"
+      ],
       "acceptance": [
         "long actions keep preview live",
         "A recognition / B preview does not rewrite observation basis",
         "two instances do not write concurrently",
         "cancel/exit has visible result"
       ],
-      "evidence": ["MXU sidecar backend/frame/task/quit", "no unique reader/cache", "state API >60s unresponsive observed"]
+      "evidence": [
+        "cw5/integration-report.md",
+        "Host capture gate + immutable 100ms snapshot cache; frame_id/geometry token visible in host_frame_cache diagnostics",
+        "real-process test: second screencap is served from cache, hits>=1, 2s long press and contacts still pass",
+        "MXU 43 passed/1 env failure/1 ignored; sidecar 40/40 non-CDP; headless CDP media/relative passed",
+        "remaining: preview/recognition token separation, pool/run/task IDs/append/rollback, lock-free shutdown, /api/maa/state responsiveness, dual instance, real CDP preview"
+      ]
     },
     {
       "id": "CW6",
       "title": "恢复通用 modifier+target click、薄 overlay、legacy camera、region/UID、能力准入、云生命周期",
       "status": "partial",
       "owner": "maaend",
-      "dependencies": ["CW1", "CW3", "CW4"],
+      "dependencies": [
+        "CW1",
+        "CW3",
+        "CW4"
+      ],
       "acceptance": [
         "local Win32/HDR/process assumptions do not trigger",
         "options/resources match actual profile",
         "schema and host wiring synchronized",
         "generic click restored; thin overlay only for confirmed entry"
       ],
-      "evidence": ["C++ cloud_web + DailyRewards whitelist", "global AutoAltClick Escape branch (material section 0.1 rejects)", "region/UID/legacy camera/cloud lifecycle missing"]
+      "evidence": [
+        "cw6/integration-report.md",
+        "global AutoAltClick->Escape branch and __AutoEscClickAction removed; generic modifier+target click restored",
+        "thin resource_cloud_web overlay for confirmed menu entries; InMenuList OCR fallback; CloudWeb attach_resource_path",
+        "interface.schema supports CloudWeb/cloudweb; validator includes resource_cloud_web; schema validation passed",
+        "Go build/test passed; build-and-install linked install/resource_cloud_web",
+        "legacy camera can now consume sidecar input.relative; real cloud menu/camera, region/UID cache, capability gate and cloud lifecycle pending"
+      ]
     },
     {
       "id": "CW7",
       "title": "真实 actuator/目标身份；连接→登录/排队→DailyRewards→Stop/重开；MapNavigator+AutoFight；后台隔离",
       "status": "partial",
       "owner": "integration+validator",
-      "dependencies": ["CW3", "CW4", "CW5", "CW6-subset"],
+      "dependencies": [
+        "CW3",
+        "CW4",
+        "CW5",
+        "CW6-subset"
+      ],
       "acceptance": [
         "actual game and background isolation succeed",
         "mail present/absent scenarios covered",
         "fake/fake SDK/fixed PNG not counted",
         "Stop/reopen and MapNavigator/AutoFight verified"
       ],
-      "evidence": ["run-20261024-172134 exit 0 preconditioned", "172301/174331 cold-start failures", "175718 MXU API timeout", "Stop/reopen/nav/combat unverified"]
+      "evidence": [
+        "cw7/audit-report.md",
+        "candidate 9ce6f578...",
+        "real product-overlay DailyRewards exit 0 twice: run-20261024-094713 (ready page), run-20261024-094836 (process-level stop/reopen)",
+        "run-20261024-094537 exposed __SceneImageCheck cloud incompatibility; fixed in resource_cloud_web overlay",
+        "run-20261024-094408 screenshot exposed title 'Click to continue' position; game-enter fixed",
+        "remaining: true title/new-tab cold start (new tab lost login), MapNavigator/AutoFight, Windows foreground/focus/input isolation, in-session Stop"
+      ]
     },
     {
       "id": "FIX-RS",
@@ -275,52 +581,383 @@
     }
   ],
   "future_issues": [
-    {"id": "CW8-1", "title": "在 c7fd1b25 重生成 task/option/preset/pretask inventory", "owner": "Perlica", "status": "verified", "dependencies": [], "acceptance": ["49/426/3/1 计数", "46 Windows 分类", "inventory hash"], "evidence": ["49/426/3/2/1", "windows_applicable=46", "inventory-current.json sha256 bc0bb67d6b8b93e7efeb9b2c8e476ec519b912b613e048aff201428b5f514cc8", "baseline 47 + LevelUpOperator/UmbralMonument"]},
-    {"id": "CW8-2", "title": "任务族矩阵与证据 schema", "owner": "Perlica", "status": "verified", "dependencies": ["CW8-1"], "acceptance": ["每族一张矩阵", "空行保持 Pending"], "evidence": ["46 rows all pending", "task-matrix.json sha256 46994117006bbeeadf8eb134d216346d1b472fa2ade15ded56edaa922f3b0061", "task-matrix.md sha256 9ecaea440542bc98213f00a09c4d10233204eea2e724560bbebd3375f49b8464"]},
-    {"id": "CW8-3", "title": "任务族适配（Daily/AutoEssence/ProtocolSpace/DeliveryJobs/ToS/RealTimeTask/生命周期/预设/ZiplineImport）", "owner": "task-family agents", "status": "pending", "dependencies": ["CW8-2", "CW7"], "acceptance": ["真实截图/ROI/跳转/游戏结果"]},
-    {"id": "CW8-4", "title": "option/route/preset/pretask 实际运行等价", "owner": "MaaEnd agents", "status": "pending", "dependencies": ["CW8-3"], "acceptance": ["每项实际运行", "不能只静态映射"]},
-    {"id": "CW8-5", "title": "46 项 Windows 业务逐项 Pass/Fail + 独立抽查", "owner": "Perlica+validator", "status": "pending", "dependencies": ["CW8-3", "CW8-4"], "acceptance": ["46 行有候选/证据/结果"]},
-    {"id": "CW9-1", "title": "故障矩阵与证据 schema", "owner": "Perlica", "status": "verified", "dependencies": ["CW2"], "acceptance": ["每域输入/预期/证据/失败行为"], "evidence": ["8 domains / 51 rows, all pending", "protocol_fixture 15, local_browser 26, real_cloud_session 10", "fault-matrix.json sha256 ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d", "fault-matrix.md sha256 2d9daa73dcb1524c4c94a0178ecc946c7ff7708d1a1d8ac231c3b7da489ebb57", "verified means matrix/schema only; CW9-2..6 and G4 remain open"]},
-    {"id": "CW9-2", "title": "控制面故障：ACK 丢失/半包/旧代次/Stop fence", "owner": "sidecar fault agent", "status": "pending", "dependencies": ["CW2"], "acceptance": ["无盲重放", "Faulted/未知账本保留"]},
-    {"id": "CW9-3", "title": "媒体故障：冻结/重复帧/页面重建/geometry 变化", "owner": "media fault agent", "status": "pending", "dependencies": ["CW4"], "acceptance": ["冻结不标 Fresh", "旧 token 失效"]},
-    {"id": "CW9-4", "title": "Host/API 故障：MXU 崩溃/无响应/Host-death/双实例", "owner": "MXU fault agent", "status": "pending", "dependencies": ["CW2", "CW5"], "acceptance": ["只回收自己的进程", "API 有界"], "evidence": ["run-175718 state_poll_error registered as F-HS-03", "run-175512 supervisor polling kill registered as F-HS-03", "run-172548 control pipe close registered as F-HS-04 (experiment reverted)"]},
-    {"id": "CW9-5", "title": "人工接管 pause→fence→release→owner 转移", "owner": "integration agent", "status": "pending", "dependencies": ["CW2", "CW3"], "acceptance": ["无残留 held", "恢复不重放旧输入"]},
-    {"id": "CW9-6", "title": "100 循环 + 2 小时长运行", "owner": "validator", "status": "pending", "dependencies": ["CW9-2..5"], "acceptance": ["有界停止", "无泄漏/跨 run 事件"]},
-    {"id": "CW10-1", "title": "依赖/许可/最低工具链", "owner": "Perlica", "status": "in_progress", "dependencies": ["CW0"], "acceptance": ["依赖表+许可+可复现构建"]},
-    {"id": "CW10-2", "title": "干净 Windows 安装/回滚", "owner": "release agent", "status": "pending", "dependencies": ["CW0", "CW1"], "acceptance": ["干净机安装/启动/回滚"]},
-    {"id": "CW10-3", "title": "跨 Host 兼容矩阵", "owner": "host agent", "status": "pending", "dependencies": ["CW1", "CW5"], "acceptance": ["版本矩阵+unsupported 明确"]},
-    {"id": "CW10-4", "title": "上游 PR 切片（PR-A/B/C/D/F）", "owner": "Perlica+reviewer", "status": "pending", "dependencies": ["CW1 合同接受"], "acceptance": ["每张可独立审阅", "不夹带私有实现"]},
-    {"id": "CW10-5", "title": "文档/诊断/版本/支持任务清单", "owner": "release agent", "status": "pending", "dependencies": ["CW8", "CW9"], "acceptance": ["文档与候选一致", "不夸大 Gate"]},
-    {"id": "AC-1", "title": "CW0–CW7/FIX-RS 验收 checklist 与证据模板", "owner": "Perlica", "status": "in_progress", "dependencies": [], "acceptance": ["每 CW 一张 checklist", "证据字段齐全"]},
-    {"id": "AC-2", "title": "独立 validator/reviewer 分工与 Gate 评审流程", "owner": "Perlica", "status": "in_progress", "dependencies": ["AC-1"], "acceptance": ["实施/验收分离", "未通过项保留"]}
+    {
+      "id": "CW8-1",
+      "title": "在 c7fd1b25 重生成 task/option/preset/pretask inventory",
+      "owner": "Perlica",
+      "status": "verified",
+      "dependencies": [],
+      "acceptance": [
+        "49/426/3/1 计数",
+        "46 Windows 分类",
+        "inventory hash"
+      ],
+      "evidence": [
+        "49/426/3/2/1",
+        "windows_applicable=46",
+        "inventory-current.json sha256 bc0bb67d6b8b93e7efeb9b2c8e476ec519b912b613e048aff201428b5f514cc8",
+        "baseline 47 + LevelUpOperator/UmbralMonument"
+      ]
+    },
+    {
+      "id": "CW8-2",
+      "title": "任务族矩阵与证据 schema",
+      "owner": "Perlica",
+      "status": "verified",
+      "dependencies": [
+        "CW8-1"
+      ],
+      "acceptance": [
+        "每族一张矩阵",
+        "空行保持 Pending"
+      ],
+      "evidence": [
+        "46 rows all pending",
+        "task-matrix.json sha256 46994117006bbeeadf8eb134d216346d1b472fa2ade15ded56edaa922f3b0061",
+        "task-matrix.md sha256 9ecaea440542bc98213f00a09c4d10233204eea2e724560bbebd3375f49b8464"
+      ]
+    },
+    {
+      "id": "CW8-3",
+      "title": "任务族适配（Daily/AutoEssence/ProtocolSpace/DeliveryJobs/ToS/RealTimeTask/生命周期/预设/ZiplineImport）",
+      "owner": "task-family agents",
+      "status": "pending",
+      "dependencies": [
+        "CW8-2",
+        "CW7"
+      ],
+      "acceptance": [
+        "真实截图/ROI/跳转/游戏结果"
+      ]
+    },
+    {
+      "id": "CW8-4",
+      "title": "option/route/preset/pretask 实际运行等价",
+      "owner": "MaaEnd agents",
+      "status": "pending",
+      "dependencies": [
+        "CW8-3"
+      ],
+      "acceptance": [
+        "每项实际运行",
+        "不能只静态映射"
+      ]
+    },
+    {
+      "id": "CW8-5",
+      "title": "46 项 Windows 业务逐项 Pass/Fail + 独立抽查",
+      "owner": "Perlica+validator",
+      "status": "pending",
+      "dependencies": [
+        "CW8-3",
+        "CW8-4"
+      ],
+      "acceptance": [
+        "46 行有候选/证据/结果"
+      ]
+    },
+    {
+      "id": "CW9-1",
+      "title": "故障矩阵与证据 schema",
+      "owner": "Perlica",
+      "status": "verified",
+      "dependencies": [
+        "CW2"
+      ],
+      "acceptance": [
+        "每域输入/预期/证据/失败行为"
+      ],
+      "evidence": [
+        "8 domains / 51 rows, all pending",
+        "protocol_fixture 15, local_browser 26, real_cloud_session 10",
+        "fault-matrix.json sha256 ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d",
+        "fault-matrix.md sha256 2d9daa73dcb1524c4c94a0178ecc946c7ff7708d1a1d8ac231c3b7da489ebb57",
+        "verified means matrix/schema only; CW9-2..6 and G4 remain open"
+      ]
+    },
+    {
+      "id": "CW9-2",
+      "title": "控制面故障：ACK 丢失/半包/旧代次/Stop fence",
+      "owner": "sidecar fault agent",
+      "status": "partial",
+      "dependencies": [
+        "CW2"
+      ],
+      "acceptance": [
+        "无盲重放",
+        "Faulted/未知账本保留"
+      ],
+      "evidence": [
+        "Batch A: 15 rows -> 6 pass / 4 partial / 3 fail / 2 blocked",
+        "sidecar 8b9cc6f + diff 4c775f51c5e4d55c7c0f65d832476963334e6097a4b8232c0c1421854d9cbd9a",
+        "cargo test -- --skip cdp_ -> 40 passed / 0 failed / 3 filtered, exit 0",
+        "results.json sha256 2811dc82c1d41a74aeb6318f6dd112ea942f84d513d32de6fde64ab00cb509d2",
+        "report.md sha256 a4ff2e93576b5e642ca9f5246b49db05e645f6ad64dc887866d399e1aa63f2b0",
+        "open: long RPC preemption, in-flight deadline, pending/backpressure, Host ACK harness"
+      ]
+    },
+    {
+      "id": "CW9-3",
+      "title": "媒体故障：冻结/重复帧/页面重建/geometry 变化",
+      "owner": "media fault agent",
+      "status": "pending",
+      "dependencies": [
+        "CW4"
+      ],
+      "acceptance": [
+        "冻结不标 Fresh",
+        "旧 token 失效"
+      ]
+    },
+    {
+      "id": "CW9-4",
+      "title": "Host/API 故障：MXU 崩溃/无响应/Host-death/双实例",
+      "owner": "MXU fault agent",
+      "status": "pending",
+      "dependencies": [
+        "CW2",
+        "CW5"
+      ],
+      "acceptance": [
+        "只回收自己的进程",
+        "API 有界"
+      ],
+      "evidence": [
+        "run-175718 state_poll_error registered as F-HS-03",
+        "run-175512 supervisor polling kill registered as F-HS-03",
+        "run-172548 control pipe close registered as F-HS-04 (experiment reverted)"
+      ]
+    },
+    {
+      "id": "CW9-5",
+      "title": "人工接管 pause→fence→release→owner 转移",
+      "owner": "integration agent",
+      "status": "pending",
+      "dependencies": [
+        "CW2",
+        "CW3"
+      ],
+      "acceptance": [
+        "无残留 held",
+        "恢复不重放旧输入"
+      ]
+    },
+    {
+      "id": "CW9-6",
+      "title": "100 循环 + 2 小时长运行",
+      "owner": "validator",
+      "status": "pending",
+      "dependencies": [
+        "CW9-2..5"
+      ],
+      "acceptance": [
+        "有界停止",
+        "无泄漏/跨 run 事件"
+      ]
+    },
+    {
+      "id": "CW10-1",
+      "title": "依赖/许可/最低工具链",
+      "owner": "Perlica",
+      "status": "in_progress",
+      "dependencies": [
+        "CW0"
+      ],
+      "acceptance": [
+        "依赖表+许可+可复现构建"
+      ]
+    },
+    {
+      "id": "CW10-2",
+      "title": "干净 Windows 安装/回滚",
+      "owner": "release agent",
+      "status": "pending",
+      "dependencies": [
+        "CW0",
+        "CW1"
+      ],
+      "acceptance": [
+        "干净机安装/启动/回滚"
+      ]
+    },
+    {
+      "id": "CW10-3",
+      "title": "跨 Host 兼容矩阵",
+      "owner": "host agent",
+      "status": "pending",
+      "dependencies": [
+        "CW1",
+        "CW5"
+      ],
+      "acceptance": [
+        "版本矩阵+unsupported 明确"
+      ]
+    },
+    {
+      "id": "CW10-4",
+      "title": "上游 PR 切片（PR-A/B/C/D/F）",
+      "owner": "Perlica+reviewer",
+      "status": "pending",
+      "dependencies": [
+        "CW1 合同接受"
+      ],
+      "acceptance": [
+        "每张可独立审阅",
+        "不夹带私有实现"
+      ]
+    },
+    {
+      "id": "CW10-5",
+      "title": "文档/诊断/版本/支持任务清单",
+      "owner": "release agent",
+      "status": "pending",
+      "dependencies": [
+        "CW8",
+        "CW9"
+      ],
+      "acceptance": [
+        "文档与候选一致",
+        "不夸大 Gate"
+      ]
+    },
+    {
+      "id": "AC-1",
+      "title": "CW0–CW7/FIX-RS 验收 checklist 与证据模板",
+      "owner": "Perlica",
+      "status": "in_progress",
+      "dependencies": [],
+      "acceptance": [
+        "每 CW 一张 checklist",
+        "证据字段齐全"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "title": "独立 validator/reviewer 分工与 Gate 评审流程",
+      "owner": "Perlica",
+      "status": "in_progress",
+      "dependencies": [
+        "AC-1"
+      ],
+      "acceptance": [
+        "实施/验收分离",
+        "未通过项保留"
+      ]
+    }
   ],
   "claims": [
-    {"epic": "E8", "owner": "Perlica", "status": "in_progress", "scope": "CW8 planning/inventory/matrix; no GitHub writes"},
-    {"epic": "E9", "owner": "Perlica", "status": "in_progress", "scope": "CW9-1 matrix done; CW9-2..6 execution waits on CW2/CW4/CW7; no cloud runs"},
-    {"epic": "E10", "owner": "Perlica", "status": "in_progress", "scope": "CW10 dependency/license/PR mapping; no external writes"},
-    {"epic": "AC", "owner": "Perlica", "status": "in_progress", "scope": "CW0–CW7/FIX-RS acceptance checklists and gate review"}
+    {
+      "epic": "E8",
+      "owner": "Perlica",
+      "status": "in_progress",
+      "scope": "CW8 planning/inventory/matrix; no GitHub writes"
+    },
+    {
+      "epic": "E9",
+      "owner": "Perlica",
+      "status": "in_progress",
+      "scope": "CW9-1 done; CW9-2 Batch A first pass partial; CW9-2..6 execution waits on CW2/CW4/CW7; no cloud runs"
+    },
+    {
+      "epic": "E10",
+      "owner": "Perlica",
+      "status": "in_progress",
+      "scope": "CW10 dependency/license/PR mapping; no external writes"
+    },
+    {
+      "epic": "AC",
+      "owner": "Perlica",
+      "status": "in_progress",
+      "scope": "CW0–CW7/FIX-RS acceptance checklists and gate review"
+    }
   ],
   "gates": {
-    "G0": {"status": "partial", "requires": ["CW0", "CW1"]},
-    "G1": {"status": "blocked", "requires": ["CW2", "CW3", "CW4"]},
-    "G2": {"status": "blocked", "requires": ["CW7"]},
-    "G3": {"status": "not_started", "requires": ["CW8"]},
-    "G4": {"status": "not_started", "requires": ["CW9", "CW10"]}
+    "G0": {
+      "status": "partial",
+      "requires": [
+        "CW0",
+        "CW1"
+      ]
+    },
+    "G1": {
+      "status": "blocked",
+      "requires": [
+        "CW2",
+        "CW3",
+        "CW4"
+      ]
+    },
+    "G2": {
+      "status": "blocked",
+      "requires": [
+        "CW7"
+      ]
+    },
+    "G3": {
+      "status": "not_started",
+      "requires": [
+        "CW8"
+      ]
+    },
+    "G4": {
+      "status": "not_started",
+      "requires": [
+        "CW9",
+        "CW10"
+      ]
+    }
   },
   "current_evidence": {
     "run_count": 30,
-    "exit_code_counts": {"0": 5, "1": 17, "2": 1, "3": 3, "7": 3, "9": 1},
+    "exit_code_counts": {
+      "0": 5,
+      "1": 17,
+      "2": 1,
+      "3": 3,
+      "7": 3,
+      "9": 1
+    },
     "successes": [
-      {"run": "run-20261024-165438.json", "task_status": "Succeeded", "path": "no auto_start; precondition not recorded", "sidecar_exit": "graceful"},
-      {"run": "run-20261024-165556.json", "task_status": "Succeeded", "path": "no auto_start; precondition not recorded", "sidecar_exit": "force_kill"},
-      {"run": "run-20261024-165726.json", "task_status": "Succeeded", "path": "no auto_start; precondition not recorded", "sidecar_exit": "force_kill"},
-      {"run": "run-20261024-172134.json", "task_status": "Succeeded", "path": "Regional Development precondition recorded; menu click bypassed", "sidecar_exit": "force_kill"},
-      {"run": "run-20261024-174123.json", "task_status": "Succeeded", "path": "login restore + auto_start cold-start path; activationBefore=false -> activationAfter=true; reward delta unproven", "sidecar_exit": "force_kill"}
+      {
+        "run": "run-20261024-165438.json",
+        "task_status": "Succeeded",
+        "path": "no auto_start; precondition not recorded",
+        "sidecar_exit": "graceful"
+      },
+      {
+        "run": "run-20261024-165556.json",
+        "task_status": "Succeeded",
+        "path": "no auto_start; precondition not recorded",
+        "sidecar_exit": "force_kill"
+      },
+      {
+        "run": "run-20261024-165726.json",
+        "task_status": "Succeeded",
+        "path": "no auto_start; precondition not recorded",
+        "sidecar_exit": "force_kill"
+      },
+      {
+        "run": "run-20261024-172134.json",
+        "task_status": "Succeeded",
+        "path": "Regional Development precondition recorded; menu click bypassed",
+        "sidecar_exit": "force_kill"
+      },
+      {
+        "run": "run-20261024-174123.json",
+        "task_status": "Succeeded",
+        "path": "login restore + auto_start cold-start path; activationBefore=false -> activationAfter=true; reward delta unproven",
+        "sidecar_exit": "force_kill"
+      }
     ],
     "success_count": 5,
     "cold_start_success": "run-20261024-174123.json (one success, not stable; later 174331 failed)",
     "task_success_caveat": "MaaFramework task-status Succeeded is not proof that a new DailyRewards reward was claimed; the DailyRewards branch was entered but reward delta is not evidenced.",
-    "failures": ["run-20261024-172301.json", "run-20261024-174331.json", "run-20261024-175512.json", "run-20261024-175718.json"],
+    "failures": [
+      "run-20261024-172301.json",
+      "run-20261024-174331.json",
+      "run-20261024-175512.json",
+      "run-20261024-175718.json"
+    ],
     "failure_summary": "172301/174331 cold-start menu failure; 175512 polling timeout; 175718 MXU API unresponsive",
     "old_evidence_relation": "All runs predate the CW1 candidate; they remain historical facts but do not validate the current candidate and do not expose the inner backend kind.",
     "cw9_1": {
@@ -330,15 +967,65 @@
       "rows": 51,
       "domains": 8,
       "status": "all pending",
-      "by_layer": {"protocol_fixture": 15, "local_browser": 26, "real_cloud_session": 10},
-      "by_gate": {"G4-pre": 41, "G4": 10},
-      "observed_inputs": ["run-175718 -> F-HS-03", "run-175512 -> F-HS-03", "run-172548 -> F-HS-04 (experiment reverted)"],
+      "by_layer": {
+        "protocol_fixture": 15,
+        "local_browser": 26,
+        "real_cloud_session": 10
+      },
+      "by_gate": {
+        "G4-pre": 41,
+        "G4": 10
+      },
+      "observed_inputs": [
+        "run-175718 -> F-HS-03",
+        "run-175512 -> F-HS-03",
+        "run-172548 -> F-HS-04 (experiment reverted)"
+      ],
       "scope_note": "Matrix/schema only; CW9-2..6 and G4 remain open."
+    },
+    "cw9_2_batch_a": {
+      "report": "cases/cloudweb-cw8-cw10/cw9/batch-a/report.md",
+      "report_sha256": "a4ff2e93576b5e642ca9f5246b49db05e645f6ad64dc887866d399e1aa63f2b0",
+      "results": "cases/cloudweb-cw8-cw10/cw9/batch-a/results.json",
+      "results_sha256": "2811dc82c1d41a74aeb6318f6dd112ea942f84d513d32de6fde64ab00cb509d2",
+      "test_log_sha256": "e4c9356d6f478645ff16c71e580ea817febb0084ac0a744bc1392921650978a3",
+      "sidecar_head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "sidecar_diff_sha256": "4c775f51c5e4d55c7c0f65d832476963334e6097a4b8232c0c1421854d9cbd9a",
+      "tests": "40 passed / 0 failed / 3 filtered, exit 0",
+      "rows": {
+        "total": 15,
+        "pass": 6,
+        "partial": 4,
+        "fail": 3,
+        "blocked": 2
+      },
+      "open": [
+        "long RPC in-flight Stop preemption",
+        "in-flight deadline",
+        "pending queue/backpressure",
+        "Host ACK-loss harness"
+      ],
+      "cw2_status": "partial; owned launcher and Host-death reclamation also open"
     },
     "delivery_audit": "cases/cloudweb-delivery-20261024-success/",
     "delivery_status": "needs_review",
     "delivery_manifest_bound": "ccc3a611c4bc4228fc7caab3d5c73d4c2ad4f35e8adeda69be682f0f91e99e9c",
-    "delivery_manifest_current": "0fa1e98517b486ec45d7b52e8210c65f661de8d5f628d68d62d364a8181c599e"
+    "delivery_manifest_current": "0fa1e98517b486ec45d7b52e8210c65f661de8d5f628d68d62d364a8181c599e",
+    "cw7_blocker": {
+      "status": "partial",
+      "reason": "true title/new-tab cold start still needs a fresh manual login; new tab lost session; MapNavigator/AutoFight and isolation not run",
+      "runs": [
+        "run-20261024-094408.json (title click failure)",
+        "run-20261024-094537.json (image check failure)",
+        "run-20261024-094713.json (success)",
+        "run-20261024-094836.json (success/reopen)"
+      ],
+      "next": "manual login, then true cold start -> DailyRewards -> Stop/reopen -> MapNavigator/AutoFight"
+    },
+    "cw7_successes": [
+      "run-20261024-094713.json exit 0 product overlay ready page",
+      "run-20261024-094836.json exit 0 product overlay process-level stop/reopen"
+    ]
   },
   "decisions": [
     {
@@ -366,5 +1053,79 @@
     "no automatic push/PR/issue/comment",
     "old evidence invalid after candidate change",
     "fake/fake SDK/fixed PNG/standalone Node script do not count"
-  ]
+  ],
+  "cw4_candidate": {
+    "candidate_id": "6d7393bb82b1fc68c3ca1b20e99dc754dc6045783bafc91c1fe6dcf3171a6f60",
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "tracked_diff_sha256": "28aec95fb9929ae212c91f7425279374e4047c450fc1a57582846924d822a1fd",
+      "readme_sha256": "4eead4ef4aa5d6f6122a4af2193e3913105a7df31a0db0eaf5ce7906946c890b",
+      "release_exe_sha256": "6482013751eda86491d03c7d676eabbd759dbea99192ae00dfe95c39a6c080df"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "tracked_diff_sha256": "201e5bb9f1362ffdcb8600e9e63e171a95d0c060c9882582776b082ada66a28e"
+    },
+    "status": "partial",
+    "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw4/integration-report.md",
+    "superseded_by": "8e1b0e60166a922cb25a5796c0c81c681769c48199ac56e51c0d320872e76111"
+  },
+  "cw5_candidate": {
+    "candidate_id": "8e1b0e60166a922cb25a5796c0c81c681769c48199ac56e51c0d320872e76111",
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "tracked_diff_sha256": "28aec95fb9929ae212c91f7425279374e4047c450fc1a57582846924d822a1fd",
+      "release_exe_sha256": "6482013751eda86491d03c7d676eabbd759dbea99192ae00dfe95c39a6c080df"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "tracked_diff_sha256": "d776975d0e432599da1028f552e850f467db6332439b3be164229c6e91eeb856"
+    },
+    "status": "partial",
+    "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw5/integration-report.md",
+    "superseded_by": "4b7580d85f8c16167dfaea0bab65faae50eebd5677788bb227b60808ceda4a3e"
+  },
+  "cw6_candidate": {
+    "candidate_id": "4b7580d85f8c16167dfaea0bab65faae50eebd5677788bb227b60808ceda4a3e",
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "tracked_diff_sha256": "28aec95fb9929ae212c91f7425279374e4047c450fc1a57582846924d822a1fd",
+      "release_exe_sha256": "6482013751eda86491d03c7d676eabbd759dbea99192ae00dfe95c39a6c080df"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "tracked_diff_sha256": "d776975d0e432599da1028f552e850f467db6332439b3be164229c6e91eeb856"
+    },
+    "maaend": {
+      "head": "c7fd1b25071d9976703635b7dda66812172d1629",
+      "tracked_diff_sha256": "247a3dbbf36c635ce0a4949b634ad114d6c2d469d8f05cc1a6f5143e4519bfd9",
+      "untracked": {
+        "assets/resource_cloud_web/pipeline/SceneMenuCloudWeb.json": "1e533f5a012a6d952b4c5f1195c29374b9b6c97ea4f2a993b6a6744a07d1d780"
+      }
+    },
+    "status": "partial",
+    "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw6/integration-report.md",
+    "superseded_by": "9ce6f5782752089fd4738de69ee9e62f32cb2543c9be4eead3cbbe7e0e03ea98"
+  },
+  "cw7_candidate": {
+    "candidate_id": "9ce6f5782752089fd4738de69ee9e62f32cb2543c9be4eead3cbbe7e0e03ea98",
+    "sidecar": {
+      "head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+      "tracked_diff_sha256": "4c775f51c5e4d55c7c0f65d832476963334e6097a4b8232c0c1421854d9cbd9a",
+      "release_exe_sha256": "3684d64a78547e2a8afc900fea9059a9f6afbe192fb3690660c31b0e48df9e69"
+    },
+    "mxu": {
+      "head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+      "tracked_diff_sha256": "d776975d0e432599da1028f552e850f467db6332439b3be164229c6e91eeb856"
+    },
+    "maaend": {
+      "head": "c7fd1b25071d9976703635b7dda66812172d1629",
+      "tracked_diff_sha256": "247a3dbbf36c635ce0a4949b634ad114d6c2d469d8f05cc1a6f5143e4519bfd9",
+      "untracked": {
+        "assets/resource_cloud_web/pipeline/SceneMenuCloudWeb.json": "f5c9fffe44cf400d4ae4485b95ad924d3aea8c83c462798dbc78cd187a47c5ca"
+      }
+    },
+    "status": "partial",
+    "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw7/audit-report.md"
+  }
 }

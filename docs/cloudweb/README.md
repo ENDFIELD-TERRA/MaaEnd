@@ -10,6 +10,7 @@ This directory is the public snapshot of the CloudWeb planning set:
 - `inventory-current.json` — generated task/option/preset/pretask inventory at the fixed MaaEnd baseline (49/426/3/2/1, 46 Windows).
 - `task-matrix.json` / `task-matrix.md` — 46-row Windows task matrix, all rows Pending, with evidence schema.
 - `fault-matrix.json` / `fault-matrix.md` — CW9-1 fault matrix: 8 domains / 51 rows, all Pending, with closure layers and evidence schema.
+- `cw9-batch-a-report.md` / `cw9-batch-a-results.json` — CW9-2 Batch A first pass: 15 protocol-fixture rows, 6 pass / 4 partial / 3 fail / 2 blocked.
 
 Scope note:
 
@@ -17,6 +18,7 @@ Scope note:
 - Local absolute paths and private fork names were replaced with placeholders (`<workspace>`, `<sidecar-fork>`, `<MXU-fork>`) when this snapshot was produced.
 - The public snapshot is not a claim that G1/G2/G3/G4 are closed. CW0–CW7 are `partial`/`not_started` as recorded in the roadmap; the only real task success so far was preconditioned and must not be generalised.
 - CW8-1/2 and CW9-1 matrices are definitions and evidence schemas, not executed test results. `fault-matrix.json` has 51 Pending rows; fixture/local-browser rows cannot close real-cloud claims, and no row may be marked Pass without the full evidence schema.
+- CW9-2 Batch A is a first protocol-layer pass only: 6 pass / 4 partial / 3 fail / 2 blocked. It does not close CW9-2 or G4. CW2 remains `partial` (long RPC preemption, owned launcher, Host-death reclamation open), so Batch A will be re-run after CW2 closes those items.
 
 Update procedure (idempotent):
 
