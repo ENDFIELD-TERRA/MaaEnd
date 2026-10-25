@@ -42,6 +42,12 @@
   （真实云，taskId 级成功）。
 - Trial 的 `Fight` / `AutoFight` / `FightFinish` 节点级 **Succeeded**（有真实演算次数）。
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
+- **冷启动最终 5 任务严格队列 Succeeded（2026-10-25 16:45–16:47，141 s）**：
+  pretask `--inject` 拉起全新 CloudShell → `CloudWebStartGame`（InWorld 门控）→
+  `DailyRewards` → `ClaimSimulationRewards` → `VisitFriends` → `DijiangRewards`
+  （`SelectToGrow=DoNothing`），五项全部 succeeded，无人工点击。
+- 暖会话 5 任务 100.9 s、4 任务 85.8 s 同样通过；跨任务场景恢复增加稳定帧等待后，
+  `Claim` 紧跟 `Daily` 的帝江号菜单转场失败消失。
 - **最终 4 任务严格队列 Succeeded（2026-10-25 16:22–16:23，81 s）**：
   `CloudWebStartGame`（InWorld 门控）→ `DailyRewards` → `ClaimSimulationRewards` → `VisitFriends`，
   四项全部 succeeded；使用隐藏浮球后的最终注入脚本。
@@ -85,7 +91,9 @@
   MapNavigator 动态恢复超时；DijiangRewards 因培养舱目标识别失败（任务特定，
   与上游 #6854 的转场输入窗口同类）尚未通过；46 项矩阵未全量验证。
 - MapNavigator 末段朝向/动态恢复是当前主要剩余阻塞（Trial 与野外任务点），
-  与 CloudWeb 打印帧/输入架构无关；需要单独的导航调参或 authored route 工作。
+  与 CloudWeb 打印帧/输入架构无关；navmesh `deck_probe` 已确认 Trial 终点只有单一可走面
+  （高 221.57，`on_surface:false`），不存在重叠 deck，`target_deck_y` 不适用；
+  需要单独修订 authored route/末段控制。
 - 上游 #6854（open）指出转场后约 750 ms 的输入忽略窗口；CloudWeb 上紧接转场的点击也需
   预留 pre_delay，后续任务适配时沿用。
 - Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；
