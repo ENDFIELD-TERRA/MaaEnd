@@ -1302,7 +1302,8 @@
       "Trial Fight/AutoFight/FightFinish node-level",
       "no focus steal",
       "login persisted",
-      "3-task queue Succeeded: CloudWebStartGame + DailyRewards + ClaimSimulationRewards (116s)"
+      "3-task queue Succeeded: CloudWebStartGame + DailyRewards + ClaimSimulationRewards (116s)",
+      "dev pretask --inject cold start; startup task reached InWorld; DailyRewards succeeded"
     ],
     "open": [
       "start button transparent overlay",
@@ -1310,7 +1311,8 @@
       "46-task dynamic matrix",
       "background/minimized long-run",
       "final release e2e",
-      "pretask --inject cold start"
+      "pretask --inject cold start",
+      "menu home/last-tab state for operational manual/regional development"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }
