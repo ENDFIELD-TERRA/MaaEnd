@@ -100,7 +100,8 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 - round3：补 SeqConflict 单测（sidecar 53/0/1）与 MXU lost down/up ACK 测试（2/0），并用现有 lease/token 测试补齐 F-LS-02/06；**15/15 pass**；结果 `round3-results.json` `d966cb5b…`，日志 `5de7ee96…`/`0bf5e3a2…`。
 - **CW2 已 closed（pass-with-boundary）**：`cw2/clause-table.md` 条款 1–6，`review-lease`/`review-renew-sidecar` pass、`review-combined` pass-with-notes；边界为 job kill 瞬间 held 输入释放 best-effort。`cw9/cw2-reevaluation.md` 已重写。
 - **Batch B round2**：26 行 local_browser；CDP smoke + 4 CDP 测试 + session MEDIA_STALLED 端到端全过；F-MD-01 为唯一 pass；1 pass / 13 partial / 11 not_run / 1 blocked。
-- **Batch B round3**：8 个 CDP 测试全过；新增 F-MD-07 resize（revision 1→3）、F-BR-01 CDP 断链、F-BR-03 同名页；A/B 自洽 smoke 28 样本，F-MD-03 仍 partial；行级 **4 pass / 11 partial / 10 not_run / 1 blocked**。结果 `round3-results.json` `84389123…`、harness `eedf1815…`、日志 `d48cc9bf…`。
+- **Batch B round3**：8 个 CDP 测试全过；F-MD-07 resize、F-BR-01 CDP 断链、F-BR-03 同名页 pass；A/B 自洽 smoke，F-MD-03 partial；行级 4 pass / 11 partial / 10 not_run / 1 blocked。
+- **Batch B round4**：F-MD-04 解除 blocked 并 pass——frame_id 即 snapshot token；窗口过期/geometry/age/代次拒绝，新帧接受；本地测试 1 passed；行级 **5 pass / 11 partial / 10 not_run / 0 blocked**。结果 `round4-results.json` `9efdfa1e…`、日志 `836f3909…`、harness `97c80716…`。
 - Batch B 顺序：B2 媒体（余 A/B、resize、session 冻结端到端）→ B3 CDP（断链、同名页）→ B1 Stop → B5 跨 run/资源 → B4 Host 生命周期。
 - 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `4abcb891…`、就绪度 `0aecbd57…`、报告 `8eb8f943…`、round3 结果 `84389123…`。
 
@@ -173,7 +174,7 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 
 - 现在可做：CW8-1/2 静态 inventory/矩阵（done）、CW9-1 故障矩阵（done）、CW10-1/4 依赖/PR 映射、AC 清单。
 - CW2 协议层已 closed（pass-with-boundary）；Batch A round3 15/15 pass，不再等 CW2。
-- Batch B round3：4 pass / 11 partial / 10 not_run / 1 blocked；继续 Stop 预算、Host 生命周期、跨 run/资源。
+- Batch B round4：5 pass / 11 partial / 10 not_run / 0 blocked；继续 Stop 预算、Host 生命周期、跨 run/资源。
 - CW7 关闭后：CW8-3/4/5、CW9-5/CW9-6、Batch C（10 行 real_cloud_session）。
 - CW10-2/3 依赖 CW0/CW1/CW5；CW10-4 依赖 CW1 合同接受。
 

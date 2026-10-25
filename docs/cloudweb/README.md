@@ -14,8 +14,8 @@ This directory is the public snapshot of the CloudWeb planning set:
 - `cw9-cw2-reevaluation.md` — CW2 re-evaluation: protocol-layer closed (pass-with-boundary); only job-kill instant held-input release remains best-effort.
 - `cw9-runbook.md` — reproducible Batch A/B run commands, environment boundaries and evidence rules.
 - `cw9-batch-a-round2-results.json` / `cw9-batch-a-round3-results.json` — Batch A: round2 10/5; round3 15/15 pass after SeqConflict + Host lost-ACK tests.
-- `cw9-batch-b-plan.md` / `cw9-batch-b-readiness.json` — Batch B preparation and round3: 26 local-browser rows, 4 pass / 11 partial / 10 not_run / 1 blocked.
-- `cw9-batch-b-report.md` / `cw9-batch-b-round2-results.json` / `cw9-batch-b-round3-results.json` — Batch B rounds 2–3: session MEDIA_STALLED, A/B self-consistency, resize, CDP disconnect and same-URL page tests passed on sidecar `1f8625d5`; F-MD-01/07 and F-BR-01/03 are pass. Test-only harness, product diff unchanged.
+- `cw9-batch-b-plan.md` / `cw9-batch-b-readiness.json` — Batch B preparation and round4: 26 local-browser rows, 5 pass / 11 partial / 10 not_run / 0 blocked.
+- `cw9-batch-b-report.md` / `cw9-batch-b-round2-results.json` / `cw9-batch-b-round3-results.json` / `cw9-batch-b-round4-results.json` — Batch B rounds 2–4: session MEDIA_STALLED, A/B self-consistency, resize, CDP disconnect, same-URL page and stale frame-token tests passed on sidecar `1f8625d5`; F-MD-01/04/07 and F-BR-01/03 are pass. Test-only harness, product diff unchanged.
 
 Scope note:
 
@@ -24,7 +24,7 @@ Scope note:
 - The public snapshot is not a claim that G1/G2/G3/G4 are closed. CW0–CW7 are `partial`/`not_started` as recorded in the roadmap; the only real task success so far was preconditioned and must not be generalised.
 - CW8-1/2 and CW9-1 matrices are definitions and evidence schemas, not executed test results. `fault-matrix.json` has 51 Pending rows; fixture/local-browser rows cannot close real-cloud claims, and no row may be marked Pass without the full evidence schema.
 - CW9-2 Batch A is closed at 15/15 protocol-layer rows (round3); it still does not close G4. CW2 is closed pass-with-boundary: urgent path, deadline, backpressure, attach-only, job object and real-cloud Stop are verified; job-kill instant held-input release remains best-effort.
-- Batch B round3: 26 local-browser rows are 4 pass / 11 partial / 10 not_run / 1 blocked. F-MD-01/07 and F-BR-01/03 are pass; A/B remains a self-consistency smoke (partial), Stop budget, Host lifecycle and cross-run rows remain open.
+- Batch B round4: 26 local-browser rows are 5 pass / 11 partial / 10 not_run / 0 blocked. F-MD-01/04/07 and F-BR-01/03 are pass; A/B remains a self-consistency smoke (partial), Stop budget, Host lifecycle and cross-run rows remain open. F-MD-04 is unblocked: the sidecar frame_id is the snapshot token; window/geometry/age/generation fences are verified locally.
 
 Update procedure (idempotent):
 

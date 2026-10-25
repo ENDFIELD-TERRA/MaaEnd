@@ -72,10 +72,10 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | CW8-3 | 任务族适配：Daily、AutoEssence、ProtocolSpace、DeliveryJobs/Seize、TrialOfSwordmancy、RealTimeTask、生命周期、预设/settings、ZiplineImport | task-family agents（待 CW7） | `pending` |
 | CW8-4 | option/route/preset/pretask 实际运行等价 | MaaEnd agents（待 CW7） | `pending` |
 | CW8-5 | 46 项逐项 Pass/Fail + 独立抽查 | Perlica + validator | `pending` |
-| E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（CW9-1 完成；CW9-2 verified 15/15；Batch B round3 4 pass / 11 partial / 10 not_run / 1 blocked） |
+| E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（CW9-1 完成；CW9-2 verified 15/15；Batch B round4 5 pass / 11 partial / 10 not_run / 0 blocked） |
 | CW9-1 | 故障矩阵与证据 schema：8 域、注入/预期/禁止/证据/owner/依赖/层级/gate | Perlica | `verified`（51 行全 Pending；protocol_fixture 15、local_browser 26、real_cloud_session 10；`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…`；不关闭 CW9-2..6） |
 | CW9-2 | 控制面/租约协议故障 Batch A（D1/D2，15 行） | sidecar fault agent | `verified`（round3：15/15 pass；round2 后补 SeqConflict + Host lost-ACK 测试；`round3-results.json` `d966cb5b…`；Host 无独立 maybe-held 账本、F-LS-02 为 fence/Ready、F-LS-06 用 frame_id+geometry+age+generation） |
-| CW9-3/4/5/6 | Batch B round3：媒体、CDP、Stop、Host 生命周期、跨 run | Perlica | `in_progress`（26 行：4 pass / 11 partial / 10 not_run / 1 blocked；F-MD-01/07、F-BR-01/03 pass；A/B 为自洽 smoke；HS-01/07 边界仍在） |
+| CW9-3/4/5/6 | Batch B round4：媒体、CDP、Stop、Host 生命周期、跨 run | Perlica | `in_progress`（26 行：5 pass / 11 partial / 10 not_run / 0 blocked；F-MD-01/04/07、F-BR-01/03 pass；A/B 为自洽 smoke；HS-01/07 边界仍在） |
 | CW9-4 前置登记 | 把 `run-175718` 的 `state_poll_error` 登记为 Host/API 无响应真实输入 | Perlica | `verified`（已登记为 F-HS-03；同域 `run-175512` 轮询误杀、`run-172548` control pipe 关闭，根因未闭合；CW9-4 本体仍 pending） |
 | E10 / CW10 | 依赖/许可、干净 Windows 安装/回滚、跨 Host、PR 切片、版本文档 | Perlica | `in_progress`（依赖/PR 映射） |
 | AC | CW0–CW7/FIX-RS 验收 checklist、Gate 评审、validator/reviewer 分工 | Perlica | `in_progress` |
@@ -118,7 +118,8 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 - CW2 重评（round 2）：最新候选 `6227c5a8…`（sidecar `1f8625d5…` / MXU `e193e0d4…`）已把 urgent path、在途 deadline、pending/Backpressure、attach-only、Host kill 进程退出、真实云协议 Stop 逐项闭合；`review-lease`/`review-renew-sidecar` pass，`review-combined` pass-with-notes，`review-format` pass。边界：job kill 瞬间 held 输入释放 best-effort。`cw2/clause-table.md`、`cw9/cw2-reevaluation.md`。
 - CW9-2 Batch A round3：15 行 **15/15 pass**；补 SeqConflict 单测 + MXU lost down/up ACK 测试；sidecar 53/0/1、MXU lost-ACK 2/0；`round3-results.json` `d966cb5b…`。
 - CW9 Batch B round2：1 pass / 13 partial / 11 not_run / 1 blocked；4 CDP + session MEDIA_STALLED 通过（F-MD-01 pass）。
-- CW9 Batch B round3：**4 pass / 11 partial / 10 not_run / 1 blocked**；8 个 CDP 测试全过；新增 F-MD-07 resize（revision 1→3）、F-BR-01 CDP 断链、F-BR-03 同名页（URL-scoped 选新页）；A/B 自洽 smoke 28 样本，F-MD-03 仍 partial；结果 `round3-results.json` `84389123…`、日志 `d48cc9bf…`、harness `eedf1815…`。
+- CW9 Batch B round3：8 个 CDP 测试全过；F-MD-07 resize、F-BR-01 CDP 断链、F-BR-03 同名页 pass；A/B 自洽 smoke，F-MD-03 partial。
+- CW9 Batch B round4：**F-MD-04 解除 blocked 并 pass**——frame_id 即 snapshot token；窗口过期/geometry/age/代次拒绝，新帧接受；本地测试 1 passed；26 行 **5 pass / 11 partial / 10 not_run / 0 blocked**；结果 `round4-results.json` `9efdfa1e…`、日志 `836f3909…`、harness `97c80716…`。
 - 旧运行没有 `backend_kind` 字段，无法区分内层 fake/cdp；按配置、首帧 `0x0`/281ms 等只能稳妥推断为 cdp，不能标已验证。CW1 候选改变后旧证据失效，需重生成。
 - 已修运行时项：标题双击、`InMenuList` OCR-only/右侧兜底、`Regional` 两行 OCR、`MenuListEnterWorld` Escape、轮询容忍、best-effort kill；均未形成产品候选，`cloudweb-run.ps1` 为本地联调 supervisor。
 - 交付审计：`cases/cloudweb-delivery-20261024-success/`（status `needs_review`，绑定旧 MANIFEST `ccc3a611…`；当前 MANIFEST `0fa1e985…`，最终冻结需重绑）。

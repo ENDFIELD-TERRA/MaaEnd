@@ -1,6 +1,6 @@
 # CloudWeb CW9 Batch B 执行记录
 
-状态：`partial`（round3：8 个 CDP 测试 + session MEDIA_STALLED 端到端通过；26 行 4 pass）。
+状态：`partial`（round4：F-MD-04 旧 token 本地测试通过；26 行 5 pass / 11 partial / 10 not_run / 0 blocked）。
 候选：sidecar HEAD `8b9cc6f` + product diff `1f8625d5…`；MXU `8bddfee` + diff `e193e0d4…`。
 测试载体：临时 test-only worktree；round2 harness diff `bb4f38aa…`（只含测试，不改产品代码）。
 产品 diff 与候选一致；round1 harness `70805a91…` 绑定旧候选，仅作历史。
@@ -19,6 +19,18 @@
 round2 覆盖：F-MD-01（session 端到端 MEDIA_STALLED/恢复，**pass**）、F-MD-02/05（冻结/重复帧/截图不冒充 rVFC）、
 F-MD-06（reload 改 doc_nonce）、F-BR-02（kill 显式错误）、F-BR-03（target close 显式错误）、F-BR-06（临时 profile/端口清理）。
 
+## round4（2026-10-25）：F-MD-04 解除 blocked
+
+根因：F-MD-04 原本按“opaque CW4 snapshot token”定义，但候选没有 opaque token；MXU 代码明确把 sidecar `frame_id` 当作 snapshot token，sidecar 用 frame_id + geometry_revision + based_on_age_ms + generation 组成 observation fence。
+
+新增本地浏览器测试 `batch_b_stale_frame_token_is_rejected_locally`：
+- 捕获 frame1/frame2；停止 polling 让活动窗口过期；
+- 用 frame1 旧 token + 旧 geometry 提交 -> **FrameStale（window）**；
+- 再取新帧 -> **Dispatched**。
+- 1 passed / 0 failed；日志 `logs/md04-local-stale-token.log` `836f3909…`；harness `harness-md04-local.diff` `97c80716…`。
+
+注意：活动窗口内的 lagging frame_id 是设计允许的；stale 指窗口外、geometry 不符、声明 age 超限或 frame_id 超前。26 行现在 **5 pass / 11 partial / 10 not_run / 0 blocked**。
+
 ## round3（2026-10-25）
 
 | 测试 | 结果 | 映射 |
@@ -29,7 +41,7 @@ F-MD-06（reload 改 doc_nonce）、F-BR-02（kill 显式错误）、F-BR-03（t
 | same-URL new page | pass：关闭旧 target→about:blank→CDP navigate→decoy tab；URL-scoped actuator 选新页，不选 decoy | **F-BR-03 pass** |
 
 - 8 个 `batch_b_` 测试全过：日志 `logs/round3-batch-b-all-tests.log` `d48cc9bf…`；harness `harness-round3.diff` `eedf1815…`。
-- 26 行：**4 pass（F-MD-01/07、F-BR-01/03）/ 11 partial / 10 not_run / 1 blocked**。
+- 26 行：**5 pass（F-MD-01/04/07、F-BR-01/03）/ 11 partial / 10 not_run / 0 blocked**。
 - A/B 仍是自洽 smoke，不是确定性 torn-read 注入；F-MD-03 保持 partial。
 
 ## round1（历史）
