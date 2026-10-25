@@ -24,10 +24,25 @@
   ],
   "summary": {
     "rows": 26,
-    "partial": 12,
-    "not_run": 13,
+    "partial": 14,
+    "not_run": 11,
     "blocked": 1,
-    "pass": 0
+    "pass": 0,
+    "note": "after the first Batch B execution; readiness is still not a pass"
+  },
+  "executed": {
+    "harness": "temporary test-only worktree; product candidate diff unchanged",
+    "harness_diff_sha256": "70805a919a4327b2d5f39d4c3b868cbf5f9f7a14d89a9dfbe891c3ccc904cf1c",
+    "first_run": "1 harness assertion failure (frozen slot assumption) + 1 HTTP-read hang; harness fixed, product unchanged",
+    "second_run": "4 passed / 0 failed, exit 0",
+    "second_run_log": "cw9/batch-b/logs/batch-b-cdp-tests-2.log",
+    "second_run_log_sha256": "a06c27d2e0d521fadb048c01709c800dc51961001adda10d7cc41bbc162f2174",
+    "tests": [
+      "batch_b_media_freeze_repeat_and_screenshot",
+      "batch_b_page_reload_changes_doc_nonce",
+      "batch_b_target_close_is_explicit",
+      "batch_b_browser_kill_is_explicit"
+    ]
   },
   "rows": [
     {"id": "F-ST-01", "group": "B1", "readiness": "partial", "note": "session maybe-held union tests pass; local browser Stop not run"},
@@ -44,8 +59,8 @@
     {"id": "F-MD-07", "group": "B2", "readiness": "partial", "note": "geometry>=1 in CDP smoke; resize not run"},
     {"id": "F-MD-08", "group": "B2", "readiness": "partial", "note": "non-canonical empty frame passed; evidence fields need completion"},
     {"id": "F-BR-01", "group": "B3", "readiness": "not_run", "note": "CDP disconnect harness missing"},
-    {"id": "F-BR-02", "group": "B3", "readiness": "not_run", "note": "browser kill harness missing"},
-    {"id": "F-BR-03", "group": "B3", "readiness": "not_run", "note": "target close/recreate harness missing"},
+    {"id": "F-BR-02", "group": "B3", "readiness": "partial", "note": "browser kill test passed: explicit CDP error, no fallback; session Faulted and residual ledger not tested"},
+    {"id": "F-BR-03", "group": "B3", "readiness": "partial", "note": "target close test passed: explicit CDP error; same-name recreation and old-token invalidation not tested"},
     {"id": "F-BR-06", "group": "B3", "readiness": "partial", "note": "temp profile/port cleanup passed; user-browser non-touch assertion pending"},
     {"id": "F-HS-01", "group": "B4", "readiness": "not_run", "note": "MXU kill/process-tree harness missing; owned launcher open"},
     {"id": "F-HS-02", "group": "B4", "readiness": "not_run", "note": "GUI kill/API bounded harness missing"},

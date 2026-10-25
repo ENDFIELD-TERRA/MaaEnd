@@ -1,0 +1,257 @@
+--- cloudweb-sidecar/src/cdp.rs	2026-10-24 09:08:39.690606700 -0700
++++ cloudweb-sidecar-cw9b/src/cdp.rs	2026-10-24 18:51:39.022034600 -0700
+@@ -1297,6 +1297,7 @@
+ mod tests {
+     use std::fs::File;
+     use std::net::{SocketAddr, TcpStream};
++    use std::io::{Read, Write};
+     use std::panic::{AssertUnwindSafe, catch_unwind, resume_unwind};
+     use std::path::{Path, PathBuf};
+     use std::process::{Child, Command, Stdio};
+@@ -1986,4 +1987,246 @@
+         }
+         guard.shutdown();
+     }
++
++    fn connect_test(guard: &ChromeGuard) -> Result<CdpActuator, String> {
++        let deadline = Instant::now() + Duration::from_secs(20);
++        loop {
++            let mut candidate = CdpActuator::with_target_url(guard.port, guard.page_url.clone());
++            match candidate.connect() {
++                Ok(()) => {
++                    wait_for_page(&mut candidate, Duration::from_secs(10))?;
++                    return Ok(candidate);
++                }
++                Err(error) => {
++                    if Instant::now() >= deadline {
++                        return Err(format!(
++                            "CDP connect failed: {error}; chrome stderr: {}",
++                            read_snippet(&guard.stderr_log, 1200)
++                        ));
++                    }
++                    std::thread::sleep(Duration::from_millis(250));
++                }
++            }
++        }
++    }
++
++    fn wait_for_probe_after(
++        actuator: &mut CdpActuator,
++        after: u64,
++        timeout: Duration,
++    ) -> Result<MediaProbe, String> {
++        let deadline = Instant::now() + timeout;
++        loop {
++            match actuator.media_probe() {
++                Ok(probe) if probe.presented > after => return Ok(probe),
++                Ok(_) => {}
++                Err(error) => {
++                    if Instant::now() >= deadline {
++                        return Err(error);
++                    }
++                }
++            }
++            if Instant::now() >= deadline {
++                return Err(format!("rVFC progress did not advance beyond {after}"));
++            }
++            std::thread::sleep(Duration::from_millis(50));
++        }
++    }
++
++    fn http_get(port: u16, path: &str) -> Result<String, String> {
++        let mut stream = TcpStream::connect(("127.0.0.1", port))
++            .map_err(|error| format!("HTTP connect failed: {error}"))?;
++        stream
++            .set_read_timeout(Some(Duration::from_secs(2)))
++            .map_err(|error| format!("HTTP read timeout setup failed: {error}"))?;
++        stream
++            .set_write_timeout(Some(Duration::from_secs(2)))
++            .map_err(|error| format!("HTTP write timeout setup failed: {error}"))?;
++        write!(
++            stream,
++            "GET {path} HTTP/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n"
++        )
++        .map_err(|error| format!("HTTP write failed: {error}"))?;
++        let mut response = String::new();
++        let mut buffer = [0u8; 4096];
++        loop {
++            match stream.read(&mut buffer) {
++                Ok(0) => break,
++                Ok(read) => response.push_str(&String::from_utf8_lossy(&buffer[..read])),
++                Err(error)
++                    if error.kind() == std::io::ErrorKind::WouldBlock
++                        || error.kind() == std::io::ErrorKind::TimedOut =>
++                {
++                    break;
++                }
++                Err(error) => return Err(format!("HTTP read failed: {error}")),
++            }
++        }
++        Ok(response)
++    }
++
++    #[test]
++    #[ignore = "launches a temporary local Chrome on 127.0.0.1:9230"]
++    fn batch_b_media_freeze_repeat_and_screenshot() {
++        let mut guard = ChromeGuard::launch().expect("chrome setup");
++        let outcome = catch_unwind(AssertUnwindSafe(|| -> Result<(), String> {
++            let mut actuator = connect_test(&guard)?;
++            let probe = wait_for_probe(&mut actuator, Duration::from_secs(5))?;
++            let before = probe.presented;
++            eprintln!("[cw9-b] media before={before}");
++
++            actuator.evaluate("document.getElementById('cwRealVideo').pause()")?;
++            std::thread::sleep(Duration::from_millis(1200));
++            let frozen = actuator.media_probe()?;
++            eprintln!("[cw9-b] frozen paused={} presented={}", frozen.paused, frozen.presented);
++            assert!(frozen.paused, "video must be paused for the freeze probe");
++            assert_eq!(
++                frozen.presented, before,
++                "paused video must not advance presented frames"
++            );
++
++            // The legacy screenshot path can still succeed while media is
++            // frozen; it must not be treated as fresh media progress.
++            let shot = actuator.frame_sample()?;
++            assert_eq!(
++                shot.media.presented, before,
++                "screenshot must not relabel frozen media as new progress"
++            );
++            // The page-side slot may be empty while paused; if it still
++            // returns frames, they must keep the same presented counter.
++            if let Some(first) = actuator.poll_cycle(Instant::now())?
++                && let Some(second) = actuator.poll_cycle(Instant::now())?
++            {
++                assert_eq!(
++                    first.media.presented, second.media.presented,
++                    "repeated frozen frames must keep the same presented counter"
++                );
++            }
++
++            actuator.evaluate("document.getElementById('cwRealVideo').play()")?;
++            let resumed = wait_for_probe_after(&mut actuator, before, Duration::from_secs(5))?;
++            eprintln!("[cw9-b] resumed presented={}", resumed.presented);
++            assert!(resumed.presented > before);
++            actuator.stop_media()?;
++            Ok(())
++        }));
++        match outcome {
++            Ok(result) => {
++                guard.shutdown();
++                result.expect("media freeze test");
++            }
++            Err(payload) => {
++                guard.shutdown();
++                resume_unwind(payload);
++            }
++        }
++    }
++
++    #[test]
++    #[ignore = "launches a temporary local Chrome on 127.0.0.1:9230"]
++    fn batch_b_page_reload_changes_doc_nonce() {
++        let mut guard = ChromeGuard::launch().expect("chrome setup");
++        let outcome = catch_unwind(AssertUnwindSafe(|| -> Result<(), String> {
++            let mut first = connect_test(&guard)?;
++            let before = wait_for_probe(&mut first, Duration::from_secs(5))?;
++            let first_nonce = before.doc_nonce.clone();
++            eprintln!("[cw9-b] reload before nonce={first_nonce}");
++
++            let _ = first.evaluate("location.reload()");
++            std::thread::sleep(Duration::from_millis(800));
++
++            let mut second = connect_test(&guard)?;
++            let after = wait_for_probe(&mut second, Duration::from_secs(5))?;
++            eprintln!("[cw9-b] reload after nonce={}", after.doc_nonce);
++            assert_ne!(
++                after.doc_nonce, first_nonce,
++                "page reload must produce a new document nonce"
++            );
++            assert!(after.presented > 0);
++            second.stop_media()?;
++            Ok(())
++        }));
++        match outcome {
++            Ok(result) => {
++                guard.shutdown();
++                result.expect("page reload test");
++            }
++            Err(payload) => {
++                guard.shutdown();
++                resume_unwind(payload);
++            }
++        }
++    }
++
++    #[test]
++    #[ignore = "launches a temporary local Chrome on 127.0.0.1:9230"]
++    fn batch_b_target_close_is_explicit() {
++        let mut guard = ChromeGuard::launch().expect("chrome setup");
++        let outcome = catch_unwind(AssertUnwindSafe(|| -> Result<(), String> {
++            let mut actuator = connect_test(&guard)?;
++            let target = actuator
++                .target_id()
++                .ok_or_else(|| "no target id".to_string())?
++                .to_string();
++            eprintln!("[cw9-b] closing target={target}");
++            let response = http_get(guard.port, &format!("/json/close/{target}"))?;
++            assert!(
++                response.starts_with("HTTP/1.1 200") || response.starts_with("HTTP/1.0 200"),
++                "target close was not accepted: {}",
++                response.lines().next().unwrap_or("<empty>")
++            );
++            std::thread::sleep(Duration::from_millis(500));
++            let result = actuator.frame_sample();
++            assert!(
++                result.is_err(),
++                "closed target must fail explicitly instead of attaching to another page"
++            );
++            eprintln!("[cw9-b] closed target error={:?}", result.err());
++            Ok(())
++        }));
++        match outcome {
++            Ok(result) => {
++                guard.shutdown();
++                result.expect("target close test");
++            }
++            Err(payload) => {
++                guard.shutdown();
++                resume_unwind(payload);
++            }
++        }
++    }
++
++    #[test]
++    #[ignore = "launches a temporary local Chrome on 127.0.0.1:9230"]
++    fn batch_b_browser_kill_is_explicit() {
++        let mut guard = ChromeGuard::launch().expect("chrome setup");
++        let outcome = catch_unwind(AssertUnwindSafe(|| -> Result<(), String> {
++            let mut actuator = connect_test(&guard)?;
++            wait_for_probe(&mut actuator, Duration::from_secs(5))?;
++            if let Some(child) = guard.child.as_mut() {
++                eprintln!("[cw9-b] killing chrome pid={}", child.id());
++                child.kill().map_err(|error| format!("kill failed: {error}"))?;
++            } else {
++                return Err("no chrome child".to_string());
++            }
++            std::thread::sleep(Duration::from_millis(500));
++            let result = actuator.frame_sample();
++            assert!(
++                result.is_err(),
++                "killed browser must fail explicitly, not silently fall back"
++            );
++            eprintln!("[cw9-b] killed browser error={:?}", result.err());
++            Ok(())
++        }));
++        match outcome {
++            Ok(result) => {
++                guard.shutdown();
++                result.expect("browser kill test");
++            }
++            Err(payload) => {
++                guard.shutdown();
++                resume_unwind(payload);
++            }
++        }
++    }
+ }

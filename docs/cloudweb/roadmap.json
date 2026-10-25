@@ -712,9 +712,10 @@
         "旧 token 失效"
       ],
       "evidence": [
-        "Batch B readiness: 8 media rows -> 7 partial / 1 blocked, 0 pass",
+        "Batch B first pass: 8 media rows -> 7 partial / 1 blocked, 0 pass",
         "headless Chrome CDP smoke: rVFC Start/Stop, canonical JPEG, doc_nonce/geometry, non-canonical empty frame",
-        "open: freeze/repeat/A-B/reload/resize rows not run; snapshot token blocked"
+        "new CDP tests: freeze/repeat/screenshot (presented 1->frozen->3), page reload changes doc_nonce",
+        "open: A/B, resize, session MEDIA_STALLED end-to-end; snapshot token blocked"
       ]
     },
     {
@@ -1034,12 +1035,18 @@
       "plan": "cases/cloudweb-cw8-cw10/cw9/batch-b/plan.md",
       "plan_sha256": "7e1daf1d5c9d6c7f8a71082f614091dd3581dcfc958a4c53842fb06575b211e2",
       "readiness": "cases/cloudweb-cw8-cw10/cw9/batch-b/readiness.json",
-      "readiness_sha256": "7c382b831838762ab39974cd83fab3249eb9a2ceebe0ec8ed60ca1b86c984c2b",
-      "rows": {"total": 26, "partial": 12, "not_run": 13, "blocked": 1, "pass": 0},
+      "readiness_sha256": "87fa7a279616a3f3570acb42b383d5304ca3c06e0cd14e54d9496054ee4a41c9",
+      "report": "cases/cloudweb-cw8-cw10/cw9/batch-b/report.md",
+      "report_sha256": "21d996684e8dd783c7aceb51fcdaa987c935ed374c39fe9f7440eb3b6678e115",
+      "test_log_sha256": "a06c27d2e0d521fadb048c01709c800dc51961001adda10d7cc41bbc162f2174",
+      "rows": {"total": 26, "partial": 14, "not_run": 11, "blocked": 1, "pass": 0},
       "evidence": [
         "cargo test --all-targets: 42 passed / 1 ignored / 0 failed, exit 0",
         "headless Chrome CDP smoke: 1 passed, temp profile/port cleaned",
-        "B2/B3 can start; HS-01/07 wait on owned launcher/Host-death"
+        "new CDP tests: 4 passed / 0 failed (media freeze/repeat/screenshot, page reload, target close, browser kill)",
+        "test-only harness diff 70805a919a4327b2d5f39d4c3b868cbf5f9f7a14d89a9dfbe891c3ccc904cf1c; product diff unchanged 4c775f51...",
+        "first harness run had 1 assertion failure + 1 HTTP read hang; fixed, product unchanged",
+        "B2/B3 can continue; HS-01/07 wait on owned launcher/Host-death"
       ]
     },
     "delivery_audit": "cases/cloudweb-delivery-20261024-success/",

@@ -75,7 +75,7 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（CW9-1 完成；CW9-2 Batch A 6/4/3/2；Batch B 已准备，0 pass） |
 | CW9-1 | 故障矩阵与证据 schema：8 域、注入/预期/禁止/证据/owner/依赖/层级/gate | Perlica | `verified`（51 行全 Pending；protocol_fixture 15、local_browser 26、real_cloud_session 10；`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…`；不关闭 CW9-2..6） |
 | CW9-2 | 控制面/租约协议故障 Batch A（D1/D2，15 行） | sidecar fault agent | `partial`（6 pass / 4 partial / 3 fail / 2 blocked；`results.json` / `report.md`；CW2 minimal stop pass，但长 RPC 抢占、在途 deadline、pending/背压、Host ACK harness 未闭合） |
-| CW9-3/4/5/6 | Batch B 准备：媒体、CDP、Stop、Host 生命周期、跨 run | Perlica | `in_progress`（Batch B 26 行就绪度 12 partial / 13 not_run / 1 blocked，0 pass；本地 headless Chrome smoke 1 passed；HS-01/07 等 owned launcher/Host-death） |
+| CW9-3/4/5/6 | Batch B 首轮：媒体、CDP、Stop、Host 生命周期、跨 run | Perlica | `in_progress`（26 行：14 partial / 11 not_run / 1 blocked，0 pass；新增 4 个 CDP 测试全过；HS-01/07 等 owned launcher/Host-death） |
 | CW9-4 前置登记 | 把 `run-175718` 的 `state_poll_error` 登记为 Host/API 无响应真实输入 | Perlica | `verified`（已登记为 F-HS-03；同域 `run-175512` 轮询误杀、`run-172548` control pipe 关闭，根因未闭合；CW9-4 本体仍 pending） |
 | E10 / CW10 | 依赖/许可、干净 Windows 安装/回滚、跨 Host、PR 切片、版本文档 | Perlica | `in_progress`（依赖/PR 映射） |
 | AC | CW0–CW7/FIX-RS 验收 checklist、Gate 评审、validator/reviewer 分工 | Perlica | `in_progress` |
@@ -116,7 +116,8 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 - CW9-1 故障矩阵：`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…`；8 域 51 行全 Pending；已登记 `175718`/`175512`/`172548` 三个真实输入，根因未闭合；矩阵存在不等于故障已执行或 G4 通过。
 - CW9-2 Batch A 首轮：sidecar `8b9cc6f` + diff `4c775f51…`；`cargo test -- --skip cdp_` 40/40，pass 6 / partial 4 / fail 3 / blocked 2；`results.json` / `report.md`；长 RPC 抢占、在途 deadline、pending/背压与 Host ACK harness 未闭合。
 - CW2 重评：`cw7/final-audit.md` 把 **minimal stop** 升为 pass（真实云 `autofight-20261024-104052/114725`）；完整 CW2 仍 partial（长 RPC 逐命令类型、owned launcher、Host-death）。`cw9/cw2-reevaluation.md`。
-- CW9 Batch B 准备：26 行 local_browser，就绪度 12 partial / 13 not_run / 1 blocked、0 pass；本地 headless Chrome smoke 1 passed，临时 profile/端口清理通过；`batch-b/plan.md`、`batch-b/readiness.json`。
+- CW9 Batch B 首轮：26 行 local_browser，14 partial / 11 not_run / 1 blocked、0 pass；新增 4 个 CDP 测试（媒体冻结/重复帧/截图、页面 reload、target close、browser kill）**4 passed / 0 failed**，test-only harness diff `70805a91…`，产品 diff 仍 `4c775f51…`；日志 `a06c27d2…`。
+- Batch B 首次运行有 1 个测试假设失败（冻结时 slot 无帧）和 1 次 HTTP 读取挂起；已修 harness，不归因产品；失败日志保留。
 - 旧运行没有 `backend_kind` 字段，无法区分内层 fake/cdp；按配置、首帧 `0x0`/281ms 等只能稳妥推断为 cdp，不能标已验证。CW1 候选改变后旧证据失效，需重生成。
 - 已修运行时项：标题双击、`InMenuList` OCR-only/右侧兜底、`Regional` 两行 OCR、`MenuListEnterWorld` Escape、轮询容忍、best-effort kill；均未形成产品候选，`cloudweb-run.ps1` 为本地联调 supervisor。
 - 交付审计：`cases/cloudweb-delivery-20261024-success/`（status `needs_review`，绑定旧 MANIFEST `ccc3a611…`；当前 MANIFEST `0fa1e985…`，最终冻结需重绑）。
