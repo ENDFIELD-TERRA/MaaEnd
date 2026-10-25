@@ -1303,7 +1303,8 @@
       "no focus steal",
       "login persisted",
       "3-task queue Succeeded: CloudWebStartGame + DailyRewards + ClaimSimulationRewards (116s)",
-      "dev pretask --inject cold start; startup task reached InWorld; DailyRewards succeeded"
+      "dev pretask --inject cold start; startup task reached InWorld; DailyRewards succeeded",
+      "strict startup task reached InWorld after max_hit fix"
     ],
     "open": [
       "start button transparent overlay",
@@ -1314,7 +1315,8 @@
       "pretask --inject cold start",
       "menu home/last-tab state for operational manual/regional development",
       "startup task max_hit false-success fixed; strict InWorld re-verification pending",
-      "cloud game start page stuck at 游戏启动中 (service/session)"
+      "cloud game start page stuck at 游戏启动中 (service/session)",
+      "strict full queue DailyRewards/ClaimSimulationRewards fail at menu home/last-tab (Escape opens map, CloudShell floating ball blocks world menu)"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }

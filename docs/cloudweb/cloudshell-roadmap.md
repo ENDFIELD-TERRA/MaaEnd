@@ -24,9 +24,9 @@
 | 阶段 | 状态 | 交付 | Issue |
 | --- | --- | --- | --- |
 | U0 启动注入 | verified | CloudShell `--inject` 启动脚本 + `LaunchCloudWeb` 接线；dev pretask 冷启动实测 | [#1](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/1) |
-| U0 启动任务 | partial（max_hit 假成功已修，严格 InWorld 待复验） | 标题页、今日月卡奖励、进入世界（`CloudWebStartGame`） | [#4](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/4) |
+| U0 启动任务 | verified（严格 InWorld） | 标题页、今日月卡奖励、进入世界（`CloudWebStartGame`） | [#4](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/4) |
 | U0 凭据 | partial | WebView2 会话 DPAPI 保存/恢复 harness；秘密不进入仓库/日志 | [#2](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/2) |
-| U1 队列 | partial（任务 3/3；启动任务假成功已修） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
+| U1 队列 | partial（手动 3/3；严格启动 1/3 菜单失败） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
 | U2 核心任务 | partial | DailyRewards、Trial、AutoFight；Trial 战后任务级闭环 | [#5](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/5) |
 | U3 全量矩阵 | planned | 46 项 Windows 任务的 CloudWeb 资格/动态证据；有副作用任务按清单跳过 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
 | U4 后台/长时 | planned | 遮挡/最小化/长时供帧与任务稳定性；边界有证据 | — |
@@ -44,10 +44,10 @@
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
 - **首轮完整队列 Succeeded（2026-10-25）**：`CloudWebStartGame` → `DailyRewards` →
   `ClaimSimulationRewards` 三项均 succeeded，overall Succeeded，116 s。
-- **dev pretask 冷启动成功**：`LaunchCloudWeb` 以 `--inject` 拉起 CloudShell；启动任务在
-  「游戏启动中」阶段曾因循环节点 `max_hit=1` 提前报 Succeeded（假阳性），已修复为只有
-  `CloudWebWorldReady`（InWorld）结束；严格 InWorld 复验待做。同一队列 DailyRewards
-  succeeded；ClaimSimulationRewards 因菜单 home/last-tab 失败。
+- **dev pretask 冷启动成功**：`LaunchCloudWeb` 以 `--inject` 拉起 CloudShell。启动任务在
+  「游戏启动中」阶段保持 Running（max_hit 假阳性已修），游戏加载后严格 Succeeded 于
+  藏剑谷 InWorld。随后严格 3 任务队列中 DailyRewards/ClaimSimulationRewards 仍因
+  主菜单 home/last-tab 失败；手动启动时的 3/3 仍有效。
 
 ## 未验证 / 边界（不得当作已通过）
 
