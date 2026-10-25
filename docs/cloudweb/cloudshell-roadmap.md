@@ -42,6 +42,9 @@
   （真实云，taskId 级成功）。
 - Trial 的 `Fight` / `AutoFight` / `FightFinish` 节点级 **Succeeded**（有真实演算次数）。
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
+- **冷启动全自动队列 Succeeded（2026-10-25 15:50–15:52，122 s）**：pretask `LaunchCloudWeb`
+  以 `--inject` 拉起全新 CloudShell，脚本自动点开始（最多 2 次），管线处理加载/标题/月卡 →
+  InWorld → `DailyRewards` → `ClaimSimulationRewards`，三项 succeeded，无人工点击。
 - **严格 3 任务队列 Succeeded（2026-10-25 15:43，61 s）**：`CloudWebStartGame`
   （仅在 InWorld 结束）→ `DailyRewards` → `ClaimSimulationRewards` 三项全部 succeeded。
 - **DailyRewards 全链路**：世界 → 菜单 → 地区建设 → 换区 → 仓库 → 我的转移页 → 领取 → 返回，
@@ -50,6 +53,9 @@
   `.ob90eP` 设为 `pointer-events:none`，标题页与游戏内所有鼠标事件都被掐断；修复后只禁用
   左上角 ≤180×180 的 fixed/absolute 容器。修复后控制器单击与 Esc 均可驱动游戏
   （标题推进、菜单打开、角色攻击）。启始按钮同时改回按 OCR 框点击。
+- **启动卡住根因与修复**：「游戏启动中/请耐心等待」在视频流里，页面 DOM 读不到；脚本每 5 s
+  重复 DOM click「开始游戏」，会把供给中的云会话反复打回起点。改为最多点 2 次、间隔 20 s，
+  并让启动等待识别「游戏已重连/正在连接」后，冷启动约 45 s 进入游戏加载页。
 - **DPAPI 恢复 harness 实机通过**：在会话过期后的手机号登录页恢复 4 cookies / 22 localStorage，
   reload 后 `通行证UID` 校验通过，临时明文删除。
 - **上游确认**：#6841（OPEN/Draft，head `d54392de`）维护者 17:32 UTC 评论确认
@@ -58,7 +64,8 @@
 
 ## 未验证 / 边界（不得当作已通过）
 
-- 修复后的注入脚本尚未用于冷启动复跑：当前严格 3/3 会话是旧脚本启动 + 手工恢复输入层后完成的。
+- 任务广度仍不足：目前真实云动态覆盖启动、DailyRewards、ClaimSimulationRewards；VisitFriends/
+  DijiangRewards/EnvironmentMonitoring 等进行中，长任务与 46 项矩阵尚未验证。
 - Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；
   “home 缺失”原判断由鼠标输入被掐断造成，已撤销。
 - 队列结束可能停在模拟空间/行动手册（ClaimSimulationRewards 的 `SimCheckEmpty` 终止路径）；

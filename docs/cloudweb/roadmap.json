@@ -1277,7 +1277,7 @@
   },
   "cloudshell_2026_10_25": {
     "schema": "cloudweb-cloudshell-roadmap/1",
-    "updated_at": "2026-10-25T22:45:00Z",
+    "updated_at": "2026-10-25T22:54:00Z",
     "single_source": "docs/cloudweb/cloudshell-roadmap.md",
     "epic": 8,
     "issues": {
@@ -1303,10 +1303,12 @@
       "input-layer fix: floating-ball disable restricted to small top-left containers; controller click/Esc drive the game",
       "DailyRewards Succeeded with full world->menu->regional development->region change->depot->claim navigation",
       "strict 3-task queue Succeeded in 61s: CloudWebStartGame (InWorld gate) + DailyRewards + ClaimSimulationRewards",
-      "dev pretask --inject cold start (old script) reached InWorld"
+      "dev pretask --inject cold start (old script) reached InWorld",
+      "cold start with the fixed script: pretask --inject -> landing -> loading -> title -> InWorld, fully automatic",
+      "autonomous cold-start strict 3-task queue Succeeded in 122s (startup + DailyRewards + ClaimSimulationRewards)",
+      "start-click cap fixed the repeated-click cloud session reset"
     ],
     "open": [
-      "cold start with the fixed injected script (current session still used the old script)",
       "Trial task-level post-fight",
       "46-task dynamic matrix",
       "background/obscured long-run",
