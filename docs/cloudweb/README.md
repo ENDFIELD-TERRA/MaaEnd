@@ -1,8 +1,14 @@
 # CloudWeb planning docs
 
-This directory is the public snapshot of the CloudWeb planning set:
+This directory is the public snapshot of the CloudWeb planning set.
 
-- `roadmap.md` — single human-readable progress source (CW0–CW10, CW0–CW7 closure first).
+> **2026-10-25 architecture pivot**: the current single source is
+> [`cloudshell-roadmap.md`](cloudshell-roadmap.md) (upstream #6841 CloudShell/WebView2 +
+> Win32/PrintWindow/PostMessage). The CW0–CW10 files below are the historical sidecar/MXU
+> snapshot and are no longer the progress source.
+
+- `cloudshell-roadmap.md` — current roadmap: background CloudShell full MaaEnd task queue.
+- `roadmap.md` — historical single human-readable progress source (CW0–CW10, CW0–CW7 closure first).
 - `roadmap.json` — machine-readable mirror of the same status.
 - `plan.md` — contracts, acceptance criteria and first tasks for CW0–CW7 and FIX-RS.
 - `cw8-cw10-plan.md` — CW8 full task qualification, CW9 fault/long-run, CW10 packaging/upstream plan.

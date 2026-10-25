@@ -1,4 +1,8 @@
-# CloudWeb 单一源 roadmap（CW0–CW10）
+# CloudWeb 单一源 roadmap（CW0–CW10，历史）
+
+> **2026-10-25 架构转向**：当前单一源改为 [`cloudshell-roadmap.md`](cloudshell-roadmap.md)，
+> 对齐上游 #6841 的 CloudShell/WebView2 + Win32/PrintWindow/PostMessage 路线。本文保留为
+> CW0–CW10 的 sidecar/MXU 历史快照，不再代表当前产品路线。
 
 状态审计：2026-10-24 23:20（Asia/Shanghai）
 单一源：本文 + `cloudweb-roadmap.json`。详细合同与首批任务见 `cases/cloudweb-cw0-cw7/plan.md`。

@@ -1274,5 +1274,43 @@
     },
     "status": "partial",
     "evidence": ".qoder/maaend-private/cases/cloudweb-cw0-cw7/cw7/audit-report.md"
+  },
+  "cloudshell_2026_10_25": {
+    "schema": "cloudweb-cloudshell-roadmap/1",
+    "updated_at": "2026-10-25T21:25:00Z",
+    "single_source": "docs/cloudweb/cloudshell-roadmap.md",
+    "epic": 8,
+    "issues": {
+      "startup_inject": 1,
+      "startup_task": 4,
+      "trial_post_fight": 5,
+      "queue": 6,
+      "task_matrix": 7,
+      "credentials": 2,
+      "stack_e2e": 3
+    },
+    "architecture": {
+      "policy": "#6807",
+      "implementation": "#6841",
+      "reference": "#6800"
+    },
+    "status": "partial",
+    "verified": [
+      "CloudShell WebView2/Chromium host",
+      "Win32 PrintWindow/PostMessage",
+      "DailyRewards Succeeded",
+      "Trial Fight/AutoFight/FightFinish node-level",
+      "no focus steal",
+      "login persisted"
+    ],
+    "open": [
+      "start button transparent overlay",
+      "startup task title/monthly/world",
+      "Trial task-level post-fight",
+      "46-task dynamic matrix",
+      "background/minimized long-run",
+      "final release e2e"
+    ],
+    "note": "The CW0-CW10 snapshot below is historical and superseded."
   }
 }

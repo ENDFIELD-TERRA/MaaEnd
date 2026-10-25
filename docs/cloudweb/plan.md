@@ -1,4 +1,8 @@
-# CloudWeb CW0–CW7 实施计划
+# CloudWeb CW0–CW7 实施计划（历史）
+
+> **2026-10-25 架构转向**：当前实施路线见 [`cloudshell-roadmap.md`](cloudshell-roadmap.md)，
+> 对齐上游 #6841 的 CloudShell/WebView2 + Win32/PrintWindow/PostMessage。本文保留为
+> CW0–CW7 sidecar/MXU 历史计划，不再代表当前产品路线。
 
 状态：规划稿，2026-10-24。单一源进度以同目录 `cloudweb-roadmap.md` / `cloudweb-roadmap.json` 为准；本文定义各 CW 的合同、验收和首批任务。
 材料权威顺序：`MaaEnd-CloudWeb-Implementation-Review-2026-10-24.md`（主报告）→ `FeatureRequirementDoc-MaaEnd-CloudWeb-Neo.md` v1.1 §0 → `MaaEnd-CloudWeb-Coordinator-Report.md` §0。旧 P00–P17/CW-xx 编号只作历史映射，不再作为进度源。
