@@ -14,7 +14,7 @@ This directory is the public snapshot of the CloudWeb planning set:
 - `cw9-cw2-reevaluation.md` — CW2 re-evaluation: minimal stop pass, full contract partial; remaining long-RPC preemption, owned launcher, Host-death.
 - `cw9-runbook.md` — reproducible Batch A/B run commands, environment boundaries and evidence rules.
 - `cw9-batch-b-plan.md` / `cw9-batch-b-readiness.json` — Batch B preparation and first execution: 26 local-browser rows, 14 partial / 11 not_run / 1 blocked, 0 pass.
-- `cw9-batch-b-report.md` / `cw9-batch-b-harness.diff` — first Batch B execution: 4 new CDP tests passed (media freeze/repeat/screenshot, page reload, target close, browser kill); test-only harness, product diff unchanged.
+- `cw9-batch-b-report.md` — first Batch B execution: 4 new CDP tests passed (media freeze/repeat/screenshot, page reload, target close, browser kill); test-only harness, product diff unchanged. The raw harness diff and test logs stay in the private workspace.
 
 Scope note:
 
