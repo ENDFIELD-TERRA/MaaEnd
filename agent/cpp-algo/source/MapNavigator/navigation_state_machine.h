@@ -76,6 +76,14 @@ private:
         const Waypoint& anchor,
         const NaviPosition& origin,
         double stuck_heading);
+    // 卡死脱困的选侧: 不以固定侧移猜方向, 而是对左右两个候选禁区各做一次网格试规划,
+    // 选可行且代价更低的一侧提交禁区并重规划; 两侧都不可行才返回 false。
+    bool TrySideDetourReplan(
+        const char* reason,
+        size_t continue_index,
+        const Waypoint& anchor,
+        const NaviPosition& origin,
+        double stuck_heading);
     // 走不到的上索点在这里让路: 判成够不着就丢掉这条链改走路, 返回 true 表示这一拍已经处理完。
     bool GiveUpUnreachableZipline(const char* reason);
     bool HandleZiplineRecoveryReplan();

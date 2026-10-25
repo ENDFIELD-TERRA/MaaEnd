@@ -307,6 +307,8 @@ struct OffRouteWedgeState
     std::chrono::steady_clock::time_point blind_since {};
     double best_distance = std::numeric_limits<double>::max();
     bool active = false;
+    // Bounded navmesh detours per wedge episode; a further wedge still follows the normal replan/fail path.
+    int recovery_attempts = 0;
 
     void PauseAt(const std::chrono::steady_clock::time_point& now)
     {

@@ -222,8 +222,8 @@ def main():
         "--resource-dirs",
         type=str,
         nargs="+",
-        default=["assets/resource"],
-        help="Directories containing resource files to validate (default: assets/resource)",
+        default=["assets/resource", "assets/resource_cloud_web"],
+        help="Directories containing resource files to validate (default: assets/resource and assets/resource_cloud_web)",
     )
     parser.add_argument(
         "--exclude-dirs",

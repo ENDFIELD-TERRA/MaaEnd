@@ -1,0 +1,389 @@
+{
+    "__SceneImageCheck": {
+        "desc": "CloudWeb：原生画面检查会主动触发登出提示，不适用于云流；仅 CloudWeb 资源禁用",
+        "enabled": false
+    },
+    "InMenuList": {
+        "desc": "CloudWeb：菜单总列表（模板检测 + 右侧 OCR 兜底）",
+        "recognition": "Or",
+        "any_of": [
+            {
+                "recognition": "And",
+                "all_of": [
+                    "CheckMenuListText",
+                    "CheckMenuListText2",
+                    "CheckMenuListColor"
+                ]
+            },
+            {
+                "recognition": "OCR",
+                "roi": [
+                    1000,
+                    120,
+                    280,
+                    200
+                ],
+                "expected": [
+                    "Regional Development",
+                    "Regional",
+                    "Development",
+                    "Operational Manual",
+                    "Operational",
+                    "Protocol Pass",
+                    "Protocol",
+                    "Friends",
+                    "地区建设",
+                    "地區建設",
+                    "地域建設",
+                    "지역 건설"
+                ]
+            },
+            {
+                "recognition": "OCR",
+                "roi": [
+                    0,
+                    120,
+                    320,
+                    400
+                ],
+                "expected": [
+                    "Operators",
+                    "Events",
+                    "Headhunt",
+                    "Acquisition",
+                    "Center",
+                    "干员",
+                    "活动",
+                    "寻访"
+                ]
+            }
+        ]
+    },
+    "__ScenePrivateWorldEnterMenuRegionalDevelopment": {
+        "desc": "CloudWeb：大世界或已打开的菜单列表都可进入地区建设（Escape 打开列表后原地识别）",
+        "recognition": "Or",
+        "any_of": [
+            "InWorld",
+            "InMenuList"
+        ],
+        "next": [
+            "__ScenePrivateMenuListEnterMenuRegionalDevelopment",
+            "[JumpBack]__ScenePrivateWorldEnterMenuList"
+        ]
+    },
+    "__ScenePrivateWorldEnterMenuList": {
+        "desc": "CloudWeb：用 Escape 打开菜单总列表（网页不接收 Alt+click）",
+        "recognition": {
+            "type": "TemplateMatch",
+            "param": {
+                "roi": [
+                    -200,
+                    0,
+                    200,
+                    200
+                ],
+                "template": [
+                    "SceneManager/WorldMenu.png"
+                ],
+                "green_mask": true
+            }
+        },
+        "pre_wait_freezes": {
+            "time": 100,
+            "timeout": 1000
+        },
+        "action": "ClickKey",
+        "key": 27,
+        "post_delay": 1500,
+        "rate_limit": 0,
+        "next": [
+            "__SceneImageCheck",
+            "__ScenePrivateAnyEnterMenuListSuccess"
+        ]
+    },
+    "__ScenePrivateMenuListEnterWorld": {
+        "desc": "CloudWeb：用 Escape 关闭菜单总列表",
+        "recognition": "And",
+        "all_of": [
+            "InMenuList"
+        ],
+        "action": "ClickKey",
+        "key": 27,
+        "post_delay": 1500,
+        "rate_limit": 0,
+        "next": [
+            "[JumpBack]SceneNoticeRewardsUpgrade",
+            "__ScenePrivateAnyEnterWorldSuccess"
+        ]
+    },
+    "__ScenePrivateMenuListEnterMenuOperationalManual": {
+        "desc": "CloudWeb：菜单列表进入行动手册（英文标签分两行）",
+        "recognition": "And",
+        "all_of": [
+            "InMenuList",
+            {
+                "recognition": "OCR",
+                "roi": [
+                    -400,
+                    0,
+                    400,
+                    720
+                ],
+                "expected": [
+                    "Operational Manual",
+                    "Operational",
+                    "Manual",
+                    "行动手册",
+                    "行動手",
+                    "案内所",
+                    "작전 매뉴얼"
+                ]
+            }
+        ],
+        "box_index": 1,
+        "action": "Click",
+        "next": [
+            "__ScenePrivateAnyEnterMenuOperationalManualSuccess"
+        ]
+    },
+    "__ScenePrivateMenuOperationalManualEnterUmbralMonument": {
+        "desc": "CloudWeb：行动手册进入影拓丰碑（英文标签可能分两行）",
+        "recognition": "And",
+        "all_of": [
+            "InOperationalManual",
+            {
+                "recognition": "OCR",
+                "roi": [
+                    160,
+                    200,
+                    960,
+                    80
+                ],
+                "expected": [
+                    "Umbral Monument",
+                    "Umbral",
+                    "Monument",
+                    "影拓丰碑",
+                    "影拓豐碑",
+                    "映像の記念碑",
+                    "그림자 이정표"
+                ]
+            }
+        ],
+        "box_index": 1,
+        "action": "Click",
+        "next": [
+            "__ScenePrivateAnyEnterMenuOperationalManualUmbralMonumentSuccess"
+        ]
+    },
+    "__ScenePrivateMenuListEnterMenuRegionalDevelopment": {
+        "desc": "CloudWeb：从菜单列表进入地区建设",
+        "recognition": "And",
+        "all_of": [
+            "InMenuList",
+            {
+                "recognition": "OCR",
+                "roi": [
+                    -400,
+                    0,
+                    400,
+                    720
+                ],
+                "expected": [
+                    "地区建设",
+                    "地區建設",
+                    "(?i)Regional\\s*Development",
+                    "地域建設",
+                    "지역 건설",
+                    "Regional",
+                    "Development"
+                ]
+            }
+        ],
+        "box_index": 1,
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "RepeatUntilFoundAction",
+                "custom_action_param": {
+                    "action": "Click",
+                    "wait_nodes": [
+                        "InRegionalDevelopment"
+                    ],
+                    "repeat_count": 2,
+                    "interval_ms": 3500
+                }
+            }
+        },
+        "target_offset": [
+            -22,
+            -17,
+            0,
+            0
+        ],
+        "next": [
+            "__ScenePrivateMenuRegionalDevelopmentUnlockClose",
+            "__ScenePrivateAnyEnterMenuRegionalDevelopmentSuccess"
+        ]
+    },
+    "__ScenePrivateMenuRegionalDevelopmentWulingEnterOverview": {
+        "desc": "CloudWeb：武陵地区建设界面点击事务总览（模板未命中时的 OCR 兜底；截图为证）",
+        "recognition": "OCR",
+        "roi": [
+            0,
+            226,
+            258,
+            136
+        ],
+        "expected": [
+            "事务总览",
+            "事務總覽",
+            "(?i)Regional Overview",
+            "Overview"
+        ],
+        "pre_delay": 0,
+        "action": "Click",
+        "post_delay": 0,
+        "rate_limit": 0,
+        "next": [
+            "__ScenePrivateMenuRegionalDevelopmentWulingEnterOverviewSuccess"
+        ]
+    },
+    "TrialOfSwordmancyGotoTrialArena": {
+        "desc": "CloudWeb：演武台以导航网格的可行走廊点作为 authored route（设备点本身在到达带外）",
+        "custom_action_param": {
+            "arrival_timeout": 45000,
+            "path": [
+                {
+                    "action": "ZONE",
+                    "zone_id": "Wuling_Base"
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1840.625,
+                        2863.875
+                    ]
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1842.625,
+                        2862.375
+                    ]
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1850.375,
+                        2861.875
+                    ]
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1856.625,
+                        2861.875
+                    ]
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1857.375,
+                        2860.125
+                    ]
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1857.125,
+                        2858.375
+                    ]
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1863.125,
+                        2849.125
+                    ]
+                },
+                {
+                    "action": "NAVMESH",
+                    "target": [
+                        1863.23,
+                        2847.51
+                    ]
+                }
+            ]
+        }
+    },
+    "TrialOfSwordmancyOverviewViewPosition": {
+        "desc": "CloudWeb：查看位置首发可能被吞；以本地地图的前往传送按钮作为停止条件",
+        "action": {
+            "type": "Custom",
+            "param": {
+                "custom_action": "RepeatUntilFoundAction",
+                "custom_action_param": {
+                    "action": "Click",
+                    "wait_nodes": [
+                        "QuickTeleportButton"
+                    ],
+                    "repeat_count": 3,
+                    "interval_ms": 3000
+                }
+            }
+        }
+    },
+    "TrialOfSwordmancyQuickTeleportDone": {
+        "desc": "CloudWeb：传送后可能是大世界或主菜单；用 SceneAnyEnterWorld 统一回到大世界",
+        "recognition": "Or",
+        "any_of": [
+            "InWorld",
+            "InMenuList"
+        ],
+        "action": "Custom",
+        "custom_action": "SubTask",
+        "custom_action_param": {
+            "sub": [
+                "SceneAnyEnterWorld"
+            ]
+        }
+    },
+    "TrialOfSwordmancyViewPositionButton": {
+        "desc": "CloudWeb：选剑演武行的查看位置（固定 ROI 的 OCR，避免命中其他行）",
+        "recognition": "OCR",
+        "roi": [
+            900,
+            290,
+            170,
+            60
+        ],
+        "expected": [
+            "查看位置",
+            "(?i)View Position",
+            "View"
+        ],
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 0
+    },
+    "__QuickTeleportButton": {
+        "desc": "CloudWeb：前往传送按钮（文字 OCR，避免模板命中追踪图标）",
+        "recognition": "OCR",
+        "roi": [
+            960,
+            630,
+            180,
+            60
+        ],
+        "expected": [
+            "前往传送",
+            "前往傳送",
+            "(?i)Quick Teleport",
+            "Teleport"
+        ],
+        "pre_delay": 0,
+        "post_delay": 0,
+        "rate_limit": 0
+    }
+}

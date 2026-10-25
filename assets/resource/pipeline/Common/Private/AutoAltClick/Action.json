@@ -20,13 +20,6 @@
         "action": "Click",
         "post_delay": 100
     },
-    "__AutoEscClickAction": {
-        "desc": "CloudWeb：用 Escape 打开菜单（Alt+click 不能到达云游戏）",
-        "pre_delay": 0,
-        "action": "ClickKey",
-        "key": 27,
-        "post_delay": 1500
-    },
     "__AutoAltSwipeMouseSwipeAction": {
         "desc": "鼠标滑动",
         "pre_delay": 400, // delay = 0 有极小概率SeizeInput点不上，特别是性能较差的电脑

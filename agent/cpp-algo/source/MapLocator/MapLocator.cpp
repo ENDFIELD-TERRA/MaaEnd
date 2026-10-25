@@ -2065,13 +2065,21 @@ LocateResult MapLocator::Impl::locate(const cv::Mat& minimap, const LocateOption
             }
         }
     }
+    const auto lastPosOpt = motionTracker->getLastPos();
     if (!globalResult) {
-        if (bestRawGlobal.score > kSeamFallbackMinPeakScore) {
+        const bool hasSameZoneLast = lastPosOpt.has_value() && lastPosOpt->zoneId == bestRawGlobal.zoneId;
+        // 低置信裸峰只用于真正的冷启动/换区。热会话里已有一帧位置时重播种会把
+        // 0.4 分的错配当成真实位移，导航随后沿错误位置规划（Trial 末段实测）。
+        if (!hasSameZoneLast && bestRawGlobal.score > kSeamFallbackMinPeakScore) {
             globalResult = bestRawGlobal;
-            LogInfo << "Global gate low-confidence: releasing best raw peak to avoid cold-start deadlock." << VAR(bestRawGlobal.x)
+            LogInfo << "Global gate low-confidence: releasing best raw peak for cold start." << VAR(bestRawGlobal.x)
                     << VAR(bestRawGlobal.y) << VAR(bestRawGlobal.score);
         }
         else {
+            if (hasSameZoneLast) {
+                LogInfo << "Global gate low-confidence: holding last position instead of a warm-session reseed." << VAR(bestRawGlobal.x)
+                        << VAR(bestRawGlobal.y) << VAR(bestRawGlobal.score) << VAR(lastPosOpt->x) << VAR(lastPosOpt->y);
+            }
             motionTracker->markLost();
             if (motionTracker->getLostCount() > maxAllowedLost) {
                 motionTracker->forceLost();
@@ -2081,7 +2089,6 @@ LocateResult MapLocator::Impl::locate(const cv::Mat& minimap, const LocateOption
         }
     }
 
-    const auto lastPosOpt = motionTracker->getLastPos();
     const bool zoneChanged = currentZoneId != globalResult->zoneId;
     const bool hasLast = lastPosOpt.has_value() && !zoneChanged;
     const double jumpDist = hasLast ? std::hypot(globalResult->x - lastPosOpt->x, globalResult->y - lastPosOpt->y) : 0.0;

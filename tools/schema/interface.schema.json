@@ -532,7 +532,8 @@
                         "MacOS",
                         "PlayCover",
                         "Gamepad",
-                        "Linux"
+                        "Linux",
+                        "CloudWeb"
                     ]
                 },
                 "display_short_side": {
@@ -783,6 +784,43 @@
                             "title": "使用 Win32 VK 键码",
                             "description": "可选。为 true 时按键被视为 Win32 Virtual-Key 码，内部转换为 Linux evdev 码；否则按原始 evdev 码处理。默认 false",
                             "default": false
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "cloudweb": {
+                    "type": "object",
+                    "title": "CloudWeb 控制器配置（私有扩展）",
+                    "description": "CloudWeb 网页控制器的传输与 profile 配置；外层 backend 是 Host 适配器，内层 actuator 由 sidecar 握手身份决定",
+                    "properties": {
+                        "backend": {
+                            "type": "string",
+                            "title": "Host 适配器",
+                            "enum": [
+                                "sidecar",
+                                "fake"
+                            ],
+                            "default": "sidecar"
+                        },
+                        "profile": {
+                            "type": "string",
+                            "title": "站点 profile",
+                            "default": "default"
+                        },
+                        "ui_profile": {
+                            "type": "string",
+                            "title": "页面 UI profile"
+                        },
+                        "server_region": {
+                            "type": "string",
+                            "title": "服务器区域"
+                        },
+                        "input_semantics": {
+                            "type": "string",
+                            "title": "输入语义",
+                            "enum": [
+                                "pc"
+                            ]
                         }
                     },
                     "additionalProperties": false

@@ -833,6 +833,105 @@ bool NavigationStateMachine::TryApplyDynamicOverlayToNextAnchor(const char* reas
     return TryApplyDynamicOverlayToAnchor(reason, anchor->first, anchor->second, /*emit_interior_corners=*/false);
 }
 
+bool NavigationStateMachine::TrySideDetourReplan(
+    const char* reason,
+    size_t continue_index,
+    const Waypoint& anchor,
+    const NaviPosition& origin,
+    double stuck_heading)
+{
+    // 绕行基准取“指向锚点的方位”，不取相机朝向: 转向失败后镜头可能已经背对目标，
+    // 按朝向布禁区会把角色推向反方向。
+    const double to_anchor_x = anchor.x - origin.x;
+    const double to_anchor_y = anchor.y - origin.y;
+    const double to_anchor_len = std::hypot(to_anchor_x, to_anchor_y);
+    if (to_anchor_len < kMeasurementDefaultPositionQuantum) {
+        LogInfo << "Side detour skipped: already at the anchor." << VAR(reason) << VAR(origin.x) << VAR(origin.y);
+        return false;
+    }
+    const double dir_x = to_anchor_x / to_anchor_len;
+    const double dir_y = to_anchor_y / to_anchor_len;
+    // 屏幕坐标下的左法线 = (dir_y, -dir_x)。
+    const double left_x = dir_y;
+    const double left_y = -dir_x;
+
+    const navmesh::WorldPoint start { .x = origin.x, .y = origin.y };
+    const navmesh::WorldPoint goal { .x = anchor.x, .y = anchor.y };
+
+    struct Candidate
+    {
+        bool feasible = false;
+        double radius = 0.0;
+        double x = 0.0;
+        double y = 0.0;
+        double cost = std::numeric_limits<double>::max();
+    };
+    Candidate best;
+
+    for (const int side : { 1, -1 }) {
+        // A wider disc than the default clears props that pin the capsule at a narrow gap.
+        double radius = std::max(kVirtualNoGoRadius, 3.0);
+        double cx = 0.0;
+        double cy = 0.0;
+        const auto place = [&](double r) {
+            const double offset = r + kVirtualNoGoStandoff;
+            cx = origin.x + dir_x * offset + left_x * offset * side;
+            cy = origin.y + dir_y * offset + left_y * offset * side;
+        };
+        place(radius);
+        // 禁区不得覆盖锚点，也不得把规划起点(当前位置)圈进去。
+        while (radius >= kVirtualNoGoRadiusMin
+               && (std::hypot(anchor.x - cx, anchor.y - cy) < radius + kVirtualNoGoGoalClearance
+                   || std::hypot(origin.x - cx, origin.y - cy) < radius)) {
+            radius *= 0.5;
+            place(radius);
+        }
+        if (radius < kVirtualNoGoRadiusMin) {
+            continue;
+        }
+
+        std::vector<VirtualNoGoDisc> trial = runtime_state_.virtual_no_go;
+        trial.push_back({ .zone_id = origin.zone_id, .x = cx, .y = cy, .radius = radius });
+        const auto route = PlanNavmeshRoute(
+            param_,
+            position_->zone_id,
+            start,
+            goal,
+            anchor.target_deck_y,
+            session_->WalkedFloorY(origin),
+            nullptr,
+            &trial,
+            session_->LandedTowerDeckY(origin),
+            nullptr);
+        if (!route) {
+            continue;
+        }
+        if (!best.feasible || route->cost < best.cost) {
+            best.feasible = true;
+            best.radius = radius;
+            best.x = cx;
+            best.y = cy;
+            best.cost = route->cost;
+        }
+    }
+
+    if (!best.feasible) {
+        LogInfo << "Side detour skipped: neither side is feasible." << VAR(reason) << VAR(origin.x) << VAR(origin.y)
+                << VAR(to_anchor_x) << VAR(to_anchor_y) << VAR(stuck_heading);
+        return false;
+    }
+
+    runtime_state_.virtual_no_go.push_back({ .zone_id = origin.zone_id, .x = best.x, .y = best.y, .radius = best.radius });
+    LogInfo << "Side detour selected." << VAR(reason) << VAR(best.x) << VAR(best.y) << VAR(best.radius) << VAR(best.cost)
+            << VAR(runtime_state_.virtual_no_go.size());
+    if (TryApplyDynamicOverlayToAnchor(reason, continue_index, anchor)) {
+        return true;
+    }
+    runtime_state_.virtual_no_go.pop_back();
+    LogWarn << "Side detour overlay failed." << VAR(reason);
+    return false;
+}
+
 bool NavigationStateMachine::TryVirtualNoGoReplan(
     const char* reason,
     size_t continue_index,
@@ -1827,6 +1926,21 @@ bool NavigationStateMachine::TickNavigate()
         }
         const int64_t wedge_ms = std::chrono::duration_cast<std::chrono::milliseconds>(now - wedge.since).count();
         if (wedge_ms >= kOffRouteWedgeFailMs) {
+            if (param_.dynamic_detour && wedge.recovery_attempts < 2) {
+                // A prop pinned in front of the corridor never clears through a plain replan: stamp a no-go disc
+                // ahead of the wedge and replan around it, reusing the recovery detour machinery.
+                ++wedge.recovery_attempts;
+                const std::optional<DynamicAnchor> anchor = ResolveCurrentAnchor(session_, *position_);
+                if (anchor
+                    && (TrySideDetourReplan("offroute_wedge_side", anchor->first, anchor->second, *position_, current_heading)
+                        || TryVirtualNoGoReplan("offroute_wedge_detour", anchor->first, anchor->second, *position_, current_heading))) {
+                    wedge.since = std::chrono::steady_clock::now();
+                    wedge.best_distance = route.progress_distance;
+                    LogWarn << "Off-route wedge detour." << VAR(wedge_ms) << VAR(route.cross_track)
+                            << VAR(route.waypoint_distance) << VAR(runtime_state_.virtual_no_go.size());
+                    return true;
+                }
+            }
             return FailNavigation(
                 "offroute_wedge_timeout",
                 "Off-route with no route progress past the wedge timeout; terminating so the pipeline can retry.",

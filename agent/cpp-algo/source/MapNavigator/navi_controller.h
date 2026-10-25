@@ -25,6 +25,9 @@ struct NaviParam
     // 起步 A* 开关。叠层地区的 tier floor 烘在空气里时，起步规划会绕出几百格；关掉它就落到
     // Bootstrap 里现成的两档兜底（串行续接 / 直接朝路线头走），照录制点走。默认开，不设置的线路行为不变。
     bool enable_bootstrap_navmesh = true;
+    // 可选避障：卡死时按锚点方位左右试算禁区并重规划（动态绕行）。默认关；关闭时保持原有
+    // 重规划/失败路径。GUI 选项在充分验证后才引入。
+    bool dynamic_detour = false;
     // When set, live fixes are projected onto the navmesh base-pixel frame via the navmesh's own baked
     // tier affine (see NormalizeLivePositionToBase). MapNavigator turns this on.
     bool normalize_position_via_navmesh = false;

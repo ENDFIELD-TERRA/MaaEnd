@@ -62,6 +62,9 @@
             "description": "$controller.CloudWeb.description",
             "type": "CloudWeb",
             "display_short_side": 720,
+            "attach_resource_path": [
+                "./resource_cloud_web"
+            ],
             "cloudweb": {
                 "backend": "sidecar",
                 "profile": "default",
