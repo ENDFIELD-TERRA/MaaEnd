@@ -25,8 +25,8 @@
 | --- | --- | --- | --- |
 | U0 启动注入 | verified | CloudShell `--inject` 启动脚本 + `LaunchCloudWeb` 接线；dev pretask 冷启动实测 | [#1](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/1) |
 | U0 启动任务 | verified（严格 InWorld） | 标题页、今日月卡奖励、进入世界（`CloudWebStartGame`） | [#4](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/4) |
-| U0 凭据 | partial | WebView2 会话 DPAPI 保存/恢复 harness；秘密不进入仓库/日志 | [#2](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/2) |
-| U1 队列 | partial（手动 3/3；严格启动 1/3 菜单失败） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
+| U0 凭据 | verified | WebView2 会话 DPAPI 保存/恢复 harness；真实过期会话恢复 4 cookies / 22 localStorage；秘密不进入仓库/日志 | [#2](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/2) |
+| U1 队列 | verified（严格 3/3，61 s） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
 | U2 核心任务 | partial | DailyRewards、Trial、AutoFight；Trial 战后任务级闭环 | [#5](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/5) |
 | U3 全量矩阵 | planned | 46 项 Windows 任务的 CloudWeb 资格/动态证据；有副作用任务按清单跳过 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
 | U4 后台/长时 | planned | 遮挡/最小化/长时供帧与任务稳定性；边界有证据 | — |
@@ -42,19 +42,27 @@
   （真实云，taskId 级成功）。
 - Trial 的 `Fight` / `AutoFight` / `FightFinish` 节点级 **Succeeded**（有真实演算次数）。
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
-- **首轮完整队列 Succeeded（2026-10-25）**：`CloudWebStartGame` → `DailyRewards` →
-  `ClaimSimulationRewards` 三项均 succeeded，overall Succeeded，116 s。
-- **dev pretask 冷启动成功**：`LaunchCloudWeb` 以 `--inject` 拉起 CloudShell。启动任务在
-  「游戏启动中」阶段保持 Running（max_hit 假阳性已修），游戏加载后严格 Succeeded 于
-  藏剑谷 InWorld。随后严格 3 任务队列中 DailyRewards/ClaimSimulationRewards 仍因
-  主菜单 home/last-tab 失败；手动启动时的 3/3 仍有效。
+- **严格 3 任务队列 Succeeded（2026-10-25 15:43，61 s）**：`CloudWebStartGame`
+  （仅在 InWorld 结束）→ `DailyRewards` → `ClaimSimulationRewards` 三项全部 succeeded。
+- **DailyRewards 全链路**：世界 → 菜单 → 地区建设 → 换区 → 仓库 → 我的转移页 → 领取 → 返回，
+  是真实点击驱动的多级菜单闭环，不是空转。
+- **点击失效根因与修复**：注入脚本「禁用悬浮球」沿祖先链把承载 `#game-video` 的全屏层
+  `.ob90eP` 设为 `pointer-events:none`，标题页与游戏内所有鼠标事件都被掐断；修复后只禁用
+  左上角 ≤180×180 的 fixed/absolute 容器。修复后控制器单击与 Esc 均可驱动游戏
+  （标题推进、菜单打开、角色攻击）。启始按钮同时改回按 OCR 框点击。
+- **DPAPI 恢复 harness 实机通过**：在会话过期后的手机号登录页恢复 4 cookies / 22 localStorage，
+  reload 后 `通行证UID` 校验通过，临时明文删除。
+- **上游确认**：#6841（OPEN/Draft，head `d54392de`）维护者 17:32 UTC 评论确认
+  CloudShell 可直接 PostMessage，与本地实测一致；#6800 建议直接 Stack 到 #6841。
+- 历史：首轮手动 3/3（116 s）发生在严格启动门控前，仅作历史记录。
 
 ## 未验证 / 边界（不得当作已通过）
 
-- 官网“开始游戏”按钮被透明层覆盖；控制器点击命中透明层，JS click 才能启动。
-  这属于启动/pretask 缺口（U0）。
-- 主菜单 home/last-tab 状态：Escape 打开上次标签（地图），行动手册/地区建设右侧按钮不在；
-  需要 home 导航或固定 home 入口。
+- 修复后的注入脚本尚未用于冷启动复跑：当前严格 3/3 会话是旧脚本启动 + 手工恢复输入层后完成的。
+- Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；
+  “home 缺失”原判断由鼠标输入被掐断造成，已撤销。
+- 队列结束可能停在模拟空间/行动手册（ClaimSimulationRewards 的 `SimCheckEmpty` 终止路径）；
+  下一任务能否从该菜单态恢复尚未验证。启动任务只负责冷启动，不负责暖会话恢复。
 - Trial 战后结果页被跳过、角色回大世界且不在演算提示附近；重导航在 `GotoTrialArena` 失败，
   Trial 任务级仍未 Succeeded（U2）。
 - 46 项任务仅 DailyRewards/ClaimSimulationRewards/Trial 有真实云动态证据；其余为静态资格/未跑（U3）。

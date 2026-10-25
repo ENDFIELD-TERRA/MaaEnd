@@ -1277,7 +1277,7 @@
   },
   "cloudshell_2026_10_25": {
     "schema": "cloudweb-cloudshell-roadmap/1",
-    "updated_at": "2026-10-25T21:25:00Z",
+    "updated_at": "2026-10-25T22:45:00Z",
     "single_source": "docs/cloudweb/cloudshell-roadmap.md",
     "epic": 8,
     "issues": {
@@ -1297,26 +1297,22 @@
     "status": "partial",
     "verified": [
       "CloudShell WebView2/Chromium host",
-      "Win32 PrintWindow/PostMessage",
-      "DailyRewards Succeeded",
-      "Trial Fight/AutoFight/FightFinish node-level",
-      "no focus steal",
-      "login persisted",
-      "3-task queue Succeeded: CloudWebStartGame + DailyRewards + ClaimSimulationRewards (116s)",
-      "dev pretask --inject cold start; startup task reached InWorld; DailyRewards succeeded",
-      "strict startup task reached InWorld after max_hit fix"
+      "Win32 PrintWindow/PostMessage; maintainer confirmed direct PostMessage on #6841",
+      "login persisted; DPAPI restore verified on an expired live session (4 cookies / 22 localStorage, 通行证UID marker)",
+      "strict startup task reaches InWorld after max_hit fix",
+      "input-layer fix: floating-ball disable restricted to small top-left containers; controller click/Esc drive the game",
+      "DailyRewards Succeeded with full world->menu->regional development->region change->depot->claim navigation",
+      "strict 3-task queue Succeeded in 61s: CloudWebStartGame (InWorld gate) + DailyRewards + ClaimSimulationRewards",
+      "dev pretask --inject cold start (old script) reached InWorld"
     ],
     "open": [
-      "start button transparent overlay",
+      "cold start with the fixed injected script (current session still used the old script)",
       "Trial task-level post-fight",
       "46-task dynamic matrix",
-      "background/minimized long-run",
+      "background/obscured long-run",
       "final release e2e",
-      "pretask --inject cold start",
-      "menu home/last-tab state for operational manual/regional development",
-      "startup task max_hit false-success fixed; strict InWorld re-verification pending",
-      "cloud game start page stuck at 游戏启动中 (service/session)",
-      "strict full queue DailyRewards/ClaimSimulationRewards fail at menu home/last-tab (Escape opens map, CloudShell floating ball blocks world menu)"
+      "task-queue end state can be simulation space/operational manual; next-task scene recovery from that state not yet verified",
+      "startup task is cold-start only; it does not recover a warm session left in menus"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }
