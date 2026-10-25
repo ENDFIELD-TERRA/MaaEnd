@@ -24,11 +24,11 @@
   ],
   "summary": {
     "rows": 26,
-    "partial": 13,
-    "not_run": 11,
+    "partial": 11,
+    "not_run": 10,
     "blocked": 1,
-    "pass": 1,
-    "note": "after round2; only F-MD-01 is a local pass"
+    "pass": 4,
+    "note": "after round3; F-MD-01/07, F-BR-01/03 pass"
   },
   "executed": {
     "harness": "temporary test-only worktree; product candidate diff unchanged",
@@ -49,6 +49,20 @@
       "log": "cw9/batch-b/logs/round2-session-media-stalled.log",
       "log_sha256": "2fd9450b747681f91b0bcd6aab266df9b10f1b87417a5da276e10a90194a19cf",
       "harness_diff_sha256": "c7146ec2439113c0a1e5f9a84e19302d0da44f88df0e28d625c17d864ec51da0"
+    },
+    "round3": {
+      "tests": "8 passed / 0 failed, exit 0",
+      "log": "cw9/batch-b/logs/round3-batch-b-all-tests.log",
+      "log_sha256": "d48cc9bfe233717d9de314ae17f3a7fbc85f2e1b835135fcf2c13e519cc774fb",
+      "harness_diff_sha256": "eedf181573cca51f346a4cc9394107ea586dc09d00dd601026c21ea7b586707e",
+      "results": "cw9/batch-b/round3-results.json",
+      "results_sha256": "84389123df5d244ec2c48608eb11ee54512c86d55fca7a8adebb6b1e1707d49e",
+      "covered": [
+        "A/B self-consistency",
+        "resize geometry 1->3",
+        "CDP disconnect+reconnect",
+        "same-URL page identity"
+      ]
     }
   },
   "rows": [
@@ -98,7 +112,7 @@
       "id": "F-MD-03",
       "group": "B2",
       "readiness": "partial",
-      "note": "slot/transport unit tests; local A/B not run"
+      "note": "28 A/B samples self-consistent; no torn sample observed; formal injection not run"
     },
     {
       "id": "F-MD-04",
@@ -121,8 +135,8 @@
     {
       "id": "F-MD-07",
       "group": "B2",
-      "readiness": "partial",
-      "note": "geometry>=1 in CDP smoke; resize not run"
+      "readiness": "pass",
+      "note": "resize bumped geometry revision 1 -> 3"
     },
     {
       "id": "F-MD-08",
@@ -133,8 +147,8 @@
     {
       "id": "F-BR-01",
       "group": "B3",
-      "readiness": "not_run",
-      "note": "CDP disconnect harness missing"
+      "readiness": "pass",
+      "note": "dropped CDP socket: explicit errors; reconnect works"
     },
     {
       "id": "F-BR-02",
@@ -145,8 +159,8 @@
     {
       "id": "F-BR-03",
       "group": "B3",
-      "readiness": "partial",
-      "note": "target close test passed: explicit CDP error; same-name recreation and old-token invalidation not tested"
+      "readiness": "pass",
+      "note": "target close explicit; recreated same-URL page selected over decoy"
     },
     {
       "id": "F-BR-06",

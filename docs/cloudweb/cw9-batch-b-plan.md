@@ -1,6 +1,6 @@
 # CloudWeb CW9 Batch B 准备（local_browser，26 行）
 
-状态：`in_progress`（round2：CDP smoke + 4 个 CDP 测试 + session MEDIA_STALLED 端到端通过；26 行 1 pass）。
+状态：`in_progress`（round3：8 个 CDP 测试 + session MEDIA_STALLED 端到端通过；26 行 4 pass）。
 范围：`fault-matrix.json` 中 `local_browser` 的 26 行；不包含 `real_cloud_session` 行（Batch C）。
 候选：sidecar HEAD `8b9cc6f` + diff `1f8625d5…`；MXU HEAD `8bddfee` + diff `e193e0d4…`。
 前置：CW2 协议层已 closed（pass-with-boundary）；CW4/CW5 的本地媒体与 reader/cache 已接通；硬杀输入释放按 best-effort 记录。
@@ -30,6 +30,7 @@
 | `cdp_actuator_screenshots_and_inputs --ignored`（headless Chrome 9233） | **1 passed**；日志 `logs/round2-cdp-smoke.log` `1e362969…` | canonical JPEG、rVFC Start/Stop、doc_nonce/geometry、relative 分段、trusted anchor、非 canonical 空帧、临时 profile/端口清理 |
 | Batch B 4 tests（headless Chrome 9234） | **4 passed / 0 failed，exit 0**；日志 `logs/round2-batch-b-cdp-tests-2.log` `3ae5145b…` | 冻结/重复帧/截图、page reload、target close、browser kill |
 | Session MEDIA_STALLED 端到端 | **1 passed / 0 failed，exit 0**；日志 `logs/round2-session-media-stalled.log` `2fd9450b…` | 暂停→MEDIA_STALLED；恢复→Live 且输入 Dispatched |
+| Round3 8 个 CDP tests | **8 passed / 0 failed，exit 0**；日志 `logs/round3-batch-b-all-tests.log` `d48cc9bf…` | A/B 自洽、resize、CDP 断链、same-URL 新页 + 既有 4 项 |
 | 运行后清理 | `port_closed=true`、`temp_removed=Ok`、`profile_removed=Ok` | F-BR-06 的测试边界 |
 
 注意：以上只是本地浏览器证据，不等于 26 行逐项 Pass；`fault-matrix.json` 仍全 Pending，行级结果见 `round2-results.json`。
@@ -45,15 +46,15 @@
 | F-ST-05 Stop 预算 | not_run | 需重复采样 p50/p95 | 本地 Stop 采样 |
 | F-MD-01 冻结 | pass | round2 session 端到端：暂停→MEDIA_STALLED，恢复→Live+Dispatched | 已闭 |
 | F-MD-02 重复帧 | partial | `still_scene_stays_live_and_fresh`（fake）；无本地浏览器重复取帧 | 本地静止画面多帧 |
-| F-MD-03 A/B 覆盖 | partial | slot/transport 单测；无本地浏览器 A/B | 快速写入/读取 A/B |
+| F-MD-03 A/B 覆盖 | partial | round3 28 个 A/B 样本自洽；无确定性 torn-read 注入 | 保持 partial |
 | F-MD-04 旧 token | blocked | snapshot token 尚未实现 | 等 CW4 token |
 | F-MD-05 截图成功但冻结 | partial | `frozen_media_rejects_input_and_recovers_on_progress`（fake） | 本地冻结 + screenshot RPC |
 | F-MD-06 页面重建 | partial | `document_navigation_bumps_generation_and_unknowns_latest`（fake）；无真实刷新 | 本地页面 reload |
-| F-MD-07 geometry | partial | CDP smoke geometry>=1、viewport 1280×720；无 resize | 本地 resize/视口变化 |
+| F-MD-07 geometry | pass | round3 resize：revision 1 → 3 | 已闭 |
 | F-MD-08 非 canonical | partial | CDP smoke non-canonical 空帧通过 | 补齐证据字段后可升 pass |
-| F-BR-01 CDP 断链 | not_run | 无断链测试 | 断开 CDP→fence/release |
+| F-BR-01 CDP 断链 | pass | round3 drop WS：input/capture 显式错误，重连成功 | 已闭 |
 | F-BR-02 浏览器崩溃 | partial | round2：kill 临时 Chrome 后显式 CDP 错误；session Faulted/未知账本未测 | 补 session/ledger |
-| F-BR-03 目标页重建 | partial | round2：close target 后显式 CDP 错误；同名页/旧 token 未测 | 补同名页重建 |
+| F-BR-03 目标页重建 | pass | round3：close→about:blank→navigate→decoy；URL-scoped actuator 选新页，不选 decoy | 已闭 |
 | F-BR-06 自有/用户浏览器边界 | partial | CDP smoke 临时 profile/端口清理通过 | 断言未触碰用户 Chrome |
 | F-HS-01 MXU 崩溃 | not_run | 无进程树测试 | 强杀 MXU→sidecar 回收 |
 | F-HS-02 GUI 崩溃 | not_run | 无 WebView 测试 | 杀 GUI→API 有界 |

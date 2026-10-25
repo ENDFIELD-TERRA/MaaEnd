@@ -99,15 +99,16 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 - round2（新候选 sidecar `1f8625d5…` / MXU `e193e0d4…`）：`cargo test --all-targets` → **52 passed / 0 failed / 1 ignored**；行级 10 pass / 5 partial。
 - round3：补 SeqConflict 单测（sidecar 53/0/1）与 MXU lost down/up ACK 测试（2/0），并用现有 lease/token 测试补齐 F-LS-02/06；**15/15 pass**；结果 `round3-results.json` `d966cb5b…`，日志 `5de7ee96…`/`0bf5e3a2…`。
 - **CW2 已 closed（pass-with-boundary）**：`cw2/clause-table.md` 条款 1–6，`review-lease`/`review-renew-sidecar` pass、`review-combined` pass-with-notes；边界为 job kill 瞬间 held 输入释放 best-effort。`cw9/cw2-reevaluation.md` 已重写。
-- **Batch B round2**：26 行 local_browser；CDP smoke 1 passed + 4 个 CDP 测试 + session MEDIA_STALLED 端到端 **全过**；F-MD-01 为唯一 pass；行级 1 pass / 13 partial / 11 not_run / 1 blocked。结果 `round2-results.json` `8deabe92…`、harness `bb4f38aa…`/`c7146ec2…`。
+- **Batch B round2**：26 行 local_browser；CDP smoke + 4 CDP 测试 + session MEDIA_STALLED 端到端全过；F-MD-01 为唯一 pass；1 pass / 13 partial / 11 not_run / 1 blocked。
+- **Batch B round3**：8 个 CDP 测试全过；新增 F-MD-07 resize（revision 1→3）、F-BR-01 CDP 断链、F-BR-03 同名页；A/B 自洽 smoke 28 样本，F-MD-03 仍 partial；行级 **4 pass / 11 partial / 10 not_run / 1 blocked**。结果 `round3-results.json` `84389123…`、harness `eedf1815…`、日志 `d48cc9bf…`。
 - Batch B 顺序：B2 媒体（余 A/B、resize、session 冻结端到端）→ B3 CDP（断链、同名页）→ B1 Stop → B5 跨 run/资源 → B4 Host 生命周期。
-- 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `9eea22a4…`、就绪度 `433b5eab…`、报告 `ffa78879…`、round2 结果 `8deabe92…`。
+- 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `4abcb891…`、就绪度 `0aecbd57…`、报告 `8eb8f943…`、round3 结果 `84389123…`。
 
 ### 首批动作
 
 1. **[done]** 建立 `fault-matrix.json` / `.md`，登记 `run-175718`/`run-172548`/`run-175512` 三个真实输入，不猜测根因。
 2. Batch A round3 已 15/15 pass；SeqConflict、Host lost-ACK、lease/token 语义均有测试或现有证据。
-3. Batch B round2 已跑通 4 个 CDP 测试 + session `MEDIA_STALLED` 端到端；继续补 A/B、resize、CDP 断链/同名页、Stop 预算。
+3. Batch B round3 已跑通 8 个 CDP 测试 + session `MEDIA_STALLED` 端到端；A/B 为自洽 smoke，继续补确定性 A/B、Stop 预算、Host/跨 run。
 4. Batch B 的 Host 生命周期/跨 run 行仍未跑；HS-01/07 现受 job object 强杀边界影响，输入释放按 best-effort 记录。
 5. Batch C（10 行 real_cloud_session）依赖 CW7；长运行最后。判据不变：“不可确认即 Faulted/未知账本，禁止新 run”；禁止自动重放。
 
@@ -172,7 +173,7 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 
 - 现在可做：CW8-1/2 静态 inventory/矩阵（done）、CW9-1 故障矩阵（done）、CW10-1/4 依赖/PR 映射、AC 清单。
 - CW2 协议层已 closed（pass-with-boundary）；Batch A round3 15/15 pass，不再等 CW2。
-- Batch B round2：1 pass / 13 partial / 11 not_run / 1 blocked；B2/B3 继续 A/B、resize、断链/同名页。
+- Batch B round3：4 pass / 11 partial / 10 not_run / 1 blocked；继续 Stop 预算、Host 生命周期、跨 run/资源。
 - CW7 关闭后：CW8-3/4/5、CW9-5/CW9-6、Batch C（10 行 real_cloud_session）。
 - CW10-2/3 依赖 CW0/CW1/CW5；CW10-4 依赖 CW1 合同接受。
 

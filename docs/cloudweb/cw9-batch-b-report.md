@@ -1,6 +1,6 @@
 # CloudWeb CW9 Batch B 执行记录
 
-状态：`partial`（round2：CDP smoke + 4 个 CDP 测试 + session MEDIA_STALLED 端到端通过；26 行 1 pass）。
+状态：`partial`（round3：8 个 CDP 测试 + session MEDIA_STALLED 端到端通过；26 行 4 pass）。
 候选：sidecar HEAD `8b9cc6f` + product diff `1f8625d5…`；MXU `8bddfee` + diff `e193e0d4…`。
 测试载体：临时 test-only worktree；round2 harness diff `bb4f38aa…`（只含测试，不改产品代码）。
 产品 diff 与候选一致；round1 harness `70805a91…` 绑定旧候选，仅作历史。
@@ -14,10 +14,23 @@
 | 4 个 Batch B CDP 测试 | **4 passed / 0 failed**（headless 9234）；日志 `logs/round2-batch-b-cdp-tests-2.log` `3ae5145b…` |
 | Session MEDIA_STALLED 端到端 | **1 passed / 0 failed**（headless 9235）；日志 `logs/round2-session-media-stalled.log` `2fd9450b…` |
 | 首轮 round2 | 1 failed / 3 passed；原因：测试假设 `frame_sample.media.presented` 必须等于 rVFC `presented`；新候选截图明确标 `source=cdp_screenshot`，改为 source 检查后通过；产品未变。日志 `d2321578…` |
-| 26 行 | 1 pass / 13 partial / 11 not_run / 1 blocked；结果 `round2-results.json` `fcf8d944…` |
+| 26 行 | round2 1 pass / 13 partial / 11 not_run / 1 blocked；round3 **4 pass / 11 partial / 10 not_run / 1 blocked**；round3 结果 `84389123…` |
 
 round2 覆盖：F-MD-01（session 端到端 MEDIA_STALLED/恢复，**pass**）、F-MD-02/05（冻结/重复帧/截图不冒充 rVFC）、
 F-MD-06（reload 改 doc_nonce）、F-BR-02（kill 显式错误）、F-BR-03（target close 显式错误）、F-BR-06（临时 profile/端口清理）。
+
+## round3（2026-10-25）
+
+| 测试 | 结果 | 映射 |
+| --- | --- | --- |
+| A/B frame slot self-consistency | pass：28 个样本，canonical 图像、nonce、geometry、presented 单调 | F-MD-03 partial |
+| resize geometry | pass：`Emulation.setDeviceMetricsOverride` 后 revision **1 → 3** | **F-MD-07 pass** |
+| CDP disconnect | pass：drop WS 后 input/capture 显式错误，新 actuator 可重连 | **F-BR-01 pass** |
+| same-URL new page | pass：关闭旧 target→about:blank→CDP navigate→decoy tab；URL-scoped actuator 选新页，不选 decoy | **F-BR-03 pass** |
+
+- 8 个 `batch_b_` 测试全过：日志 `logs/round3-batch-b-all-tests.log` `d48cc9bf…`；harness `harness-round3.diff` `eedf1815…`。
+- 26 行：**4 pass（F-MD-01/07、F-BR-01/03）/ 11 partial / 10 not_run / 1 blocked**。
+- A/B 仍是自洽 smoke，不是确定性 torn-read 注入；F-MD-03 保持 partial。
 
 ## round1（历史）
 
