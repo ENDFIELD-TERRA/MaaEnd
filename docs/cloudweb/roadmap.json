@@ -1079,7 +1079,7 @@
     },
     "cw9_batch_b_readiness": {
       "plan": "cases/cloudweb-cw8-cw10/cw9/batch-b/plan.md",
-      "plan_sha256": "24bbd001603e6c741b2c69471fd85b528a8fbbfc732f46969e5c7f5c6d504114",
+      "plan_sha256": "4abcb8916b47172c287ef87a32ab35e141e554e14bd1edfccd0b390d13e585e7",
       "readiness": "cases/cloudweb-cw8-cw10/cw9/batch-b/readiness.json",
       "readiness_sha256": "0aecbd570453023c8bc8dada7a0b4f0aa032e458bc06134da701dcef52e8d68a",
       "report": "cases/cloudweb-cw8-cw10/cw9/batch-b/report.md",
