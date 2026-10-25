@@ -12,7 +12,7 @@
 #include <meojson/json.hpp>
 
 #include "../Common/output_paths.h"
-#include "../MapNavigator/controller_info_utils.h"
+#include "../MapNavigator/control/controller_info_utils.h"
 #include "../utils.h"
 #include "IconRecognizer.h"
 #include "detail/Attach.h"

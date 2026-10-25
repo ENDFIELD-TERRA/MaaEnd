@@ -14,7 +14,7 @@
 #include <MaaUtils/Logger.h>
 #include <meojson/json.hpp>
 
-#include "../MapNavigator/controller_info_utils.h"
+#include "../MapNavigator/control/controller_info_utils.h"
 #include "WorldMapSolver.h"
 #include "utils.h"
 
