@@ -93,7 +93,9 @@
 - MapNavigator 末段朝向/动态恢复是当前主要剩余阻塞（Trial 与野外任务点），
   与 CloudWeb 打印帧/输入架构无关；navmesh `deck_probe` 已确认 Trial 终点只有单一可走面
   （高 221.57，`on_surface:false`），不存在重叠 deck，`target_deck_y` 不适用；
-  需要单独修订 authored route/末段控制。
+  `route` 查询 start→goal 为 reachable / same_component / 1.62 m，但运行在起点 1.56 m 处
+  `steer_heading` 等于当前朝向、未转向，dynamic recovery 超时。需要单独处理
+  MapNavigator 转向死锁/拐角，不是 CloudWeb 或路线不可达。
 - 上游 #6854（open）指出转场后约 750 ms 的输入忽略窗口；CloudWeb 上紧接转场的点击也需
   预留 pre_delay，后续任务适配时沿用。
 - Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；

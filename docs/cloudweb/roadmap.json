@@ -1317,7 +1317,8 @@
       "warm 5-task queue 100.9s and warm 4-task 85.8s Succeeded",
       "scene recovery stable-frame wait fixes Claim-after-Daily menu transition failure",
       "DijiangRewards Succeeded with SelectToGrow=DoNothing",
-      "navmesh deck_probe: Trial target has a single deck (221.57, on_surface false); target_deck_y not applicable"
+      "navmesh deck_probe: Trial target has a single deck (221.57, on_surface false); target_deck_y not applicable",
+      "route probe: Trial final segment reachable/same component (1.62m); runtime failure is steering (steer_heading == current heading), not an unreachable route"
     ],
     "open": [
       "Trial task-level post-fight",
