@@ -1058,7 +1058,7 @@
     },
     "cw9_batch_b_round2": {
       "results": "cases/cloudweb-cw8-cw10/cw9/batch-b/round2-results.json",
-      "results_sha256": "fcf8d944efcff8a009fad08b5738b468c4ec66557443425057c93c31b4408e64",
+      "results_sha256": "8deabe92faf3f18b55f663e3bd4f8945a0baaf120802800000c90a486471148e",
       "harness_diff_sha256": "bb4f38aa2f38f72e05b05d61dde14045b131bf7624633b8b427cbb65445443ac",
       "smoke_log_sha256": "1e362969280064cf3822e14daac4e98ba9915099a86f6d0f53708f3bbaac9247",
       "tests_log_sha256": "3ae5145bf0ce5aa7a70efbf2dd143f0d07548c369fec5c1f00058da892859fed",
@@ -1080,11 +1080,11 @@
     },
     "cw9_batch_b_readiness": {
       "plan": "cases/cloudweb-cw8-cw10/cw9/batch-b/plan.md",
-      "plan_sha256": "634d46a8a6becc396f39cbcd756a580445b31ac0b6143a04fa926ee641ae9858",
+      "plan_sha256": "9eea22a48e1056c782c676deb6fa80a7c77892fac34b5ca4a10abf0d80e46244",
       "readiness": "cases/cloudweb-cw8-cw10/cw9/batch-b/readiness.json",
-      "readiness_sha256": "bbef7ad196ad19c50fae292b82b7c6c99b362348ab6fd44b03fad05a89af8d39",
+      "readiness_sha256": "433b5eabc2fc2f3dc13012678c13b0d1c01e483fab8b60520b604b3bc3106950",
       "report": "cases/cloudweb-cw8-cw10/cw9/batch-b/report.md",
-      "report_sha256": "f3543fa5e94b6df584b496df0b8b0c4a3ec9be9bc9e5625a3979fa17e2d62a30",
+      "report_sha256": "ffa788799f241333cc922bbda76758f66ae4b14deb64e46f990b8d21e3ed505b",
       "test_log_sha256": "3ae5145bf0ce5aa7a70efbf2dd143f0d07548c369fec5c1f00058da892859fed",
       "rows": {
         "total": 26,

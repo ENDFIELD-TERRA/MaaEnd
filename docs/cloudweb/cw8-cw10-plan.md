@@ -99,9 +99,9 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 - round2（新候选 sidecar `1f8625d5…` / MXU `e193e0d4…`）：`cargo test --all-targets` → **52 passed / 0 failed / 1 ignored**；行级 10 pass / 5 partial。
 - round3：补 SeqConflict 单测（sidecar 53/0/1）与 MXU lost down/up ACK 测试（2/0），并用现有 lease/token 测试补齐 F-LS-02/06；**15/15 pass**；结果 `round3-results.json` `d966cb5b…`，日志 `5de7ee96…`/`0bf5e3a2…`。
 - **CW2 已 closed（pass-with-boundary）**：`cw2/clause-table.md` 条款 1–6，`review-lease`/`review-renew-sidecar` pass、`review-combined` pass-with-notes；边界为 job kill 瞬间 held 输入释放 best-effort。`cw9/cw2-reevaluation.md` 已重写。
-- **Batch B round2**：26 行 local_browser；CDP smoke 1 passed + 4 个 CDP 测试 + session MEDIA_STALLED 端到端 **全过**；F-MD-01 为唯一 pass；行级 1 pass / 13 partial / 11 not_run / 1 blocked。结果 `round2-results.json` `fcf8d944…`、harness `bb4f38aa…`/`c7146ec2…`。
+- **Batch B round2**：26 行 local_browser；CDP smoke 1 passed + 4 个 CDP 测试 + session MEDIA_STALLED 端到端 **全过**；F-MD-01 为唯一 pass；行级 1 pass / 13 partial / 11 not_run / 1 blocked。结果 `round2-results.json` `8deabe92…`、harness `bb4f38aa…`/`c7146ec2…`。
 - Batch B 顺序：B2 媒体（余 A/B、resize、session 冻结端到端）→ B3 CDP（断链、同名页）→ B1 Stop → B5 跨 run/资源 → B4 Host 生命周期。
-- 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `634d46a8…`、就绪度 `bbef7ad1…`、报告 `f3543fa5…`、round2 结果 `fcf8d944…`。
+- 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `9eea22a4…`、就绪度 `433b5eab…`、报告 `ffa78879…`、round2 结果 `8deabe92…`。
 
 ### 首批动作
 
