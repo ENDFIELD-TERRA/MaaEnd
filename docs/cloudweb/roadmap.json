@@ -434,7 +434,9 @@
         "Host periodic renewal thread in MXU; 2s real-process long press keeps health.held_keys=[65]",
         "sidecar command grace refreshes the same owner generation after an authorized slow command",
         "sidecar 40/40 non-CDP tests, clippy 0; MXU 42 passed/1 env failure/1 ignored; real-process test passed",
-        "remaining: immediate Stop preemption during an in-flight RPC, owned launcher/profile, Host-death process reclamation"
+        "minimal stop pass on real cloud: autofight-20261024-104052 and autofight-20261024-114725 (Running -> MaaTaskerPostStop -> need_to_stop -> inactive -> ReleaseOwner)",
+        "cw9/cw2-reevaluation.md: minimal_stop=pass, full_contract=partial",
+        "remaining: long-RPC preemption per command type, owned launcher/profile, Host-death process reclamation"
       ]
     },
     {
@@ -691,8 +693,9 @@
         "Batch A: 15 rows -> 6 pass / 4 partial / 3 fail / 2 blocked",
         "sidecar 8b9cc6f + diff 4c775f51c5e4d55c7c0f65d832476963334e6097a4b8232c0c1421854d9cbd9a",
         "cargo test -- --skip cdp_ -> 40 passed / 0 failed / 3 filtered, exit 0",
-        "results.json sha256 2811dc82c1d41a74aeb6318f6dd112ea942f84d513d32de6fde64ab00cb509d2",
-        "report.md sha256 a4ff2e93576b5e642ca9f5246b49db05e645f6ad64dc887866d399e1aa63f2b0",
+        "results.json sha256 874588c453eab7e4e28dcc9b0bc24dee29be4dacec1f84de29164546808e3a96",
+        "report.md sha256 17326584682b2bd8fd9f776bcdeed425f87ebb2a6f47c031a88aa613b680d499",
+        "cw2 minimal stop pass (autofight-20261024-104052/114725); full CW2 still partial",
         "open: long RPC preemption, in-flight deadline, pending/backpressure, Host ACK harness"
       ]
     },
@@ -700,13 +703,18 @@
       "id": "CW9-3",
       "title": "媒体故障：冻结/重复帧/页面重建/geometry 变化",
       "owner": "media fault agent",
-      "status": "pending",
+      "status": "partial",
       "dependencies": [
         "CW4"
       ],
       "acceptance": [
         "冻结不标 Fresh",
         "旧 token 失效"
+      ],
+      "evidence": [
+        "Batch B readiness: 8 media rows -> 7 partial / 1 blocked, 0 pass",
+        "headless Chrome CDP smoke: rVFC Start/Stop, canonical JPEG, doc_nonce/geometry, non-canonical empty frame",
+        "open: freeze/repeat/A-B/reload/resize rows not run; snapshot token blocked"
       ]
     },
     {
@@ -725,7 +733,9 @@
       "evidence": [
         "run-175718 state_poll_error registered as F-HS-03",
         "run-175512 supervisor polling kill registered as F-HS-03",
-        "run-172548 control pipe close registered as F-HS-04 (experiment reverted)"
+        "run-172548 control pipe close registered as F-HS-04 (experiment reverted)",
+        "Batch B readiness: 6 host rows -> 2 partial / 4 not_run, 0 pass",
+        "open: HS-01/07 wait on owned launcher/Host-death; HS-02/05/06 harnesses not run"
       ]
     },
     {
@@ -985,9 +995,9 @@
     },
     "cw9_2_batch_a": {
       "report": "cases/cloudweb-cw8-cw10/cw9/batch-a/report.md",
-      "report_sha256": "a4ff2e93576b5e642ca9f5246b49db05e645f6ad64dc887866d399e1aa63f2b0",
+      "report_sha256": "17326584682b2bd8fd9f776bcdeed425f87ebb2a6f47c031a88aa613b680d499",
       "results": "cases/cloudweb-cw8-cw10/cw9/batch-a/results.json",
-      "results_sha256": "2811dc82c1d41a74aeb6318f6dd112ea942f84d513d32de6fde64ab00cb509d2",
+      "results_sha256": "874588c453eab7e4e28dcc9b0bc24dee29be4dacec1f84de29164546808e3a96",
       "test_log_sha256": "e4c9356d6f478645ff16c71e580ea817febb0084ac0a744bc1392921650978a3",
       "sidecar_head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
       "sidecar_diff_sha256": "4c775f51c5e4d55c7c0f65d832476963334e6097a4b8232c0c1421854d9cbd9a",
@@ -1005,7 +1015,32 @@
         "pending queue/backpressure",
         "Host ACK-loss harness"
       ],
-      "cw2_status": "partial; owned launcher and Host-death reclamation also open"
+      "cw2_status": "minimal_stop=pass; full_contract=partial; owned launcher and Host-death reclamation open"
+    },
+    "cw2_reevaluation": {
+      "report": "cases/cloudweb-cw8-cw10/cw9/cw2-reevaluation.md",
+      "report_sha256": "476860bc4d54b5544cba87d0c17815b752fa9be249a7ab18aa06f7a2a86b355b",
+      "candidate_id": "d315fac670912f5cfc3c96792417a820b32f05ae8e6029ce7eb1a09223212465",
+      "minimal_stop": "pass",
+      "full_contract": "partial",
+      "real_cloud_stop": ["autofight-20261024-104052", "autofight-20261024-114725"],
+      "remaining": ["long-RPC preemption per command type", "owned launcher/profile", "Host-death reclamation"]
+    },
+    "cw9_runbook": {
+      "path": "cases/cloudweb-cw8-cw10/cw9/runbook.md",
+      "sha256": "e2b7eaf9e5b00bf5f0e938577f15d08bd15ca8d531a4528d8129094cfedf7b56"
+    },
+    "cw9_batch_b_readiness": {
+      "plan": "cases/cloudweb-cw8-cw10/cw9/batch-b/plan.md",
+      "plan_sha256": "7e1daf1d5c9d6c7f8a71082f614091dd3581dcfc958a4c53842fb06575b211e2",
+      "readiness": "cases/cloudweb-cw8-cw10/cw9/batch-b/readiness.json",
+      "readiness_sha256": "7c382b831838762ab39974cd83fab3249eb9a2ceebe0ec8ed60ca1b86c984c2b",
+      "rows": {"total": 26, "partial": 12, "not_run": 13, "blocked": 1, "pass": 0},
+      "evidence": [
+        "cargo test --all-targets: 42 passed / 1 ignored / 0 failed, exit 0",
+        "headless Chrome CDP smoke: 1 passed, temp profile/port cleaned",
+        "B2/B3 can start; HS-01/07 wait on owned launcher/Host-death"
+      ]
     },
     "delivery_audit": "cases/cloudweb-delivery-20261024-success/",
     "delivery_status": "needs_review",

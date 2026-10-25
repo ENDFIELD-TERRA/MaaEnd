@@ -18,6 +18,22 @@
       "Host-death process reclamation not verified"
     ]
   },
+  "cw2_reevaluation": {
+    "source": "cw7/final-audit.md",
+    "candidate_id": "d315fac670912f5cfc3c96792417a820b32f05ae8e6029ce7eb1a09223212465",
+    "minimal_stop": "pass",
+    "full_contract": "partial",
+    "real_cloud_stop": [
+      "autofight-20261024-104052",
+      "autofight-20261024-114725"
+    ],
+    "remaining": [
+      "long RPC preemption per command type not re-proved",
+      "owned launcher/profile not implemented",
+      "Host-death reclamation not verified"
+    ],
+    "note": "Task-level in-session Stop passes; it does not close the protocol-level F-CP-07/09 rows."
+  },
   "summary": {
     "rows": 15,
     "pass": 6,
@@ -103,7 +119,8 @@
       "status": "partial",
       "evidence": [
         "A 2 s hold survives the 350 ms lease with renewals; media health gating does not block release inputs.",
-        "The control loop waits for the in-flight command before reading Stop/ReleaseAll, so a slow screencap still delays preemption."
+        "Real-cloud task-level in-session Stop passes (autofight-20261024-104052/114725).",
+        "The control loop waits for the in-flight command before reading Stop/ReleaseAll, so a slow screencap still delays protocol-level preemption."
       ],
       "related_tests": [
         "session::tests::two_second_long_press_survives_the_350ms_lease_with_renewals",
@@ -126,7 +143,8 @@
       "status": "fail",
       "evidence": [
         "The control loop reads one command, runs it to completion in spawn_blocking, writes the receipt, then reads the next command.",
-        "Stop/Close shares this serial path; there is no fence-first queue drain."
+        "Stop/Close shares this serial path; there is no fence-first queue drain.",
+        "Real-cloud AutoFight Stop is task-level evidence only; it does not prove queue-drain semantics."
       ],
       "related_tests": [],
       "blocker": "CW2 gap: fence-first Stop with bounded in-flight command handling."

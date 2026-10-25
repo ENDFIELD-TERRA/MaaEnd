@@ -95,7 +95,7 @@ CW8（46 任务）、CW9（故障/长时）、CW10（发行/上游）保留主�
 
 - 目标：记录真实 actuator/目标身份；连接→登录/排队→DailyRewards 子分支→Stop/重开；再做原 MapNavigator + AutoFight。
 - 依赖：CW3/CW4/CW5 + CW6 首条任务必需子集；owner：integration Agent + 独立 validator。
-- 当前：`partial`。有一次 `run-20261024-172134` exit 0（必须从 Regional Development 界面启动，绕过菜单点击）；从菜单/标题冷启动失败（`run-20261024-172301`/`174331`），MXU API 在任务中可长时间无响应；Stop/重开、MapNavigator、AutoFight、后台隔离均未验证。
+- 当前：`partial`（候选 `eb50e2ff...`，详见 `cw7/audit-report-late.md`）。真实云已通过：`run-20261024-112908` 最终 exe 人工登录后的冷启动（首页→auto_start→标题→世界）→ DailyRewards exit 0；`run-20261024-114141` 开放世界起点 MapNavigator Succeeded；`autofight-20261024-114725` 最终 exe 真实战斗内 AutoFight，Running→Stop→`ReleaseOwner`；`run-20261024-114523` 中文 UI 下 Operational Manual→影拓丰碑详情；`autofight-20261024-103758/104052` 为早期 AutoFight/Stop 证据。MapNavigator 早期 `104430`（室内）/`113125`（菜单）因无开放世界起点失败；管理员手动传送到悬谷台后，`run-20261024-114141`（最终 exe）产品 trial 路径 `MapNavigateAction` **Succeeded**（~50s，到达演武场入口）。最终候选经 reviewer-cw7d 判 pass。奖励增量、46 项矩阵、静态构建、Linux/macOS runner、零焦点变化（`foreground-autofight.log` 有 1/180 MXU 前台）仍未闭合；FIX-RS 待收口。
 - 首批任务：①把 CW6 薄 overlay + CW3 relative 接入后复跑冷启动；②记录真实 actuator/target/profile 身份；③连接→登录/排队→DailyRewards→Stop→重开；④MapNavigator + AutoFight；⑤前台未变/无 OS 焦点/输入隔离证据；⑥独立 validator 复核。
 - 验收：实际游戏和后台隔离成功；邮件有/无场景；fake/假 SDK/固定 PNG 不可计入；G2 关闭。当前成功不能关闭 CW7。
 

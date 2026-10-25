@@ -1,0 +1,66 @@
+{
+  "schema": "cloudweb-cw9-batch-b-readiness/1",
+  "source_matrix": "fault-matrix.json",
+  "source_matrix_sha256": "ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d",
+  "candidate": {
+    "sidecar_head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+    "sidecar_diff_sha256": "4c775f51c5e4d55c7c0f65d832476963334e6097a4b8232c0c1421854d9cbd9a",
+    "mxu_head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+    "mxu_diff_sha256": "8feb31cd6608f587de18a4445a96601b4d8b232b8137e72f4a37577059040912"
+  },
+  "readiness_runs": [
+    {
+      "command": "cargo test --all-targets",
+      "result": "42 passed / 1 ignored / 0 failed, exit 0",
+      "log": "cw9/batch-b/logs/sidecar-all-targets.log",
+      "log_sha256": "dcd507ba7b3da8cd120fe896a175afa951f78c193d107224fc0d5b129efb0338"
+    },
+    {
+      "command": "CHROME_PATH=... CLOUDWEB_CDP_TEST_HEADLESS=1 CLOUDWEB_CDP_TEST_PORT=9231 cargo test cdp::tests::cdp_actuator_screenshots_and_inputs -- --ignored --nocapture",
+      "result": "1 passed, exit 0; port_closed=true; temp/profile removed",
+      "log": "cw9/batch-b/logs/cdp-smoke.log",
+      "log_sha256": "2df08ce0e3fce0ec3fd9f72bd56a6529258cf37f5dc11ec0ab3e7a16e3dc3a65"
+    }
+  ],
+  "summary": {
+    "rows": 26,
+    "partial": 12,
+    "not_run": 13,
+    "blocked": 1,
+    "pass": 0
+  },
+  "rows": [
+    {"id": "F-ST-01", "group": "B1", "readiness": "partial", "note": "session maybe-held union tests pass; local browser Stop not run"},
+    {"id": "F-ST-02", "group": "B1", "readiness": "partial", "note": "failed release retry tests pass; unreachable target not run"},
+    {"id": "F-ST-03", "group": "B1", "readiness": "not_run", "note": "local long action cancel harness missing"},
+    {"id": "F-ST-04", "group": "B1", "readiness": "not_run", "note": "target close then close harness missing"},
+    {"id": "F-ST-05", "group": "B1", "readiness": "not_run", "note": "p50/p95 Stop sampling missing"},
+    {"id": "F-MD-01", "group": "B2", "readiness": "partial", "note": "Start/Stop covered; freeze health not run"},
+    {"id": "F-MD-02", "group": "B2", "readiness": "partial", "note": "still-scene fake test; local repeated frames not run"},
+    {"id": "F-MD-03", "group": "B2", "readiness": "partial", "note": "slot/transport unit tests; local A/B not run"},
+    {"id": "F-MD-04", "group": "B2", "readiness": "blocked", "note": "snapshot token not implemented (CW4)"},
+    {"id": "F-MD-05", "group": "B2", "readiness": "partial", "note": "frozen fake test; local screenshot-vs-freeze not run"},
+    {"id": "F-MD-06", "group": "B2", "readiness": "partial", "note": "document nonce fake test; local reload not run"},
+    {"id": "F-MD-07", "group": "B2", "readiness": "partial", "note": "geometry>=1 in CDP smoke; resize not run"},
+    {"id": "F-MD-08", "group": "B2", "readiness": "partial", "note": "non-canonical empty frame passed; evidence fields need completion"},
+    {"id": "F-BR-01", "group": "B3", "readiness": "not_run", "note": "CDP disconnect harness missing"},
+    {"id": "F-BR-02", "group": "B3", "readiness": "not_run", "note": "browser kill harness missing"},
+    {"id": "F-BR-03", "group": "B3", "readiness": "not_run", "note": "target close/recreate harness missing"},
+    {"id": "F-BR-06", "group": "B3", "readiness": "partial", "note": "temp profile/port cleanup passed; user-browser non-touch assertion pending"},
+    {"id": "F-HS-01", "group": "B4", "readiness": "not_run", "note": "MXU kill/process-tree harness missing; owned launcher open"},
+    {"id": "F-HS-02", "group": "B4", "readiness": "not_run", "note": "GUI kill/API bounded harness missing"},
+    {"id": "F-HS-04", "group": "B4", "readiness": "partial", "note": "historical control-pipe close input; controlled repro missing"},
+    {"id": "F-HS-05", "group": "B4", "readiness": "not_run", "note": "dual-instance/pool harness missing"},
+    {"id": "F-HS-06", "group": "B4", "readiness": "partial", "note": "historical process inventory; idle reclaim not run"},
+    {"id": "F-HS-07", "group": "B4", "readiness": "not_run", "note": "Host-death/owned launcher open"},
+    {"id": "F-LR-03", "group": "B5", "readiness": "not_run", "note": "repeated-failure cleanup harness missing"},
+    {"id": "F-LR-04", "group": "B5", "readiness": "not_run", "note": "cross-run late-event injection missing"},
+    {"id": "F-LR-05", "group": "B5", "readiness": "not_run", "note": "close resource counters missing"}
+  ],
+  "non_claims": [
+    "Readiness is not a pass; all 26 rows remain Pending in the fault matrix.",
+    "The local headless Chrome smoke uses a temporary profile/port and does not touch the user's Chrome or the cloud session.",
+    "Rows requiring owned launcher or Host-death reclamation cannot pass until CW2 closes those items.",
+    "real_cloud_session rows are out of Batch B scope."
+  ]
+}

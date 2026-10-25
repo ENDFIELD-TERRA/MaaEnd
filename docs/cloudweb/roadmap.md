@@ -52,7 +52,7 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | --- | --- | --- | --- | --- |
 | CW0 | 候选与契约盘点、可复现构建、实际配置、许可/工具链 | `partial` | 无 | 三仓 SHA 已固定；`cw0/baseline-inventory.md` 记录 sidecar 基线重建 `8e9d…` 与 dist 逐字节一致、实际 cdp 配置、真实/fake 判定表、5 条 exit 0 证据审计；sidecar LICENSE `AGPL-3.0-only`（`8486a10c…`）；MSRV 实测 1.88（1.85 被依赖/let-chains 拒绝）；MXU 干净 release 构建（`f2fef2dd…`）与 MaaEnd Go/C++ 构建记录已补；缺口：MXU dist profile、MaaEnd Go 1.25.6、C++ 从零构建、MANIFEST 重绑 |
 | CW1 | provider/launcher、最低版本、外层 adapter 与实际 actuator 分离、生产显式 CDP | `partial`（本地实现完成，最终审计并入 CW7） | CW0 | 候选 `adaa5905…`：sidecar 缺 backend 即失败；`hello_ok` minor 1 返回 `backend_kind`/`ui_profile`；MXU 校验 readiness+hello 并拒绝未授权 fake；sidecar 36/36 非 CDP 测试、clippy 0；MXU MSVC 42/44（1 环境失败、1 ignored 真实进程测试单独通过）。按新流程不设 CW1 独立复核门禁；真实 CDP 会话、UI 徽标、旧证据重生成并入 CW7 完整审计 |
-| CW2 | run/document epoch、独立 renew、typed held∪maybe、真实 deadline、owned launcher、Host-death 回收 | `partial`（最小停止已联合演示） | CW0/1 | 候选 `391659fb…`：typed confirmed∪maybe_held；Stop/ReleaseOwner/Close 遍历并集并尝试 up；MXU 独立续租线程；真实 sidecar 进程 2 秒长按 `health.held_keys=[65]` 通过；sidecar 命令完成后续租同一代；sidecar 40/40 非 CDP 测试、clippy 0；MXU 42/44（1 环境失败、1 ignored 真进程测试通过）。未闭合：长 RPC 进行中 Stop 立即抢占、owned launcher/profile、Host-death 进程回收 |
+| CW2 | run/document epoch、独立 renew、typed held∪maybe、真实 deadline、owned launcher、Host-death 回收 | `partial`（minimal stop pass） | CW0/1 | 最终候选 `d315fac6…`：typed confirmed∪maybe_held；Stop/ReleaseOwner/Close 遍历并集并尝试 up；MXU 独立续租线程；2 秒长按 `health.held_keys=[65]` 通过；真实云任务内 Stop `autofight-20261024-104052/114725`（Running→PostStop→need_to_stop→inactive→ReleaseOwner）通过。未闭合：长 RPC 逐命令类型抢占、在途 deadline、owned launcher/profile、Host-death 进程回收。`cw9/cw2-reevaluation.md` |
 | CW3 | 真实 relative、contact 映射、modifier/repeat、wheel/drag/text、SDK readiness、人工接管 | `partial`（本地输入语义接通） | CW2 | 候选 `574f4b0f…`：页面 pending delta + trusted anchor mousemove 的 relative 事务，127 分段，`input.relative` 已宣告；headless CDP 测试 3 段 trusted 事件、和 200/-300、buttons=2、shift=true；contact1→wire2、contact2→wire1、contact3 拒绝；sidecar 40/40 非 CDP、clippy 0；MXU 43/45（1 环境失败、1 ignored 真进程 2s+contacts 通过）。未闭合：真实云游戏持续组合/中键锁敌、SDK 正向 readiness、人工接管、Windows 隔离 |
 | CW4 | rVFC/媒体进度、720p 规范化、document/geometry、snapshot token、帧去重/slot | `partial`（本地媒体语义接通） | CW0/1；真实接线依赖 CW2 | 候选 `6d7393bb…`：rVFC Start/Stop 幂等、1280×720 letterbox、doc_nonce/geometry_revision、原子 image+metadata slot；headless CDP 测试 rvfc probe、canonical JPEG、geometry>=1、stop 两次通过；session 的 static/frozen/dedupe 由 ScriptedFrameSource 覆盖。未闭合：sidecar↔CDP 全链路、真实云视频、真实静态/冻结、snapshot token、Host 帧去重/slot/receipt、性能 |
 | CW5 | 唯一 frame reader/cache、preview/识别分离、pool/run/task ID、锁外 shutdown | `partial`（最小 reader/cache 已接通） | CW2/4 | 候选 `8e1b0e60…`：Host capture gate + immutable 100ms snapshot cache，TTL 内第二次 screencap 不重复发命令；`host_frame_cache` 诊断暴露 frame_id/geometry/hits；真实进程测试缓存命中、2 秒长按与 contacts 仍通过。未闭合：preview/识别 token 分离、pool/run/task ID/append/rollback、锁外 shutdown、`/api/maa/state` 响应性、双实例、真实 CDP 预览 |
@@ -72,9 +72,10 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 | CW8-3 | 任务族适配：Daily、AutoEssence、ProtocolSpace、DeliveryJobs/Seize、TrialOfSwordmancy、RealTimeTask、生命周期、预设/settings、ZiplineImport | task-family agents（待 CW7） | `pending` |
 | CW8-4 | option/route/preset/pretask 实际运行等价 | MaaEnd agents（待 CW7） | `pending` |
 | CW8-5 | 46 项逐项 Pass/Fail + 独立抽查 | Perlica + validator | `pending` |
-| E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（CW9-1 矩阵完成；CW9-2 Batch A 首轮 6/4/3/2，等待 CW2 收口） |
+| E9 / CW9 | 故障与长时：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、长运行 | Perlica | `in_progress`（CW9-1 完成；CW9-2 Batch A 6/4/3/2；Batch B 已准备，0 pass） |
 | CW9-1 | 故障矩阵与证据 schema：8 域、注入/预期/禁止/证据/owner/依赖/层级/gate | Perlica | `verified`（51 行全 Pending；protocol_fixture 15、local_browser 26、real_cloud_session 10；`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…`；不关闭 CW9-2..6） |
-| CW9-2 | 控制面/租约协议故障 Batch A（D1/D2，15 行） | sidecar fault agent | `partial`（6 pass / 4 partial / 3 fail / 2 blocked；`results.json` `2811dc82…` / `report.md` `a4ff2e93…`；长 RPC 抢占、在途 deadline、pending/背压、Host ACK harness 未闭合） |
+| CW9-2 | 控制面/租约协议故障 Batch A（D1/D2，15 行） | sidecar fault agent | `partial`（6 pass / 4 partial / 3 fail / 2 blocked；`results.json` / `report.md`；CW2 minimal stop pass，但长 RPC 抢占、在途 deadline、pending/背压、Host ACK harness 未闭合） |
+| CW9-3/4/5/6 | Batch B 准备：媒体、CDP、Stop、Host 生命周期、跨 run | Perlica | `in_progress`（Batch B 26 行就绪度 12 partial / 13 not_run / 1 blocked，0 pass；本地 headless Chrome smoke 1 passed；HS-01/07 等 owned launcher/Host-death） |
 | CW9-4 前置登记 | 把 `run-175718` 的 `state_poll_error` 登记为 Host/API 无响应真实输入 | Perlica | `verified`（已登记为 F-HS-03；同域 `run-175512` 轮询误杀、`run-172548` control pipe 关闭，根因未闭合；CW9-4 本体仍 pending） |
 | E10 / CW10 | 依赖/许可、干净 Windows 安装/回滚、跨 Host、PR 切片、版本文档 | Perlica | `in_progress`（依赖/PR 映射） |
 | AC | CW0–CW7/FIX-RS 验收 checklist、Gate 评审、validator/reviewer 分工 | Perlica | `in_progress` |
@@ -113,7 +114,9 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 - 任务级 `Succeeded` ≠ 实际领取新奖励：DailyRewards 上游只启用 `DailyClaimDeliveryJobsRewardSub`，其余四项 `enabled:false`；分支可达不等于奖励状态变化。
 - 失败：`172301`（菜单冷启动 exit 1）、`174331`（Regional 超时 exit 1）、`175512`（轮询误杀 exit 7）、`175718`（MXU API 连续超时 exit 2）。
 - CW9-1 故障矩阵：`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…`；8 域 51 行全 Pending；已登记 `175718`/`175512`/`172548` 三个真实输入，根因未闭合；矩阵存在不等于故障已执行或 G4 通过。
-- CW9-2 Batch A 首轮：sidecar `8b9cc6f` + diff `4c775f51…`；`cargo test -- --skip cdp_` 40/40，pass 6 / partial 4 / fail 3 / blocked 2；`results.json` `2811dc82…` / `report.md` `a4ff2e93…`；长 RPC 抢占、在途 deadline、pending/背压与 Host ACK harness 未闭合。
+- CW9-2 Batch A 首轮：sidecar `8b9cc6f` + diff `4c775f51…`；`cargo test -- --skip cdp_` 40/40，pass 6 / partial 4 / fail 3 / blocked 2；`results.json` / `report.md`；长 RPC 抢占、在途 deadline、pending/背压与 Host ACK harness 未闭合。
+- CW2 重评：`cw7/final-audit.md` 把 **minimal stop** 升为 pass（真实云 `autofight-20261024-104052/114725`）；完整 CW2 仍 partial（长 RPC 逐命令类型、owned launcher、Host-death）。`cw9/cw2-reevaluation.md`。
+- CW9 Batch B 准备：26 行 local_browser，就绪度 12 partial / 13 not_run / 1 blocked、0 pass；本地 headless Chrome smoke 1 passed，临时 profile/端口清理通过；`batch-b/plan.md`、`batch-b/readiness.json`。
 - 旧运行没有 `backend_kind` 字段，无法区分内层 fake/cdp；按配置、首帧 `0x0`/281ms 等只能稳妥推断为 cdp，不能标已验证。CW1 候选改变后旧证据失效，需重生成。
 - 已修运行时项：标题双击、`InMenuList` OCR-only/右侧兜底、`Regional` 两行 OCR、`MenuListEnterWorld` Escape、轮询容忍、best-effort kill；均未形成产品候选，`cloudweb-run.ps1` 为本地联调 supervisor。
 - 交付审计：`cases/cloudweb-delivery-20261024-success/`（status `needs_review`，绑定旧 MANIFEST `ccc3a611…`；当前 MANIFEST `0fa1e985…`，最终冻结需重绑）。
@@ -211,9 +214,9 @@ CW8 全任务资格（G3）、CW9 故障/长时、CW10 打包/上游收口（G4�
 
 ## 下一步顺序
 
-0. 并行（Perlica 独立推进）：CW8 inventory/任务族矩阵（done）、CW9-1 故障矩阵（done）、CW9-2 Batch A 首轮（partial）、CW10 依赖/PR 映射、AC 验收清单。
+0. 并行（Perlica 独立推进）：CW8 inventory/任务族矩阵（done）、CW9-1 故障矩阵（done）、CW9-2 Batch A 首轮（partial）、CW9 Batch B 准备（ready，0 pass）、CW10 依赖/PR 映射、AC 验收清单。
 1. CW0 剩余字节级一致性/证据；CW1 本地实现完成；不设中间独立复核；FIX-RS 并行。
-2. CW2 最小停止已联合演示，但长 RPC 抢占、在途 deadline、owned launcher、Host-death 回收仍未闭合；Batch A 重跑等待这些项，不进入 Batch B。
+2. CW2 minimal stop 已 pass；长 RPC 逐命令类型、在途 deadline、owned launcher、Host-death 仍未闭合；Batch A 重跑等待这些项，Batch B 的 B2/B3 可先执行。
 3. CW3 本地输入语义、CW4 本地媒体 collector/canonical 帧、CW5 最小 reader/cache 已接通；真实云游戏持续组合、sidecar↔CDP 全链路、preview/识别 token 分离、人工接管与隔离并入 CW7。
 4. CW6 全局 Escape 撤销、薄 overlay、schema/安装同步已接通；region/UID、能力门、云生命周期与真实云回归并入 CW7；CW7 冷启动→DailyRewards→Stop/重开→MapNavigator/AutoFight。
 5. **CW7 唯一完整审计/验证门**：对 CW0–CW6 的候选、真实 CDP/Windows、后台隔离、证据、许可、干净构建与文档做一次集中审计；在此之前不宣称 G0–G2 或完整功能通过。
