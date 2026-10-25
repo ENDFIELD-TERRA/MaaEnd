@@ -24,11 +24,11 @@
   ],
   "summary": {
     "rows": 26,
-    "partial": 14,
+    "partial": 13,
     "not_run": 11,
     "blocked": 1,
-    "pass": 0,
-    "note": "after the first Batch B execution; readiness is still not a pass"
+    "pass": 1,
+    "note": "after round2; only F-MD-01 is a local pass"
   },
   "executed": {
     "harness": "temporary test-only worktree; product candidate diff unchanged",
@@ -42,35 +42,172 @@
       "batch_b_page_reload_changes_doc_nonce",
       "batch_b_target_close_is_explicit",
       "batch_b_browser_kill_is_explicit"
-    ]
+    ],
+    "session_stall": {
+      "test": "batch_b_session_media_stalled_end_to_end",
+      "result": "1 passed / 0 failed, exit 0",
+      "log": "cw9/batch-b/logs/round2-session-media-stalled.log",
+      "log_sha256": "2fd9450b747681f91b0bcd6aab266df9b10f1b87417a5da276e10a90194a19cf",
+      "harness_diff_sha256": "c7146ec2439113c0a1e5f9a84e19302d0da44f88df0e28d625c17d864ec51da0"
+    }
   },
   "rows": [
-    {"id": "F-ST-01", "group": "B1", "readiness": "partial", "note": "session maybe-held union tests pass; local browser Stop not run"},
-    {"id": "F-ST-02", "group": "B1", "readiness": "partial", "note": "failed release retry tests pass; unreachable target not run"},
-    {"id": "F-ST-03", "group": "B1", "readiness": "not_run", "note": "local long action cancel harness missing"},
-    {"id": "F-ST-04", "group": "B1", "readiness": "not_run", "note": "target close then close harness missing"},
-    {"id": "F-ST-05", "group": "B1", "readiness": "not_run", "note": "p50/p95 Stop sampling missing"},
-    {"id": "F-MD-01", "group": "B2", "readiness": "partial", "note": "Start/Stop covered; freeze health not run"},
-    {"id": "F-MD-02", "group": "B2", "readiness": "partial", "note": "still-scene fake test; local repeated frames not run"},
-    {"id": "F-MD-03", "group": "B2", "readiness": "partial", "note": "slot/transport unit tests; local A/B not run"},
-    {"id": "F-MD-04", "group": "B2", "readiness": "blocked", "note": "snapshot token not implemented (CW4)"},
-    {"id": "F-MD-05", "group": "B2", "readiness": "partial", "note": "frozen fake test; local screenshot-vs-freeze not run"},
-    {"id": "F-MD-06", "group": "B2", "readiness": "partial", "note": "document nonce fake test; local reload not run"},
-    {"id": "F-MD-07", "group": "B2", "readiness": "partial", "note": "geometry>=1 in CDP smoke; resize not run"},
-    {"id": "F-MD-08", "group": "B2", "readiness": "partial", "note": "non-canonical empty frame passed; evidence fields need completion"},
-    {"id": "F-BR-01", "group": "B3", "readiness": "not_run", "note": "CDP disconnect harness missing"},
-    {"id": "F-BR-02", "group": "B3", "readiness": "partial", "note": "browser kill test passed: explicit CDP error, no fallback; session Faulted and residual ledger not tested"},
-    {"id": "F-BR-03", "group": "B3", "readiness": "partial", "note": "target close test passed: explicit CDP error; same-name recreation and old-token invalidation not tested"},
-    {"id": "F-BR-06", "group": "B3", "readiness": "partial", "note": "temp profile/port cleanup passed; user-browser non-touch assertion pending"},
-    {"id": "F-HS-01", "group": "B4", "readiness": "not_run", "note": "MXU kill/process-tree harness missing; owned launcher open"},
-    {"id": "F-HS-02", "group": "B4", "readiness": "not_run", "note": "GUI kill/API bounded harness missing"},
-    {"id": "F-HS-04", "group": "B4", "readiness": "partial", "note": "historical control-pipe close input; controlled repro missing"},
-    {"id": "F-HS-05", "group": "B4", "readiness": "not_run", "note": "dual-instance/pool harness missing"},
-    {"id": "F-HS-06", "group": "B4", "readiness": "partial", "note": "historical process inventory; idle reclaim not run"},
-    {"id": "F-HS-07", "group": "B4", "readiness": "not_run", "note": "Host-death/owned launcher open"},
-    {"id": "F-LR-03", "group": "B5", "readiness": "not_run", "note": "repeated-failure cleanup harness missing"},
-    {"id": "F-LR-04", "group": "B5", "readiness": "not_run", "note": "cross-run late-event injection missing"},
-    {"id": "F-LR-05", "group": "B5", "readiness": "not_run", "note": "close resource counters missing"}
+    {
+      "id": "F-ST-01",
+      "group": "B1",
+      "readiness": "partial",
+      "note": "session maybe-held union tests pass; local browser Stop not run"
+    },
+    {
+      "id": "F-ST-02",
+      "group": "B1",
+      "readiness": "partial",
+      "note": "failed release retry tests pass; unreachable target not run"
+    },
+    {
+      "id": "F-ST-03",
+      "group": "B1",
+      "readiness": "not_run",
+      "note": "local long action cancel harness missing"
+    },
+    {
+      "id": "F-ST-04",
+      "group": "B1",
+      "readiness": "not_run",
+      "note": "target close then close harness missing"
+    },
+    {
+      "id": "F-ST-05",
+      "group": "B1",
+      "readiness": "not_run",
+      "note": "p50/p95 Stop sampling missing"
+    },
+    {
+      "id": "F-MD-01",
+      "group": "B2",
+      "readiness": "pass",
+      "note": "paused video -> MEDIA_STALLED; play() -> Live and input accepted"
+    },
+    {
+      "id": "F-MD-02",
+      "group": "B2",
+      "readiness": "partial",
+      "note": "still-scene fake test; local repeated frames not run"
+    },
+    {
+      "id": "F-MD-03",
+      "group": "B2",
+      "readiness": "partial",
+      "note": "slot/transport unit tests; local A/B not run"
+    },
+    {
+      "id": "F-MD-04",
+      "group": "B2",
+      "readiness": "blocked",
+      "note": "snapshot token not implemented (CW4)"
+    },
+    {
+      "id": "F-MD-05",
+      "group": "B2",
+      "readiness": "partial",
+      "note": "frozen fake test; local screenshot-vs-freeze not run"
+    },
+    {
+      "id": "F-MD-06",
+      "group": "B2",
+      "readiness": "partial",
+      "note": "document nonce fake test; local reload not run"
+    },
+    {
+      "id": "F-MD-07",
+      "group": "B2",
+      "readiness": "partial",
+      "note": "geometry>=1 in CDP smoke; resize not run"
+    },
+    {
+      "id": "F-MD-08",
+      "group": "B2",
+      "readiness": "partial",
+      "note": "non-canonical empty frame passed; evidence fields need completion"
+    },
+    {
+      "id": "F-BR-01",
+      "group": "B3",
+      "readiness": "not_run",
+      "note": "CDP disconnect harness missing"
+    },
+    {
+      "id": "F-BR-02",
+      "group": "B3",
+      "readiness": "partial",
+      "note": "browser kill test passed: explicit CDP error, no fallback; session Faulted and residual ledger not tested"
+    },
+    {
+      "id": "F-BR-03",
+      "group": "B3",
+      "readiness": "partial",
+      "note": "target close test passed: explicit CDP error; same-name recreation and old-token invalidation not tested"
+    },
+    {
+      "id": "F-BR-06",
+      "group": "B3",
+      "readiness": "partial",
+      "note": "temp profile/port cleanup passed; user-browser non-touch assertion pending"
+    },
+    {
+      "id": "F-HS-01",
+      "group": "B4",
+      "readiness": "not_run",
+      "note": "MXU kill/process-tree harness missing; owned launcher open"
+    },
+    {
+      "id": "F-HS-02",
+      "group": "B4",
+      "readiness": "not_run",
+      "note": "GUI kill/API bounded harness missing"
+    },
+    {
+      "id": "F-HS-04",
+      "group": "B4",
+      "readiness": "partial",
+      "note": "historical control-pipe close input; controlled repro missing"
+    },
+    {
+      "id": "F-HS-05",
+      "group": "B4",
+      "readiness": "not_run",
+      "note": "dual-instance/pool harness missing"
+    },
+    {
+      "id": "F-HS-06",
+      "group": "B4",
+      "readiness": "partial",
+      "note": "historical process inventory; idle reclaim not run"
+    },
+    {
+      "id": "F-HS-07",
+      "group": "B4",
+      "readiness": "not_run",
+      "note": "Host-death/owned launcher open"
+    },
+    {
+      "id": "F-LR-03",
+      "group": "B5",
+      "readiness": "not_run",
+      "note": "repeated-failure cleanup harness missing"
+    },
+    {
+      "id": "F-LR-04",
+      "group": "B5",
+      "readiness": "not_run",
+      "note": "cross-run late-event injection missing"
+    },
+    {
+      "id": "F-LR-05",
+      "group": "B5",
+      "readiness": "not_run",
+      "note": "close resource counters missing"
+    }
   ],
   "non_claims": [
     "Readiness is not a pass; all 26 rows remain Pending in the fault matrix.",

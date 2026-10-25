@@ -1,0 +1,65 @@
+{
+  "schema": "cloudweb-cw9-batch-a/3",
+  "source_matrix": "fault-matrix.json",
+  "source_matrix_sha256": "ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d",
+  "candidate": {
+    "sidecar_head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+    "sidecar_diff_sha256": "1f8625d56503b7598c7b19adfb64ad414b409ae1b62d99be86da20b813ebcb44",
+    "mxu_head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+    "mxu_diff_sha256": "e193e0d427d3300fa0f744d3dcabd816bc2cd9f99350b3003c677e0888c5dfbd"
+  },
+  "tests": {
+    "sidecar_all_targets": {
+      "command": "cargo test --all-targets (test-only SeqConflict addition)",
+      "result": "53 passed / 0 failed / 1 ignored, exit 0",
+      "log": "cw9/batch-a/logs/round3-sidecar-all-targets.log",
+      "log_sha256": "5de7ee960757fd96da426926551196c218adc587fa94bfbd03e13f78be68e9d2"
+    },
+    "seq_conflict": {
+      "command": "cargo test session::tests::same_seq_with_different_content_is_rejected_without_dispatch -- --exact",
+      "result": "1 passed / 0 failed",
+      "log_sha256": "db99388a1c56fc98f102a2c660c84edcfd516769eaed4b6a64f94765742aeade",
+      "harness_diff_sha256": "365abe42423b12f33f602013aa6e5b089889edf2a53b334a602436e1ad2d477a"
+    },
+    "host_lost_ack": {
+      "command": "cargo test --lib commands::cloudweb::sidecar::tests::a_lost_ -- --nocapture (MSVC + vcvars)",
+      "result": "2 passed / 0 failed",
+      "log_sha256": "0bf5e3a257d16227a042b9b3d42b58d997504646e2c869492d2415a1cdc957f5",
+      "harness_diff_sha256": "5089f0146ed6427dc34d16ab13cd4f44d341cfd29e03887475847179709e2f85"
+    }
+  },
+  "summary": {
+    "rows": 15,
+    "pass": 15,
+    "partial": 0,
+    "fail": 0,
+    "blocked": 0
+  },
+  "rows": [
+    {"id": "F-CP-01", "status": "pass", "evidence": "lost down receipt: timeout, pending 0, no second key_down; urgent Stop still writes; sidecar ledger authoritative, Host has no separate maybe-held ledger", "test": "a_lost_down_receipt_does_not_replay_and_stop_still_writes"},
+    {"id": "F-CP-02", "status": "pass", "evidence": "lost up receipt: timeout, pending 0, no replay of either direction; urgent Stop still writes", "test": "a_lost_up_receipt_does_not_replay_and_stop_still_writes"},
+    {"id": "F-CP-03", "status": "pass", "evidence": "oversized/malformed/zero-length control frames rejected", "test": "transport::tests::oversized_and_malformed_control_frames_are_rejected"},
+    {"id": "F-CP-04", "status": "pass", "evidence": "same seq with different content returns SeqConflict; only one key_down, no key_up", "test": "session::tests::same_seq_with_different_content_is_rejected_without_dispatch"},
+    {"id": "F-CP-05", "status": "pass", "evidence": "old generation rejected before dispatch", "test": "session::tests::owner_conflict_and_generation_guard"},
+    {"id": "F-CP-06", "status": "pass", "evidence": "in-flight/queued deadline -> Unknown, no replay", "tests": ["deadline_exceeded_during_execution_returns_unknown_without_replay", "dispatched_input_past_deadline_becomes_unknown_without_replay", "queued_command_expired_before_dispatch_is_rejected"]},
+    {"id": "F-CP-07", "status": "pass", "evidence": "urgent Stop preempts a running slow swipe; real-cloud RTT 8/43 ms", "test": "transport::tests::urgent_release_all_preempts_a_running_slow_swipe"},
+    {"id": "F-CP-08", "status": "pass", "evidence": "normal lane bounded, Backpressure receipt", "test": "transport::tests::overfilled_pending_lane_returns_backpressure"},
+    {"id": "F-CP-09", "status": "pass", "evidence": "urgent lane drains before queued normal commands", "test": "transport::tests::urgent_lane_jumps_queued_normal_lane"},
+    {"id": "F-LS-01", "status": "pass", "evidence": "expired lease fenced without a command; key released", "test": "transport::tests::expired_lease_is_fenced_without_a_command"},
+    {"id": "F-LS-02", "status": "pass", "evidence": "renew stop leads to lease expiry, generation fence and held-key release before the next input; state is Ready, not Faulted (documented CW2 design)", "test": "session::tests::lease_tick_fences_releases_and_closes_generation"},
+    {"id": "F-LS-03", "status": "pass", "evidence": "second owner rejected; no dual write", "test": "session::tests::owner_conflict_and_generation_guard"},
+    {"id": "F-LS-04", "status": "pass", "evidence": "host pipe EOF releases held inputs and fences generation", "test": "transport::tests::host_disconnect_releases_held_inputs_and_fences_generation"},
+    {"id": "F-LS-05", "status": "pass", "evidence": "wrong token rejected, valid token accepted", "test": "transport::tests::hello_rejects_wrong_token_then_accepts_valid_token"},
+    {"id": "F-LS-06", "status": "pass", "evidence": "frame id ahead/stale, geometry mismatch, expired age and generation bump all reject; observation fence is based_on_frame_id + geometry + age + generation (no opaque token)", "tests": ["session::tests::input_requires_running_frame_and_valid_observation", "transport::tests::host_disconnect_releases_held_inputs_and_fences_generation"]}
+  ],
+  "notes": [
+    "F-CP-01/02: the Host does not keep a second maybe-held ledger; the sidecar ledger is authoritative and urgent Stop releases it.",
+    "F-LS-02: the safe behavior is fence/release and Ready state, not Faulted; if Faulted is required by a stricter contract, reopen this row.",
+    "F-LS-06: no opaque snapshot token exists; the equivalent fence is based_on_frame_id + geometry_revision + age + generation."
+  ],
+  "non_claims": [
+    "Batch A is protocol/local evidence; real-cloud rows remain Batch C.",
+    "The SeqConflict test is a test-only addition; product candidate diff is unchanged.",
+    "The Host lost-ACK tests use a scripted ControlLink, not a real sidecar process."
+  ]
+}

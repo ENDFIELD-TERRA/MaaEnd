@@ -13,9 +13,9 @@ This directory is the public snapshot of the CloudWeb planning set:
 - `cw9-batch-a-report.md` / `cw9-batch-a-results.json` — CW9-2 Batch A first pass: 15 protocol-fixture rows, 6 pass / 4 partial / 3 fail / 2 blocked.
 - `cw9-cw2-reevaluation.md` — CW2 re-evaluation: protocol-layer closed (pass-with-boundary); only job-kill instant held-input release remains best-effort.
 - `cw9-runbook.md` — reproducible Batch A/B run commands, environment boundaries and evidence rules.
-- `cw9-batch-a-round2-results.json` — Batch A round 2: 10 pass / 5 partial / 0 fail / 0 blocked on sidecar `1f8625d5`.
-- `cw9-batch-b-plan.md` / `cw9-batch-b-readiness.json` — Batch B preparation and first execution: 26 local-browser rows, 14 partial / 11 not_run / 1 blocked, 0 pass.
-- `cw9-batch-b-report.md` / `cw9-batch-b-round2-results.json` — Batch B round 2: CDP smoke + 4 CDP tests passed on sidecar `1f8625d5` (media freeze/repeat/screenshot, page reload, target close, browser kill); test-only harness, product diff unchanged. Raw harness diff and test logs stay private.
+- `cw9-batch-a-round2-results.json` / `cw9-batch-a-round3-results.json` — Batch A: round2 10/5; round3 15/15 pass after SeqConflict + Host lost-ACK tests.
+- `cw9-batch-b-plan.md` / `cw9-batch-b-readiness.json` — Batch B preparation and round2: 26 local-browser rows, 1 pass / 13 partial / 11 not_run / 1 blocked.
+- `cw9-batch-b-report.md` / `cw9-batch-b-round2-results.json` — Batch B round 2: CDP smoke + 4 CDP tests + session MEDIA_STALLED end-to-end passed on sidecar `1f8625d5`; F-MD-01 is the only row pass. Test-only harness, product diff unchanged. Raw harness diff and test logs stay private.
 
 Scope note:
 
@@ -23,8 +23,8 @@ Scope note:
 - Local absolute paths and private fork names were replaced with placeholders (`<workspace>`, `<sidecar-fork>`, `<MXU-fork>`) when this snapshot was produced.
 - The public snapshot is not a claim that G1/G2/G3/G4 are closed. CW0–CW7 are `partial`/`not_started` as recorded in the roadmap; the only real task success so far was preconditioned and must not be generalised.
 - CW8-1/2 and CW9-1 matrices are definitions and evidence schemas, not executed test results. `fault-matrix.json` has 51 Pending rows; fixture/local-browser rows cannot close real-cloud claims, and no row may be marked Pass without the full evidence schema.
-- CW9-2 Batch A is a first protocol-layer pass only: 6 pass / 4 partial / 3 fail / 2 blocked. It does not close CW9-2 or G4. CW2 minimal stop is now pass on real-cloud AutoFight evidence, but the full CW2 contract remains `partial` (long-RPC preemption per command type, owned launcher, Host-death reclamation open), so Batch A will be re-run after those items close.
-- Batch B first execution is still not a row-level pass: 26 local-browser rows are 14 partial / 11 not_run / 1 blocked, 0 pass. Four new CDP tests passed with a temporary profile/port (media freeze/repeat/screenshot, page reload, target close, browser kill), but session/ledger integration and the remaining rows are open.
+- CW9-2 Batch A is closed at 15/15 protocol-layer rows (round3); it still does not close G4. CW2 is closed pass-with-boundary: urgent path, deadline, backpressure, attach-only, job object and real-cloud Stop are verified; job-kill instant held-input release remains best-effort.
+- Batch B round2: 26 local-browser rows are 1 pass / 13 partial / 11 not_run / 1 blocked. F-MD-01 (session MEDIA_STALLED end-to-end) is pass; A/B, resize, CDP disconnect/same-name page, Stop budget, Host lifecycle and cross-run rows remain open.
 
 Update procedure (idempotent):
 

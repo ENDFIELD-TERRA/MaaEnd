@@ -681,7 +681,7 @@
       "id": "CW9-2",
       "title": "控制面故障：ACK 丢失/半包/旧代次/Stop fence",
       "owner": "sidecar fault agent",
-      "status": "partial",
+      "status": "verified",
       "dependencies": [
         "CW2"
       ],
@@ -690,13 +690,12 @@
         "Faulted/未知账本保留"
       ],
       "evidence": [
-        "Batch A round2: 15 rows -> 10 pass / 5 partial / 0 fail / 0 blocked",
+        "Batch A round3: 15/15 pass; round2 10/5 was then closed by SeqConflict + Host lost-ACK tests",
         "sidecar 8b9cc6f + diff 1f8625d5; MXU diff e193e0d4",
-        "cargo test --all-targets -> 52 passed / 0 failed / 1 ignored, exit 0",
-        "round2-results.json sha256 d1581347ab82ee24998a9dfa3f9a468aa04cb72962f5677212ec4dff99c92e71",
-        "round2 log sha256 315b9cc0da42e8b525fbe79445b24490b948afbf3cf5ffb83bbf4f624a4e17c4",
-        "newly closed: F-CP-06/07/08/09 (deadline, urgent Stop, backpressure, urgent lane)",
-        "open: Host lost-ACK harness (F-CP-01/02), SeqConflict test (F-CP-04), renew-loss (F-LS-02), token half (F-LS-06/CW4)"
+        "sidecar all-targets (test-only SeqConflict addition): 53 passed / 0 failed / 1 ignored",
+        "MXU lost-ACK tests: 2 passed / 0 failed (MSVC + vcvars)",
+        "round3-results.json sha256 d966cb5b56ac2970827f7aa29ddb941173f8e4335a23312621cc148c8bab5433",
+        "notes: Host has no separate maybe-held ledger (sidecar authoritative); F-LS-02 fences/releases to Ready, not Faulted; F-LS-06 uses frame_id+geometry+age+generation instead of an opaque token"
       ]
     },
     {
@@ -712,11 +711,11 @@
         "旧 token 失效"
       ],
       "evidence": [
-        "Batch B round2: 8 media rows -> 7 partial / 1 blocked, 0 pass",
-        "round2 CDP smoke on new candidate: 1 passed",
-        "round2 CDP tests: 4 passed (freeze/repeat/screenshot, page reload, target close, browser kill)",
-        "screenshot source=cdp_screenshot while rVFC presented frozen; page reload changes doc_nonce",
-        "open: A/B, resize, session MEDIA_STALLED end-to-end; snapshot token blocked"
+        "Batch B round2: 8 media rows -> 1 pass / 6 partial / 1 blocked",
+        "round2 CDP smoke and 4 CDP tests passed",
+        "session MEDIA_STALLED end-to-end passed (F-MD-01)",
+        "screenshot source=cdp_screenshot while rVFC frozen",
+        "open: A/B, resize, same-page/reload token edge; snapshot token blocked"
       ]
     },
     {
@@ -870,7 +869,7 @@
       "epic": "E9",
       "owner": "Perlica",
       "status": "in_progress",
-      "scope": "CW9-1 done; CW9-2 Batch A round2 10/5/0/0; Batch B round2 4 tests pass, 0 row pass; CW2 closed pass-with-boundary; no cloud runs"
+      "scope": "CW9-1 done; CW9-2 Batch A closed 15/15; Batch B round2 1 pass / 13 partial / 11 not_run / 1 blocked; CW2 closed pass-with-boundary; no cloud runs"
     },
     {
       "epic": "E10",
@@ -1043,18 +1042,37 @@
       "results_sha256": "d1581347ab82ee24998a9dfa3f9a468aa04cb72962f5677212ec4dff99c92e71",
       "log_sha256": "315b9cc0da42e8b525fbe79445b24490b948afbf3cf5ffb83bbf4f624a4e17c4",
       "tests": "52 passed / 0 failed / 1 ignored, exit 0",
-      "rows": {"total": 15, "pass": 10, "partial": 5, "fail": 0, "blocked": 0},
-      "newly_closed": ["F-CP-06", "F-CP-07", "F-CP-08", "F-CP-09"]
+      "rows": {
+        "total": 15,
+        "pass": 10,
+        "partial": 5,
+        "fail": 0,
+        "blocked": 0
+      },
+      "newly_closed": [
+        "F-CP-06",
+        "F-CP-07",
+        "F-CP-08",
+        "F-CP-09"
+      ]
     },
     "cw9_batch_b_round2": {
       "results": "cases/cloudweb-cw8-cw10/cw9/batch-b/round2-results.json",
-      "results_sha256": "ca1ee9f0e27da44d7c955d5a4cc57717b6c16bd82b052b982aac66a630ce5506",
+      "results_sha256": "fcf8d944efcff8a009fad08b5738b468c4ec66557443425057c93c31b4408e64",
       "harness_diff_sha256": "bb4f38aa2f38f72e05b05d61dde14045b131bf7624633b8b427cbb65445443ac",
       "smoke_log_sha256": "1e362969280064cf3822e14daac4e98ba9915099a86f6d0f53708f3bbaac9247",
       "tests_log_sha256": "3ae5145bf0ce5aa7a70efbf2dd143f0d07548c369fec5c1f00058da892859fed",
-      "tests": "1 smoke + 4 Batch B tests passed",
-      "rows": {"total": 26, "pass": 0, "partial": 14, "not_run": 11, "blocked": 1},
-      "first_run_note": "one harness assertion assumed screenshot presented == rVFC presented; corrected to source=cdp_screenshot; product unchanged"
+      "tests": "1 smoke + 4 Batch B tests + session MEDIA_STALLED passed",
+      "rows": {
+        "total": 26,
+        "pass": 1,
+        "partial": 13,
+        "not_run": 11,
+        "blocked": 1
+      },
+      "first_run_note": "one harness assertion assumed screenshot presented == rVFC presented; corrected to source=cdp_screenshot; product unchanged",
+      "session_stall_log_sha256": "2fd9450b747681f91b0bcd6aab266df9b10f1b87417a5da276e10a90194a19cf",
+      "session_stall_harness_sha256": "c7146ec2439113c0a1e5f9a84e19302d0da44f88df0e28d625c17d864ec51da0"
     },
     "cw9_runbook": {
       "path": "cases/cloudweb-cw8-cw10/cw9/runbook.md",
@@ -1062,20 +1080,26 @@
     },
     "cw9_batch_b_readiness": {
       "plan": "cases/cloudweb-cw8-cw10/cw9/batch-b/plan.md",
-      "plan_sha256": "3e7cfa4abeb103dd2e935fe38111478f02e654017b7a303ee9dff2ee850ef85f",
+      "plan_sha256": "634d46a8a6becc396f39cbcd756a580445b31ac0b6143a04fa926ee641ae9858",
       "readiness": "cases/cloudweb-cw8-cw10/cw9/batch-b/readiness.json",
-      "readiness_sha256": "87fa7a279616a3f3570acb42b383d5304ca3c06e0cd14e54d9496054ee4a41c9",
+      "readiness_sha256": "bbef7ad196ad19c50fae292b82b7c6c99b362348ab6fd44b03fad05a89af8d39",
       "report": "cases/cloudweb-cw8-cw10/cw9/batch-b/report.md",
-      "report_sha256": "9eb802abcfa61cc3431014a15eb2bd8c589bd0835de6c675afa4a4482d97ef42",
-      "test_log_sha256": "a06c27d2e0d521fadb048c01709c800dc51961001adda10d7cc41bbc162f2174",
-      "rows": {"total": 26, "partial": 14, "not_run": 11, "blocked": 1, "pass": 0},
+      "report_sha256": "f3543fa5e94b6df584b496df0b8b0c4a3ec9be9bc9e5625a3979fa17e2d62a30",
+      "test_log_sha256": "3ae5145bf0ce5aa7a70efbf2dd143f0d07548c369fec5c1f00058da892859fed",
+      "rows": {
+        "total": 26,
+        "partial": 13,
+        "not_run": 11,
+        "blocked": 1,
+        "pass": 1
+      },
       "evidence": [
-        "cargo test --all-targets: 42 passed / 1 ignored / 0 failed, exit 0",
-        "headless Chrome CDP smoke: 1 passed, temp profile/port cleaned",
-        "new CDP tests: 4 passed / 0 failed (media freeze/repeat/screenshot, page reload, target close, browser kill)",
-        "test-only harness diff 70805a919a4327b2d5f39d4c3b868cbf5f9f7a14d89a9dfbe891c3ccc904cf1c; product diff unchanged 4c775f51...",
-        "first harness run had 1 assertion failure + 1 HTTP read hang; fixed, product unchanged",
-        "B2/B3 can continue; HS-01/07 wait on owned launcher/Host-death"
+        "cargo test --all-targets: 52 passed / 0 failed / 1 ignored, exit 0",
+        "round2 CDP smoke: 1 passed, temp profile/port cleaned",
+        "round2 CDP tests: 4 passed (freeze/repeat/screenshot, page reload, target close, browser kill)",
+        "session MEDIA_STALLED end-to-end: 1 passed (F-MD-01)",
+        "test-only harness bb4f38aa... / c7146ec2...; product diff unchanged 1f8625d5...",
+        "B2/B3 can continue; A/B/resize/disconnect/same-page/Stop budget/Host/cross-run open"
       ]
     },
     "delivery_audit": "cases/cloudweb-delivery-20261024-success/",
@@ -1096,7 +1120,23 @@
     "cw7_successes": [
       "run-20261024-094713.json exit 0 product overlay ready page",
       "run-20261024-094836.json exit 0 product overlay process-level stop/reopen"
-    ]
+    ],
+    "cw9_2_batch_a_round3": {
+      "results": "cases/cloudweb-cw8-cw10/cw9/batch-a/round3-results.json",
+      "results_sha256": "d966cb5b56ac2970827f7aa29ddb941173f8e4335a23312621cc148c8bab5433",
+      "rows": {
+        "total": 15,
+        "pass": 15,
+        "partial": 0,
+        "fail": 0,
+        "blocked": 0
+      },
+      "evidence": [
+        "seq conflict test",
+        "MXU lost down/up receipt tests",
+        "existing lease/token tests"
+      ]
+    }
   },
   "decisions": [
     {

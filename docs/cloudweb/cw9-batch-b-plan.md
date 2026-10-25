@@ -1,6 +1,6 @@
 # CloudWeb CW9 Batch B 准备（local_browser，26 行）
 
-状态：`in_progress`（round2：CDP smoke + 4 个 CDP 测试通过；26 行仍 0 pass）。
+状态：`in_progress`（round2：CDP smoke + 4 个 CDP 测试 + session MEDIA_STALLED 端到端通过；26 行 1 pass）。
 范围：`fault-matrix.json` 中 `local_browser` 的 26 行；不包含 `real_cloud_session` 行（Batch C）。
 候选：sidecar HEAD `8b9cc6f` + diff `1f8625d5…`；MXU HEAD `8bddfee` + diff `e193e0d4…`。
 前置：CW2 协议层已 closed（pass-with-boundary）；CW4/CW5 的本地媒体与 reader/cache 已接通；硬杀输入释放按 best-effort 记录。
@@ -29,6 +29,7 @@
 | `cargo test --all-targets`（新候选 sidecar `1f8625d5`） | **52 passed / 1 ignored / 0 failed，exit 0**；日志 `../batch-a/logs/round2-sidecar-tests.log` `315b9cc0…` | 协议/会话/transport 回归；ignored 为临时 Chrome CDP |
 | `cdp_actuator_screenshots_and_inputs --ignored`（headless Chrome 9233） | **1 passed**；日志 `logs/round2-cdp-smoke.log` `1e362969…` | canonical JPEG、rVFC Start/Stop、doc_nonce/geometry、relative 分段、trusted anchor、非 canonical 空帧、临时 profile/端口清理 |
 | Batch B 4 tests（headless Chrome 9234） | **4 passed / 0 failed，exit 0**；日志 `logs/round2-batch-b-cdp-tests-2.log` `3ae5145b…` | 冻结/重复帧/截图、page reload、target close、browser kill |
+| Session MEDIA_STALLED 端到端 | **1 passed / 0 failed，exit 0**；日志 `logs/round2-session-media-stalled.log` `2fd9450b…` | 暂停→MEDIA_STALLED；恢复→Live 且输入 Dispatched |
 | 运行后清理 | `port_closed=true`、`temp_removed=Ok`、`profile_removed=Ok` | F-BR-06 的测试边界 |
 
 注意：以上只是本地浏览器证据，不等于 26 行逐项 Pass；`fault-matrix.json` 仍全 Pending，行级结果见 `round2-results.json`。
@@ -42,7 +43,7 @@
 | F-ST-03 长动作 cancel | not_run | 需本地长动作 + fence | 本地长任务 cancel 计时 |
 | F-ST-04 页面死亡 close | not_run | 需关闭 target 后 close | target close→close→未知账本 |
 | F-ST-05 Stop 预算 | not_run | 需重复采样 p50/p95 | 本地 Stop 采样 |
-| F-MD-01 冻结 | partial | CDP smoke 有 Start/Stop；无冻结健康判定 | 暂停 rVFC→MEDIA_STALLED |
+| F-MD-01 冻结 | pass | round2 session 端到端：暂停→MEDIA_STALLED，恢复→Live+Dispatched | 已闭 |
 | F-MD-02 重复帧 | partial | `still_scene_stays_live_and_fresh`（fake）；无本地浏览器重复取帧 | 本地静止画面多帧 |
 | F-MD-03 A/B 覆盖 | partial | slot/transport 单测；无本地浏览器 A/B | 快速写入/读取 A/B |
 | F-MD-04 旧 token | blocked | snapshot token 尚未实现 | 等 CW4 token |
