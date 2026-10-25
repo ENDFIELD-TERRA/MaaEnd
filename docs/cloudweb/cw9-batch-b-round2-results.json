@@ -1,0 +1,73 @@
+{
+  "schema": "cloudweb-cw9-batch-b/2",
+  "source_matrix": "fault-matrix.json",
+  "source_matrix_sha256": "ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d",
+  "candidate": {
+    "sidecar_head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+    "sidecar_diff_sha256": "1f8625d56503b7598c7b19adfb64ad414b409ae1b62d99be86da20b813ebcb44",
+    "mxu_head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+    "mxu_diff_sha256": "e193e0d427d3300fa0f744d3dcabd816bc2cd9f99350b3003c677e0888c5dfbd"
+  },
+  "harness": {
+    "test_only": true,
+    "round2_diff": "cw9/batch-b/harness-round2.diff",
+    "round2_diff_sha256": "bb4f38aa2f38f72e05b05d61dde14045b131bf7624633b8b427cbb65445443ac",
+    "round1_diff_sha256": "70805a919a4327b2d5f39d4c3b868cbf5f9f7a14d89a9dfbe891c3ccc904cf1c",
+    "note": "round2 is rebased onto sidecar 1f8625d5; product diff unchanged"
+  },
+  "tests": [
+    {
+      "name": "cdp_actuator_screenshots_and_inputs",
+      "result": "1 passed / 0 failed, exit 0",
+      "log": "cw9/batch-b/logs/round2-cdp-smoke.log",
+      "log_sha256": "1e362969280064cf3822e14daac4e98ba9915099a86f6d0f53708f3bbaac9247"
+    },
+    {
+      "name": "batch_b_media_freeze_repeat_and_screenshot",
+      "result": "pass on rerun after correcting the screenshot assertion",
+      "log": "cw9/batch-b/logs/round2-batch-b-cdp-tests-2.log",
+      "log_sha256": "3ae5145bf0ce5aa7a70efbf2dd143f0d07548c369fec5c1f00058da892859fed"
+    },
+    {
+      "name": "batch_b_page_reload_changes_doc_nonce",
+      "result": "pass"
+    },
+    {
+      "name": "batch_b_target_close_is_explicit",
+      "result": "pass"
+    },
+    {
+      "name": "batch_b_browser_kill_is_explicit",
+      "result": "pass"
+    }
+  ],
+  "first_run": {
+    "result": "1 failed / 3 passed; exit 101",
+    "log": "cw9/batch-b/logs/round2-batch-b-cdp-tests.log",
+    "log_sha256": "d2321578eb34abecc37a227969b5d1f48b6c3f510cdde728006f6c662b3b67fb",
+    "cause": "test assumed screenshot media.presented must equal rVFC presented; new candidate labels screenshots as source=cdp_screenshot with its own counter. Assertion corrected to source check; product unchanged."
+  },
+  "summary": {
+    "rows": 26,
+    "pass": 0,
+    "partial": 14,
+    "not_run": 11,
+    "blocked": 1
+  },
+  "row_evidence": [
+    {"id": "F-MD-01", "status": "partial", "evidence": "paused rVFC presented frozen; resume 1->3"},
+    {"id": "F-MD-02", "status": "partial", "evidence": "frozen slot frames keep presented; empty slot accepted"},
+    {"id": "F-MD-05", "status": "partial", "evidence": "screenshot succeeds with source=cdp_screenshot while rVFC remains frozen"},
+    {"id": "F-MD-06", "status": "partial", "evidence": "page reload changes doc_nonce"},
+    {"id": "F-BR-02", "status": "partial", "evidence": "browser kill returns explicit CDP error"},
+    {"id": "F-BR-03", "status": "partial", "evidence": "target close returns explicit CDP error"},
+    {"id": "F-BR-06", "status": "partial", "evidence": "temporary profile/port cleanup"},
+    {"id": "F-MD-07", "status": "partial", "evidence": "CDP smoke geometry>=1, viewport 1280x720; resize not run"},
+    {"id": "F-MD-08", "status": "partial", "evidence": "CDP smoke non-canonical empty frame"}
+  ],
+  "non_claims": [
+    "26 rows remain 0 pass; tests are local_browser evidence only.",
+    "No session MEDIA_STALLED end-to-end, A/B, resize, CDP disconnect, Stop budget, Host lifecycle or cross-run rows yet.",
+    "Test-only worktree; product candidate diff is unchanged."
+  ]
+}

@@ -416,7 +416,7 @@
     {
       "id": "CW2",
       "title": "run/document epoch、独立 renew、typed held∪maybe、真实 deadline、owned launcher、Host-death 回收",
-      "status": "partial",
+      "status": "verified",
       "owner": "sidecar+host",
       "dependencies": [
         "CW0",
@@ -429,14 +429,14 @@
         "只回收自己的进程"
       ],
       "evidence": [
-        "cw2/integration-report.md",
-        "typed confirmed∪maybe_held ledger; Stop/ReleaseOwner/Close sweep the union",
-        "Host periodic renewal thread in MXU; 2s real-process long press keeps health.held_keys=[65]",
-        "sidecar command grace refreshes the same owner generation after an authorized slow command",
-        "sidecar 40/40 non-CDP tests, clippy 0; MXU 42 passed/1 env failure/1 ignored; real-process test passed",
-        "minimal stop pass on real cloud: autofight-20261024-104052 and autofight-20261024-114725 (Running -> MaaTaskerPostStop -> need_to_stop -> inactive -> ReleaseOwner)",
-        "cw9/cw2-reevaluation.md: minimal_stop=pass, full_contract=partial",
-        "remaining: long-RPC preemption per command type, owned launcher/profile, Host-death process reclamation"
+        "cw2/clause-table.md: clauses 1-6 closed; pass-with-boundary",
+        "candidate 6227c5a8: sidecar 1f8625d5, MXU e193e0d4",
+        "urgent lane + preempt_flag; real-cloud 60000px move ReleaseAll RTT 8 ms / 43 ms, no held input",
+        "in-flight/queued deadline returns Unknown without replay; max_pending backpressure test",
+        "attach-only ownership; job object KILL_ON_JOB_CLOSE; hostdeath 143/158 ms exit, no leftovers",
+        "review-lease pass, review-renew-sidecar pass, review-combined pass-with-notes, review-format pass",
+        "boundary: job-kill instant held-input release remains best-effort",
+        "cw9/cw2-reevaluation.md"
       ]
     },
     {
@@ -690,13 +690,13 @@
         "Faulted/未知账本保留"
       ],
       "evidence": [
-        "Batch A: 15 rows -> 6 pass / 4 partial / 3 fail / 2 blocked",
-        "sidecar 8b9cc6f + diff 4c775f51c5e4d55c7c0f65d832476963334e6097a4b8232c0c1421854d9cbd9a",
-        "cargo test -- --skip cdp_ -> 40 passed / 0 failed / 3 filtered, exit 0",
-        "results.json sha256 874588c453eab7e4e28dcc9b0bc24dee29be4dacec1f84de29164546808e3a96",
-        "report.md sha256 17326584682b2bd8fd9f776bcdeed425f87ebb2a6f47c031a88aa613b680d499",
-        "cw2 minimal stop pass (autofight-20261024-104052/114725); full CW2 still partial",
-        "open: long RPC preemption, in-flight deadline, pending/backpressure, Host ACK harness"
+        "Batch A round2: 15 rows -> 10 pass / 5 partial / 0 fail / 0 blocked",
+        "sidecar 8b9cc6f + diff 1f8625d5; MXU diff e193e0d4",
+        "cargo test --all-targets -> 52 passed / 0 failed / 1 ignored, exit 0",
+        "round2-results.json sha256 d1581347ab82ee24998a9dfa3f9a468aa04cb72962f5677212ec4dff99c92e71",
+        "round2 log sha256 315b9cc0da42e8b525fbe79445b24490b948afbf3cf5ffb83bbf4f624a4e17c4",
+        "newly closed: F-CP-06/07/08/09 (deadline, urgent Stop, backpressure, urgent lane)",
+        "open: Host lost-ACK harness (F-CP-01/02), SeqConflict test (F-CP-04), renew-loss (F-LS-02), token half (F-LS-06/CW4)"
       ]
     },
     {
@@ -712,9 +712,10 @@
         "旧 token 失效"
       ],
       "evidence": [
-        "Batch B first pass: 8 media rows -> 7 partial / 1 blocked, 0 pass",
-        "headless Chrome CDP smoke: rVFC Start/Stop, canonical JPEG, doc_nonce/geometry, non-canonical empty frame",
-        "new CDP tests: freeze/repeat/screenshot (presented 1->frozen->3), page reload changes doc_nonce",
+        "Batch B round2: 8 media rows -> 7 partial / 1 blocked, 0 pass",
+        "round2 CDP smoke on new candidate: 1 passed",
+        "round2 CDP tests: 4 passed (freeze/repeat/screenshot, page reload, target close, browser kill)",
+        "screenshot source=cdp_screenshot while rVFC presented frozen; page reload changes doc_nonce",
         "open: A/B, resize, session MEDIA_STALLED end-to-end; snapshot token blocked"
       ]
     },
@@ -735,8 +736,10 @@
         "run-175718 state_poll_error registered as F-HS-03",
         "run-175512 supervisor polling kill registered as F-HS-03",
         "run-172548 control pipe close registered as F-HS-04 (experiment reverted)",
-        "Batch B readiness: 6 host rows -> 2 partial / 4 not_run, 0 pass",
-        "open: HS-01/07 wait on owned launcher/Host-death; HS-02/05/06 harnesses not run"
+        "CW2 job object: KILL_ON_JOB_CLOSE + AssignProcessToJobObject; hostdeath 143/158 ms exit, no leftovers",
+        "Batch B round2: 6 host rows -> 2 partial / 4 not_run, 0 pass",
+        "boundary: job-kill instant held-input release remains best-effort",
+        "open: HS-02/05/06 harnesses not run; HS-01/07 local repro still to run against the current candidate"
       ]
     },
     {
@@ -867,7 +870,7 @@
       "epic": "E9",
       "owner": "Perlica",
       "status": "in_progress",
-      "scope": "CW9-1 done; CW9-2 Batch A first pass partial; CW9-2..6 execution waits on CW2/CW4/CW7; no cloud runs"
+      "scope": "CW9-1 done; CW9-2 Batch A round2 10/5/0/0; Batch B round2 4 tests pass, 0 row pass; CW2 closed pass-with-boundary; no cloud runs"
     },
     {
       "epic": "E10",
@@ -1020,12 +1023,38 @@
     },
     "cw2_reevaluation": {
       "report": "cases/cloudweb-cw8-cw10/cw9/cw2-reevaluation.md",
-      "report_sha256": "476860bc4d54b5544cba87d0c17815b752fa9be249a7ab18aa06f7a2a86b355b",
-      "candidate_id": "d315fac670912f5cfc3c96792417a820b32f05ae8e6029ce7eb1a09223212465",
-      "minimal_stop": "pass",
-      "full_contract": "partial",
-      "real_cloud_stop": ["autofight-20261024-104052", "autofight-20261024-114725"],
-      "remaining": ["long-RPC preemption per command type", "owned launcher/profile", "Host-death reclamation"]
+      "report_sha256": "db4bd3ffef5b9365c977f86c691607284b09365460aae27ec4e57c4987dfae95",
+      "candidate_id": "6227c5a8d406b26efebaef9451a7b9990178aa47d1f0aa46d6344860e5545fed",
+      "status": "pass-with-boundary",
+      "closed": [
+        "urgent control path",
+        "in-flight/queued deadline",
+        "max_pending/Backpressure",
+        "attach-only ownership",
+        "Host kill process exit/no orphan",
+        "real-cloud protocol stop"
+      ],
+      "boundary": "job-kill instant held-input release is best-effort",
+      "sidecar_diff": "1f8625d56503b7598c7b19adfb64ad414b409ae1b62d99be86da20b813ebcb44",
+      "mxu_diff": "e193e0d427d3300fa0f744d3dcabd816bc2cd9f99350b3003c677e0888c5dfbd"
+    },
+    "cw9_2_batch_a_round2": {
+      "results": "cases/cloudweb-cw8-cw10/cw9/batch-a/round2-results.json",
+      "results_sha256": "d1581347ab82ee24998a9dfa3f9a468aa04cb72962f5677212ec4dff99c92e71",
+      "log_sha256": "315b9cc0da42e8b525fbe79445b24490b948afbf3cf5ffb83bbf4f624a4e17c4",
+      "tests": "52 passed / 0 failed / 1 ignored, exit 0",
+      "rows": {"total": 15, "pass": 10, "partial": 5, "fail": 0, "blocked": 0},
+      "newly_closed": ["F-CP-06", "F-CP-07", "F-CP-08", "F-CP-09"]
+    },
+    "cw9_batch_b_round2": {
+      "results": "cases/cloudweb-cw8-cw10/cw9/batch-b/round2-results.json",
+      "results_sha256": "ca1ee9f0e27da44d7c955d5a4cc57717b6c16bd82b052b982aac66a630ce5506",
+      "harness_diff_sha256": "bb4f38aa2f38f72e05b05d61dde14045b131bf7624633b8b427cbb65445443ac",
+      "smoke_log_sha256": "1e362969280064cf3822e14daac4e98ba9915099a86f6d0f53708f3bbaac9247",
+      "tests_log_sha256": "3ae5145bf0ce5aa7a70efbf2dd143f0d07548c369fec5c1f00058da892859fed",
+      "tests": "1 smoke + 4 Batch B tests passed",
+      "rows": {"total": 26, "pass": 0, "partial": 14, "not_run": 11, "blocked": 1},
+      "first_run_note": "one harness assertion assumed screenshot presented == rVFC presented; corrected to source=cdp_screenshot; product unchanged"
     },
     "cw9_runbook": {
       "path": "cases/cloudweb-cw8-cw10/cw9/runbook.md",
@@ -1033,11 +1062,11 @@
     },
     "cw9_batch_b_readiness": {
       "plan": "cases/cloudweb-cw8-cw10/cw9/batch-b/plan.md",
-      "plan_sha256": "7e1daf1d5c9d6c7f8a71082f614091dd3581dcfc958a4c53842fb06575b211e2",
+      "plan_sha256": "3e7cfa4abeb103dd2e935fe38111478f02e654017b7a303ee9dff2ee850ef85f",
       "readiness": "cases/cloudweb-cw8-cw10/cw9/batch-b/readiness.json",
       "readiness_sha256": "87fa7a279616a3f3570acb42b383d5304ca3c06e0cd14e54d9496054ee4a41c9",
       "report": "cases/cloudweb-cw8-cw10/cw9/batch-b/report.md",
-      "report_sha256": "21d996684e8dd783c7aceb51fcdaa987c935ed374c39fe9f7440eb3b6678e115",
+      "report_sha256": "9eb802abcfa61cc3431014a15eb2bd8c589bd0835de6c675afa4a4482d97ef42",
       "test_log_sha256": "a06c27d2e0d521fadb048c01709c800dc51961001adda10d7cc41bbc162f2174",
       "rows": {"total": 26, "partial": 14, "not_run": 11, "blocked": 1, "pass": 0},
       "evidence": [

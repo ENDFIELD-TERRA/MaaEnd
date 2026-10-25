@@ -75,7 +75,7 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 | ID | 事项 | owner | 依赖 | 验收 |
 | --- | --- | --- | --- | --- |
 | CW9-1 | 故障矩阵与证据 schema：ACK 丢失、半包、旧代次、媒体冻结、页面重建、Host/GUI 崩溃、人工接管、远端残留输入 | Perlica | CW2 合同 | **verified**：8 域 / 51 行全 Pending；每行含注入/预期/禁止/证据/owner/依赖/层级/gate；`fault-matrix.json` `ed335379…` / `.md` `2d9daa73…` |
-| CW9-2 | 控制面故障：ACK 丢失/半包/seq 错乱/旧 generation；Stop 先 fence 再中和 | sidecar fault agent | CW2 | **partial**：Batch A 15 行首轮 6 pass / 4 partial / 3 fail / 2 blocked；CW2 minimal stop 已 pass，但 full contract 仍 partial；长 RPC 抢占、在途 deadline、pending/背压、Host ACK harness 未闭合 |
+| CW9-2 | 控制面故障：ACK 丢失/半包/seq 错乱/旧 generation；Stop 先 fence 再中和 | sidecar fault agent | CW2 | **partial（round2）**：15 行 10 pass / 5 partial / 0 fail / 0 blocked；CW2 协议层已 closed（pass-with-boundary）；剩 Host ACK、SeqConflict、renew-loss、token |
 | CW9-3 | 媒体故障：rVFC 冻结、重复帧、A/B 覆盖、页面重建、document/geometry 变化 | media fault agent | CW4 | 冻结不标 Fresh；旧 token 失效 |
 | CW9-4 | Host 故障：MXU 崩溃、GUI 崩溃、API 无响应、Host-death 回收、双实例 | MXU fault agent | CW2/CW5 | 只回收自己的进程；API 有界 |
 | CW9-5 | 人工接管：pause→fence→release→owner 转移→重新识别 | integration agent | CW2/CW3 | 无残留 held；恢复不重放旧输入 |
@@ -93,26 +93,24 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 - 产物：`fault-matrix.json` sha256 `ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d`；`fault-matrix.md` sha256 `2d9daa73dcb1524c4c94a0178ecc946c7ff7708d1a1d8ac231c3b7da489ebb57`。
 - CW9-1 `verified` 仅指矩阵与 schema 已建立；不关闭 CW9-2..6，也不代表 G4。
 
-### CW9-2 Batch A 首轮（partial）
+### CW9-2 Batch A（round1 → round2）
 
-- 范围：D1 9 行 + D2 6 行，全部 `protocol_fixture`；候选 sidecar `8b9cc6f` + diff `4c775f51…`。
-- 执行：`cargo test -- --skip cdp_` → 40 passed / 0 failed / 3 filtered，exit 0；日志 `e4c9356d…`。
-- 行级：**6 pass / 4 partial / 3 fail / 2 blocked**；结果 `results.json` `874588c4…`，报告 `report.md` `17326584…`。
-- pass：F-CP-03、F-CP-05、F-LS-01、F-LS-03、F-LS-04、F-LS-05。
-- partial：F-CP-04（SeqConflict 无测试）、F-CP-07（长按通过，慢 RPC 抢占未闭合）、F-LS-02（无 renew 丢失测试）、F-LS-06（token 半属 CW4）。
-- fail：F-CP-06（仅拒绝 deadline=0）、F-CP-08（`max_pending` 无使用点）、F-CP-09（串行控制面无 fence-first 队列）。
-- blocked：F-CP-01/02（ACK 丢失是 Host 事件，需要 MXU unknown 账本 harness）。
-- **CW2 口径修正**：`cw7/final-audit.md` 已把 **minimal stop** 升为 pass（真实云 AutoFight 任务内 Stop），但长 RPC 逐命令类型、owned launcher、Host-death 仍未闭合；完整 CW2 仍为 `partial`。CW9-2 保持 `partial`。
-- **Batch B 已开始**：26 行 local_browser；本地 headless Chrome smoke 1 passed；新增 4 个 CDP 测试（媒体冻结/重复帧/截图、页面 reload、target close、browser kill）**4 passed**；临时 profile/端口清理通过；首轮执行后 14 partial / 11 not_run / 1 blocked，0 pass。详见 `cw9/batch-b/plan.md` 与 `readiness.json`。
-- Batch B 顺序：B2 媒体 → B3 CDP → B1 Stop → B5 跨 run/资源 → B4 Host 生命周期；HS-01/07 等 owned launcher/父死检测。
-- 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `7e1daf1d…`、就绪度 `87fa7a27…`、首轮报告 `21d99668…`。
+- round1（旧候选 `4c775f51…`）：**6 pass / 4 partial / 3 fail / 2 blocked**；结果 `results.json` `874588c4…`。
+- round2（新候选 sidecar `1f8625d5…` / MXU `e193e0d4…`）：`cargo test --all-targets` → **52 passed / 0 failed / 1 ignored**；
+  行级 **10 pass / 5 partial / 0 fail / 0 blocked**；结果 `round2-results.json` `d1581347…`，日志 `315b9cc0…`。
+- round2 新闭：F-CP-06 在途/排队 deadline、F-CP-07 urgent Stop、F-CP-08 pending/Backpressure、F-CP-09 urgent lane。
+- round2 剩余 partial：F-CP-01/02（Host lost-ACK harness）、F-CP-04（SeqConflict 无测试）、F-LS-02（无 renew-loss 注入）、F-LS-06（token 半属 CW4）。
+- **CW2 已 closed（pass-with-boundary）**：`cw2/clause-table.md` 条款 1–6，`review-lease`/`review-renew-sidecar` pass、`review-combined` pass-with-notes；边界为 job kill 瞬间 held 输入释放 best-effort。`cw9/cw2-reevaluation.md` 已重写。
+- **Batch B round2**：26 行 local_browser；新候选上 CDP smoke 1 passed + 4 个 CDP 测试 **4 passed**；首轮 round2 有 1 个 harness 断言错误（截图 media.presented 不应与 rVFC 比较），改为 `source=cdp_screenshot` 后通过；行级仍 14 partial / 11 not_run / 1 blocked、0 pass。结果 `round2-results.json` `ca1ee9f0…`、harness diff `bb4f38aa…`、日志 `3ae5145b…`。
+- Batch B 顺序：B2 媒体（余 A/B、resize、session 冻结端到端）→ B3 CDP（断链、同名页）→ B1 Stop → B5 跨 run/资源 → B4 Host 生命周期。
+- 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `3e7cfa4a…`、就绪度 `87fa7a27…`、报告 `9eb802ab…`、round2 结果 `ca1ee9f0…`。
 
 ### 首批动作
 
 1. **[done]** 建立 `fault-matrix.json` / `.md`，登记 `run-175718`/`run-172548`/`run-175512` 三个真实输入，不猜测根因。
-2. Batch A 首轮已执行（6/4/3/2）；**暂停重跑**，先由 CW2 owner 收口长 RPC 抢占、在途 deadline、owned launcher、Host-death；Host ACK harness 由 MXU 侧补。
-3. CW2 收口后重跑 Batch A，重点转 F-CP-01/02/06/07/08/09 与 F-LS-02/06；Batch B 的 B2/B3 可并行准备，不依赖长 RPC 抢占。
-4. Batch B（26 行 local_browser）：已补媒体冻结/重复帧/截图、页面 reload、target close、browser kill 四个测试并全部通过（test-only worktree，产品 diff 未变）；剩余 A/B/resize、CDP 断链、Stop 预算、Host/跨 run 未跑；HS-01/07 等 owned launcher/父死检测。
+2. Batch A round2 已执行（10/5/0/0）；剩余 F-CP-01/02 需 Host lost-ACK harness，F-CP-04 补 SeqConflict 测试，F-LS-02 补 renew-loss，F-LS-06 等 CW4 token。
+3. Batch B round2 已在新候选上跑通 4 个 CDP 测试；继续补 A/B、resize、session `MEDIA_STALLED` 端到端、CDP 断链/同名页、Stop 预算。
+4. Batch B 的 Host 生命周期/跨 run 行仍未跑；HS-01/07 现受 job object 强杀边界影响，输入释放按 best-effort 记录。
 5. Batch C（10 行 real_cloud_session）依赖 CW7；长运行最后。判据不变：“不可确认即 Faulted/未知账本，禁止新 run”；禁止自动重放。
 
 ## E10 / CW10 打包、兼容与上游收口
@@ -175,8 +173,8 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 ## 并行与依赖
 
 - 现在可做：CW8-1/2 静态 inventory/矩阵（done）、CW9-1 故障矩阵（done）、CW10-1/4 依赖/PR 映射、AC 清单。
-- CW2 minimal stop 已 pass；Batch A 首轮 6/4/3/2，重跑等待长 RPC 抢占/在途 deadline；owned launcher/Host-death 影响 Batch B 的 HS-01/07。
-- Batch B 已准备：本地 headless Chrome smoke 通过；26 行就绪度 12 partial / 13 not_run / 1 blocked，B2/B3 可先执行。
+- CW2 协议层已 closed（pass-with-boundary）；Batch A round2 10/5/0/0，剩余 5 行不再等 CW2。
+- Batch B round2 已在新候选跑通 4 个 CDP 测试；26 行 14 partial / 11 not_run / 1 blocked，B2/B3 继续。
 - CW7 关闭后：CW8-3/4/5、CW9-5/CW9-6、Batch C（10 行 real_cloud_session）。
 - CW10-2/3 依赖 CW0/CW1/CW5；CW10-4 依赖 CW1 合同接受。
 

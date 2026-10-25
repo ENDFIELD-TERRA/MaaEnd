@@ -11,10 +11,11 @@ This directory is the public snapshot of the CloudWeb planning set:
 - `task-matrix.json` / `task-matrix.md` — 46-row Windows task matrix, all rows Pending, with evidence schema.
 - `fault-matrix.json` / `fault-matrix.md` — CW9-1 fault matrix: 8 domains / 51 rows, all Pending, with closure layers and evidence schema.
 - `cw9-batch-a-report.md` / `cw9-batch-a-results.json` — CW9-2 Batch A first pass: 15 protocol-fixture rows, 6 pass / 4 partial / 3 fail / 2 blocked.
-- `cw9-cw2-reevaluation.md` — CW2 re-evaluation: minimal stop pass, full contract partial; remaining long-RPC preemption, owned launcher, Host-death.
+- `cw9-cw2-reevaluation.md` — CW2 re-evaluation: protocol-layer closed (pass-with-boundary); only job-kill instant held-input release remains best-effort.
 - `cw9-runbook.md` — reproducible Batch A/B run commands, environment boundaries and evidence rules.
+- `cw9-batch-a-round2-results.json` — Batch A round 2: 10 pass / 5 partial / 0 fail / 0 blocked on sidecar `1f8625d5`.
 - `cw9-batch-b-plan.md` / `cw9-batch-b-readiness.json` — Batch B preparation and first execution: 26 local-browser rows, 14 partial / 11 not_run / 1 blocked, 0 pass.
-- `cw9-batch-b-report.md` — first Batch B execution: 4 new CDP tests passed (media freeze/repeat/screenshot, page reload, target close, browser kill); test-only harness, product diff unchanged. The raw harness diff and test logs stay in the private workspace.
+- `cw9-batch-b-report.md` / `cw9-batch-b-round2-results.json` — Batch B round 2: CDP smoke + 4 CDP tests passed on sidecar `1f8625d5` (media freeze/repeat/screenshot, page reload, target close, browser kill); test-only harness, product diff unchanged. Raw harness diff and test logs stay private.
 
 Scope note:
 

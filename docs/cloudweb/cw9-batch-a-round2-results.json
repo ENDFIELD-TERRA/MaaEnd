@@ -1,0 +1,66 @@
+{
+  "schema": "cloudweb-cw9-batch-a/2",
+  "source_matrix": "fault-matrix.json",
+  "source_matrix_sha256": "ed335379ee5873ca3a17710dc99dd95ad205e4ca754e64a022b9835c9830ab4d",
+  "candidate": {
+    "sidecar_head": "8b9cc6f670fc59652ffb7f50e312d1949e7f73ac",
+    "sidecar_diff_sha256": "1f8625d56503b7598c7b19adfb64ad414b409ae1b62d99be86da20b813ebcb44",
+    "mxu_head": "8bddfee34bba3ea8ec81e3b8fdcb118375329b76",
+    "mxu_diff_sha256": "e193e0d427d3300fa0f744d3dcabd816bc2cd9f99350b3003c677e0888c5dfbd",
+    "reviewed_candidate_id": "6227c5a8d406b26efebaef9451a7b9990178aa47d1f0aa46d6344860e5545fed",
+    "cw2_clause_table": "cw2/clause-table.md"
+  },
+  "tests": {
+    "command": "cargo test --all-targets",
+    "result": "52 passed / 0 failed / 1 ignored, exit 0",
+    "log": "cw9/batch-a/logs/round2-sidecar-tests.log",
+    "log_sha256": "315b9cc0da42e8b525fbe79445b24490b948afbf3cf5ffb83bbf4f624a4e17c4"
+  },
+  "summary": {
+    "rows": 15,
+    "pass": 10,
+    "partial": 5,
+    "fail": 0,
+    "blocked": 0
+  },
+  "newly_closed": [
+    "F-CP-06 in-flight/queued deadline",
+    "F-CP-07 urgent Stop preemption",
+    "F-CP-08 pending backpressure",
+    "F-CP-09 urgent lane before queued normal commands"
+  ],
+  "rows": [
+    {"id": "F-CP-01", "status": "partial", "note": "MXU ControlLink pending/EOF tests exist; no dedicated lost-down-ACK + Host unknown-ledger test"},
+    {"id": "F-CP-02", "status": "partial", "note": "MXU pending/urgent failure tests exist; no dedicated lost-up-ACK test"},
+    {"id": "F-CP-03", "status": "pass", "tests": ["transport::tests::oversized_and_malformed_control_frames_are_rejected"]},
+    {"id": "F-CP-04", "status": "partial", "note": "expired-seq no-replay test passes; same-seq/different-content SeqConflict still has no test", "tests": ["session::tests::seq_expiry_returns_command_expired_instead_of_replay"]},
+    {"id": "F-CP-05", "status": "pass", "tests": ["session::tests::owner_conflict_and_generation_guard"]},
+    {"id": "F-CP-06", "status": "pass", "tests": ["session::tests::deadline_exceeded_during_execution_returns_unknown_without_replay", "session::tests::dispatched_input_past_deadline_becomes_unknown_without_replay", "transport::tests::queued_command_expired_before_dispatch_is_rejected"]},
+    {"id": "F-CP-07", "status": "pass", "tests": ["transport::tests::urgent_release_all_preempts_a_running_slow_swipe"], "real_cloud": "t5-mxu-20261024.log RTT 8 ms / 43 ms; no held input"},
+    {"id": "F-CP-08", "status": "pass", "tests": ["transport::tests::overfilled_pending_lane_returns_backpressure"]},
+    {"id": "F-CP-09", "status": "pass", "tests": ["transport::tests::urgent_lane_jumps_queued_normal_lane", "transport::tests::urgent_release_all_preempts_a_running_slow_swipe"]},
+    {"id": "F-LS-01", "status": "pass", "tests": ["transport::tests::expired_lease_is_fenced_without_a_command"]},
+    {"id": "F-LS-02", "status": "partial", "note": "bounded lease/renew formula and expiry tests pass; no dedicated renew-channel-loss injection", "tests": ["session::tests::renew_lease_keeps_the_granted_duration", "session::tests::two_second_long_press_survives_the_350ms_lease_with_renewals"]},
+    {"id": "F-LS-03", "status": "pass", "tests": ["session::tests::owner_conflict_and_generation_guard"]},
+    {"id": "F-LS-04", "status": "pass", "tests": ["transport::tests::host_disconnect_releases_held_inputs_and_fences_generation"]},
+    {"id": "F-LS-05", "status": "pass", "tests": ["transport::tests::hello_rejects_wrong_token_then_accepts_valid_token"]},
+    {"id": "F-LS-06", "status": "partial", "note": "generation bump/held clear pass; snapshot-token invalidation belongs to CW4", "tests": ["transport::tests::host_disconnect_releases_held_inputs_and_fences_generation"]}
+  ],
+  "cw2_impact": {
+    "status": "pass-with-recorded-boundary",
+    "closed_by_clause_table": [
+      "urgent control path",
+      "in-flight deadline",
+      "max_pending/Backpressure",
+      "attach-only ownership",
+      "Host kill process exit/no orphan",
+      "real-cloud protocol stop"
+    ],
+    "boundary": "hard-kill instant held-input release remains best-effort (job kill may skip cleanup); documented, not an open CW2 clause"
+  },
+  "non_claims": [
+    "Batch A is protocol/local evidence; it does not close real-cloud rows.",
+    "F-CP-01/02 still need a Host lost-ACK harness before they can be pass.",
+    "F-LS-06 token half is CW4; F-CP-04 SeqConflict still lacks a test."
+  ]
+}
