@@ -61,11 +61,22 @@
 - **上游确认**：#6841（OPEN/Draft，head `d54392de`）维护者 17:32 UTC 评论确认
   CloudShell 可直接 PostMessage，与本地实测一致；#6800 建议直接 Stack 到 #6841。
 - 历史：首轮手动 3/3（116 s）发生在严格启动门控前，仅作历史记录。
+- **任务广度**：`VisitFriends` 在冷启动会话 Succeeded（帝江号加载、拜访）；
+  `EnvironmentMonitoring` 从帝江号大世界自行导航到多个野外监控终端并逐个拍照
+  （Outskirts/MarkerStone 终端、天师柱、落日、虫类目标等），
+  说明 MapNavigator/场景切换在 CloudWeb 打印帧上可用；长任务终态仍在跑。
+- **场景恢复**：DijiangRewards 因培养舱 `GrowthChamberGrowViewIn` 目标未识别失败并停在
+  帝江号总控中枢；后续任务原先只在 `InMenuList` 时按 Escape，故连续失败。实测该界面
+  PostMessage Escape 可退回帝江号大世界，已将 EnterWorld 识别扩展为
+  `Or(InMenuList, InDijiangControlNexus)`。
 
 ## 未验证 / 边界（不得当作已通过）
 
-- 任务广度仍不足：目前真实云动态覆盖启动、DailyRewards、ClaimSimulationRewards；VisitFriends/
-  DijiangRewards/EnvironmentMonitoring 等进行中，长任务与 46 项矩阵尚未验证。
+- 任务广度仍不足：真实云动态已覆盖启动、DailyRewards、ClaimSimulationRewards、VisitFriends；
+  EnvironmentMonitoring 仍在长任务中；DijiangRewards 因培养舱目标识别失败（任务特定，
+  与上游 #6854 的转场输入窗口同类）尚未通过；Trial 与 46 项矩阵未验证。
+- 上游 #6854（open）指出转场后约 750 ms 的输入忽略窗口；CloudWeb 上紧接转场的点击也需
+  预留 pre_delay，后续任务适配时沿用。
 - Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；
   “home 缺失”原判断由鼠标输入被掐断造成，已撤销。
 - 队列结束可能停在模拟空间/行动手册（ClaimSimulationRewards 的 `SimCheckEmpty` 终止路径）；

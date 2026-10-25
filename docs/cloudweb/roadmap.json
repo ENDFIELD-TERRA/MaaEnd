@@ -1277,7 +1277,7 @@
   },
   "cloudshell_2026_10_25": {
     "schema": "cloudweb-cloudshell-roadmap/1",
-    "updated_at": "2026-10-25T22:54:00Z",
+    "updated_at": "2026-10-25T23:12:00Z",
     "single_source": "docs/cloudweb/cloudshell-roadmap.md",
     "epic": 8,
     "issues": {
@@ -1306,7 +1306,10 @@
       "dev pretask --inject cold start (old script) reached InWorld",
       "cold start with the fixed script: pretask --inject -> landing -> loading -> title -> InWorld, fully automatic",
       "autonomous cold-start strict 3-task queue Succeeded in 122s (startup + DailyRewards + ClaimSimulationRewards)",
-      "start-click cap fixed the repeated-click cloud session reset"
+      "start-click cap fixed the repeated-click cloud session reset",
+      "VisitFriends Succeeded on CloudWeb (Dijiang loading + visit)",
+      "EnvironmentMonitoring navigated to multiple wild monitoring terminals on CloudWeb (long task still running)",
+      "Dijiang control-nexus scene recovery via Escape (Or(InMenuList, InDijiangControlNexus))"
     ],
     "open": [
       "Trial task-level post-fight",
@@ -1314,7 +1317,9 @@
       "background/obscured long-run",
       "final release e2e",
       "task-queue end state can be simulation space/operational manual; next-task scene recovery from that state not yet verified",
-      "startup task is cold-start only; it does not recover a warm session left in menus"
+      "startup task is cold-start only; it does not recover a warm session left in menus",
+      "DijiangRewards GrowthChamberGrowViewIn target recognition failure",
+      "transition input-ignore window (~750ms, upstream #6854) to apply to CloudWeb task clicks"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }
