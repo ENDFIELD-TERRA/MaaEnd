@@ -105,7 +105,7 @@ Owner：Perlica（coordinator）。本文件是内部执行计划，不等于 Gi
 - **CW2 口径修正**：`cw7/final-audit.md` 已把 **minimal stop** 升为 pass（真实云 AutoFight 任务内 Stop），但长 RPC 逐命令类型、owned launcher、Host-death 仍未闭合；完整 CW2 仍为 `partial`。CW9-2 保持 `partial`。
 - **Batch B 已准备**：26 行 local_browser；本地 headless Chrome smoke 1 passed、临时 profile/端口清理通过；就绪度 12 partial / 13 not_run / 1 blocked，0 pass。详见 `cw9/batch-b/plan.md` 与 `readiness.json`。
 - Batch B 顺序：B2 媒体 → B3 CDP → B1 Stop → B5 跨 run/资源 → B4 Host 生命周期；HS-01/07 等 owned launcher/父死检测。
-- 执行入口：`cw9/runbook.md` sha256 `e2b7eaf9…`；Batch B 计划 `7e1daf1d…`、就绪度 `7c382b83…`。
+- 执行入口：`cw9/runbook.md` sha256 `ee76a958…`；Batch B 计划 `7e1daf1d…`、就绪度 `7c382b83…`。
 
 ### 首批动作
 

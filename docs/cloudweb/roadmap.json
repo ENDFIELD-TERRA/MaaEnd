@@ -1028,7 +1028,7 @@
     },
     "cw9_runbook": {
       "path": "cases/cloudweb-cw8-cw10/cw9/runbook.md",
-      "sha256": "e2b7eaf9e5b00bf5f0e938577f15d08bd15ca8d531a4528d8129094cfedf7b56"
+      "sha256": "ee76a958743ff217238c95f29d3b85d26bc7efab7f69391b7a23a96c6d566c97"
     },
     "cw9_batch_b_readiness": {
       "plan": "cases/cloudweb-cw8-cw10/cw9/batch-b/plan.md",
