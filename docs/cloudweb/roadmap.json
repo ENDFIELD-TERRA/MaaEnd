@@ -1301,15 +1301,16 @@
       "DailyRewards Succeeded",
       "Trial Fight/AutoFight/FightFinish node-level",
       "no focus steal",
-      "login persisted"
+      "login persisted",
+      "3-task queue Succeeded: CloudWebStartGame + DailyRewards + ClaimSimulationRewards (116s)"
     ],
     "open": [
       "start button transparent overlay",
-      "startup task title/monthly/world",
       "Trial task-level post-fight",
       "46-task dynamic matrix",
       "background/minimized long-run",
-      "final release e2e"
+      "final release e2e",
+      "pretask --inject cold start"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }

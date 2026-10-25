@@ -23,10 +23,10 @@
 
 | 阶段 | 状态 | 交付 | Issue |
 | --- | --- | --- | --- |
-| U0 启动注入 | partial | CloudShell `--inject` 启动脚本 + `LaunchCloudWeb` 接线，自动点击开始、处理数据弹窗 | [#1](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/1) |
-| U0 启动任务 | planned | 标题页、今日月卡奖励、进入世界（`CloudWebStartGame`） | [#4](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/4) |
+| U0 启动注入 | partial（手动注入已验证；pretask 冷启动待验） | CloudShell `--inject` 启动脚本 + `LaunchCloudWeb` 接线 | [#1](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/1) |
+| U0 启动任务 | verified | 标题页、今日月卡奖励、进入世界（`CloudWebStartGame`） | [#4](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/4) |
 | U0 凭据 | partial | WebView2 会话 DPAPI 保存/恢复 harness；秘密不进入仓库/日志 | [#2](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/2) |
-| U1 队列 | planned | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
+| U1 队列 | partial（首轮 3 任务 Succeeded） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
 | U2 核心任务 | partial | DailyRewards、Trial、AutoFight；Trial 战后任务级闭环 | [#5](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/5) |
 | U3 全量矩阵 | planned | 46 项 Windows 任务的 CloudWeb 资格/动态证据；有副作用任务按清单跳过 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
 | U4 后台/长时 | planned | 遮挡/最小化/长时供帧与任务稳定性；边界有证据 | — |
@@ -42,15 +42,17 @@
   （真实云，taskId 级成功）。
 - Trial 的 `Fight` / `AutoFight` / `FightFinish` 节点级 **Succeeded**（有真实演算次数）。
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
+- **首轮完整队列 Succeeded（2026-10-25）**：`CloudWebStartGame` → `DailyRewards` →
+  `ClaimSimulationRewards` 三项均 succeeded，overall Succeeded，116 s；启动任务等待云加载/标题/大世界，随后两个领取任务顺序完成。
 
 ## 未验证 / 边界（不得当作已通过）
 
 - 官网“开始游戏”按钮被透明层覆盖；控制器点击命中透明层，JS click 才能启动。
   这属于启动/pretask 缺口（U0）。
-- 游戏标题页、今日月卡奖励、进入世界尚无自动启动任务（U0）。
+- 启动注入的 pretask 冷启动尚未验证；标题/月卡节点由启动任务覆盖并在首轮队列中通过。
 - Trial 战后结果页被跳过、角色回大世界且不在演算提示附近；重导航在 `GotoTrialArena` 失败，
   Trial 任务级仍未 Succeeded（U2）。
-- 46 项任务仅 DailyRewards/Trial 有真实云动态证据；其余为静态资格/未跑（U3）。
+- 46 项任务仅 DailyRewards/ClaimSimulationRewards/Trial 有真实云动态证据；其余为静态资格/未跑（U3）。
 - 最小化窗口的 PrintWindow 本次为空白；后台/遮挡/长时供帧仍未系统验证（U4）。
 - `/screenshot` 预览在任务结束后可能返回上一帧缓存；CDP 页面是实时的。不要用预览缓存
   证明任务识别帧。
