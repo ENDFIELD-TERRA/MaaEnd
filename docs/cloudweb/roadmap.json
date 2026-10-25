@@ -1277,7 +1277,7 @@
   },
   "cloudshell_2026_10_25": {
     "schema": "cloudweb-cloudshell-roadmap/1",
-    "updated_at": "2026-10-25T23:12:00Z",
+    "updated_at": "2026-10-25T23:24:00Z",
     "single_source": "docs/cloudweb/cloudshell-roadmap.md",
     "epic": 8,
     "issues": {
@@ -1309,7 +1309,10 @@
       "start-click cap fixed the repeated-click cloud session reset",
       "VisitFriends Succeeded on CloudWeb (Dijiang loading + visit)",
       "EnvironmentMonitoring navigated to multiple wild monitoring terminals on CloudWeb (long task still running)",
-      "Dijiang control-nexus scene recovery via Escape (Or(InMenuList, InDijiangControlNexus))"
+      "Dijiang control-nexus scene recovery via Escape (Or(InMenuList, InDijiangControlNexus))",
+      "final 4-task strict queue Succeeded in 81s (startup + Daily + Claim + VisitFriends)",
+      "floating ball hidden (display:none) removes minimap occlusion; MapLocator heading becomes valid",
+      "Trial navigation progressed 84s / 581 ticks to 1.56m before MapNavigator final-approach timeout"
     ],
     "open": [
       "Trial task-level post-fight",
@@ -1319,7 +1322,8 @@
       "task-queue end state can be simulation space/operational manual; next-task scene recovery from that state not yet verified",
       "startup task is cold-start only; it does not recover a warm session left in menus",
       "DijiangRewards GrowthChamberGrowViewIn target recognition failure",
-      "transition input-ignore window (~750ms, upstream #6854) to apply to CloudWeb task clicks"
+      "transition input-ignore window (~750ms, upstream #6854) to apply to CloudWeb task clicks",
+      "MapNavigator final approach (dynamic recovery/yaw) blocks Trial and wild mission points"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }

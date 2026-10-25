@@ -42,6 +42,9 @@
   （真实云，taskId 级成功）。
 - Trial 的 `Fight` / `AutoFight` / `FightFinish` 节点级 **Succeeded**（有真实演算次数）。
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
+- **最终 4 任务严格队列 Succeeded（2026-10-25 16:22–16:23，81 s）**：
+  `CloudWebStartGame`（InWorld 门控）→ `DailyRewards` → `ClaimSimulationRewards` → `VisitFriends`，
+  四项全部 succeeded；使用隐藏浮球后的最终注入脚本。
 - **冷启动全自动队列 Succeeded（2026-10-25 15:50–15:52，122 s）**：pretask `LaunchCloudWeb`
   以 `--inject` 拉起全新 CloudShell，脚本自动点开始（最多 2 次），管线处理加载/标题/月卡 →
   InWorld → `DailyRewards` → `ClaimSimulationRewards`，三项 succeeded，无人工点击。
@@ -62,9 +65,14 @@
   CloudShell 可直接 PostMessage，与本地实测一致；#6800 建议直接 Stack 到 #6841。
 - 历史：首轮手动 3/3（116 s）发生在严格启动门控前，仅作历史记录。
 - **任务广度**：`VisitFriends` 在冷启动会话 Succeeded（帝江号加载、拜访）；
-  `EnvironmentMonitoring` 从帝江号大世界自行导航到多个野外监控终端并逐个拍照
-  （Outskirts/MarkerStone 终端、天师柱、落日、虫类目标等），
-  说明 MapNavigator/场景切换在 CloudWeb 打印帧上可用；长任务终态仍在跑。
+  `EnvironmentMonitoring` 自行导航到多个野外监控终端并接受任务，但各任务执行在
+  `GoTo*Execute` 的 MapNavigator 移动节点失败（天师柱/落日/虫类/水竹铃/涂鸦/彩虹），
+  FailureCollector 汇总 Failed。
+- **浮球遮挡小地图（关键修复）**：CloudShell 浮球位于左上角、压住小地图；仅设
+  `pointer-events:none` 仍会进入 PrintWindow 帧，MapLocator 的 camera heading prior 恒为 -1。
+  改为 `display:none` 后，MapNavigator 获得有效航向，Trial 连续导航 84 s / 581 tick，
+  到达距目标 1.56 m，最终因末段 `Dynamic recovery timeout`（yaw_error≈-101°）失败——
+  从「立即放弃」推进到末段控制问题。
 - **场景恢复**：DijiangRewards 因培养舱 `GrowthChamberGrowViewIn` 目标未识别失败并停在
   帝江号总控中枢；后续任务原先只在 `InMenuList` 时按 Escape，故连续失败。实测该界面
   PostMessage Escape 可退回帝江号大世界，已将 EnterWorld 识别扩展为
@@ -73,8 +81,11 @@
 ## 未验证 / 边界（不得当作已通过）
 
 - 任务广度仍不足：真实云动态已覆盖启动、DailyRewards、ClaimSimulationRewards、VisitFriends；
-  EnvironmentMonitoring 仍在长任务中；DijiangRewards 因培养舱目标识别失败（任务特定，
-  与上游 #6854 的转场输入窗口同类）尚未通过；Trial 与 46 项矩阵未验证。
+  EnvironmentMonitoring 的终端导航通过但任务点移动失败；Trial 到达末段 1.56 m 后
+  MapNavigator 动态恢复超时；DijiangRewards 因培养舱目标识别失败（任务特定，
+  与上游 #6854 的转场输入窗口同类）尚未通过；46 项矩阵未全量验证。
+- MapNavigator 末段朝向/动态恢复是当前主要剩余阻塞（Trial 与野外任务点），
+  与 CloudWeb 打印帧/输入架构无关；需要单独的导航调参或 authored route 工作。
 - 上游 #6854（open）指出转场后约 750 ms 的输入忽略窗口；CloudWeb 上紧接转场的点击也需
   预留 pre_delay，后续任务适配时沿用。
 - Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；
