@@ -1312,7 +1312,9 @@
       "background/minimized long-run",
       "final release e2e",
       "pretask --inject cold start",
-      "menu home/last-tab state for operational manual/regional development"
+      "menu home/last-tab state for operational manual/regional development",
+      "startup task max_hit false-success fixed; strict InWorld re-verification pending",
+      "cloud game start page stuck at 游戏启动中 (service/session)"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }
