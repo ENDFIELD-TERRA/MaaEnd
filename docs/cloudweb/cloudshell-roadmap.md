@@ -166,3 +166,13 @@
   战斗→回世界）2m21s 成功；页面收到 173 次带位移 trusted mousemove。
 - 仍开放：EnvironmentMonitoring 路线中的 `localization_lost_timeout`（cold-start collecting），
   46 项动态全量，最小化窗口 PrintWindow，正式 release 标签；最终证据绑定 98e39508 的 CI 包。
+
+## 2026-10-26 最终 CI 包验收（4321b05c）
+
+- install run 40272085096 全绿（win/mac/linux 构建与打包）；最终包 `MaaEnd-win-x86_64.zip`，
+  版本 `v0.0.0-ci.261026-4321b05c`。包内 `cloud-shell.exe` 与 `cpp-algo.exe` 与 CI 工件逐字节一致。
+- 同一最终包：10 任务队列全成功；独立 Trial（StartGame 复位后）全链路成功。look 转向通道
+  在最终产物上生效，全程未接管系统光标/窗口/焦点。
+- 同一队列内 Trial 紧接 IntelArchive 时在 `QuickTeleportStart` 的地区总览入口失败；
+  属起始菜单态/队列编排问题，不是导航。EnvironmentMonitoring 仍有 `localization_lost_timeout`。
+- 未闭合：上述队列转场、Env 定位丢失、46 项动态全量、最小化 PrintWindow、正式 release 标签。
