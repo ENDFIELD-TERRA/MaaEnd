@@ -48,8 +48,9 @@
 - **安全 3 任务队列 Succeeded（2026-10-26 01:22–01:24，96 s）**：
   `ReceiveProdManual` → `SwitchTeam` → `StashBackpack`，三项全部 succeeded（无资源消耗）。
   最终构建包动态成功任务增至 8 项。
-- **AutoEcoFarm 空转（未计入）**：只跑 `Task→Main→Loop→Finish`，未执行农场 Job；
-  测试编排未展开 option 默认 case，已撤回该证据（ResourceRecycle 同理）。
+- **AutoEcoFarm / ResourceRecycle（未计入）**：默认 options 下分别只跑 Loop→Finish / Start→End；
+  显式展开 option 后，AutoEcoFarm 三个 Job 全部在 Execute 失败，ResourceRecycle 在 Map/Overview
+  入口失败。两者均不计入动态证据，最终动态成功为 10 项。
 - **IntelArchive 长任务 Succeeded（2026-10-26 02:01–02:12，约 11 min）**：
   最终构建包冷启动后读取档案完成；旧会话 8 分钟预算内未完成，本次 30 分钟预算通过。
 - **`check` CI 通过（2026-10-26 02:07）**：基座增加 `CloudWebStartGame` 占位入口（17e3ecaf），
