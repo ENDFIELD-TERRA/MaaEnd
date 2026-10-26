@@ -154,3 +154,15 @@
   Tasker 状态、真实入队/回执、失败隔离）。
 - 公开写入（PR/评论/issue 自动回复）逐次确认；本文件与 issue 只记录可公开的进度。
 - 每个增量提交到 fork 的栈分支；持续监控上游 #6807/#6841/#6800 与提交，更新本文件。
+
+## 2026-10-26 转向改为非侵入 look 通道；完整 Trial 通过
+
+- 背景：后台 SendInput 相对移动到不了 WebView2，MouseLockFollow 还会接管用户系统光标与窗口。
+  两条路径都不可接受，实测也无法转动镜头。
+- 方案（提交 `68609b5a`，后续 `98e39508` 修正非 Windows 编译）：CloudShell 新增 look 消息，
+  由页面派发一次带位移的 mousemove 后零位移回位；cpp-algo 识别 CloudShell 窗口后改走该消息，
+  不再启用 MouseLockFollow。系统光标、窗口位置与前台窗口均不改变。
+- 证据：8 点 authored route 35 s 走通（camRot 90°→29°）；完整 Trial（启动→传送→导航→触发→
+  战斗→回世界）2m21s 成功；页面收到 173 次带位移 trusted mousemove。
+- 仍开放：EnvironmentMonitoring 路线中的 `localization_lost_timeout`（cold-start collecting），
+  46 项动态全量，最小化窗口 PrintWindow，正式 release 标签；最终证据绑定 98e39508 的 CI 包。

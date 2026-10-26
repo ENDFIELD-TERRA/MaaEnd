@@ -1333,5 +1333,34 @@
       "production release-tag e2e not run (CI package build verified)"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
+  },
+  "cloudshell_2026_10_26": {
+    "schema": "cloudweb-cloudshell/1",
+    "updated_at": "2026-10-26T05:00:00Z",
+    "status": {
+      "architecture": "verified",
+      "trial_navigation": "verified_on_dev_build",
+      "environment_monitoring": "open_localization_loss",
+      "dynamic_matrix": "partial_11_of_46",
+      "release": "pending_ci_98e39508"
+    },
+    "change": {
+      "summary": "Camera steering moved from SendInput/MouseLockFollow to a CloudShell look message.",
+      "commit": "68609b5a",
+      "follow_up": "98e39508 cross-platform guard",
+      "mechanism": "CloudShell WM_APP look message -> page CDP mouseMoved (look marker + zero-return); cpp-algo detects MaaEnd.CloudShell and skips MouseLockFollow.",
+      "why": "SendInput relative moves do not reach WebView2 in the background; MouseLockFollow also takes over the user's cursor and window."
+    },
+    "evidence": {
+      "authored_route": "8-point route, 35 s, final (1863.12, 2849.63), camRot 90->29 deg",
+      "trial": "full Trial succeeded in 2m21s (startup, teleport, navigation, trigger, fight, world re-entry)",
+      "input_isolation": "no system cursor, window position, or foreground change"
+    },
+    "open": [
+      "EnvironmentMonitoring localization_lost_timeout",
+      "46-task dynamic matrix",
+      "minimized PrintWindow",
+      "release tag"
+    ]
   }
 }
