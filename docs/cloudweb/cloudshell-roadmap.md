@@ -59,9 +59,10 @@
   节点集合 6029；CloudWeb 可用性 44 项显式声明 + `AutoEssence` 无 controller 字段（全控制器），
   仅 `CloseGamePC` 为 PC 专属。动态证据仍为 5 任务 + `ReadAllWiki` 长时/`IntelArchive` 部分；
   Trial/EnvironmentMonitoring 受导航末段阻塞。
-- **最终 10 任务冷启动队列 Succeeded（2026-10-26 03:23–03:39，982 s）**：
-  重建包上 StartGame → Daily → Claim → VisitFriends → DijiangRewards → ReceiveProdManual →
-  SwitchTeam → StashBackpack → PullCountCalculator → IntelArchive 全部 succeeded；含 ~11 min 长任务。
+- **最终 10 任务冷启动队列连续两次 Succeeded（2026-10-26 03:23–03:39 / 03:40–03:59）**：
+  重建包上同一队列两次全部 succeeded（982 s / 约 18 min，均含 IntelArchive 长任务）；
+  StartGame → Daily → Claim → VisitFriends → DijiangRewards → ReceiveProdManual → SwitchTeam →
+  StashBackpack → PullCountCalculator → IntelArchive。可重复性成立。
 - **重建产物冷启动 5 任务 Succeeded（2026-10-26 02:35–02:37，167 s，stack head 17e3ecaf）**：
   新包含基座 `CloudWebStartGame` 占位，CloudWeb 附加资源覆盖为真实状态机；启动约 60 s，
   非占位秒过。install run 40258057525 与 check run 40257399337 同 head，均为绿。
