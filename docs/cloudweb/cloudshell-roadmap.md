@@ -198,3 +198,14 @@
 - Env 下一步应在任务流程层修：拍照/画面设置结束先退出再启动导航；对“脱离卡死”弹窗
   做任务级处理（取消或脱离卡死后重新定位）。已验证的 Trial、队列与起始复位结论不变。
 - 未闭合：Env、46 项动态全量、最小化 PrintWindow、正式 release 标签。
+
+## 2026-10-26 08:18 final6（868e9af6）：Esc 模态恢复入包；Trial 转场待干净态重验
+
+- install run 40288912687 全绿；final6 包 shell `f209cc24…`、cpp-algo `13f60e79…`，
+  含 Trial 转场前置复位、Env 终端前置 SceneAnyEnterWorld、CloudWeb 定位丢失 Esc 重试。
+- Env 的“脱离卡死/黑屏”模态丢失实测发送 Esc 后 ~2.7s 恢复（3 次）；Env 仍剩
+  BambooWaterChimes 终点 2.195m 的 `dwell_watchdog`（地形/落点，非模态）。
+- final6 上 Trial 转场探针（冷启动与热态）都停在地区总览菜单链；SceneAnyEnterWorld/InWorld
+  已成功，该路径未改动，final5 同时点曾成功。判断为长期 Env/拍照运行后的游戏菜单/任务态，
+  需干净会话重验，不能据此宣称回归或完成。
+- 未闭合：干净态 Trial 转场重验、Env 终点、46 项动态全量、最小化 PrintWindow、release 标签。

@@ -1336,7 +1336,7 @@
   },
   "cloudshell_2026_10_26": {
     "schema": "cloudweb-cloudshell/1",
-    "updated_at": "2026-10-26T07:35:00Z",
+    "updated_at": "2026-10-26T08:18:00Z",
     "status": {
       "architecture": "verified",
       "trial_navigation": "verified_on_final_ci_package",
@@ -1345,7 +1345,10 @@
       "release": "ci_package_verified_tag_pending",
       "queue_transition": "open_trial_after_intelarchive",
       "trial_queue_transition": "verified_on_final_ci_package",
-      "nav_start_scene_reset": "verified"
+      "nav_start_scene_reset": "verified",
+      "env_modal_recovery": "verified",
+      "env_final_approach": "open_dwell_watchdog",
+      "trial_transition_clean_state_revalidation": "pending"
     },
     "change": {
       "summary": "Camera steering moved from SendInput/MouseLockFollow to a CloudShell look message.",
@@ -1358,10 +1361,11 @@
         "98e39508",
         "4321b05c",
         "ed26600b",
-        "63f34238"
+        "63f34238",
+        "868e9af6"
       ],
-      "final_package": "v0.0.0-ci.261026-63f34238 (install run 40279072318)",
-      "final_package_binding": "cloud-shell 652e7c98..., cpp-algo 58c8d83a..., byte-identical to CI artifacts"
+      "final_package": "v0.0.0-ci.261026-868e9af6 (install run 40288912687)",
+      "final_package_binding": "cloud-shell f209cc24..., cpp-algo 13f60e79..., byte-identical to CI artifacts"
     },
     "evidence": {
       "authored_route": "8-point route, 35 s, final (1863.12, 2849.63), camRot 90->29 deg",
@@ -1372,10 +1376,13 @@
       "final_queue": "10/10 tasks succeeded (package 4321b05c)",
       "final_trial": "standalone Trial and friends-UI transition probe succeeded on 63f34238",
       "nav_reset": "friends UI nav 46 s; normal world nav 20 s with no reset",
-      "env_diagnosis": "actual loss frame shows the in-game unstuck dialog; another run shows photo-mode without minimap; nav-level SceneAnyEnterWorld/OCR cancel/OCR title+Esc all failed and were reverted"
+      "env_diagnosis": "actual loss frame shows the in-game unstuck dialog; another run shows photo-mode without minimap; nav-level SceneAnyEnterWorld/OCR cancel/OCR title+Esc all failed and were reverted",
+      "env_modal": "Esc retry recovered 3 modal/black-frame losses in ~2.7s",
+      "final6_state": "Trial transition probe on final6 blocked at regional-overview menu chain; same node passed on final5 before Env runs; needs clean session"
     },
     "open": [
-      "EnvironmentMonitoring task-flow: exit photo/settings before nav; handle unstuck dialog (cancel or teleport) then relocalize",
+      "Clean-session Trial transition revalidation",
+      "EnvironmentMonitoring BambooWaterChimes 2.195m dwell_watchdog (route/terrain)",
       "46-task dynamic matrix",
       "minimized PrintWindow",
       "release tag"
