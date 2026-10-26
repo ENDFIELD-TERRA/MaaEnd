@@ -28,7 +28,7 @@
 | U0 凭据 | verified | WebView2 会话 DPAPI 保存/恢复 harness；真实过期会话恢复 4 cookies / 22 localStorage；秘密不进入仓库/日志 | [#2](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/2) |
 | U1 队列 | verified（严格 3/3，61 s） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
 | U2 核心任务 | partial | DailyRewards、Trial、AutoFight；Trial 战后任务级闭环 | [#5](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/5) |
-| U3 全量矩阵 | partial | 最终构建包 46/46 静态资格、0 override 缺失；动态 5 任务 + 长时/部分证据；导航阻塞项单列 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
+| U3 全量矩阵 | partial | 最终构建包 46/46 静态资格、0 override 缺失；动态 8 任务 + 长时/部分证据；导航阻塞项单列 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
 | U4 后台/长时 | partial | 非前台长时可运行（ReadAllWiki 19+ min 持续交互，前台非 shell）；最小化 PrintWindow 仍空白 | — |
 | U5 栈与验收 | verified（构建产物 5 任务；导航/矩阵残余） | 基于 upstream/pr-6841 的栈分支、install CI、构建产物冷启动 e2e、fork 同步与上游监控 | [#3](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/3) |
 
@@ -45,6 +45,9 @@
 - **长时后台交互（2026-10-26 01:15）**：最终构建包上 `ReadAllWiki` 在非前台窗口连续
   19+ 分钟点击/滚动未读百科页，前台窗口始终不是 CloudShell；仅因编排器 20 分钟上限停止，
   任务仍在 Running。最小化窗口 PrintWindow 仍为空白的边界不变。
+- **安全 3 任务队列 Succeeded（2026-10-26 01:22–01:24，96 s）**：
+  `ReceiveProdManual` → `SwitchTeam` → `StashBackpack`，三项全部 succeeded（无资源消耗）。
+  最终构建包动态成功任务增至 8 项。
 - **46 项静态资格（最终构建包）**：46/46 入口节点存在，0 个 option override 节点缺失，
   节点集合 6029；CloudWeb 可用性 44 项显式声明 + `AutoEssence` 无 controller 字段（全控制器），
   仅 `CloseGamePC` 为 PC 专属。动态证据仍为 5 任务 + `ReadAllWiki` 长时/`IntelArchive` 部分；
@@ -119,7 +122,7 @@
   下一任务能否从该菜单态恢复尚未验证。启动任务只负责冷启动，不负责暖会话恢复。
 - Trial 战后结果页被跳过、角色回大世界且不在演算提示附近；重导航在 `GotoTrialArena` 失败，
   Trial 任务级仍未 Succeeded（U2）。
-- 46 项任务中已有启动、DailyRewards、ClaimSimulationRewards、VisitFriends、DijiangRewards、Trial/环境监测（部分）真实云动态证据；其余为静态资格/未跑（U3）。
+- 46 项任务中已有 8 项动态成功（启动、Daily、Claim、VisitFriends、DijiangRewards、ReceiveProdManual、SwitchTeam、StashBackpack），ReadAllWiki 长时/IntelArchive 部分，Trial/环境监测导航阻塞；其余为静态资格/未跑（U3）。
 - 最小化窗口的 PrintWindow 本次为空白；后台/遮挡/长时供帧仍未系统验证（U4）。
 - `/screenshot` 预览在任务结束后可能返回上一帧缓存；CDP 页面是实时的。不要用预览缓存
   证明任务识别帧。
