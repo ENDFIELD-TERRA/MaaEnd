@@ -28,7 +28,7 @@
 | U0 凭据 | verified | WebView2 会话 DPAPI 保存/恢复 harness；真实过期会话恢复 4 cookies / 22 localStorage；秘密不进入仓库/日志 | [#2](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/2) |
 | U1 队列 | verified（严格 3/3，61 s） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
 | U2 核心任务 | partial | DailyRewards、Trial、AutoFight；Trial 战后任务级闭环 | [#5](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/5) |
-| U3 全量矩阵 | partial | 最终构建包 46/46 静态资格、0 override 缺失；动态 10 任务 + 长时证据；导航阻塞项单列 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
+| U3 全量矩阵 | partial | 最终构建包 46/46 静态资格、0 override 缺失；动态 11 任务 + 长时证据；导航阻塞项单列 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
 | U4 后台/长时 | partial | 非前台长时可运行（ReadAllWiki 19+ min 持续交互，前台非 shell）；最小化 PrintWindow 仍空白 | — |
 | U5 栈与验收 | verified（构建产物 5 任务；导航/矩阵残余） | 基于 upstream/pr-6841 的栈分支、install CI、构建产物冷启动 e2e、fork 同步与上游监控 | [#3](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/3) |
 
@@ -48,6 +48,8 @@
 - **安全 3 任务队列 Succeeded（2026-10-26 01:22–01:24，96 s）**：
   `ReceiveProdManual` → `SwitchTeam` → `StashBackpack`，三项全部 succeeded（无资源消耗）。
   最终构建包动态成功任务增至 8 项。
+- **AutoEcoFarm Succeeded（2026-10-26 03:07–03:08，96 s）**：重建包冷启动后三项农场子任务完成，
+  `AutoEcoFarmFinish`（FailureCollectorFinish）无失败；说明非 Trial 的开放世界任务路径可用。
 - **IntelArchive 长任务 Succeeded（2026-10-26 02:01–02:12，约 11 min）**：
   最终构建包冷启动后读取档案完成；旧会话 8 分钟预算内未完成，本次 30 分钟预算通过。
 - **`check` CI 通过（2026-10-26 02:07）**：基座增加 `CloudWebStartGame` 占位入口（17e3ecaf），
@@ -132,7 +134,7 @@
   下一任务能否从该菜单态恢复尚未验证。启动任务只负责冷启动，不负责暖会话恢复。
 - Trial 战后结果页被跳过、角色回大世界且不在演算提示附近；重导航在 `GotoTrialArena` 失败，
   Trial 任务级仍未 Succeeded（U2）。
-- 46 项任务中已有 10 项动态成功（启动、Daily、Claim、VisitFriends、DijiangRewards、ReceiveProdManual、SwitchTeam、StashBackpack、PullCountCalculator、IntelArchive），ReadAllWiki 长时/部分，Trial/环境监测导航阻塞；BakerEntry 在对话页循环、手动停止不计。其余为静态资格/未跑（U3）。
+- 46 项任务中已有 11 项动态成功（启动、Daily、Claim、VisitFriends、DijiangRewards、ReceiveProdManual、SwitchTeam、StashBackpack、PullCountCalculator、IntelArchive、AutoEcoFarm），ReadAllWiki 长时/部分，Trial/环境监测导航阻塞；BakerEntry 在对话页循环、手动停止不计。其余为静态资格/未跑（U3）。
 - 最小化窗口的 PrintWindow 本次为空白；后台/遮挡/长时供帧仍未系统验证（U4）。
 - `/screenshot` 预览在任务结束后可能返回上一帧缓存；CDP 页面是实时的。不要用预览缓存
   证明任务识别帧。
