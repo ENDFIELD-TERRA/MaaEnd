@@ -112,8 +112,10 @@
   （清空后重发）并在 CI 构建包复跑：pending 能清，但 4.8 s 内航向仍无变化（moved=0），
   仍在 3.72 m 超时；修复已回退。根因是末段停下后无法转向/楔死，不是 pending 记账。
   需要单独处理 MapNavigator 静止转向与脱困，不是 CloudWeb 或路线不可达。
-  另试 `heading_source:"camera"`（参数已传入）仍在 1.95 m / yaw 157° 失败，
-  `steering_on_camera=false`；三种无 C++ 变体均未通过，已停止盲试。
+  另试 `heading_source:"camera"`（参数已传入）仍在 1.95 m / yaw 157° 失败；
+  最后用 `TrialOfSwordmancyQuickTeleportStart` 强制走完传送链（起点受控在悬谷台），
+  prevpoint 终点仍在 2.32 m / yaw -140° 失败。起点漂移与终点假设均排除，
+  末段是控制/楔死；导航盲试结束，需录制绕行或控制层修复。
 - 上游 #6854（open）指出转场后约 750 ms 的输入忽略窗口；CloudWeb 上紧接转场的点击也需
   预留 pre_delay，后续任务适配时沿用。
 - Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；
