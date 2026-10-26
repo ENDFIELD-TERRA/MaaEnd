@@ -220,3 +220,13 @@
 - final6 的 Trial 转场探针失败是测试脚本人为留下好友界面导致 InWorld 误判，不是产品回归；
   真实 Trial 证据在 final5（63f34238）。干净会话可在日常重置后重验。
 - 未闭合：Env 水竹铃拐角、干净态 Trial 重验、46 项动态全量、最小化 PrintWindow、release 标签。
+
+## 2026-10-26 08:56 final6 10 任务队列全通过
+
+- 最终 CI 包 868e9af6（final6）上重跑 10 任务队列：01:36:14–01:56:09（约 20 min）10/10 Succeeded；
+  StartGame 因接手 Env 失败态耗时 8.5 min，其后 Daily/Claim/Visit/Dijiang/ReceiveProdManual/
+  SwitchTeam/StashBackpack/PullCountCalculator/IntelArchive 全部成功。
+- 报告：final6 `EVIDENCE/queue-report-cwfinal6q-20261026-013609.json`；shell f209cc24…、
+  cpp-algo 13f60e79… 与 CI 工件一致。
+- 仍开放：Env 水竹铃走廊 authored 走廊/路线改点、干净态 Trial 重验（当日演武已消耗）、
+  46 项动态全量、最小化 PrintWindow、正式 release 标签。

@@ -1336,7 +1336,7 @@
   },
   "cloudshell_2026_10_26": {
     "schema": "cloudweb-cloudshell/1",
-    "updated_at": "2026-10-26T08:22:00Z",
+    "updated_at": "2026-10-26T08:56:00Z",
     "status": {
       "architecture": "verified",
       "trial_navigation": "verified_on_final_ci_package",
@@ -1348,7 +1348,8 @@
       "nav_start_scene_reset": "verified",
       "env_modal_recovery": "verified",
       "env_final_approach": "open_dwell_watchdog",
-      "trial_transition_clean_state_revalidation": "pending"
+      "trial_transition_clean_state_revalidation": "pending",
+      "final_queue": "10_of_10_succeeded"
     },
     "change": {
       "summary": "Camera steering moved from SendInput/MouseLockFollow to a CloudShell look message.",
@@ -1378,11 +1379,13 @@
       "nav_reset": "friends UI nav 46 s; normal world nav 20 s with no reset",
       "env_diagnosis": "modal losses fixed by Esc retry (~2.7s x3); remaining failure is a 118-degree corridor corner at BambooWaterChimes where the agent is 2.5m off-route (target still 41m away), dwell_watchdog",
       "env_modal": "Esc retry recovered 3 modal/black-frame losses in ~2.7s",
-      "final6_state": "Trial transition probe on final6 blocked at regional-overview menu chain; same node passed on final5 before Env runs; needs clean session"
+      "final6_state": "Trial transition probe on final6 blocked at regional-overview menu chain; same node passed on final5 before Env runs; needs clean session",
+      "final6_queue": "10/10 tasks succeeded on final6 (report cwfinal6q, ~20 min; StartGame 8.5 min from prior failure state)",
+      "final6_binding": "shell f209cc24..., cpp-algo 13f60e79..., byte-identical to CI artifacts"
     },
     "open": [
-      "Authored/recorded corridor or route change for BambooWaterChimes corner",
-      "Clean-session Trial revalidation (test probe artificial friends UI caused InWorld false positive)",
+      "Authored/recorded corridor or route change for BambooWaterChimes corridor",
+      "Clean-session Trial revalidation after daily reset",
       "46-task dynamic matrix",
       "minimized PrintWindow",
       "release tag"
