@@ -29,7 +29,7 @@
 | U1 队列 | verified（严格 3/3，61 s） | 同一控制器顺序运行多个任务，失败隔离、状态可观测、Stop 可中断 | [#6](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/6) |
 | U2 核心任务 | partial | DailyRewards、Trial、AutoFight；Trial 战后任务级闭环 | [#5](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/5) |
 | U3 全量矩阵 | planned | 46 项 Windows 任务的 CloudWeb 资格/动态证据；有副作用任务按清单跳过 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
-| U4 后台/长时 | planned | 遮挡/最小化/长时供帧与任务稳定性；边界有证据 | — |
+| U4 后台/长时 | partial | 非前台长时可运行（ReadAllWiki 19+ min 持续交互，前台非 shell）；最小化 PrintWindow 仍空白 | — |
 | U5 栈与验收 | verified（构建产物 5 任务；导航/矩阵残余） | 基于 upstream/pr-6841 的栈分支、install CI、构建产物冷启动 e2e、fork 同步与上游监控 | [#3](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/3) |
 
 ## 已验证（2026-10-25）
@@ -42,6 +42,9 @@
   （真实云，taskId 级成功）。
 - Trial 的 `Fight` / `AutoFight` / `FightFinish` 节点级 **Succeeded**（有真实演算次数）。
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
+- **长时后台交互（2026-10-26 01:15）**：最终构建包上 `ReadAllWiki` 在非前台窗口连续
+  19+ 分钟点击/滚动未读百科页，前台窗口始终不是 CloudShell；仅因编排器 20 分钟上限停止，
+  任务仍在 Running。最小化窗口 PrintWindow 仍为空白的边界不变。
 - **构建产物冷启动 5 任务 Succeeded（2026-10-26 00:25–00:29，176 s）**：
   fork `install` workflow run 40247102256（ref `feat/cloudweb-6841-stack`）的
   `MaaEnd-win-x86_64-zip` 独立解包；统一 `go-service.exe` 以 pretask `--inject` 启动新外壳，
