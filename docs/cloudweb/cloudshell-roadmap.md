@@ -48,6 +48,8 @@
 - **安全 3 任务队列 Succeeded（2026-10-26 01:22–01:24，96 s）**：
   `ReceiveProdManual` → `SwitchTeam` → `StashBackpack`，三项全部 succeeded（无资源消耗）。
   最终构建包动态成功任务增至 8 项。
+- **`check` CI 通过（2026-10-26 02:07）**：基座增加 `CloudWebStartGame` 占位入口（17e3ecaf），
+  解决 maa-checker 在非 CloudWeb 控制器下报未知入口；check run 40257399337 success。
 - **46 项静态资格（最终构建包）**：46/46 入口节点存在，0 个 option override 节点缺失，
   节点集合 6029；CloudWeb 可用性 44 项显式声明 + `AutoEssence` 无 controller 字段（全控制器），
   仅 `CloseGamePC` 为 PC 专属。动态证据仍为 5 任务 + `ReadAllWiki` 长时/`IntelArchive` 部分；
