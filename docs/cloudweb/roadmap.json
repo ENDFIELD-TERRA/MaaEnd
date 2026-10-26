@@ -1336,11 +1336,11 @@
   },
   "cloudshell_2026_10_26": {
     "schema": "cloudweb-cloudshell/1",
-    "updated_at": "2026-10-26T08:18:00Z",
+    "updated_at": "2026-10-26T08:22:00Z",
     "status": {
       "architecture": "verified",
       "trial_navigation": "verified_on_final_ci_package",
-      "environment_monitoring": "open_task_flow_anti_stuck_dialog_and_photo_mode",
+      "environment_monitoring": "open_offroute_wedge_at_bamboowaterchimes_corridor",
       "dynamic_matrix": "partial_11_of_46",
       "release": "ci_package_verified_tag_pending",
       "queue_transition": "open_trial_after_intelarchive",
@@ -1376,13 +1376,13 @@
       "final_queue": "10/10 tasks succeeded (package 4321b05c)",
       "final_trial": "standalone Trial and friends-UI transition probe succeeded on 63f34238",
       "nav_reset": "friends UI nav 46 s; normal world nav 20 s with no reset",
-      "env_diagnosis": "actual loss frame shows the in-game unstuck dialog; another run shows photo-mode without minimap; nav-level SceneAnyEnterWorld/OCR cancel/OCR title+Esc all failed and were reverted",
+      "env_diagnosis": "modal losses fixed by Esc retry (~2.7s x3); remaining failure is a 118-degree corridor corner at BambooWaterChimes where the agent is 2.5m off-route (target still 41m away), dwell_watchdog",
       "env_modal": "Esc retry recovered 3 modal/black-frame losses in ~2.7s",
       "final6_state": "Trial transition probe on final6 blocked at regional-overview menu chain; same node passed on final5 before Env runs; needs clean session"
     },
     "open": [
-      "Clean-session Trial transition revalidation",
-      "EnvironmentMonitoring BambooWaterChimes 2.195m dwell_watchdog (route/terrain)",
+      "Authored/recorded corridor or route change for BambooWaterChimes corner",
+      "Clean-session Trial revalidation (test probe artificial friends UI caused InWorld false positive)",
       "46-task dynamic matrix",
       "minimized PrintWindow",
       "release tag"
