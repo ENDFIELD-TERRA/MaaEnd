@@ -30,7 +30,7 @@
 | U2 核心任务 | partial | DailyRewards、Trial、AutoFight；Trial 战后任务级闭环 | [#5](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/5) |
 | U3 全量矩阵 | planned | 46 项 Windows 任务的 CloudWeb 资格/动态证据；有副作用任务按清单跳过 | [#7](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/7) |
 | U4 后台/长时 | planned | 遮挡/最小化/长时供帧与任务稳定性；边界有证据 | — |
-| U5 栈与验收 | in_progress | 基于 upstream/pr-6841 的栈分支、MaaEnd/原生检查、release e2e、fork 同步与上游监控 | [#3](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/3) |
+| U5 栈与验收 | verified（构建产物 5 任务；导航/矩阵残余） | 基于 upstream/pr-6841 的栈分支、install CI、构建产物冷启动 e2e、fork 同步与上游监控 | [#3](https://github.com/ENDFIELD-TERRA/MaaEnd/issues/3) |
 
 ## 已验证（2026-10-25）
 
@@ -42,6 +42,11 @@
   （真实云，taskId 级成功）。
 - Trial 的 `Fight` / `AutoFight` / `FightFinish` 节点级 **Succeeded**（有真实演算次数）。
 - 非前台/被遮挡的正常窗口 PrintWindow 可抓完整页面；任务期间识别帧正常。
+- **构建产物冷启动 5 任务 Succeeded（2026-10-26 00:25–00:29，176 s）**：
+  fork `install` workflow run 40247102256（ref `feat/cloudweb-6841-stack`）的
+  `MaaEnd-win-x86_64-zip` 独立解包；统一 `go-service.exe` 以 pretask `--inject` 启动新外壳，
+  登录 profile 复制后冷启动 `CloudWebStartGame → DailyRewards → ClaimSimulationRewards →
+  VisitFriends → DijiangRewards`，五项全部 succeeded。构建产物 + 产品 pretask + 队列闭环。
 - **冷启动最终 5 任务严格队列 Succeeded（2026-10-25 16:45–16:47，141 s）**：
   pretask `--inject` 拉起全新 CloudShell → `CloudWebStartGame`（InWorld 门控）→
   `DailyRewards` → `ClaimSimulationRewards` → `VisitFriends` → `DijiangRewards`
@@ -86,10 +91,9 @@
 
 ## 未验证 / 边界（不得当作已通过）
 
-- 任务广度仍不足：真实云动态已覆盖启动、DailyRewards、ClaimSimulationRewards、VisitFriends；
-  EnvironmentMonitoring 的终端导航通过但任务点移动失败；Trial 到达末段 1.56 m 后
-  MapNavigator 动态恢复超时；DijiangRewards 因培养舱目标识别失败（任务特定，
-  与上游 #6854 的转场输入窗口同类）尚未通过；46 项矩阵未全量验证。
+- 任务广度：真实云动态已覆盖启动、DailyRewards、ClaimSimulationRewards、VisitFriends、
+  DijiangRewards（`SelectToGrow=DoNothing`）；EnvironmentMonitoring 终端导航通过但任务点移动失败；
+  Trial 到达末段 1.56 m 后 MapNavigator 动态恢复超时；46 项矩阵未全量验证。
 - MapNavigator 末段朝向/动态恢复是当前主要剩余阻塞（Trial 与野外任务点），
   与 CloudWeb 打印帧/输入架构无关；navmesh `deck_probe` 已确认 Trial 终点只有单一可走面
   （高 221.57，`on_surface:false`），不存在重叠 deck，`target_deck_y` 不适用；
@@ -104,7 +108,7 @@
   下一任务能否从该菜单态恢复尚未验证。启动任务只负责冷启动，不负责暖会话恢复。
 - Trial 战后结果页被跳过、角色回大世界且不在演算提示附近；重导航在 `GotoTrialArena` 失败，
   Trial 任务级仍未 Succeeded（U2）。
-- 46 项任务仅 DailyRewards/ClaimSimulationRewards/Trial 有真实云动态证据；其余为静态资格/未跑（U3）。
+- 46 项任务中已有启动、DailyRewards、ClaimSimulationRewards、VisitFriends、DijiangRewards、Trial/环境监测（部分）真实云动态证据；其余为静态资格/未跑（U3）。
 - 最小化窗口的 PrintWindow 本次为空白；后台/遮挡/长时供帧仍未系统验证（U4）。
 - `/screenshot` 预览在任务结束后可能返回上一帧缓存；CDP 页面是实时的。不要用预览缓存
   证明任务识别帧。
