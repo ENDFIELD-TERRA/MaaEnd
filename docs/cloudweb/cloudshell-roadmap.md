@@ -176,3 +176,14 @@
 - 同一队列内 Trial 紧接 IntelArchive 时在 `QuickTeleportStart` 的地区总览入口失败；
   属起始菜单态/队列编排问题，不是导航。EnvironmentMonitoring 仍有 `localization_lost_timeout`。
 - 未闭合：上述队列转场、Env 定位丢失、46 项动态全量、最小化 PrintWindow、正式 release 标签。
+
+## 2026-10-26 07:00 最终包 63f34238；Env 中段定位丢失仍开放
+
+- 最终包 `v0.0.0-ci.261026-63f34238`（install run 40279072318）：
+  `cloud-shell` 652e7c98…、`cpp-algo` 58c8d83a…，与 CI 工件逐字节一致。
+- 已验证：10 任务队列（4321b05c 包）全成功；独立 Trial 全链路；好友界面 → 快速传送
+  （ed26600b 前置复位）成功；导航首次取位失败 → 场景复位（63f34238）在好友界面下 46s
+  导航成功，正常大世界 20s 不触发复位。
+- EnvironmentMonitoring：起始好友界面已修复；中段拍摄区域仍出现 YOLO `None` 定位丢失，
+  中段盲复位实验每 ~13s 触发且不恢复，已回退。后续需抓实际丢失帧判断过渡/拍摄遮挡。
+- 未闭合：Env 中段、46 项动态全量、最小化 PrintWindow、正式 release 标签。

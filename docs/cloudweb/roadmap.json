@@ -1336,21 +1336,32 @@
   },
   "cloudshell_2026_10_26": {
     "schema": "cloudweb-cloudshell/1",
-    "updated_at": "2026-10-26T05:46:00Z",
+    "updated_at": "2026-10-26T07:00:00Z",
     "status": {
       "architecture": "verified",
       "trial_navigation": "verified_on_final_ci_package",
-      "environment_monitoring": "open_localization_loss",
+      "environment_monitoring": "open_mid_route_localization_loss",
       "dynamic_matrix": "partial_11_of_46",
       "release": "ci_package_verified_tag_pending",
-      "queue_transition": "open_trial_after_intelarchive"
+      "queue_transition": "open_trial_after_intelarchive",
+      "trial_queue_transition": "verified_on_final_ci_package",
+      "nav_start_scene_reset": "verified"
     },
     "change": {
       "summary": "Camera steering moved from SendInput/MouseLockFollow to a CloudShell look message.",
       "commit": "68609b5a",
       "follow_up": "98e39508 cross-platform guard",
       "mechanism": "CloudShell WM_APP look message -> page CDP mouseMoved (look marker + zero-return); cpp-algo detects MaaEnd.CloudShell and skips MouseLockFollow.",
-      "why": "SendInput relative moves do not reach WebView2 in the background; MouseLockFollow also takes over the user's cursor and window."
+      "why": "SendInput relative moves do not reach WebView2 in the background; MouseLockFollow also takes over the user's cursor and window.",
+      "commits": [
+        "68609b5a",
+        "98e39508",
+        "4321b05c",
+        "ed26600b",
+        "63f34238"
+      ],
+      "final_package": "v0.0.0-ci.261026-63f34238 (install run 40279072318)",
+      "final_package_binding": "cloud-shell 652e7c98..., cpp-algo 58c8d83a..., byte-identical to CI artifacts"
     },
     "evidence": {
       "authored_route": "8-point route, 35 s, final (1863.12, 2849.63), camRot 90->29 deg",
@@ -1358,12 +1369,12 @@
       "input_isolation": "no system cursor, window position, or foreground change",
       "final_package": "v0.0.0-ci.261026-4321b05c (install run 40272085096, all build/package jobs green)",
       "final_package_binding": "cloud-shell d5700e0f..., cpp-algo 71c4bc87..., byte-identical to CI artifacts",
-      "final_queue": "10/10 tasks succeeded (report cwfinal3)",
-      "final_trial": "standalone Trial succeeded (report cwfinal3t)"
+      "final_queue": "10/10 tasks succeeded (package 4321b05c)",
+      "final_trial": "standalone Trial and friends-UI transition probe succeeded on 63f34238",
+      "nav_reset": "friends UI nav 46 s; normal world nav 20 s with no reset"
     },
     "open": [
-      "Trial immediately after IntelArchive: QuickTeleportStart menu transition",
-      "EnvironmentMonitoring localization_lost_timeout",
+      "EnvironmentMonitoring mid-route localization loss (YOLO None in photo region)",
       "46-task dynamic matrix",
       "minimized PrintWindow",
       "release tag"
