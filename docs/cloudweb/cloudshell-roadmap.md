@@ -56,7 +56,10 @@
   节点集合 6029；CloudWeb 可用性 44 项显式声明 + `AutoEssence` 无 controller 字段（全控制器），
   仅 `CloseGamePC` 为 PC 专属。动态证据仍为 5 任务 + `ReadAllWiki` 长时/`IntelArchive` 部分；
   Trial/EnvironmentMonitoring 受导航末段阻塞。
-- **构建产物冷启动 5 任务 Succeeded（2026-10-26 00:25–00:29，176 s）**：
+- **重建产物冷启动 5 任务 Succeeded（2026-10-26 02:35–02:37，167 s，stack head 17e3ecaf）**：
+  新包含基座 `CloudWebStartGame` 占位，CloudWeb 附加资源覆盖为真实状态机；启动约 60 s，
+  非占位秒过。install run 40258057525 与 check run 40257399337 同 head，均为绿。
+- **构建产物冷启动 5 任务 Succeeded（2026-10-26 00:25–00:29，176 s，历史 run 40247102256）**：
   fork `install` workflow run 40247102256（ref `feat/cloudweb-6841-stack`）的
   `MaaEnd-win-x86_64-zip` 独立解包；统一 `go-service.exe` 以 pretask `--inject` 启动新外壳，
   登录 profile 复制后冷启动 `CloudWebStartGame → DailyRewards → ClaimSimulationRewards →
