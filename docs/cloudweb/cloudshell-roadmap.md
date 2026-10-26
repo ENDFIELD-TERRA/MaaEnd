@@ -230,3 +230,15 @@
   cpp-algo 13f60e79… 与 CI 工件一致。
 - 仍开放：Env 水竹铃走廊 authored 走廊/路线改点、干净态 Trial 重验（当日演武已消耗）、
   46 项动态全量、最小化 PrintWindow、正式 release 标签。
+
+## 2026-10-26 09:11 真实 IntelArchive→Trial 转场取证
+
+- 10 任务队列以 IntelArchive 结束后直接跑 Trial Coating（当日 Daily 已消耗）：
+  无前置时 QuickTeleportStart 失败（档案全屏界面挡住地区总览）；加两次盲 Esc 前置后，
+  链路进入地区总览并展开选剑演武（`__ScenePrivateMenuRegionalOverviewWulingExpandTrialOfSwordmancy`），
+  但仍在展开/选择步失败（Coating 模式/菜单交互差异）。
+- 盲 Esc 前置未验证 Daily 正常路径且可能把世界态弹成暂停菜单，已回退；final6 资源恢复 CI 工件，
+  stack 保持 868e9af6。结论：需要任务级全屏界面处理（识别档案/好友→关闭→严格入世界），
+  而不是快速传送前盲按 Esc。final6 的 10/10 队列证据有效。
+- 未闭合：任务级全屏处理与 Daily 干净态重验、Env 水竹铃走廊、46 项动态全量、最小化 PrintWindow、
+  release 标签。

@@ -1336,7 +1336,7 @@
   },
   "cloudshell_2026_10_26": {
     "schema": "cloudweb-cloudshell/1",
-    "updated_at": "2026-10-26T08:56:00Z",
+    "updated_at": "2026-10-26T09:11:00Z",
     "status": {
       "architecture": "verified",
       "trial_navigation": "verified_on_final_ci_package",
@@ -1344,7 +1344,7 @@
       "dynamic_matrix": "partial_11_of_46",
       "release": "ci_package_verified_tag_pending",
       "queue_transition": "open_trial_after_intelarchive",
-      "trial_queue_transition": "verified_on_final_ci_package",
+      "trial_queue_transition": "open_archive_fullscreen_and_expand_step",
       "nav_start_scene_reset": "verified",
       "env_modal_recovery": "verified",
       "env_final_approach": "open_dwell_watchdog",
@@ -1381,11 +1381,12 @@
       "env_modal": "Esc retry recovered 3 modal/black-frame losses in ~2.7s",
       "final6_state": "Trial transition probe on final6 blocked at regional-overview menu chain; same node passed on final5 before Env runs; needs clean session",
       "final6_queue": "10/10 tasks succeeded on final6 (report cwfinal6q, ~20 min; StartGame 8.5 min from prior failure state)",
-      "final6_binding": "shell f209cc24..., cpp-algo 13f60e79..., byte-identical to CI artifacts"
+      "final6_binding": "shell f209cc24..., cpp-algo 13f60e79..., byte-identical to CI artifacts",
+      "trial_transition": "post-IntelArchive Coating run: without cleanup fails at QuickTeleportStart (archive UI); blind-Esc prelude reaches regional overview and expand-trial but fails at expand/select; prelude reverted"
     },
     "open": [
-      "Authored/recorded corridor or route change for BambooWaterChimes corridor",
-      "Clean-session Trial revalidation after daily reset",
+      "Task-level fullscreen UI handling (archive/friends) then strict in-world check",
+      "Authored/recorded corridor for BambooWaterChimes",
       "46-task dynamic matrix",
       "minimized PrintWindow",
       "release tag"
