@@ -98,8 +98,10 @@
   与 CloudWeb 打印帧/输入架构无关；navmesh `deck_probe` 已确认 Trial 终点只有单一可走面
   （高 221.57，`on_surface:false`），不存在重叠 deck，`target_deck_y` 不适用；
   `route` 查询 start→goal 为 reachable / same_component / 1.62 m，但运行在起点 1.56 m 处
-  `steer_heading` 等于当前朝向、未转向，dynamic recovery 超时。需要单独处理
-  MapNavigator 转向死锁/拐角，不是 CloudWeb 或路线不可达。
+  `steer_heading` 等于当前朝向、未转向，dynamic recovery 超时。已试作废 stale pending
+  （清空后重发）并在 CI 构建包复跑：pending 能清，但 4.8 s 内航向仍无变化（moved=0），
+  仍在 3.72 m 超时；修复已回退。根因是末段停下后无法转向/楔死，不是 pending 记账。
+  需要单独处理 MapNavigator 静止转向与脱困，不是 CloudWeb 或路线不可达。
 - 上游 #6854（open）指出转场后约 750 ms 的输入忽略窗口；CloudWeb 上紧接转场的点击也需
   预留 pre_delay，后续任务适配时沿用。
 - Escape 打开的是上次标签（地图），但右侧行动手册/地区建设按钮实际存在，菜单导航已通过；
