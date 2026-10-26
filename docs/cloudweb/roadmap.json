@@ -1277,7 +1277,7 @@
   },
   "cloudshell_2026_10_25": {
     "schema": "cloudweb-cloudshell-roadmap/1",
-    "updated_at": "2026-10-25T23:51:00Z",
+    "updated_at": "2026-10-26T00:29:00Z",
     "single_source": "docs/cloudweb/cloudshell-roadmap.md",
     "epic": 8,
     "issues": {
@@ -1318,18 +1318,19 @@
       "scene recovery stable-frame wait fixes Claim-after-Daily menu transition failure",
       "DijiangRewards Succeeded with SelectToGrow=DoNothing",
       "navmesh deck_probe: Trial target has a single deck (221.57, on_surface false); target_deck_y not applicable",
-      "route probe: Trial final segment reachable/same component (1.62m); runtime failure is steering (steer_heading == current heading), not an unreachable route"
+      "route probe: Trial final segment reachable/same component (1.62m); runtime failure is steering (steer_heading == current heading), not an unreachable route",
+      "built-package cold-start 5-task queue Succeeded in 176s from install CI run 40247102256 (unified go-service --inject + merged overlay)"
     ],
     "open": [
       "Trial task-level post-fight",
       "46-task dynamic matrix",
       "background/obscured long-run",
-      "final release e2e",
       "task-queue end state can be simulation space/operational manual; next-task scene recovery from that state not yet verified",
       "startup task is cold-start only; it does not recover a warm session left in menus",
       "transition input-ignore window (~750ms, upstream #6854) to apply to CloudWeb task clicks",
       "MapNavigator final approach (dynamic recovery/yaw) blocks Trial and wild mission points",
-      "DijiangRewards default SelectToGrow=Any still fails when the growth chamber has no target"
+      "DijiangRewards default SelectToGrow=Any still fails when the growth chamber has no target",
+      "production release-tag e2e not run (CI package build verified)"
     ],
     "note": "The CW0-CW10 snapshot below is historical and superseded."
   }
