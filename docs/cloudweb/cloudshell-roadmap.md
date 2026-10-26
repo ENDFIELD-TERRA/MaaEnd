@@ -242,3 +242,12 @@
   而不是快速传送前盲按 Esc。final6 的 10/10 队列证据有效。
 - 未闭合：任务级全屏处理与 Daily 干净态重验、Env 水竹铃走廊、46 项动态全量、最小化 PrintWindow、
   release 标签。
+
+## 2026-10-26 09:31 final7（f53316e5）全屏关闭修复绑定通过
+
+- CI run 40298098821 全绿；final7 包 shell `d5755dd7…`、cpp-algo `7564acbf…`，与 CI 工件一致。
+- final7 好友探针：StartGame 81s → VisitFriendsEnter → QuickTeleportStart（点好友 X → 入世界 →
+  地区总览链）Succeeded，QuickTeleportStart 20s（report cwfinal7a）。
+- 真实 IntelArchive→Trial(Coating) 仍失败在 Coating 展开/选择（模式特定）；全屏档案/好友关闭本身已验证。
+  Daily 产品路径待日常重置后干净重验；10/10 队列证据在 final6。
+- 未闭合：Daily 重验、Coating 展开/选择、Env 水竹铃走廊、46 动态、最小化 PrintWindow、release 标签。

@@ -1336,7 +1336,7 @@
   },
   "cloudshell_2026_10_26": {
     "schema": "cloudweb-cloudshell/1",
-    "updated_at": "2026-10-26T09:11:00Z",
+    "updated_at": "2026-10-26T09:31:00Z",
     "status": {
       "architecture": "verified",
       "trial_navigation": "verified_on_final_ci_package",
@@ -1349,7 +1349,10 @@
       "env_modal_recovery": "verified",
       "env_final_approach": "open_dwell_watchdog",
       "trial_transition_clean_state_revalidation": "pending",
-      "final_queue": "10_of_10_succeeded"
+      "final_queue": "10_of_10_succeeded",
+      "trial_fullscreen_close_transition": "verified",
+      "trial_coating_expand": "open_mode_specific",
+      "trial_daily_clean_revalidation": "pending_daily_reset"
     },
     "change": {
       "summary": "Camera steering moved from SendInput/MouseLockFollow to a CloudShell look message.",
@@ -1363,10 +1366,11 @@
         "4321b05c",
         "ed26600b",
         "63f34238",
-        "868e9af6"
+        "868e9af6",
+        "f53316e5"
       ],
-      "final_package": "v0.0.0-ci.261026-868e9af6 (install run 40288912687)",
-      "final_package_binding": "cloud-shell f209cc24..., cpp-algo 13f60e79..., byte-identical to CI artifacts"
+      "final_package": "v0.0.0-ci.261026-f53316e5 (install run 40298098821)",
+      "final_package_binding": "cloud-shell d5755dd7..., cpp-algo 7564acbf..., byte-identical to CI artifacts"
     },
     "evidence": {
       "authored_route": "8-point route, 35 s, final (1863.12, 2849.63), camRot 90->29 deg",
@@ -1382,11 +1386,14 @@
       "final6_state": "Trial transition probe on final6 blocked at regional-overview menu chain; same node passed on final5 before Env runs; needs clean session",
       "final6_queue": "10/10 tasks succeeded on final6 (report cwfinal6q, ~20 min; StartGame 8.5 min from prior failure state)",
       "final6_binding": "shell f209cc24..., cpp-algo 13f60e79..., byte-identical to CI artifacts",
-      "trial_transition": "post-IntelArchive Coating run: without cleanup fails at QuickTeleportStart (archive UI); blind-Esc prelude reaches regional overview and expand-trial but fails at expand/select; prelude reverted"
+      "trial_transition": "post-IntelArchive Coating run: without cleanup fails at QuickTeleportStart (archive UI); blind-Esc prelude reaches regional overview and expand-trial but fails at expand/select; prelude reverted",
+      "final7_probe": "StartGame -> VisitFriendsEnter -> fullscreen close (X) -> regional overview Succeeded (report cwfinal7a)",
+      "final7_queue": "10/10 tasks succeeded on final6 (same source except the Trial transition resource)"
     },
     "open": [
-      "Task-level fullscreen UI handling (archive/friends) then strict in-world check",
-      "Authored/recorded corridor for BambooWaterChimes",
+      "Trial Daily clean revalidation after daily reset",
+      "Trial Coating expand/select (mode-specific)",
+      "Authored route for BambooWaterChimes Env corridor",
       "46-task dynamic matrix",
       "minimized PrintWindow",
       "release tag"
