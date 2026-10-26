@@ -1336,11 +1336,11 @@
   },
   "cloudshell_2026_10_26": {
     "schema": "cloudweb-cloudshell/1",
-    "updated_at": "2026-10-26T07:00:00Z",
+    "updated_at": "2026-10-26T07:35:00Z",
     "status": {
       "architecture": "verified",
       "trial_navigation": "verified_on_final_ci_package",
-      "environment_monitoring": "open_mid_route_localization_loss",
+      "environment_monitoring": "open_task_flow_anti_stuck_dialog_and_photo_mode",
       "dynamic_matrix": "partial_11_of_46",
       "release": "ci_package_verified_tag_pending",
       "queue_transition": "open_trial_after_intelarchive",
@@ -1371,10 +1371,11 @@
       "final_package_binding": "cloud-shell d5700e0f..., cpp-algo 71c4bc87..., byte-identical to CI artifacts",
       "final_queue": "10/10 tasks succeeded (package 4321b05c)",
       "final_trial": "standalone Trial and friends-UI transition probe succeeded on 63f34238",
-      "nav_reset": "friends UI nav 46 s; normal world nav 20 s with no reset"
+      "nav_reset": "friends UI nav 46 s; normal world nav 20 s with no reset",
+      "env_diagnosis": "actual loss frame shows the in-game unstuck dialog; another run shows photo-mode without minimap; nav-level SceneAnyEnterWorld/OCR cancel/OCR title+Esc all failed and were reverted"
     },
     "open": [
-      "EnvironmentMonitoring mid-route localization loss (YOLO None in photo region)",
+      "EnvironmentMonitoring task-flow: exit photo/settings before nav; handle unstuck dialog (cancel or teleport) then relocalize",
       "46-task dynamic matrix",
       "minimized PrintWindow",
       "release tag"
