@@ -104,9 +104,8 @@
         },
         "action": "ClickKey",
         "key": 27,
-        // 云画面 Escape 后菜单收起约 1s；下一拍会在动画中识别失败，保留固定等待
-        "post_delay": 1500,
         "rate_limit": 0,
+        // Escape 后由 next 的菜单列表成功节点确认，不再固定等待
         "next": [
             "__SceneImageCheck",
             "__ScenePrivateAnyEnterMenuListSuccess"
@@ -149,12 +148,15 @@
                             400,
                             720
                         ],
+                        // 完整文本：行动手册 / 行動手冊 / Operational Manual / 案内所 / 작전 매뉴얼。
+                        // 云画面 OCR 可能只返回单词片段；片段匹配跳过自动 i18n 展开。
                         "expected": [
+                            // @i18n-skip
                             "Operational Manual",
                             "Operational",
                             "Manual",
                             "行动手册",
-                            "行動手",
+                            "行動手冊",
                             "案内所",
                             "작전 매뉴얼"
                         ]
@@ -170,7 +172,10 @@
                     300,
                     100
                 ],
+                // 完整文本：行动手册 / 行動手冊 / Operational Manual / 案内所 / 작전 매뉴얼。
+                // 云画面 OCR 可能只返回单词片段；片段匹配跳过自动 i18n 展开。
                 "expected": [
+                    // @i18n-skip
                     "行动手册",
                     "行動手冊",
                     "Operational Manual",
@@ -199,7 +204,10 @@
                     960,
                     80
                 ],
+                // 完整文本：影拓丰碑 / 影拓豐碑 / Umbral Monument / 映像の記念碑 / 그림자 이정표。
+                // 云画面 OCR 可能只返回单词片段；片段匹配跳过自动 i18n 展开。
                 "expected": [
+                    // @i18n-skip
                     "Umbral Monument",
                     "Umbral",
                     "Monument",
@@ -229,14 +237,15 @@
                     400,
                     720
                 ],
+                // 完整文本：地区建设 / 地區建設 / Regional Development / 地域建設 / 지역 건설。
+                // 云画面 OCR 可能只返回单词片段；片段匹配跳过自动 i18n 展开。
                 "expected": [
+                    // @i18n-skip
                     "地区建设",
                     "地區建設",
                     "(?i)Regional\\s*Development",
                     "地域建設",
-                    "지역 건설",
-                    "Regional",
-                    "Development"
+                    "지역 건설"
                 ]
             }
         ],
@@ -252,15 +261,17 @@
                     ],
                     "repeat_count": 2,
                     "interval_ms": 3500
-                }
+                },
+                // 注意：共享的 RepeatUntilFoundAction 目前不会把 target_offset 转发给内部 Click，
+                // 这里保留偏移意图并保证 schema 合法；若要真正生效需扩展该共享 Action。
+                "target_offset": [
+                    -22,
+                    -17,
+                    0,
+                    0
+                ]
             }
         },
-        "target_offset": [
-            -22,
-            -17,
-            0,
-            0
-        ],
         "next": [
             "__ScenePrivateMenuRegionalDevelopmentUnlockClose",
             "__ScenePrivateAnyEnterMenuRegionalDevelopmentSuccess"
@@ -275,11 +286,18 @@
             258,
             136
         ],
+        "roi_offset": [
+            0,
+            0,
+            258,
+            0
+        ],
+        // 完整文本：事务总览 / 事務總覽 / Regional Overview / 業務一覧；交给 i18n 脚本展开。
         "expected": [
             "事务总览",
             "事務總覽",
-            "(?i)Regional Overview",
-            "Overview"
+            "(?i)Regional\\s*Overview",
+            "業務一覧"
         ],
         "pre_delay": 0,
         "action": "Click",
@@ -407,48 +425,69 @@
         "any_of": [
             {
                 "recognition": "OCR",
-                "roi": [0, 360, 1280, 360],
-                "expected": ["取消", "Cancel", "cancel"],
+                "roi": [
+                    0,
+                    360,
+                    1280,
+                    360
+                ],
+                "expected": [
+                    "取消",
+                    "Cancel",
+                    "cancel"
+                ],
                 "threshold": 0.8
             },
             {
                 "recognition": "And",
-                "all_of": ["GrayButtonBackground", "__GrayCancelButtonIcon"],
+                "all_of": [
+                    "GrayButtonBackground",
+                    "__GrayCancelButtonIcon"
+                ],
                 "box_index": 1
             }
         ]
     },
     // 云画面转场/战斗加载明显慢于本地客户端；Trial 链统一放宽识别超时到 60s，
     // 仍由 next 识别推进，不是业务硬等待。
-    "TrialOfSwordmancyEnterTrialMenu": { "timeout": 60000 },
-    "TrialOfSwordmancyEnterTrialMenu2": { "timeout": 60000 },
+    "TrialOfSwordmancyEnterTrialMenu": {"timeout": 60000},
     // 队列里紧接 IntelArchive 等全屏菜单时，好友列表会挡住地区总览链；
     // 快速传送前先走通用入世界复位，再进事务总览。
     // 拍照模式/画面设置可能残留到下一个终端；切换终端前先回大世界再进菜单链
     "EnvironmentMonitoringGoToOutskirtsMonitoringTerminal": {
         "action": "Custom",
         "custom_action": "SubTask",
-        "custom_action_param": { "sub": ["SceneAnyEnterWorld"] }
+        "custom_action_param": {"sub": ["SceneAnyEnterWorld"]}
     },
     "EnvironmentMonitoringGoToMarkerStoneMonitoringTerminal": {
         "action": "Custom",
         "custom_action": "SubTask",
-        "custom_action_param": { "sub": ["SceneAnyEnterWorld"] }
+        "custom_action_param": {"sub": ["SceneAnyEnterWorld"]}
     },
     // 全屏菜单（档案/好友等）带关闭按钮；快速传送前点掉它们再严格入世界
     "CloudWebNormalizeStart": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "next": ["CloudWebCloseFullscreen", "CloudWebEnterWorld"]
+        "next": [
+            "CloudWebCloseFullscreen",
+            "CloudWebEnterWorld"
+        ]
     },
     "CloudWebCloseFullscreen": {
+        "max_hit": 6,
         "recognition": "And",
         "all_of": ["CloseButtonType1"],
         "action": "Click",
-        // 点掉全屏菜单的 X 后留 400ms 让遮罩消失，避免同帧重复点击
-        "post_delay": 400,
-        "max_hit": 6,
-        "next": ["CloudWebCloseFullscreen", "CloudWebEnterWorld"]
+        // 点掉全屏菜单的 X 后等按钮区域稳定，再决定是否继续点
+        "post_wait_freezes": {
+            "time": 150,
+            "target": "CloseButtonType1",
+            "timeout": 1500
+        },
+        "next": [
+            "CloudWebCloseFullscreen",
+            "CloudWebEnterWorld"
+        ]
     },
     "CloudWebEnterWorld": {
         "recognition": "DirectHit",
@@ -464,20 +503,20 @@
         }
     },
     // 同 Trial 链统一放宽；云画面战斗/加载明显慢于本地客户端。
-    "TrialOfSwordmancyClickTrialTrigger": { "timeout": 60000 },
-    "__ScenePrivateTrialOfSwordmancyEnterWorld": { "timeout": 60000 },
-    "__ScenePrivateTrialOfSwordmancyEnterWorldConfirm": { "timeout": 60000 },
-    "TrialOfSwordmancyDailyMain": { "timeout": 60000 },
-    "TrialOfSwordmancyDailyRecognizeDeck": { "timeout": 60000 },
-    "TrialOfSwordmancyEnsureFirstCard": { "timeout": 60000 },
-    "TrialOfSwordmancyDrawCard": { "timeout": 60000 },
-    "TrialOfSwordmancyDoDoubleReward": { "timeout": 60000 },
-    "TrialOfSwordmancyDecide": { "timeout": 60000 },
-    "TrialOfSwordmancyAbandonPopupRecognize": { "timeout": 60000 },
-    "TrialOfSwordmancyAbandonPopupCancel": { "timeout": 60000 },
-    "TrialOfSwordmancyStartTrial": { "timeout": 60000 },
-    "TrialOfSwordmancyPrepareTeam": { "timeout": 60000 },
-    "TrialOfSwordmancyFight": { "timeout": 60000 },
+    "TrialOfSwordmancyClickTrialTrigger": {"timeout": 60000},
+    "__ScenePrivateTrialOfSwordmancyEnterWorld": {"timeout": 60000},
+    "__ScenePrivateTrialOfSwordmancyEnterWorldConfirm": {"timeout": 60000},
+    "TrialOfSwordmancyDailyMain": {"timeout": 60000},
+    "TrialOfSwordmancyDailyRecognizeDeck": {"timeout": 60000},
+    "TrialOfSwordmancyEnsureFirstCard": {"timeout": 60000},
+    "TrialOfSwordmancyDrawCard": {"timeout": 60000},
+    "TrialOfSwordmancyDoDoubleReward": {"timeout": 60000},
+    "TrialOfSwordmancyDecide": {"timeout": 60000},
+    "TrialOfSwordmancyAbandonPopupRecognize": {"timeout": 60000},
+    "TrialOfSwordmancyAbandonPopupCancel": {"timeout": 60000},
+    "TrialOfSwordmancyStartTrial": {"timeout": 60000},
+    "TrialOfSwordmancyPrepareTeam": {"timeout": 60000},
+    "TrialOfSwordmancyFight": {"timeout": 60000},
     "TrialOfSwordmancyFightFinish": {
         "timeout": 60000,
         "next": [
@@ -488,22 +527,64 @@
         ]
     },
     "TrialOfSwordmancyWorldReEnterDaily": {
-        "desc": "CloudWeb：战斗已结束、结果页被跳过且角色已回大世界时，以本次演算完成为安全终态结束任务；不重导航，不宣称识别到结果页",
+        "desc": "CloudWeb：战斗已结束、结果页被跳过且角色已回大世界时，以本次演算完成为安全终态结束任务；不重导航，不宣称识别到结果页，也不保证奖励已入账",
         "recognition": "And",
         "all_of": ["InWorld"],
-        // 战斗结束到回大世界的过渡约 1s；等 InWorld 稳定再结束，避免把战斗中误判为终态
-        "pre_delay": 1200,
+        "action": "DoNothing",
+        // 回大世界后 HUD 仍在加载；等 HUD 区域稳定，再由确认节点复核一次 InWorld
+        "post_wait_freezes": {
+            "time": 300,
+            "target": [
+                70,
+                80,
+                70,
+                60
+            ],
+            "timeout": 2000
+        },
+        "next": ["TrialOfSwordmancyWorldReEnterDailyConfirm"]
+    },
+    "TrialOfSwordmancyWorldReEnterDailyConfirm": {
+        "desc": "CloudWeb：HUD 稳定后再次确认仍在大世界，才判定本次演算完成",
+        "recognition": "And",
+        "all_of": ["InWorld"],
         "action": "DoNothing",
         "next": []
     },
     "TrialOfSwordmancyWorldReEnterTrial": {
         "desc": "CloudWeb：演算结果页被跳过、角色已回到大世界时，点击场景内的进入演算提示",
         "recognition": "OCR",
-        "roi": [840, 430, 260, 80],
-        "expected": ["进入演算", "进入自由演算", "自由演算"],
+        "roi": [
+            840,
+            430,
+            260,
+            80
+        ],
+        "roi_offset": [
+            0,
+            0,
+            44,
+            0
+        ],
+        "expected": [
+            "进入演算",
+            "進入演算",
+            "(?i)Start\\s*Trial",
+            "演算開始",
+            "进入自由演算",
+            "進入自由演算",
+            "(?i)Start\\s*Free\\s*Trial",
+            "自由演算開始",
+            "自由演算",
+            "(?i)Free\\s*Trial"
+        ],
         "action": "Click",
-        // 点击进入演算后云画面加载较慢，留出确认时间；下一节点仍会重新识别
-        "post_delay": 1000,
+        // 点击后云画面加载较慢；等演算菜单出现再交给 TrialOfSwordmancyMain
+        "post_wait_freezes": {
+            "time": 200,
+            "target": "TrialOfSwordmancyInTrialMenu",
+            "timeout": 5000
+        },
         "next": ["TrialOfSwordmancyMain"]
     },
     "TrialOfSwordmancyOverviewViewPosition": {
@@ -547,26 +628,27 @@
             180,
             60
         ],
+        // 完整文本：前往传送 / 前往傳送 / Quick Teleport（JP/KR 译名在语言表中不一致，保持人工维护）。
+        // 云画面 OCR 可能只返回单词片段；片段匹配跳过自动 i18n 展开。
         "expected": [
+            // @i18n-skip
             "前往传送",
             "前往傳送",
-            "(?i)Quick Teleport",
-            "Teleport"
+            "(?i)Quick\\s*Teleport"
         ],
         "pre_delay": 0,
         "post_delay": 0,
         "rate_limit": 0
     },
     // 云上地图切换/传送转场明显慢于本地；默认 20s 会在“其他地图跳转中”时超时
-    "__ScenePrivateMapAnyEnterMapWulingMarkerStone": { "timeout": 60000 },
-    "__ScenePrivateMapAnyEnterMapWulingMarkerStoneSuccess": { "timeout": 60000 },
-    "__ScenePrivateMapOverviewEnterMapWulingMarkerStone": { "timeout": 60000 },
-    "__ScenePrivateMapOverviewSwitchMapOverviewWuling": { "timeout": 60000 },
-    "__ScenePrivateMapWulingMarkerStoneEnterWorldAnchorWithPick": { "timeout": 60000 },
-    "__ScenePrivateMapWulingMarkerStoneEnterWorldWulingMarkerStoneCloudrestGrotto": { "timeout": 60000 },
-    "__ScenePrivateMapTeleportSuccess": { "timeout": 60000 },
-    "SceneMapLayerSwitchToMain": { "timeout": 60000 },
-    "__ScenePrivateMapZoomOut": { "timeout": 60000 },
+    "__ScenePrivateMapAnyEnterMapWulingMarkerStone": {"timeout": 60000},
+    "__ScenePrivateMapOverviewEnterMapWulingMarkerStone": {"timeout": 60000},
+    "__ScenePrivateMapOverviewSwitchMapOverviewWuling": {"timeout": 60000},
+    "__ScenePrivateMapWulingMarkerStoneEnterWorldAnchorWithPick": {"timeout": 60000},
+    "__ScenePrivateMapWulingMarkerStoneEnterWorldWulingMarkerStoneCloudrestGrotto": {"timeout": 60000},
+    "__ScenePrivateMapTeleportSuccess": {"timeout": 60000},
+    "SceneMapLayerSwitchToMain": {"timeout": 60000},
+    "__ScenePrivateMapZoomOut": {"timeout": 60000},
     // CloudWeb 地图底部的“地区总览”按钮；基座按帝江/其他区域模板进入总览，云画面不匹配
     "__ScenePrivateMapAnyEnterMapOverview": {
         "next": [
@@ -577,10 +659,51 @@
     },
     "CloudWebMapEnterOverview": {
         "recognition": "OCR",
-        "roi": [1020, 630, 240, 70],
-        "expected": ["地区总览", "(?i)Region Overview"],
+        "roi": [
+            1020,
+            630,
+            240,
+            70
+        ],
+        "roi_offset": [
+            0,
+            0,
+            20,
+            0
+        ],
+        // 完整文本：地区总览 / 地區總覽 / Region Overview / エリア一覧；交给 i18n 脚本展开。
+        "expected": [
+            "地区总览",
+            "地區總覽",
+            "(?i)Region\\s*Overview",
+            "エリア一覧"
+        ],
         "action": "Click",
-        // 点击地区总览后地图界面切换约 0.8s，下一节点重新识别
-        "post_delay": 800
+        "next": ["CloudWebMapOverviewEntered"]
+    },
+    "CloudWebMapOverviewEntered": {
+        "desc": "CloudWeb：地区总览已打开（按钮消失即成功）",
+        "recognition": "OCR",
+        "roi": [
+            1020,
+            630,
+            240,
+            70
+        ],
+        "roi_offset": [
+            0,
+            0,
+            20,
+            0
+        ],
+        "expected": [
+            "地区总览",
+            "地區總覽",
+            "(?i)Region\\s*Overview",
+            "エリア一覧"
+        ],
+        "inverse": true,
+        "action": "DoNothing",
+        "next": []
     }
 }
