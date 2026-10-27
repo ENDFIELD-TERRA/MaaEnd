@@ -45,7 +45,24 @@ func run() bool {
 		return false
 	}
 
-	process, err := startDetached(exePath)
+	// 登录后自动点击「开始游戏」的注入脚本；缺失时仅告警，不阻塞 pretask
+	injectPath := fsutil.OutputPath("resource_cloud_web", "scripts", "cloud_start.js")
+	var shellArgs []string
+	if _, err := os.Stat(injectPath); err != nil {
+		log.Warn().
+			Err(err).
+			Str("component", component).
+			Str("path", injectPath).
+			Msg("cloud shell inject script not found, starting without it")
+	} else {
+		shellArgs = []string{"--inject", injectPath}
+		log.Info().
+			Str("component", component).
+			Str("path", injectPath).
+			Msg("cloud shell inject script enabled")
+	}
+
+	process, err := startDetached(exePath, shellArgs)
 	if err != nil {
 		log.Error().
 			Err(err).
@@ -100,10 +117,10 @@ func run() bool {
 }
 
 // startDetached 启动外壳并让它活过 pretask：脱离控制台与进程组，不继承 MXU 读取 pretask 输出的管道。
-// 工作目录设为安装目录，外壳的日志与登录数据落在 debug/、cache/ 下。
-func startDetached(exePath string) (*os.Process, error) {
+// 工作目录设为安装目录，外壳的日志与登录数据落在 debug/、cache/ 下。args 为传给外壳的额外命令行参数。
+func startDetached(exePath string, args []string) (*os.Process, error) {
 	start := func(flags uint32) (*os.Process, error) {
-		cmd := exec.Command(exePath)
+		cmd := exec.Command(exePath, args...)
 		cmd.Dir = fsutil.OutputPath()
 		cmd.SysProcAttr = &syscall.SysProcAttr{CreationFlags: flags}
 		if err := cmd.Start(); err != nil {

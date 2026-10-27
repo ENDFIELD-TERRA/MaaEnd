@@ -2237,6 +2237,8 @@
     "task.CloseGame.label": "❌關閉遊戲（安卓端）",
     "task.CloseGamePC.description": "關閉遊戲程序。已加入本任務時，無需再用結束程序任務結束 Endfield.exe",
     "task.CloseGamePC.label": "❌關閉遊戲（PC）",
+    "task.CloudWebStartGame.description": "在 CloudWeb 遊戲畫面中，從標題畫面或月卡獎勵畫面推進到開放世界，供任務佇列在其他雲端任務前先行執行。",
+    "task.CloudWebStartGame.label": "☁️雲端遊戲啟動至大世界",
     "task.Crafting.description": "自動製作一個應急食藥",
     "task.Crafting.label": "🧪簡易製作",
     "task.CreditShopping.auto_get_credits": "信用點不足，嘗試從帝江號會客室取得",

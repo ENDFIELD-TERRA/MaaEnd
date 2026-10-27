@@ -220,6 +220,8 @@
         // pretask
         "tasks/pretasks/LaunchGamePC.json",
         "tasks/pretasks/LaunchCloudWeb.json",
+        // CloudWeb 启动任务（other_menu 组）
+        "tasks/CloudWebStartGame.json",
         // group: regional_development
         "tasks/OutpostTrading.json",
         "tasks/SeizeDeliveryJobs.json",
