@@ -1,0 +1,182 @@
+{
+    // CloudWeb 启动任务：把游戏流页面从登录/落地页/启动等待/标题/月卡推进到开放大世界，
+    // 供队列在其他云任务前先行执行。依赖 LaunchCloudWeb pretask 已打开 CloudShell 窗口，
+    // 且 cloud_start.js 在被注入后只解除「开始游戏」按钮上的空文本透明遮罩、不碰登录弹窗。
+    // 所有识别基于 1280x720 客户区；不使用假帧，到点判定复用主资源 InWorld 节点。
+    "CloudWebStartGame": {
+        "desc": "CloudWeb：等待登录/启动/标题/月卡推进到开放大世界",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "DirectHit"
+        },
+        // 云端排队/启动可能很久；点击节点回到本节点后重新计时
+        "timeout": 600000,
+        "action": {
+            "type": "DoNothing"
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": [
+            "CloudWebLoginClick",
+            "CloudWebAckClick",
+            "CloudWebRetryClick",
+            "CloudWebStartingWait",
+            "CloudWebStartButtonClick",
+            "CloudWebTitleClick",
+            "CloudWebMonthlyClick",
+            "CloudWebWorldReady"
+        ]
+    },
+    "CloudWebLoginClick": {
+        "desc": "CloudWeb：SDK 快速登录弹窗，识别说明文字并点击固定登录按钮",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [400, 340, 600, 110],
+                "expected": ["快速登录", "您可使用当前鹰角账号"]
+            }
+        },
+        "timeout": 60000,
+        "action": {
+            "type": "Click",
+            "param": {
+                "target": [620, 396, 40, 40]
+            }
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": ["CloudWebStartGame"]
+    },
+    "CloudWebAckClick": {
+        "desc": "CloudWeb：数据/提示弹窗，点击「知道了」",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [0, 0, 1280, 720],
+                "expected": ["知道了"]
+            }
+        },
+        "timeout": 60000,
+        "action": {
+            "type": "Click"
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": ["CloudWebStartGame"]
+    },
+    "CloudWebRetryClick": {
+        "desc": "CloudWeb：连接超时提示，点击「重试连接」",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [0, 0, 1280, 720],
+                "expected": ["重试连接"]
+            }
+        },
+        "timeout": 60000,
+        "action": {
+            "type": "Click"
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": ["CloudWebStartGame"]
+    },
+    "CloudWebStartingWait": {
+        "desc": "CloudWeb：游戏启动中/排队/连接超时，保持等待，不重复点击",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [0, 0, 1280, 720],
+                "expected": ["游戏启动中", "请耐心等待", "正在排队", "连接服务器超时", "数据正在处理中", "游戏已重连", "正在连接"]
+            }
+        },
+        "timeout": 60000,
+        "action": {
+            "type": "DoNothing"
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": ["CloudWebStartGame"]
+    },
+    "CloudWebStartButtonClick": {
+        "desc": "CloudWeb：落地页「开始游戏」，按 OCR 框点击（cloud_start.js 已解除空文本遮罩）",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [700, 540, 500, 100],
+                "expected": ["开始游戏"]
+            }
+        },
+        "timeout": 60000,
+        "action": {
+            "type": "Click"
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": ["CloudWebStartGame"]
+    },
+    "CloudWebTitleClick": {
+        "desc": "CloudWeb：点击标题界面「点击任意位置继续」",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [0, 0, 1280, 720],
+                "expected": ["点击任意位置继续", "点击任意位置"]
+            }
+        },
+        "timeout": 60000,
+        "action": {
+            "type": "Click"
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": ["CloudWebStartGame"]
+    },
+    "CloudWebMonthlyClick": {
+        "desc": "CloudWeb：点击今日月卡奖励确认",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "OCR",
+            "param": {
+                "roi": [0, 0, 1280, 720],
+                "expected": ["点击确认今日月卡奖励", "今日月卡奖励"]
+            }
+        },
+        "timeout": 60000,
+        "action": {
+            "type": "Click"
+        },
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0,
+        "next": ["CloudWebStartGame"]
+    },
+    "CloudWebWorldReady": {
+        "desc": "CloudWeb：已进入大世界，启动完成",
+        "max_hit": 100000,
+        "recognition": {
+            "type": "And",
+            "param": {
+                "all_of": ["InWorld"]
+            }
+        },
+        "timeout": 60000,
+        "rate_limit": 0,
+        "pre_delay": 0,
+        "post_delay": 0
+        // 终止节点：不写 next，命中即任务成功
+    }
+}
