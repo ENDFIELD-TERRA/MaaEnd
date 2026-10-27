@@ -55,7 +55,7 @@
         const nodes = document.querySelectorAll("body *");
         for (let i = 0; i < nodes.length; i += 1) {
             const node = nodes[i];
-            if (hiddenBalls.has(node)) {
+            if (hiddenBalls.has(node) && node.style.display === "none") {
                 continue;
             }
             const style = window.getComputedStyle(node);
