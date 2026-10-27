@@ -49,20 +49,8 @@
                 ],
                 "count": 1000
             },
-            {
-                "recognition": "OCR",
-                "roi": [
-                    -250,
-                    -150,
-                    250,
-                    150
-                ],
-                "expected": [
-                    "进入",
-                    "進入",
-                    "Enter"
-                ]
-            }
+            // 引用基座已定义的进入按钮文字节点，避免重复维护同一组标签
+            "ProtocolSpaceEnterSpaceText"
         ],
         "box_index": 1,
         "action": "Click",
