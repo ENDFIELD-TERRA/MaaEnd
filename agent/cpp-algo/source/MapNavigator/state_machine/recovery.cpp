@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <cstdint>
 #include <limits>
 #include <optional>
 #include <vector>
@@ -24,6 +25,14 @@ namespace mapnavigator
 
 namespace
 {
+
+// look 消息按 int16 打包；先夹到范围内，避免极端角度截断成反方向。
+constexpr int kMaxLookUnits = std::numeric_limits<int16_t>::max();
+
+int clampLookUnits(int units)
+{
+    return std::clamp(units, -kMaxLookUnits, kMaxLookUnits);
+}
 
 bool inside_push_through_disc(const std::vector<VirtualNoGoDisc>& discs, const NaviPosition& position)
 {
@@ -251,19 +260,33 @@ bool NavigationStateMachine::executePhysicalUnstick(double stuck_heading)
     if (units == 0) {
         units = heading_delta > 0.0 ? 1 : -1;
     }
-    action_wrapper_->sendViewDeltaSync(units, 0);
+    action_wrapper_->sendViewDeltaSync(clampLookUnits(units), 0);
 
     const NaviPosition step_start = *position_;
     double moved = 0.0;
-    for (int pulse = 0; pulse < kUnstickMaxPulses; ++pulse) {
-        action_wrapper_->pulseForwardSync(kUnstickPulseMs);
-        if (!captureCurrentPosition(false) || position_provider_->lastCaptureWasBlackScreen() || !position_->valid) {
-            break;
+    auto pulse_forward = [&]() {
+        for (int pulse = 0; pulse < kUnstickMaxPulses; ++pulse) {
+            action_wrapper_->pulseForwardSync(kUnstickPulseMs);
+            if (!captureCurrentPosition(false) || position_provider_->lastCaptureWasBlackScreen() || !position_->valid) {
+                break;
+            }
+            moved = std::hypot(position_->x - step_start.x, position_->y - step_start.y);
+            if (moved >= distance * kUnstickSuccessFraction) {
+                break;
+            }
         }
-        moved = std::hypot(position_->x - step_start.x, position_->y - step_start.y);
-        if (moved >= distance * kUnstickSuccessFraction) {
-            break;
+    };
+    pulse_forward();
+    // 规划出的逃逸方向仍被实际几何挡住时，沿来路反向再试一次：角色是走进来的，身后通常可退
+    if (moved < distance * kUnstickSuccessFraction && position_->valid) {
+        const double reverse_heading = stuck_heading + 180.0;
+        const double reverse_delta = NaviMath::calcDeltaRotation(position_->angle, reverse_heading);
+        int reverse_units = static_cast<int>(std::lround(reverse_delta * action_wrapper_->defaultTurnUnitsPerDegree()));
+        if (reverse_units == 0) {
+            reverse_units = reverse_delta > 0.0 ? 1 : -1;
         }
+        action_wrapper_->sendViewDeltaSync(clampLookUnits(reverse_units), 0);
+        pulse_forward();
     }
     motion_controller_->setForwardState(false);
     ++unstick.count;
