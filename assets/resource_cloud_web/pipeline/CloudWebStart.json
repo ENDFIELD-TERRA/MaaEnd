@@ -8,6 +8,7 @@
     // 所有识别基于 1280x720 客户区；不使用假帧，到点判定复用主资源 InWorld 节点。
     "CloudWebStartGame": {
         "desc": "CloudWeb：等待登录/启动/标题/月卡推进到开放大世界",
+        // 根节点保留总量兜底；排队失败由 CloudWebStartingWait 的 15 分钟预算给出
         "max_hit": 100000,
         "recognition": {
             "type": "DirectHit"

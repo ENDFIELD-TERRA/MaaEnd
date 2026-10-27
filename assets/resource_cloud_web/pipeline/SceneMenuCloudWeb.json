@@ -278,7 +278,7 @@
         ]
     },
     "__ScenePrivateMenuRegionalDevelopmentWulingEnterOverview": {
-        "desc": "CloudWeb：武陵地区建设界面点击事务总览（模板未命中时的 OCR 兜底；截图为证）",
+        "desc": "CloudWeb：武陵地区建设界面点击事务总览（模板未命中时的 OCR 兜底）",
         "recognition": "OCR",
         "roi": [
             0,
