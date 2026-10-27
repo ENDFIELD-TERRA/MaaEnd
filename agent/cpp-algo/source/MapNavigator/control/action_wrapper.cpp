@@ -66,6 +66,11 @@ bool ActionWrapper::supportsWalkToggle() const
     return backend_->supportsWalkToggle();
 }
 
+bool ActionWrapper::resetsSceneBeforeNavigate() const
+{
+    return backend_->resetsSceneBeforeNavigate();
+}
+
 void ActionWrapper::setMovementStateSync(MovementState state, int delay_millis)
 {
     backend_->setMovementStateSync(state, delay_millis);

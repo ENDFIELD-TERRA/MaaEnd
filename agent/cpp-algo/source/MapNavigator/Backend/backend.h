@@ -44,6 +44,9 @@ public:
 
     virtual bool supportsSprint() const { return true; }
 
+    // CloudWeb 等后台网页控制器：菜单/全屏界面会挡住小地图，导航开始前先复位到大世界
+    virtual bool resetsSceneBeforeNavigate() const { return false; }
+
     // 返回 false 时走路请求不生效, 保持跑步速度
     virtual bool supportsWalkToggle() const { return false; }
 

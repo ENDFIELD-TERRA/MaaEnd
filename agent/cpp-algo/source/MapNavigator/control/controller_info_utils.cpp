@@ -17,8 +17,9 @@ struct ControllerInfo
 {
     std::string type;
     std::optional<int> mouse_method;
+    std::optional<uint64_t> hwnd;
 
-    MEO_JSONIZATION(MEO_OPT type, MEO_OPT mouse_method)
+    MEO_JSONIZATION(MEO_OPT type, MEO_OPT mouse_method, MEO_OPT hwnd)
 };
 
 ControllerInfo parse_controller_info(MaaController* controller)
@@ -83,6 +84,21 @@ bool IsMessageInputMethod(MaaWin32InputMethod method)
     default:
         return false;
     }
+}
+
+bool TryGetWin32WindowHandle(MaaController* controller, uint64_t* out_handle)
+{
+    if (out_handle == nullptr) {
+        return false;
+    }
+
+    const auto info = parse_controller_info(controller);
+    if (!info.hwnd.has_value()) {
+        return false;
+    }
+
+    *out_handle = info.hwnd.value();
+    return true;
 }
 
 } // namespace mapnavigator

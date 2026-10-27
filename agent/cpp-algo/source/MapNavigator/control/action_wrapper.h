@@ -29,6 +29,7 @@ public:
     SteeringTransportProfile steeringProfile() const;
     bool supportsSprint() const;
     bool supportsWalkToggle() const;
+    bool resetsSceneBeforeNavigate() const;
 
     void setMovementStateSync(MovementState state, int delay_millis);
     void triggerJumpSync(int hold_millis);

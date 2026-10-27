@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <memory>
 #include <string>
 
@@ -35,6 +36,7 @@ public:
     SteeringTransportProfile steeringProfile() const override;
 
     bool supportsWalkToggle() const override { return true; }
+    bool resetsSceneBeforeNavigate() const override;
 
     void setMovementStateSync(MovementState state, int delay_millis) override;
     void triggerJumpSync(int hold_millis) override;
@@ -66,6 +68,10 @@ private:
     double default_turn_units_per_degree_ = 0.0;
     double default_pitch_units_per_degree_ = 0.0;
     bool mouse_lock_follow_enabled_ = false;
+#ifdef _WIN32
+    bool look_message_enabled_ = false;
+    uint64_t look_hwnd_ = 0;
+#endif
     bool background_managed_keys_enabled_ = false;
     int hover_x_ = 0;
     int hover_y_ = 0;

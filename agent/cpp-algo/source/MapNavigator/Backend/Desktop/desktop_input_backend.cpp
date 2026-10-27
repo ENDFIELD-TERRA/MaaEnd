@@ -1,6 +1,12 @@
 #include <utility>
 #include <vector>
 
+#ifdef _WIN32
+#include <cwchar>
+#include <winsock2.h>
+#include <windows.h>
+#endif
+
 #include <MaaUtils/Logger.h>
 
 #include "../../control/controller_info_utils.h"
@@ -19,6 +25,21 @@ constexpr int32_t kDesktopDefaultHoverAnchorY = kWorkHeight / 2;
 constexpr int32_t kDesktopHoverTouchContactId = 0;
 constexpr int32_t kDesktopPrimaryTouchContactId = 1;
 constexpr int32_t kDesktopDefaultTouchPressure = 0;
+
+// CloudShell 输入桥的转向消息；用消息而不是 SendInput，避免和用户的物理鼠标抢光标
+#ifdef _WIN32
+constexpr UINT kCloudShellLookMessage = WM_APP + 0x51;
+
+bool is_cloudshell_window(uint64_t handle)
+{
+    const HWND hwnd = reinterpret_cast<HWND>(static_cast<uintptr_t>(handle));
+    wchar_t class_name[64] {};
+    if (GetClassNameW(hwnd, class_name, 64) <= 0) {
+        return false;
+    }
+    return std::wcscmp(class_name, L"MaaEnd.CloudShell") == 0;
+}
+#endif
 
 bool is_mouse_lock_follow_supported(MaaController* ctrl)
 {
@@ -93,12 +114,24 @@ DesktopInputBackend::DesktopInputBackend(
         return;
     }
 
-    if (is_mouse_lock_follow_supported(ctrl_)) {
-        mouse_lock_follow_enabled_ = try_set_mouse_lock_follow(ctrl_, true);
-        LogInfo << backend_name_ << " backend mouse lock follow." << VAR(controller_type_) << VAR(mouse_lock_follow_enabled_);
+    bool cloudshell_look = false;
+#ifdef _WIN32
+    uint64_t hwnd = 0;
+    cloudshell_look = is_mouse_lock_follow_supported(ctrl_) && TryGetWin32WindowHandle(ctrl_, &hwnd) && is_cloudshell_window(hwnd);
+    if (cloudshell_look) {
+        look_message_enabled_ = true;
+        look_hwnd_ = hwnd;
+        LogInfo << backend_name_ << " backend look message transport." << VAR(controller_type_) << VAR(hwnd);
     }
-    else {
-        LogInfo << backend_name_ << " backend mouse lock follow skipped." << VAR(controller_type_);
+#endif
+    if (!cloudshell_look) {
+        if (is_mouse_lock_follow_supported(ctrl_)) {
+            mouse_lock_follow_enabled_ = try_set_mouse_lock_follow(ctrl_, true);
+            LogInfo << backend_name_ << " backend mouse lock follow." << VAR(controller_type_) << VAR(mouse_lock_follow_enabled_);
+        }
+        else {
+            LogInfo << backend_name_ << " backend mouse lock follow skipped." << VAR(controller_type_);
+        }
     }
 
     const std::vector<int32_t> managed_keys {
@@ -137,6 +170,15 @@ bool DesktopInputBackend::usesTouchBackend() const
 bool DesktopInputBackend::isSupported() const
 {
     return ctrl_ != nullptr;
+}
+
+bool DesktopInputBackend::resetsSceneBeforeNavigate() const
+{
+#ifdef _WIN32
+    return look_message_enabled_;
+#else
+    return false;
+#endif
 }
 
 const std::string& DesktopInputBackend::unsupportedReason() const
@@ -253,6 +295,15 @@ bool DesktopInputBackend::sendViewDeltaSync(int dx, int dy)
     if (ctrl_ == nullptr) {
         return false;
     }
+
+#ifdef _WIN32
+    if (look_message_enabled_) {
+        LogInfo << "SendLookMessage" << VAR(dx) << VAR(dy);
+        const auto wparam = static_cast<WPARAM>(static_cast<int16_t>(dx));
+        const auto lparam = static_cast<LPARAM>(static_cast<int16_t>(dy));
+        return PostMessageW(reinterpret_cast<HWND>(static_cast<uintptr_t>(look_hwnd_)), kCloudShellLookMessage, wparam, lparam) != 0;
+    }
+#endif
 
     LogInfo << "SendRelativeMoveNative" << VAR(dx) << VAR(dy);
     const MaaCtrlId ctrl_id = MaaControllerPostRelativeMove(ctrl_, dx, dy);

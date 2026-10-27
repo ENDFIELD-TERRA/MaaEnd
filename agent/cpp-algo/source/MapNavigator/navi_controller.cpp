@@ -19,6 +19,7 @@
 #include "planning/navmesh_path_expander.h"
 #include "planning/navmesh_queries.h"
 #include "semantic/action_executor.h"
+#include "sensing/maa_task.h"
 #include "sensing/position_provider.h"
 #include "state_machine/navigation_state_machine.h"
 
@@ -138,10 +139,30 @@ bool NaviController::navigate(const NaviParam& requested_param)
     PreloadNavmeshWaypoints(param);
     LogInfo << "Waiting for first valid GPS signal...";
 
+    // CloudWeb：任务可能停在好友等全屏界面，先短探一次定位；失败再复位到大世界重试。
+    // 正常大世界/副本路线首帧能定位，不会触发复位。
+    const bool cloudweb_scene_reset = action_wrapper.resetsSceneBeforeNavigate();
+    const int32_t fix_probe_retries = cloudweb_scene_reset ? 50 : kLocatorWaitMaxRetries;
     NaviPosition pos;
     const std::string initial_expected_zone = InitialExpectedZone(param);
-    if (!position_provider.waitForFix(&pos, initial_expected_zone, kLocatorWaitMaxRetries, kLocatorWaitIntervalMs, is_stopping)
-        || is_stopping()) {
+    bool fixed =
+        position_provider.waitForFix(&pos, initial_expected_zone, fix_probe_retries, kLocatorWaitIntervalMs, is_stopping);
+    if (!fixed && cloudweb_scene_reset && !is_stopping()) {
+        LogWarn << "No initial fix; resetting to the world scene and retrying.";
+        const auto reset_nodes =
+            RunTaskForCompletedNodes(ctx_, "SceneAnyEnterWorld", R"({"SceneAnyEnterWorld":{"timeout":20000}})");
+        if (!reset_nodes.has_value()) {
+            LogWarn << "Scene reset before navigation did not complete.";
+        }
+        position_provider.resetTracking();
+        fixed = position_provider.waitForFix(
+            &pos,
+            initial_expected_zone,
+            kLocatorWaitMaxRetries,
+            kLocatorWaitIntervalMs,
+            is_stopping);
+    }
+    if (!fixed || is_stopping()) {
         return false;
     }
 
