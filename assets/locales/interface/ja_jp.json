@@ -2254,6 +2254,8 @@
     "task.CloseGame.label": "❌ ゲーム終了（Android）",
     "task.CloseGamePC.description": "ゲームプロセスを終了します。本タスクを追加した場合、「プロセス終了」タスクで Endfield.exe を終了する必要はありません。",
     "task.CloseGamePC.label": "❌ ゲーム終了（PC）",
+    "task.CloudWebStartGame.description": "CloudWeb のゲーム画面で、タイトル画面または月パス報酬画面からオープンワールドへ進め、後続のクラウドタスクを実行できるようにします。",
+    "task.CloudWebStartGame.label": "☁️クラウド起動からフィールドへ",
     "task.Crafting.description": "緊急食薬を自動で1つ製作します",
     "task.Crafting.label": "🧪簡易製作",
     "task.CreditShopping.auto_get_credits": "クレジット不足のため、帝江号の応接室からの回収を試みます",

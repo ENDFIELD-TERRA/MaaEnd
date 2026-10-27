@@ -2254,6 +2254,8 @@
     "task.CloseGame.label": "❌ Close Game (Android)",
     "task.CloseGamePC.description": "Closes the game process. If this task is added, you do not need the Kill Process task to end Endfield.exe.",
     "task.CloseGamePC.label": "❌ Close Game (PC)",
+    "task.CloudWebStartGame.description": "Advances the CloudWeb game view from the title or monthly-pass reward screen to the open world, so a task queue can run other cloud tasks afterwards.",
+    "task.CloudWebStartGame.label": "☁️Cloud Start to Open World",
     "task.Crafting.description": "Automatically craft one emergency ration",
     "task.Crafting.label": "🧪Simple Crafting",
     "task.CreditShopping.auto_get_credits": "Insufficient credits, attempting to collect from the Dijiang reception room",
