@@ -23,7 +23,11 @@
                     280,
                     200
                 ],
+                // 完整文本：Regional Development / Operational Manual / Protocol Pass / Friends /
+                // 行动手册 / 行動手冊 / 地区建设 / 地區建設 / 地域建設 / 지역 건설。
+                // 云画面 OCR 可能只返回单词片段；片段匹配跳过自动 i18n 展开。
                 "expected": [
+                    // @i18n-skip
                     "Regional Development",
                     "Regional",
                     "Development",
@@ -48,7 +52,10 @@
                     320,
                     400
                 ],
+                // 完整文本：Operators / Events / Headhunt / Acquisition Center / 干员 / 活动 / 寻访。
+                // 云画面 OCR 可能只返回单词片段；片段匹配跳过自动 i18n 展开。
                 "expected": [
+                    // @i18n-skip
                     "Operators",
                     "Events",
                     "Headhunt",
@@ -97,6 +104,7 @@
         },
         "action": "ClickKey",
         "key": 27,
+        // 云画面 Escape 后菜单收起约 1s；下一拍会在动画中识别失败，保留固定等待
         "post_delay": 1500,
         "rate_limit": 0,
         "next": [
@@ -117,6 +125,7 @@
         },
         "action": "ClickKey",
         "key": 27,
+        // 关闭菜单/退出总控中枢后留出动画时间，避免下一拍在过渡帧误判
         "post_delay": 1500,
         "rate_limit": 0,
         "next": [
@@ -408,6 +417,8 @@
             }
         ]
     },
+    // 云画面转场/战斗加载明显慢于本地客户端；Trial 链统一放宽识别超时到 60s，
+    // 仍由 next 识别推进，不是业务硬等待。
     "TrialOfSwordmancyEnterTrialMenu": { "timeout": 60000 },
     "TrialOfSwordmancyEnterTrialMenu2": { "timeout": 60000 },
     // 队列里紧接 IntelArchive 等全屏菜单时，好友列表会挡住地区总览链；
@@ -433,6 +444,7 @@
         "recognition": "And",
         "all_of": ["CloseButtonType1"],
         "action": "Click",
+        // 点掉全屏菜单的 X 后留 400ms 让遮罩消失，避免同帧重复点击
         "post_delay": 400,
         "max_hit": 6,
         "next": ["CloudWebCloseFullscreen", "CloudWebEnterWorld"]
