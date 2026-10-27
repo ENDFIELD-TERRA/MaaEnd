@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>visual-hosting wheel probe</title>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #0b0e12;
+        color: #e8eef5;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    #header {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 13.888889%; /* 100 / 720 */
+        background: #12b5b0;
+        color: #04211f;
+        box-sizing: border-box;
+        padding: 8px 14px;
+        overflow: hidden;
+    }
+
+    #header h1 {
+        margin: 0 0 4px 0;
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+    }
+
+    #status {
+        font: 12px/16px Consolas, monospace;
+        white-space: pre;
+    }
+
+    .pane {
+        position: absolute;
+        top: 13.888889%; /* 100 / 720 */
+        height: 86.111111%; /* 620 / 720 */
+        box-sizing: border-box;
+        overflow: auto;
+        background: #151a20;
+        border: 0;
+    }
+
+    /* Reference layout at a 1280x720 CSS viewport: 0..620 and 640..1280. */
+    #left {
+        left: 0;
+        width: 48.4375%; /* 620 / 1280 */
+    }
+
+    #right {
+        left: 50%; /* 640 / 1280 */
+        width: 50%; /* 640 / 1280 */
+    }
+
+    .content {
+        width: 3000px;
+        height: 4000px;
+        background:
+            repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.06) 0 2px, transparent 2px 44px),
+            repeating-linear-gradient(90deg, #1a2634 0 80px, #223344 80px 160px);
+        color: #9fb3c8;
+        font: 13px/18px Consolas, monospace;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    #left .content {
+        background-color: #18202a;
+    }
+
+    #right .content {
+        background-color: #1c2430;
+    }
+
+    .marker {
+        position: absolute;
+        left: 12px;
+        color: #d9e7f5;
+        background: rgba(0, 0, 0, 0.35);
+        padding: 1px 6px;
+        border-radius: 3px;
+    }
+</style>
+</head>
+<body>
+<div id="header">
+    <h1>Visual hosting wheel probe &mdash; canonical 1280&times;720 CSS layout</h1>
+    <div id="status">loading</div>
+</div>
+<div id="left" class="pane">
+    <div id="leftContent" class="content">
+        <div class="marker" style="top: 120px">left pane marker 120</div>
+        <div class="marker" style="top: 760px">left pane marker 760</div>
+        <div class="marker" style="top: 1500px">left pane marker 1500</div>
+        <div class="marker" style="top: 2400px">left pane marker 2400</div>
+        <div class="marker" style="top: 3300px">left pane marker 3300</div>
+        LEFT PANE &mdash; 3000&times;4000 scroll content
+    </div>
+</div>
+<div id="right" class="pane">
+    <div id="rightContent" class="content">
+        <div class="marker" style="top: 120px">right pane marker 120</div>
+        <div class="marker" style="top: 760px">right pane marker 760</div>
+        <div class="marker" style="top: 1500px">right pane marker 1500</div>
+        <div class="marker" style="top: 2400px">right pane marker 2400</div>
+        <div class="marker" style="top: 3300px">right pane marker 3300</div>
+        RIGHT PANE &mdash; 3000&times;4000 scroll content
+    </div>
+</div>
+<script>
+    "use strict";
+
+    // Probe: the host reads this array through ExecuteScript and then clears it.
+    window.__probe = [];
+    window.__probeReady = false;
+    window.__recordMoves = true;
+    window.__plError = "";
+
+    function record(event) {
+        if (window.__probe.length >= 400) {
+            return;
+        }
+        const target = event.target && (event.target.id || event.target.tagName) || "window";
+        window.__probe.push({
+            type: event.type,
+            x: Math.round(event.clientX),
+            y: Math.round(event.clientY),
+            deltaX: event.deltaX || 0,
+            deltaY: event.deltaY || 0,
+            target: target,
+            trusted: !!event.isTrusted,
+        });
+    }
+
+    window.addEventListener("wheel", record, { capture: true, passive: true });
+    window.addEventListener("mousemove", function (event) {
+        if (window.__recordMoves) {
+            record(event);
+        }
+    }, { capture: true, passive: true });
+
+    // Returns one newline-separated record per probe entry, prefixed by a META line.
+    // The host parses this text; no JSON parsing is required on the native side.
+    window.__take = function () {
+        const left = document.getElementById("left");
+        const right = document.getElementById("right");
+        const meta = [
+            "META",
+            window.__probeReady ? 1 : 0,
+            Math.round(window.innerWidth),
+            Math.round(window.innerHeight),
+            (window.devicePixelRatio || 1).toFixed(3),
+            Math.round(left ? left.scrollTop : -1),
+            Math.round(right ? right.scrollTop : -1),
+            Math.round(left ? left.scrollLeft : -1),
+            Math.round(right ? right.scrollLeft : -1),
+            document.hasFocus() ? 1 : 0,
+            document.visibilityState,
+            document.pointerLockElement ? "locked" : "unlocked",
+        ].join("|");
+
+        const lines = [meta];
+        const pending = window.__probe;
+        window.__probe = [];
+        const limit = Math.min(pending.length, 300);
+        for (let i = 0; i < limit; i += 1) {
+            const e = pending[i];
+            lines.push([e.type, e.x, e.y, e.deltaX, e.deltaY, e.target, e.trusted ? 1 : 0].join("|"));
+        }
+        return lines.join("\n");
+    };
+
+    window.__reset = function (top, leftOffset) {
+        const left = document.getElementById("left");
+        const right = document.getElementById("right");
+        const topValue = Number.isFinite(top) ? top : 0;
+        const leftValue = Number.isFinite(leftOffset) ? leftOffset : 0;
+        if (left) {
+            left.scrollTop = topValue;
+            left.scrollLeft = leftValue;
+        }
+        if (right) {
+            right.scrollTop = topValue;
+            right.scrollLeft = leftValue;
+        }
+        window.__probe = [];
+        window.__recordMoves = true;
+        updateStatus();
+        return "ok";
+    };
+
+    window.__plState = function () {
+        return [
+            document.pointerLockElement ? "locked" : "unlocked",
+            window.__plError || "",
+            document.visibilityState,
+        ].join("|");
+    };
+
+    function updateStatus() {
+        const left = document.getElementById("left");
+        const right = document.getElementById("right");
+        const status = document.getElementById("status");
+        if (!left || !right || !status) {
+            return;
+        }
+        status.textContent =
+            "viewport=" + Math.round(window.innerWidth) + "x" + Math.round(window.innerHeight) +
+            " dpr=" + (window.devicePixelRatio || 1).toFixed(3) +
+            " vis=" + document.visibilityState +
+            " focus=" + (document.hasFocus() ? "yes" : "no") +
+            "\nleft  top=" + Math.round(left.scrollTop) + " left=" + Math.round(left.scrollLeft) +
+            "   right top=" + Math.round(right.scrollTop) + " left=" + Math.round(right.scrollLeft) +
+            "   probes=" + window.__probe.length;
+    }
+
+    window.__probeReady = true;
+    window.addEventListener("load", function () {
+        window.__probeReady = true;
+        updateStatus();
+    });
+    setInterval(updateStatus, 200);
+    updateStatus();
+</script>
+</body>
+</html>
