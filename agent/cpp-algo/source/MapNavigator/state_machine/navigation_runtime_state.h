@@ -216,6 +216,8 @@ struct LocalizationLossState
     // 取位失败只会清 valid, 坐标还是最后一次的
     NaviPosition last_fix {};
     bool saw_black_screen = false;
+    // CloudWeb 全屏弹窗挡住小地图时，按间隔发 Esc 关闭
+    std::chrono::steady_clock::time_point last_escape_at {};
 
     void reset()
     {
@@ -223,6 +225,7 @@ struct LocalizationLossState
         last_unstick_at = {};
         last_fix = {};
         saw_black_screen = false;
+        last_escape_at = {};
     }
 };
 

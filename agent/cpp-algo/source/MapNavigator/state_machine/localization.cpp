@@ -153,6 +153,22 @@ bool NavigationStateMachine::handleLocalizationLoss()
             0);
     }
 
+    // CloudWeb：脱离卡死/拍照设置等全屏弹窗会挡住小地图；Esc 关闭后重试取位
+    const bool escape_retry_ready =
+        loss.last_escape_at == std::chrono::steady_clock::time_point {}
+        || std::chrono::duration_cast<std::chrono::milliseconds>(now - loss.last_escape_at)
+               >= std::chrono::milliseconds(4000);
+    if (motion_controller_->resetsSceneOnLocalizationLoss() && escape_retry_ready
+        && loss_elapsed >= std::chrono::milliseconds(2000)
+        && !semantic_nodes::IsTriggerPending(*session_)) {
+        loss.last_escape_at = now;
+        LogWarn << "Localization lost under CloudWeb; sending Esc to close modal UI." << VAR(loss_elapsed.count());
+        motion_controller_->pressEscape();
+        position_provider_->resetTracking();
+        last_global_relocalize_at_ = {};
+        return true;
+    }
+
     const bool relocalize_cooling = last_global_relocalize_at_ != std::chrono::steady_clock::time_point {}
                                     && std::chrono::duration_cast<std::chrono::milliseconds>(now - last_global_relocalize_at_)
                                            < std::chrono::milliseconds(kRelocationRetryIntervalMs);

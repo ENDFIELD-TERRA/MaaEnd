@@ -121,6 +121,23 @@ bool MotionController::supportsSprint() const
     return action_wrapper_ != nullptr && action_wrapper_->supportsSprint();
 }
 
+bool MotionController::resetsSceneOnLocalizationLoss() const
+{
+    return action_wrapper_ != nullptr && action_wrapper_->resetsSceneBeforeNavigate();
+}
+
+void MotionController::pressEscape()
+{
+    MaaController* ctrl = action_wrapper_ != nullptr ? action_wrapper_->getCtrl() : nullptr;
+    if (ctrl == nullptr) {
+        return;
+    }
+    const MaaCtrlId ctrl_id = MaaControllerPostClickKey(ctrl, 27);
+    if (ctrl_id != MaaInvalidId) {
+        MaaControllerWait(ctrl, ctrl_id);
+    }
+}
+
 void MotionController::setSprintSuppressed(bool suppressed)
 {
     if (suppressed && !sprint_suppressed_ && sprint_active_ && is_moving_forward_ && action_wrapper_ != nullptr) {

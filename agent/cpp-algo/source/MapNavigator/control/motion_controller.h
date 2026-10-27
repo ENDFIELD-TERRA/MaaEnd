@@ -31,6 +31,9 @@ public:
 
     bool steeringDropsTurnSends() const { return steering_profile_.drops_turn_sends; }
 
+    bool resetsSceneOnLocalizationLoss() const;
+    void pressEscape();
+
 private:
     bool steeringGateOpen(double yaw_delta_deg, std::chrono::steady_clock::time_point now) const;
     int64_t planBatchCount(double yaw_delta_deg, int64_t tick_gap_ms) const;
