@@ -31,8 +31,8 @@
             "hits": ["CloudWebWorldReady"]
         },
         {
-            "name": "战斗中（登录/标题/排队不命中，已在大世界）",
-            "image": "战斗_技能特效.png",
+            "name": "大世界（技能特效；登录/标题/排队不命中）",
+            "image": "大世界_技能特效.png",
             "hits": ["CloudWebWorldReady"]
         }
     ]
