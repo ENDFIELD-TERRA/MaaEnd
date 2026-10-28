@@ -16,8 +16,13 @@
             "hits": ["CloudWebTitleClick"]
         },
         {
-            "name": "排队/启动等待（不得命中开始游戏）",
-            "image": "启动_正在排队.png",
+            "name": "落地页（开始游戏按钮）",
+            "image": "落地页_开始游戏.png",
+            "hits": ["CloudWebStartButtonClick"]
+        },
+        {
+            "name": "启动等待（游戏启动中，不得命中开始游戏）",
+            "image": "启动_游戏启动中.png",
             "hits": ["CloudWebStartingWait"]
         },
         {
@@ -26,9 +31,9 @@
             "hits": ["CloudWebWorldReady"]
         },
         {
-            "name": "战斗中（启动节点全部不命中）",
+            "name": "战斗中（登录/标题/排队不命中，已在大世界）",
             "image": "战斗_技能特效.png",
-            "hits": []
+            "hits": ["CloudWebWorldReady"]
         }
     ]
 }
