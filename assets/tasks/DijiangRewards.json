@@ -22,6 +22,7 @@
             ],
             "option": [
                 "StageTaskSetting",
+                "AutoStartExchange",
                 "ClueSetting",
                 "SelectToGrow"
             ]
@@ -31,6 +32,7 @@
         "AutoStartExchange": {
             "type": "switch",
             "label": "$option.AutoStartExchange.label",
+            "description": "$option.AutoStartExchange.description",
             "cases": [
                 {
                     "name": "Yes",
@@ -446,7 +448,6 @@
                 {
                     "name": "Yes",
                     "option": [
-                        "AutoStartExchange",
                         "SendCluesDirect",
                         "ClueSend",
                         "ClueStockLimit",
@@ -669,6 +670,7 @@
         "QuickGiveDuplicateClues": {
             "type": "switch",
             "label": "$option.QuickGiveDuplicateClues.label",
+            "description": "$option.QuickGiveDuplicateClues.description",
             "cases": [
                 {
                     "name": "Yes",
@@ -692,6 +694,7 @@
         "ClueSend": {
             "type": "input",
             "label": "$option.ClueSend.label",
+            "description": "$option.ClueSend.description",
             "inputs": [
                 {
                     "name": "MaxClueSend",
