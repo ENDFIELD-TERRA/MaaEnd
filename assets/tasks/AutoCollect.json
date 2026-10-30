@@ -149,13 +149,6 @@
         },
         "AutoCollectMode": {
             "type": "select",
-            "controller": [
-                "CloudWeb",
-                "Linux-Gamescope",
-                "Linux-ScreenCast",
-                "Linux-Wlroots",
-                "Win32-Front"
-            ],
             "label": "$option.AutoCollectMode.label",
             "description": "$option.AutoCollectMode.description",
             "cases": [
@@ -180,13 +173,6 @@
         },
         "AutoCollectTargetInventory": {
             "type": "input",
-            "controller": [
-                "CloudWeb",
-                "Linux-Gamescope",
-                "Linux-ScreenCast",
-                "Linux-Wlroots",
-                "Win32-Front"
-            ],
             "label": "$option.AutoCollectTargetInventory.label",
             "description": "$option.AutoCollectTargetInventory.description",
             "inputs": [
