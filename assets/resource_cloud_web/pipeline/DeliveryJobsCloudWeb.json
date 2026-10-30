@@ -137,5 +137,31 @@
         "next": [
             "DeliveryJobsQuickTransferConfirm"
         ]
+    },
+    "DeliveryJobsQuickTransferReward": {
+        "recognition": "And",
+        "all_of": [
+            "DeliveryJobsCheckRewardHeader"
+        ],
+        "pre_delay": 0,
+        "action": "Custom",
+        "custom_action": "RepeatUntilNotFoundAction",
+        "custom_action_param": {
+            "action": "Click",
+            "wait_node": "DeliveryJobsCheckRewardHeader",
+            "repeat_count": 10,
+            "interval_ms": 500
+        },
+        "target": [
+            622,
+            610,
+            36,
+            36
+        ],
+        "post_delay": 0,
+        "rate_limit": 0,
+        "next": [
+            "DeliveryJobsQuickTransferBackToLocalDepotNode"
+        ]
     }
 }
