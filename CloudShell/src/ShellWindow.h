@@ -26,6 +26,7 @@ struct ShellOptions
     std::vector<std::wstring> extra_scripts;
     bool devtools = false;
     int debug_port = 0;
+    bool automation_lock = false;
     InputBridge::Mode input_mode = InputBridge::Mode::Auto;
 };
 

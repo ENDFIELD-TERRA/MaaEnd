@@ -45,6 +45,9 @@ bool parseOptions(cloudshell::ShellOptions& options)
         if (arg == L"--devtools") {
             options.devtools = true;
         }
+        else if (arg == L"--automation-lock") {
+            options.automation_lock = true;
+        }
         else if (arg == L"--url" && has_value) {
             options.url = argv[++i];
         }

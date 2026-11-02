@@ -22,6 +22,15 @@ namespace
 // 不可拉伸、不可最大化：客户区尺寸固定，截图尺寸才固定
 constexpr DWORD kWindowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_CLIPCHILDREN;
 
+DWORD shellStyle(bool automation_lock)
+{
+    DWORD style = kWindowStyle;
+    if (automation_lock) {
+        style &= ~(WS_SYSMENU | WS_MINIMIZEBOX);
+    }
+    return style;
+}
+
 // 后台、被遮挡时页面不能被节流；视频允许无手势自动播放
 constexpr const wchar_t* kBrowserArguments =
     L"--disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows "
@@ -73,7 +82,7 @@ bool ShellWindow::Create()
         WS_EX_APPWINDOW,
         kWindowClassName,
         options_.title.c_str(),
-        kWindowStyle,
+        shellStyle(options_.automation_lock),
         CW_USEDEFAULT,
         CW_USEDEFAULT,
         options_.width,
@@ -85,6 +94,9 @@ bool ShellWindow::Create()
     if (!hwnd_) {
         log::Error("CreateWindowExW failed: {}", GetLastError());
         return false;
+    }
+    if (options_.automation_lock) {
+        log::Info("automation lock: close/minimize disabled");
     }
 
     // 创建前不知道窗口落在哪块显示器上，拿到 hwnd 后再按实际 DPI 算整窗尺寸
@@ -104,7 +116,7 @@ bool ShellWindow::Create()
         log::Error("SetWinEventHook failed: {}", GetLastError());
     }
 
-    ShowWindow(hwnd_, SW_SHOW);
+    ShowWindow(hwnd_, options_.automation_lock ? SW_SHOWNOACTIVATE : SW_SHOW);
     UpdateWindow(hwnd_);
 
     initWebView();
@@ -154,6 +166,20 @@ LRESULT ShellWindow::handleMessage(UINT msg, WPARAM wparam, LPARAM lparam)
     }
 
     switch (msg) {
+    case WM_CLOSE:
+        if (options_.automation_lock) {
+            log::Info("close ignored (automation lock)");
+            return 0;
+        }
+        break;
+
+    case WM_SYSCOMMAND:
+        if (options_.automation_lock && ((wparam & 0xFFF0) == SC_CLOSE || (wparam & 0xFFF0) == SC_MINIMIZE)) {
+            log::Info("system command ignored (automation lock): 0x{:x}", wparam & 0xFFF0);
+            return 0;
+        }
+        break;
+
     case WM_SETFOCUS:
         // 真实激活时焦点落在顶层窗口上，键盘与输入法会绕开网页
         if (controller_) {
@@ -171,6 +197,11 @@ LRESULT ShellWindow::handleMessage(UINT msg, WPARAM wparam, LPARAM lparam)
     }
 
     case WM_SIZE:
+        if (options_.automation_lock && wparam == SIZE_MINIMIZED) {
+            log::Info("minimize ignored (automation lock)");
+            ShowWindowAsync(hwnd_, SW_SHOWNOACTIVATE);
+            return 0;
+        }
         // 最小化时客户区为空，跟着改会让页面视口变成 0×0
         if (controller_ && wparam != SIZE_MINIMIZED) {
             RECT bounds {};
@@ -205,7 +236,7 @@ void ShellWindow::applyFixedClientSize(UINT dpi, const POINT* origin)
 
     // 进程是 Per-Monitor v2 感知，客户区就是物理像素，只按 DPI 补上非客户区
     RECT rect { 0, 0, options_.width, options_.height };
-    if (!AdjustWindowRectExForDpi(&rect, kWindowStyle, FALSE, ex_style, dpi)) {
+    if (!AdjustWindowRectExForDpi(&rect, shellStyle(options_.automation_lock), FALSE, ex_style, dpi)) {
         log::Error("AdjustWindowRectExForDpi failed: {}", GetLastError());
         return;
     }
