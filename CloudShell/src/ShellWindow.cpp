@@ -22,13 +22,10 @@ namespace
 // 不可拉伸、不可最大化：客户区尺寸固定，截图尺寸才固定
 constexpr DWORD kWindowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_CLIPCHILDREN;
 
-DWORD shellStyle(bool automation_lock)
+DWORD shellStyle(bool)
 {
-    DWORD style = kWindowStyle;
-    if (automation_lock) {
-        style &= ~(WS_SYSMENU | WS_MINIMIZEBOX);
-    }
-    return style;
+    // 标题栏保留：automation lock 只拦截关闭/最小化，不剥夺用户恢复窗口的能力
+    return kWindowStyle;
 }
 
 // 后台、被遮挡时页面不能被节流；视频允许无手势自动播放
@@ -168,13 +165,21 @@ LRESULT ShellWindow::handleMessage(UINT msg, WPARAM wparam, LPARAM lparam)
     switch (msg) {
     case WM_CLOSE:
         if (options_.automation_lock) {
-            log::Info("close ignored (automation lock)");
+            const int choice = MessageBoxW(
+                hwnd_,
+                L"CloudShell 处于 automation lock。\n确定要退出吗？",
+                L"MaaEnd CloudShell",
+                MB_YESNO | MB_ICONQUESTION | MB_DEFBUTTON2);
+            log::Info("close confirmation: {}", choice == IDYES ? "yes" : "no");
+            if (choice == IDYES) {
+                DestroyWindow(hwnd_);
+            }
             return 0;
         }
         break;
 
     case WM_SYSCOMMAND:
-        if (options_.automation_lock && ((wparam & 0xFFF0) == SC_CLOSE || (wparam & 0xFFF0) == SC_MINIMIZE)) {
+        if (options_.automation_lock && (wparam & 0xFFF0) == SC_MINIMIZE) {
             log::Info("system command ignored (automation lock): 0x{:x}", wparam & 0xFFF0);
             return 0;
         }
