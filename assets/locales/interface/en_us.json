@@ -2377,6 +2377,8 @@
     "task.CloseGamePC.label": "❌ Close Game (PC)",
     "task.CloseGamePlayCover.description": "Closes the game through the connected PlayCover controller.",
     "task.CloseGamePlayCover.label": "❌ Close Game (PlayCover)",
+    "task.CloudWebStartGame.description": "Advances the CloudWeb game view from the title or monthly-pass reward screen to the open world, so a task queue can run other cloud tasks afterwards.",
+    "task.CloudWebStartGame.label": "☁️Cloud Start to Open World",
     "task.Crafting.description": "Automatically craft one emergency ration",
     "task.Crafting.label": "🧪Simple Crafting",
     "task.CreditShopping.auto_get_credits": "Insufficient credits, attempting to collect from the Dijiang reception room",

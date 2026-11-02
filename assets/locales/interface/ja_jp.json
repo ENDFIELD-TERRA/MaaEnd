@@ -2377,6 +2377,8 @@
     "task.CloseGamePC.label": "❌ ゲーム終了（PC）",
     "task.CloseGamePlayCover.description": "接続中の PlayCover コントローラーを通じてゲームを終了します。",
     "task.CloseGamePlayCover.label": "❌ ゲーム終了（PlayCover）",
+    "task.CloudWebStartGame.description": "CloudWeb のゲーム画面で、タイトル画面または月パス報酬画面からオープンワールドへ進め、後続のクラウドタスクを実行できるようにします。",
+    "task.CloudWebStartGame.label": "☁️クラウド起動からフィールドへ",
     "task.Crafting.description": "緊急食薬を自動で1つ製作します",
     "task.Crafting.label": "🧪簡易製作",
     "task.CreditShopping.auto_get_credits": "クレジット不足のため、帝江号の応接室からの回収を試みます",
