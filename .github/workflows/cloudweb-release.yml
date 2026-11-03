@@ -1,0 +1,116 @@
+name: cloudweb-release
+
+# 最小化发布：只构建 Windows x86_64 发行包并创建 prerelease。
+# 上游 install.yml 的 v* tag 触发已排除 *-cloudweb.*，避免拉起完整六平台矩阵。
+on:
+  push:
+    tags:
+      - "v*-cloudweb.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release-win-x86_64:
+    runs-on: windows-latest
+    steps:
+      - name: Require tag ref
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF_TYPE" != "tag" ]]; then
+            echo "::error::cloudweb-release must run on a tag ref."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - uses: astral-sh/setup-uv@v10.3.0
+        with:
+          enable-cache: true
+          cache-python: true
+
+      - name: Setup Windows 10 SDK
+        uses: GuillaumeFalourd/setup-windows10-sdk-action@v2.5
+        with:
+          sdk-version: 26100
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: "agent/go-service/go.mod"
+          cache-dependency-path: |
+            agent/go-service/go.mod
+            agent/go-service/go.sum
+
+      - name: Bootstrap MaaDeps
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: uv run tools/maadeps-download.py x64-windows
+
+      - name: Setup WebView2 SDK
+        shell: bash
+        run: uv run -m tools.setup.dep_3rdparty --webview2
+
+      - name: Download MaaFramework
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-win-x86_64*"
+          tag: v5.15.0
+          out-file-path: "deps"
+          extract: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download MXU
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: MistEO/MXU
+          fileName: "MXU-win-x86_64*"
+          tag: v2.8.1
+          out-file-path: "downloads/MXU"
+          extract: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and install
+        shell: bash
+        env:
+          PYTHONIOENCODING: utf-8
+          PYTHONUNBUFFERED: "1"
+        run: |
+          uv run -m tools.setup.build_and_install --cpp-algo --cloud-shell --ci --os win --arch x86_64 --version "$GITHUB_REF_NAME"
+          cp -r deps/bin/* install/maafw/
+          cp -r deps/share/MaaAgentBinary install/maafw/
+          rm -rf install/maafw/MaaNode*
+          if [[ -f downloads/MXU/mxu.exe ]]; then
+            cp downloads/MXU/mxu.exe install/MaaEnd.exe
+          fi
+
+      - name: Package ZIP
+        shell: pwsh
+        run: |
+          Compress-Archive -Path install/* -DestinationPath "MaaEnd-win-x86_64-${{ github.ref_name }}.zip" -Force
+
+      - name: Publish prerelease
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo "## ${GITHUB_REF_NAME}"
+            echo ""
+            echo "cloudweb-maintained 下游发行版（Windows x86_64），在上游 MaaEnd v2 之上保留 CloudWeb（《云·终末地》网页版）实装。"
+            echo ""
+            echo "- 提交：${GITHUB_SHA}"
+            echo "- 上游 v2 基线：170017de6"
+            echo "- 测试集指针：c726c8e"
+            echo "- 组件：MaaFramework v5.15.0、MXU v2.8.1、cpp-algo、go-service、CloudShell"
+            echo ""
+            echo "本发行版不会合入上游 MaaEnd。"
+          } > release-notes.md
+          gh release create "$GITHUB_REF_NAME" "MaaEnd-win-x86_64-$GITHUB_REF_NAME.zip" \
+            --title "$GITHUB_REF_NAME" \
+            --prerelease \
+            --notes-file release-notes.md
