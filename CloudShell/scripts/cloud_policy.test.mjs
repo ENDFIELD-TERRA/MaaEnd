@@ -12,6 +12,9 @@ function makeHarness() {
     class HTMLCanvasElement {}
     class Element {}
     class MouseEvent {}
+    Element.prototype.requestPointerLock = function () {
+        return Promise.resolve("granted");
+    };
     const window = {
         addEventListener(type, handler) {
             listeners.set(type, handler);
@@ -50,6 +53,7 @@ function trustedEvent(fields = {}) {
         clientY: 0,
         buttons: 0,
         cancelable: true,
+        timeStamp: 1000,
         stopped: false,
         prevented: false,
         stopImmediatePropagation() {
@@ -63,34 +67,29 @@ function trustedEvent(fields = {}) {
     return event;
 }
 
-test("requestPointerLock is always rejected in the automation host", async () => {
-    const { Element } = makeHarness();
-    const element = new Element();
-    await assert.rejects(element.requestPointerLock(), /disabled in the CloudShell automation host/);
-});
-
-test("native no-entry movement without buttons is zeroed; look movement is preserved", () => {
+test("physical movement keeps movement; automated positioning move is zeroed", () => {
     const { window, listeners } = makeHarness();
     const move = listeners.get("mousemove");
-    assert.equal(typeof move, "function");
 
-    const look = trustedEvent({ clientX: 100, clientY: 200 });
+    const physical = trustedEvent({ clientX: 300, clientY: 400 });
+    move(physical);
+    assert.equal(Object.getOwnPropertyDescriptor(physical, "movementX"), undefined);
+
+    window.__maaShellExpect(300, 400);
+    const automated = trustedEvent({ clientX: 300, clientY: 400 });
+    move(automated);
+    assert.equal(automated.movementX, 0);
+    assert.equal(automated.movementY, 0);
+});
+
+test("look movement preserves movement and zero-next zeroes the return move", () => {
+    const { window, listeners } = makeHarness();
+    const move = listeners.get("mousemove");
+
     window.__maaShellLook(100, 200);
+    const look = trustedEvent({ clientX: 100, clientY: 200 });
     move(look);
     assert.equal(Object.getOwnPropertyDescriptor(look, "movementX"), undefined);
-
-    const nativeMove = trustedEvent({ clientX: 300, clientY: 400 });
-    move(nativeMove);
-    assert.equal(nativeMove.movementX, 0);
-    assert.equal(nativeMove.movementY, 0);
-});
-
-test("zero-next return move is zeroed at the anchor", () => {
-    const { window, listeners } = makeHarness();
-    const move = listeners.get("mousemove");
-
-    window.__maaShellLook(640, 360);
-    move(trustedEvent({ clientX: 640, clientY: 360 }));
 
     window.__maaShellZeroNext();
     const back = trustedEvent({ clientX: 640, clientY: 360 });
@@ -99,12 +98,41 @@ test("zero-next return move is zeroed at the anchor", () => {
     assert.equal(back.movementY, 0);
 });
 
-test("native mousedown is allowed and does not block propagation", () => {
-    const { listeners } = makeHarness();
+test("physical mousedown is allowed; background physical move is dropped", () => {
+    const { window, listeners } = makeHarness();
     const down = listeners.get("mousedown");
-    assert.equal(typeof down, "function");
-    const event = trustedEvent({ clientX: 10, clientY: 20, buttons: 1 });
-    down(event);
-    assert.equal(event.stopped, false);
-    assert.equal(event.prevented, false);
+    const move = listeners.get("mousemove");
+
+    const physical = trustedEvent({ clientX: 10, clientY: 20, buttons: 1 });
+    down(physical);
+    assert.equal(physical.stopped, false);
+    assert.equal(physical.prevented, false);
+
+    window.__maaShellSetForeground(false);
+    const background = trustedEvent({ clientX: 30, clientY: 40 });
+    move(background);
+    assert.equal(background.stopped, true);
+    assert.equal(background.prevented, true);
+});
+
+test("automated input without human activity is delivered", () => {
+    const { window, listeners } = makeHarness();
+    const down = listeners.get("mousedown");
+    window.__maaShellExpect(10, 20);
+    const automated = trustedEvent({ clientX: 10, clientY: 20, buttons: 1 });
+    down(automated);
+    assert.equal(automated.stopped, false);
+});
+
+test("pointer lock follows the most recent physical press", async () => {
+    const { window, listeners, Element, context } = makeHarness();
+    const element = new Element();
+    const down = listeners.get("mousedown");
+
+    window.__maaShellExpect(10, 20);
+    await assert.rejects(element.requestPointerLock(), /after automated input/);
+
+    context.performance.advance(10);
+    down(trustedEvent({ clientX: 30, clientY: 40, buttons: 1 }));
+    assert.equal(await element.requestPointerLock(), "granted");
 });
