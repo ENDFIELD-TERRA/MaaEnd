@@ -24,7 +24,7 @@ constexpr DWORD kWindowStyle = WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINI
 
 DWORD shellStyle(bool)
 {
-    // 标题栏保留：automation lock 只拦截关闭/最小化，不剥夺用户恢复窗口的能力
+    // 标题栏保留：automation lock 只做关闭确认，不拦截最小化，用户可随时接管窗口
     return kWindowStyle;
 }
 
@@ -93,7 +93,7 @@ bool ShellWindow::Create()
         return false;
     }
     if (options_.automation_lock) {
-        log::Info("automation lock: close/minimize disabled");
+        log::Info("automation lock: close confirmation; minimize allowed");
     }
 
     // 创建前不知道窗口落在哪块显示器上，拿到 hwnd 后再按实际 DPI 算整窗尺寸
@@ -178,13 +178,6 @@ LRESULT ShellWindow::handleMessage(UINT msg, WPARAM wparam, LPARAM lparam)
         }
         break;
 
-    case WM_SYSCOMMAND:
-        if (options_.automation_lock && (wparam & 0xFFF0) == SC_MINIMIZE) {
-            log::Info("system command ignored (automation lock): 0x{:x}", wparam & 0xFFF0);
-            return 0;
-        }
-        break;
-
     case WM_SETFOCUS:
         // 真实激活时焦点落在顶层窗口上，键盘与输入法会绕开网页
         if (controller_) {
@@ -202,11 +195,6 @@ LRESULT ShellWindow::handleMessage(UINT msg, WPARAM wparam, LPARAM lparam)
     }
 
     case WM_SIZE:
-        if (options_.automation_lock && wparam == SIZE_MINIMIZED) {
-            log::Info("minimize ignored (automation lock)");
-            ShowWindowAsync(hwnd_, SW_SHOWNOACTIVATE);
-            return 0;
-        }
         // 最小化时客户区为空，跟着改会让页面视口变成 0×0
         if (controller_ && wparam != SIZE_MINIMIZED) {
             RECT bounds {};
